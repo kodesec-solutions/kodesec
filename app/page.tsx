@@ -38,7 +38,7 @@ export default function ComingSoon() {
       icon: "🛡️",
       title: "Security Solutions",
       description:
-        "Comprehensive penetration testing, vulnerability assessments and security audits",
+        "Comprehensive cyber security  web app, network. and mobile app penetration testing, vulnerability assessments and security audits",
       gradient: "from-purple-500 to-pink-500",
     },
     {
@@ -180,7 +180,7 @@ export default function ComingSoon() {
             </div>
 
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Join the Waitlist
+              Connect to Get Notified
             </h3>
 
             <p className="text-gray-400 mb-8">

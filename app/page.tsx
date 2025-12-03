@@ -31,7 +31,7 @@ export default function ComingSoon() {
       icon: "💻",
       title: "Web & App Development",
       description:
-        "Custom web applications and mobile solutions built with cutting-edge technologies",
+        "Custom web applications built with cutting-edge technologies, tested for security feature by feature, with continuous security checks",
       gradient: "from-blue-500 to-cyan-500",
     },
     {
@@ -75,8 +75,9 @@ export default function ComingSoon() {
             background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
             top: "10%",
             left: "10%",
-            transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30
-              }px)`,
+            transform: `translate(${mousePosition.x * 30}px, ${
+              mousePosition.y * 30
+            }px)`,
             transition: "transform 0.5s ease-out",
           }}
         />
@@ -86,8 +87,9 @@ export default function ComingSoon() {
             background: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
             top: "50%",
             right: "10%",
-            transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * 25
-              }px)`,
+            transform: `translate(${mousePosition.x * -25}px, ${
+              mousePosition.y * 25
+            }px)`,
             transition: "transform 0.5s ease-out",
           }}
         />
@@ -97,8 +99,9 @@ export default function ComingSoon() {
             background: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
             bottom: "10%",
             left: "40%",
-            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * -20
-              }px)`,
+            transform: `translate(${mousePosition.x * 20}px, ${
+              mousePosition.y * -20
+            }px)`,
             transition: "transform 0.5s ease-out",
           }}
         />
@@ -190,19 +193,20 @@ export default function ComingSoon() {
 
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <input
+                disabled
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleNotify()}
-                placeholder="your.email@example.com"
+                placeholder="kodesec13@gmail.com"
                 className="flex-1 px-6 py-4 bg-white/5 border-2 border-white/10 rounded-2xl text-white placeholder-gray-500 outline-none focus:border-purple-500 focus:bg-white/10 transition-all duration-300"
               />
-              <button
-                onClick={handleNotify}
-                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl font-bold text-white shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 hover:scale-105 active:scale-95 transition-all duration-300"
+              <a
+                href="mailto:kodesec13@gmail.com"
+                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl font-bold text-white shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 hover:scale-105 active:scale-95 transition-all duration-300 text-center"
               >
-                Notify Me
-              </button>
+                Contact Us
+              </a>
             </div>
 
             {showSuccess && (

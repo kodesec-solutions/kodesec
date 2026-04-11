@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/public/assets/Logo.png";
 
 export default function Footer() {
   return (
@@ -10,7 +12,9 @@ export default function Footer() {
             <div className="flex flex-col gap-4 text-center md:text-left md:col-span-2 lg:col-span-1">
               <div className="flex items-center justify-center gap-2 md:justify-start">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-surface-border bg-surface-dark text-primary">
-                  <span className="material-symbols-outlined text-[18px]">verified_user</span>
+                  <span className="material-symbols-outlined text-[18px]">
+                    <Image src={Logo} alt="KODESEC Logo" width={25} height={20} />
+                  </span>
                 </div>
                 <span className="text-xl font-black text-secondary">KODESEC</span>
               </div>

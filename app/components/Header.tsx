@@ -17,6 +17,7 @@ export default function Header() {
     { href: "/", label: "Home" },
     { href: "/why-us", label: "Why Us" },
     { href: "/services", label: "Services" },
+    { href: "/projects", label: "Projects" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -46,14 +47,14 @@ export default function Header() {
     <header className="fixed top-6 left-0 right-0 z-50 px-4 md:px-8">
       <nav className="max-w-7xl mx-auto">
         <div
-          className={`flex items-center justify-between px-6 py-4 rounded-full bg-[#1a1f2e] border border-white/10 shadow-2xl transition-all duration-300 ${
+          className={`flex items-center justify-between px-6 py-3 rounded-full bg-[#1a1f2e] border border-white/10 shadow-2xl transition-all duration-300 ${
             isScrolled ? "shadow-[0_8px_32px_rgba(0,0,0,0.4)]" : ""
           }`}
         >
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 hover:bg-white/10 transition-all border border-white/10"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 transition-all border border-white/10"
           >
             <Image
               src={Logo}
@@ -152,7 +153,7 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 px-5 py-2.5 bg-primary text-[#0B0F1A] rounded-full text-sm font-semibold text-center hover:bg-primary-hover transition-all"
             >
-              contact@kodesec.com
+              Contact
             </Link>
           </div>
         </div>

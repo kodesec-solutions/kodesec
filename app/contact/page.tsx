@@ -61,8 +61,8 @@ function ContactInfo() {
           </div>
           <div>
             <p className="text-xs uppercase tracking-wider text-muted">Email</p>
-            <a href="mailto:hello@kodesec.solutions" className="mt-1 inline-block text-secondary hover:text-primary transition-colors">
-              hello@kodesec.solutions
+            <a href="mailto:kodesec13@gmail.com" className="mt-1 inline-block text-secondary hover:text-primary transition-colors">
+              kodesec13@gmail.com
             </a>
           </div>
         </div>
@@ -146,15 +146,15 @@ function ContactForm() {
         </div>
 
         <label className="space-y-2.5">
-          <span className="text-sm text-secondary">Company Name</span>
+          <span className="text-sm text-secondary">Organization Name</span>
           <input
             type="text"
-            placeholder="Your Company"
+            placeholder="Your Organization"
             className="h-12 w-full rounded-xl border border-surface-border bg-surface-dark px-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
           />
         </label>
 
-        <div className="space-y-3 pt-1">
+        <div className="space-y-3 pt-4">
           <span className="text-sm text-secondary">Service Needed</span>
           <div className="flex flex-wrap gap-2.5">
             {serviceOptions.map((option) => {
@@ -187,7 +187,7 @@ function ContactForm() {
 
         <button
           type="button"
-          className="animate-glow mt-1 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-bold text-background-dark transition-all hover:bg-primary-dark md:text-base"
+          className="animate-glow mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-bold text-background-dark transition-all hover:bg-primary-dark md:text-base"
         >
           Send Secure Message
           <span className="material-symbols-outlined text-base">arrow_forward</span>

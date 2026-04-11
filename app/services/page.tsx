@@ -47,18 +47,18 @@ export default function Services() {
             <div className="relative z-10 max-w-2xl flex flex-col gap-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 w-fit">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                <span className="text-primary text-xs font-bold tracking-wide uppercase">KODESEC Service Portfolio</span>
+                <span className="text-primary text-xs font-bold tracking-wide uppercase">SECURITY-FIRST ENGINEERING</span>
               </div>
               <h1 className="text-white text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                Cybersecurity <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Services</span>
+                Engineered for<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Modern Systems</span>
               </h1>
               <p className="text-gray-400 text-lg lg:text-xl font-light max-w-xl leading-relaxed font-body">
-                Security-led engineering, infrastructure automation, and penetration testing services designed to protect modern applications and internal environments.
+                From secure application development to advanced penetration testing and infrastructure automation — we protect your systems before attackers find a way in.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">
                 <Link href="/contact" className="bg-primary hover:bg-primary-hover text-background-dark font-bold text-base px-8 py-3.5 rounded-full transition-all hover:shadow-[0_0_20px_rgba(54,226,123,0.3)]">
-                  Start Securing Now
+                  Get a Security Assessment
                 </Link>
                 <Link href="#service-list" className="bg-surface-border/50 hover:bg-surface-border text-white font-medium text-base px-8 py-3.5 rounded-full backdrop-blur-sm transition-all border border-white/10">
                   Explore Services
@@ -97,8 +97,8 @@ export default function Services() {
         <div className="flex flex-col max-w-[1200px] w-full">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
             <div className="flex flex-col gap-3">
-              <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight">Our Cybersecurity Services</h2>
-              <p className="text-gray-400 text-lg font-body">Choose a service to view complete scope, approach, and delivery details.</p>
+              <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight">Choose the Right & Secure Solution</h2>
+              <p className="text-gray-400 text-lg font-body">From development to deployment, our services are engineered to identify risks, eliminate vulnerabilities, and strengthen your security posture.</p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -3,143 +3,131 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a0e1a] border-t border-white/5">
-      <div className="px-6 md:px-20 lg:px-40 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-12 mb-12">
-          {/* Company Info */}
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2.5 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+    <footer className="bg-background-dark border-t border-surface-border">
+      <div className="px-6 py-16 lg:px-20">
+        <div className="mx-auto max-w-7xl space-y-8">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+            <div className="flex flex-col gap-4 text-center md:text-left md:col-span-2 lg:col-span-1">
+              <div className="flex items-center justify-center gap-2 md:justify-start">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-surface-border bg-surface-dark text-primary">
+                  <span className="material-symbols-outlined text-[18px]">verified_user</span>
+                </div>
+                <span className="text-xl font-black text-secondary">KODESEC</span>
               </div>
-              <span className="text-white font-bold text-xl">
-                Kodesec
-              </span>
+              <p className="max-w-sm text-sm leading-relaxed text-muted font-body">
+                Building secure digital systems for modern businesses.
+              </p>
+              <p className="text-xs uppercase tracking-[0.16em] text-primary font-semibold">
+                Security-first development & testing
+              </p>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-[280px]">
-              Building the secure digital future for businesses worldwide.
-            </p>
+
+            <nav aria-label="Services" className="flex flex-col gap-4">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-secondary">
+                Services
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/services/secure-application-development" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    Secure Development
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/manual-website-penetration-testing" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    Penetration Testing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/network-infrastructure-penetration-testing" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    Network Security
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/infrastructure-automation-cloud-solutions" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    Cloud &amp; DevOps
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
+            <nav aria-label="Company" className="flex flex-col gap-4">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-secondary">
+                Company
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/why-us" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    Why Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/careers" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                    Careers
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
+            <nav aria-label="Connect" className="flex flex-col gap-4">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-secondary">
+                Connect
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted transition-colors duration-300 hover:text-primary"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted transition-colors duration-300 hover:text-primary"
+                  >
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted transition-colors duration-300 hover:text-primary"
+                  >
+                    GitHub
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-white font-semibold mb-4 text-base">Services</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/services"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  Cybersecurity
+          <div className="border-t border-surface-border pt-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <p className="text-sm text-muted">© 2026 KODESEC. All rights reserved.</p>
+              <div className="flex flex-wrap gap-6">
+                <Link href="/privacy-policy" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                  Privacy Policy
                 </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  App Development
+                <Link href="/terms-of-service" className="text-sm text-muted transition-colors duration-300 hover:text-primary">
+                  Terms of Service
                 </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  Quality Testing
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="text-white font-semibold mb-4 text-base">Company</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/process"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  Process
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/careers"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  Careers
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Connect */}
-          <div>
-            <h3 className="text-white font-semibold mb-4 text-base">Connect</h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  Twitter
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary transition-colors text-sm"
-                >
-                  GitHub
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-white/5 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">
-              © 2023 Kodesec Solutions. All rights reserved.
-            </p>
-            <div className="flex gap-8">
-              <Link
-                href="/privacy"
-                className="text-gray-500 hover:text-primary transition-colors text-sm"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-gray-500 hover:text-primary transition-colors text-sm"
-              >
-                Terms of Service
-              </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -15,7 +15,6 @@ export default function Header() {
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/work", label: "Work" },
     { href: "/why-us", label: "Why Us" },
     { href: "/services", label: "Services" },
     { href: "/about", label: "About" },

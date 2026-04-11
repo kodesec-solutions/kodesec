@@ -1,0 +1,203 @@
+[
+  {
+    "slug": "secure-application-development",
+    "title": "Secure Application Development - Built with Cybersecurity at the Core",
+    "shortPositioning": "At KODESEC, we do not just develop websites. We engineer secure, scalable digital platforms designed to operate safely in today's threat landscape. Modern applications handle sensitive data, authentication, transactions, and business-critical workflows, where even one vulnerability can cause breach, reputation damage, and financial loss. That is why security is built into our foundation from day one.",
+    "keyApproach": [
+      "Secure architecture design before development begins",
+      "Authentication and access control planning",
+      "Secure coding practices across the development lifecycle",
+      "OWASP-aligned development standards",
+      "Phase-by-phase vulnerability validation",
+      "Internal security review before integration"
+    ],
+    "scopeFeatures": [
+      "Secure website and platform development",
+      "Security controls embedded at architecture and code level",
+      "Validation-driven development to reduce risk as the system evolves",
+      "Pre-launch structured penetration testing",
+      "Exploitation-based validation of potential attack paths",
+      "Security findings report with remediation roadmap"
+    ],
+    "whatYouGet": [
+      "Built-in security assurance before production go-live",
+      "Documented findings from penetration and exploitation validation",
+      "Remediation and secure reimplementation support",
+      "Production deployment only after identified issues are addressed"
+    ],
+    "technologies": [
+      "ReactJS",
+      "NextJS",
+      "NodeJS",
+      "ExpressJS",
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "AWS",
+      "Vercel",
+      "GitHub Actions",
+      "Automated CI/CD Workflows"
+    ],
+    "delivery": {
+      "title": "Launch Secure Platforms with Confidence",
+      "description": "We integrate secure development, validation, and final assurance so your platform reaches production with security engineered into every layer.",
+      "primaryLabel": "Build Secure with KODESEC",
+      "primaryHref": "/contact",
+      "secondaryLabel": "Schedule a Security-First Consultation",
+      "secondaryHref": "/contact"
+    },
+    "bannerImage": "/assets/Coding.gif"
+  },
+  {
+    "slug": "infrastructure-automation-cloud-solutions",
+    "title": "Infrastructure Automation",
+    "shortPositioning": "At KodeSec, we design and implement structured automation to eliminate manual errors, increase deployment speed, and ensure consistent environments. Automation ensures predictable deployments, repeatable builds, and operational efficiency.",
+    "keyApproach": [
+      "Server provisioning automation",
+      "Environment configuration automation",
+      "Application deployment workflow automation",
+      "Configuration management automation",
+      "Infrastructure scaling logic",
+      "Multi-environment consistency across Dev, Staging, and Production"
+    ],
+    "scopeFeatures": [
+      "Cloud architecture setup",
+      "Secure infrastructure design",
+      "Resource optimization",
+      "Containerized environments",
+      "Kubernetes configuration",
+      "Infrastructure as Code implementation",
+      "CI/CD pipeline setup",
+      "Automated build and deployment workflows",
+      "Reverse proxy and web server configuration",
+      "Monitoring and logging integration",
+      "System administration support"
+    ],
+    "whatYouGet": [
+      "Reliable infrastructure operations with reduced manual failure points",
+      "Scalable cloud foundations built for production growth",
+      "Maintainable infrastructure and deployment workflows",
+      "DevOps-aligned delivery focused on consistency and speed"
+    ],
+    "technologies": [
+      "Terraform",
+      "Ansible",
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "AWS",
+      "Azure",
+      "GCP"
+    ],
+    "delivery": {
+      "title": "Cloud Infrastructure and DevOps Solutions Built for Growth",
+      "description": "We deliver reliable, scalable, and maintainable infrastructure with structured automation and modern DevOps implementation.",
+      "primaryLabel": "Automate My Infrastructure",
+      "primaryHref": "/contact",
+      "secondaryLabel": "Book Cloud and DevOps Consultation",
+      "secondaryHref": "/contact"
+    },
+    "bannerImage": "/assets/Coding.gif"
+  },
+  {
+    "slug": "manual-website-penetration-testing",
+    "title": "Manual Website Penetration Testing - Professional Security Assessment",
+    "shortPositioning": "Protect your web application with structured, in-depth manual penetration testing performed using industry-standard methodologies. At KODESEC, we conduct controlled exploitation testing to identify real, actionable security weaknesses, not just automated scan results.",
+    "keyApproach": [
+      "Deep manual exploitation testing",
+      "Verified findings with proof-of-concept evidence",
+      "Risk-based severity classification",
+      "Clear remediation guidance",
+      "Structured professional security report"
+    ],
+    "scopeFeatures": [
+      "OWASP Top 10 vulnerabilities",
+      "SQL Injection",
+      "Cross-Site Scripting (XSS)",
+      "CSRF",
+      "Authentication and Session Management flaws",
+      "Broken Access Control",
+      "LFI and RFI",
+      "Remote Code Execution (RCE)",
+      "Open Redirect",
+      "Clickjacking",
+      "SSL/TLS misconfigurations",
+      "Information Disclosure",
+      "Insecure HTTP headers",
+      "Business logic weaknesses",
+      "Network exposure and open ports"
+    ],
+    "whatYouGet": [
+      "In-depth manual security validation focused on exploitable risk",
+      "Actionable findings and remediation guidance your team can implement",
+      "Professional report suitable for technical and stakeholder review",
+      "Delivery timeline: 4-7 days depending on scope and application size"
+    ],
+    "technologies": [
+      "Burp Suite",
+      "OWASP Testing Guide",
+      "Manual Exploitation",
+      "HTTP Analysis",
+      "Session Testing",
+      "Controlled Exploitation"
+    ],
+    "delivery": {
+      "title": "Strengthen Your Security Posture Before Attackers Exploit It",
+      "description": "Contact us to define testing scope and boundaries, then receive a structured manual assessment with verified and remediable findings.",
+      "primaryLabel": "Request Manual Pentest",
+      "primaryHref": "/contact",
+      "secondaryLabel": "Define Scope with Us",
+      "secondaryHref": "/contact"
+    },
+    "bannerImage": "/assets/Coding.gif"
+  },
+  {
+    "slug": "network-infrastructure-penetration-testing",
+    "title": "Network Infrastructure Penetration Testing - Internal Security Assessment",
+    "shortPositioning": "Identify weaknesses inside your network before attackers exploit them. At KODESEC, we conduct controlled internal penetration testing to evaluate the security posture of your network infrastructure, servers, and internal services. This service simulates an attacker who has gained internal access to assess how far they could move within your environment.",
+    "keyApproach": [
+      "Structured network discovery",
+      "Vulnerability identification",
+      "Controlled exploitation attempts",
+      "Risk severity classification",
+      "Infrastructure security review",
+      "Testing performed safely in a controlled and agreed scope"
+    ],
+    "scopeFeatures": [
+      "Internal network mapping and service enumeration",
+      "Open port and exposed service identification",
+      "Firewall and gateway exposure review",
+      "Server misconfiguration detection",
+      "SMB, RDP, and SSH security checks",
+      "Weak encryption protocol identification",
+      "Internal lateral movement simulation",
+      "Privilege escalation testing",
+      "Network segmentation validation"
+    ],
+    "whatYouGet": [
+      "Professional security assessment report",
+      "Verified exploitable findings",
+      "Risk severity breakdown",
+      "Clear remediation recommendations",
+      "Executive summary for management",
+      "Ideal for offices with internal networks, on-premise servers, VPN-connected environments, and organizations preparing for compliance audits"
+    ],
+    "technologies": [
+      "Nmap",
+      "Nessus",
+      "Metasploit",
+      "SMB/RDP/SSH Security Validation",
+      "Network Segmentation Review",
+      "Privilege Escalation and Lateral Movement Testing"
+    ],
+    "delivery": {
+      "title": "Strengthen Internal Infrastructure Before Attackers Move Laterally",
+      "description": "Delivery time depends on network size and scope and is finalized before engagement.",
+      "primaryLabel": "Schedule Internal Security Assessment",
+      "primaryHref": "/contact",
+      "secondaryLabel": "Define Testing Scope",
+      "secondaryHref": "/contact"
+    },
+    "bannerImage": "/assets/Coding.gif"
+  }
+]

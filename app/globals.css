@@ -518,39 +518,182 @@ body {
 
 @media (max-width: 640px) {
   .article-body {
-    font-size: 0.98rem;
-    line-height: 1.8;
-    overflow-x: auto;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .article-body > * {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .article-body :is(h1, h2, h3, h4, h5, h6) {
-    margin-top: 2rem;
-    margin-bottom: 0.85rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.75rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .article-body h1 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
   }
 
   .article-body h2 {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
+    padding-bottom: 0.5rem;
   }
 
   .article-body h3 {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
+  .article-body p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .article-body p,
+  .article-body ul,
+  .article-body ol,
+  .article-body blockquote,
+  .article-body pre,
+  .article-body table {
+    margin-top: 0.9rem;
+    margin-bottom: 0.9rem;
+  }
+
+  /* Responsive Images */
+  .article-body img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.2rem auto;
+  }
+
+  /* Responsive Code Blocks */
   .article-body pre {
-    padding: 1rem;
-    border-radius: 1rem;
+    padding: 0.9rem;
+    border-radius: 0.75rem;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.9rem;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  .article-body pre code {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    word-break: break-word;
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
 
   .article-body code {
     word-break: break-word;
+    font-size: 0.92rem;
+    padding: 0.2rem 0.35rem;
   }
 
-  .article-body table th,
-  .article-body table td {
-    padding: 0.7rem 0.8rem;
-    font-size: 0.92rem;
+  /* Responsive Tables */
+  .article-body table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--color-border-primary);
+    font-size: 0.9rem;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  .article-body table thead {
+    display: block;
+  }
+
+  .article-body table tbody {
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .article-body table thead,
+  .article-body table tbody {
+    min-width: max-content;
+  }
+
+  .article-body table tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .article-body th,
+  .article-body td {
+    border-bottom: 1px solid var(--color-border-primary);
+    padding: 0.65rem 0.75rem;
+    font-size: 0.9rem;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .article-body th {
+    background: rgba(255, 255, 255, 0.04);
+    font-weight: 700;
+  }
+
+  /* Responsive Lists */
+  .article-body ul,
+  .article-body ol {
+    padding-left: 1.2rem;
+  }
+
+  .article-body li {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .article-body li + li {
+    margin-top: 0.4rem;
+  }
+
+  /* Responsive Blockquotes */
+  .article-body blockquote {
+    border-left: 3px solid var(--color-primary);
+    padding: 0.8rem 0.9rem;
+    margin: 0.9rem 0;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .article-body blockquote p {
+    margin: 0.5rem 0;
+  }
+
+  /* Responsive Horizontal Rules */
+  .article-body hr {
+    margin: 1.5rem 0;
+  }
+
+  /* Responsive Figures */
+  .article-body figure {
+    margin: 1rem 0;
+  }
+
+  .article-body figcaption {
+    font-size: 0.9rem;
+    margin-top: 0.6rem;
   }
 }
 

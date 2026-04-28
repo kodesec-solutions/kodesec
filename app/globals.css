@@ -449,37 +449,29 @@ body {
 }
 
 .article-body table {
-  display: block;
   width: 100%;
   max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
   overflow-x: auto;
   overflow-y: hidden;
   border-radius: 1rem;
   border: 1px solid var(--color-border-primary);
 }
 
-.article-body table thead,
-.article-body table tbody,
 .article-body table tr {
   width: 100%;
-}
-
-.article-body table thead,
-.article-body table tbody {
-  min-width: max-content;
-}
-
-.article-body table tr {
-  display: table;
-  table-layout: auto;
 }
 
 .article-body th,
 .article-body td {
   border-bottom: 1px solid var(--color-border-primary);
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem;
   text-align: left;
   vertical-align: top;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .article-body th {
@@ -610,30 +602,28 @@ body {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border: 1px solid var(--color-border-primary);
+    border-radius: 1rem;
     font-size: 0.9rem;
     margin-left: -4px;
     margin-right: -4px;
   }
 
   .article-body table thead {
-    display: block;
+    display: none;
   }
 
-  .article-body table tbody {
+  .article-body table tbody,
+  .article-body table tr {
     display: block;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-
-  .article-body table thead,
-  .article-body table tbody {
-    min-width: max-content;
+    width: 100%;
   }
 
   .article-body table tr {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
+    margin-bottom: 0.85rem;
+    border: 1px solid var(--color-border-primary);
+    border-radius: 0.95rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
   }
 
   .article-body th,
@@ -648,9 +638,33 @@ body {
     word-break: break-word;
   }
 
+  .article-body td {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.9rem;
+  }
+
+  .article-body td::before {
+    content: attr(data-label);
+    flex: 0 0 42%;
+    color: var(--color-text-primary);
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
   .article-body th {
     background: rgba(255, 255, 255, 0.04);
     font-weight: 700;
+  }
+
+  .article-body th:first-child,
+  .article-body td:first-child {
+    border-top: 0;
+  }
+
+  .article-body tr:last-child td:last-child {
+    border-bottom: 0;
   }
 
   /* Responsive Lists */

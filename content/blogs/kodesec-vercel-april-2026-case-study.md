@@ -4,6 +4,7 @@ date: "2026-04-25"
 slug: "vercel-oauth-breach"
 excerpt: "A deep technical case study of the Vercel OAuth supply chain breach."
 author: "KodeSec Research Team"
+image: "/blog/vercel-oauth-breach/image_1.jpg"
 ---
 
 
@@ -94,7 +95,7 @@ Sources: [Vercel Security Bulletin](https://vercel.com/kb/bulletin/vercel-april-
 The Vercel breach happened in five stages, following a pattern common in modern supply chain attacks. At each step, the attacker took advantage of trusted connections that were originally created for normal business use. This shows why OAuth-based supply chain attacks are hard to detect and stop with traditional security methods.
 
 
-![Attack chain diagram showing progression from Context.ai OAuth compromise through Vercel employee Google Workspace account takeover to internal lateral movement and environment variable enumeration across multiple customer projects](image2.png)
+![Attack chain diagram showing progression from Context.ai OAuth compromise through Vercel employee Google Workspace account takeover to internal lateral movement and environment variable enumeration across multiple customer projects](/blog/vercel-oauth-breach/attack_chain.jpeg)
 
 *Figure 1: The Vercel breach attack chain. Orange represents the supply-chain entry point at Context.ai. Blue arrows indicate the attacker's path through Vercel's internal systems via compromised OAuth tokens. Red boxes denote attacker actions including environment variable enumeration. Grey boxes show the downstream customer impact across credential categories.*
 
@@ -320,7 +321,7 @@ Sources: [Vercel Security Bulletin](https://vercel.com/kb/bulletin/vercel-april-
 
 The full incident timeline spans approximately two months from the initial malware infection to public disclosure. This section maps confirmed events against their verification status and analyzes the critical detection gaps the timeline reveals.
 
-![Incident timeline showing progression from February 2026 Lumma Stealer infection through March 2026 AWS environment access and Google Workspace pivot, to April 10 OpenAI leaked key notification and April 19 public disclosure](image1.png)
+![Incident timeline showing progression from February 2026 Lumma Stealer infection through March 2026 AWS environment access and Google Workspace pivot, to April 10 OpenAI leaked key notification and April 19 public disclosure](/blog/vercel-oauth-breach/incident_timeline.jpeg)
 
 *Figure 2: Incident timeline from initial Lumma Stealer infection at Context.ai (February 2026) through public disclosure (April 19, 2026). The April 10 OpenAI notification represents the earliest external evidence of active credential exploitation — nine days before Vercel's disclosure.*
 
@@ -339,7 +340,7 @@ The full incident timeline spans approximately two months from the initial malwa
 
 ### The Nine-Day Gap: Analyzing the Detection-to-Disclosure Anomaly
 
-![Timeline showing nine-day gap between April 10 OpenAI notification of leaked API key and April 19 Vercel public disclosure](image3.png)
+![Timeline showing nine-day gap between April 10 OpenAI notification of leaked API key and April 19 Vercel public disclosure](/blog/vercel-oauth-breach/The-Nine-Day-Gap.jpeg)
 
 *Figure 3: The nine-day disclosure gap. A Vercel customer received an OpenAI leaked-key notification on April 10 — for an API key stored exclusively in Vercel. Vercel's public disclosure did not occur until April 19, creating a window during which other affected customers had no notification to act on.*
 

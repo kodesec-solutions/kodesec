@@ -20,7 +20,10 @@ function formatDate(date: string) {
 }
 
 function estimateReadTime(contentHtml: string) {
-  const plainText = contentHtml.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  const plainText = contentHtml
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   const words = plainText ? plainText.split(" ").length : 0;
   return `${Math.max(1, Math.ceil(words / 200))} min read`;
 }
@@ -67,14 +70,44 @@ function getTocItems(contentHtml: string) {
 function addHeadingIds(contentHtml: string) {
   const seen = new Map<string, number>();
 
-  return contentHtml.replace(/<(h2|h3)>(.*?)<\/\1>/g, (match, tagName: string, innerHtml: string) => {
-    const plainText = decodeHtml(innerHtml.replace(/<[^>]+>/g, "").trim());
-    const baseId = slugifyHeading(plainText);
-    const count = seen.get(baseId) ?? 0;
-    const id = count === 0 ? baseId : `${baseId}-${count + 1}`;
+  return contentHtml.replace(
+    /<(h2|h3)>(.*?)<\/\1>/g,
+    (match, tagName: string, innerHtml: string) => {
+      const plainText = decodeHtml(innerHtml.replace(/<[^>]+>/g, "").trim());
+      const baseId = slugifyHeading(plainText);
+      const count = seen.get(baseId) ?? 0;
+      const id = count === 0 ? baseId : `${baseId}-${count + 1}`;
 
-    seen.set(baseId, count + 1);
-    return `<${tagName} id="${id}">${innerHtml}</${tagName}>`;
+      seen.set(baseId, count + 1);
+      return `<${tagName} id="${id}">${innerHtml}</${tagName}>`;
+    },
+  );
+}
+
+function addTableCellLabels(contentHtml: string) {
+  return contentHtml.replace(/<table[^>]*>[\s\S]*?<\/table>/g, (tableHtml) => {
+    const headers = [...tableHtml.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map((match) =>
+      decodeHtml(match[1].replace(/<[^>]+>/g, "").trim()),
+    );
+
+    if (headers.length === 0) {
+      return tableHtml;
+    }
+
+    return tableHtml.replace(/<tr>([\s\S]*?)<\/tr>/g, (rowHtml, rowInnerHtml) => {
+      if (/<th[\s>]/.test(rowHtml)) {
+        return rowHtml;
+      }
+
+      let cellIndex = 0;
+
+      return `<tr>${rowInnerHtml.replace(/<td(.*?)>([\s\S]*?)<\/td>/g, (_cellMatch: string, attrs: string, cellInnerHtml: string) => {
+        const label = headers[cellIndex] ?? `Column ${cellIndex + 1}`;
+        cellIndex += 1;
+
+        return `<td${attrs} data-label="${label.replace(/"/g, "&quot;")}">${cellInnerHtml}</td>`;
+      })}</tr>`;
+    });
   });
 }
 
@@ -82,7 +115,11 @@ export async function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: String(post.slug) }));
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
@@ -92,7 +129,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   const readTime = estimateReadTime(post.contentHtml);
   const tocItems = getTocItems(post.contentHtml);
-  const articleHtml = addHeadingIds(post.contentHtml);
+  const articleHtml = addHeadingIds(addTableCellLabels(post.contentHtml));
 
   return (
     <div className="relative overflow-hidden bg-background-dark px-4 py-8 sm:px-6 lg:px-20 lg:py-16">
@@ -149,11 +186,16 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                   { label: "Source", value: "Markdown file" },
                   { label: "Style", value: "Editorial layout" },
                 ].map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-surface-border bg-background-dark/55 p-2.5 sm:p-4">
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-surface-border bg-background-dark/55 p-2.5 sm:p-4"
+                  >
                     <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-muted sm:text-[11px] sm:tracking-[0.18em]">
                       {item.label}
                     </p>
-                    <p className="mt-1.5 text-xs font-semibold text-secondary sm:mt-2 sm:text-sm">{item.value}</p>
+                    <p className="mt-1.5 text-xs font-semibold text-secondary sm:mt-2 sm:text-sm">
+                      {item.value}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -177,7 +219,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                           key={item.id}
                           href={`#${item.id}`}
                           className={`block rounded-lg px-2 py-1.5 text-xs transition-colors hover:bg-white/5 hover:text-primary sm:px-3 sm:py-2 sm:text-sm ${
-                            item.level === 3 ? "pl-4 text-muted sm:pl-5" : "text-secondary"
+                            item.level === 3
+                              ? "pl-4 text-muted sm:pl-5"
+                              : "text-secondary"
                           }`}
                         >
                           {item.label}
@@ -196,9 +240,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     Reading note
                   </p>
                   <p className="mt-2 text-xs leading-relaxed text-muted sm:mt-2.5 sm:text-sm">
-                    This article is generated from a markdown file in content/blogs,
-                    so the editorial layout adapts to headings, lists, code blocks,
-                    quotes, and images in the source.
+                    This article is generated from a markdown file in
+                    content/blogs, so the editorial layout adapts to headings,
+                    lists, code blocks, quotes, and images in the source.
                   </p>
                 </div>
 
@@ -207,8 +251,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     Source
                   </p>
                   <p className="mt-2 text-xs leading-relaxed text-muted sm:mt-2.5 sm:text-sm">
-                    Frontmatter provides the title, date, and slug, while the body is
-                    transformed into HTML with Remark.
+                    Frontmatter provides the title, date, and slug, while the
+                    body is transformed into HTML with Remark.
                   </p>
                 </div>
 
@@ -237,7 +281,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-surface-border bg-primary px-4 py-2.5 text-xs font-semibold text-[#09111a] transition-transform duration-300 hover:-translate-y-0.5 sm:py-3 sm:text-sm"
                 >
                   <span>Back to blog</span>
-                  <span className="material-symbols-outlined text-[16px] sm:text-[18px]">arrow_back</span>
+                  <span className="material-symbols-outlined text-[16px] sm:text-[18px]">
+                    arrow_back
+                  </span>
                 </Link>
               </div>
             </aside>

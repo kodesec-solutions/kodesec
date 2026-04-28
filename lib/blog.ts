@@ -11,7 +11,7 @@ const postsDirectory = path.join(process.cwd(), "content/blogs");
 export function getAllPosts() {
   const fileNames = fs.readdirSync(postsDirectory);
 
-  return fileNames.map((fileName) => {
+  const posts = fileNames.map((fileName) => {
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -22,9 +22,25 @@ export function getAllPosts() {
       date: data.date || "No date",
       excerpt: data.excerpt || "",
       slug: data.slug || fileName.replace(".md", ""),
-      author : data.author || "Unknown",
+      author: data.author || "Unknown",
+      featured: data.featured === true,
+      image: data.image || null,
     };
   });
+
+  // Sort posts by date (newest first) when dates are present to make ordering deterministic.
+  posts.sort((a, b) => {
+    const da = new Date(a.date).getTime();
+    const db = new Date(b.date).getTime();
+
+    if (Number.isNaN(da) && Number.isNaN(db)) return 0;
+    if (Number.isNaN(da)) return 1;
+    if (Number.isNaN(db)) return -1;
+
+    return db - da;
+  });
+
+  return posts;
 }
 
 // Get single post

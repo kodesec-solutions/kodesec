@@ -8,18 +8,7 @@ image: "/blog/vercel-oauth-breach/image_1.jpg"
 ---
 
 
-# KodeSec Security Intelligence Report
-## The Vercel April 2026 OAuth Supply Chain Breach: A Technical Case Study
-
----
-
-**Classification:** TLP:WHITE — Unrestricted Distribution  
-**Report ID:** KSR-2026-04-VERCEL  
-**Published:** April 25, 2026  
-**Authored by:** KodeSec Research Team  
-**Website:** [kodesec.com](https://kodesec.com)
-
----
+# The Vercel April 2026 OAuth Supply Chain Breach: A Technical Case Study
 
 > *"A Roblox cheat brought down one of the biggest deployment platforms on the internet. Not a zero-day. Not a nation-state. A game cheat."*
 
@@ -638,5 +627,3 @@ This incident is a high-visibility, well-documented demonstration of the cost of
 *This report is produced by KodeSec for informational and educational purposes. All claims attributed to threat actors are reproduced for threat-tracking purposes and should not be treated as verified. KodeSec makes no claim of independent forensic access to Vercel's systems or data. Where gaps in public knowledge exist, they are noted explicitly. This report will be updated as additional verified information becomes available.*
 
 *KodeSec — kodesec.com*
-
-*Classification: TLP:WHITE — No restrictions on distribution*

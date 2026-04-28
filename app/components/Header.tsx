@@ -17,7 +17,7 @@ export default function Header() {
     { href: "/", label: "Home" },
     { href: "/why-us", label: "Why Us" },
     { href: "/services", label: "Services" },
-    { href: "/projects", label: "Projects" },
+    { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -59,7 +59,7 @@ export default function Header() {
             <Image
               src={Logo}
               alt="Kodesec Logo"
-              className="w-8 h-8 object-contain"
+              className="h-8 w-auto object-contain"
             />
           </Link>
 

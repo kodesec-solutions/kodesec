@@ -13,7 +13,13 @@ export default function Footer() {
               <div className="flex items-center justify-center gap-2 md:justify-start">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-surface-border bg-surface-dark text-primary">
                   <span className="material-symbols-outlined text-[18px]">
-                    <Image src={Logo} alt="KODESEC Logo" width={25} height={20} />
+                    <Image
+                      src={Logo}
+                      alt="KODESEC Logo"
+                      width={25}
+                      height={31}
+                      className="h-5 w-auto object-contain"
+                    />
                   </span>
                 </div>
                 <span className="text-xl font-black text-secondary">KODESEC</span>

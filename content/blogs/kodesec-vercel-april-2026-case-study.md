@@ -13,6 +13,9 @@ image: "/blog/vercel-oauth-breach/image_1.jpg"
 > *"A Roblox cheat brought down one of the biggest deployment platforms on the internet. Not a zero-day. Not a nation-state. A game cheat."*
 
 ---
+![Incident timeline showing progression from February 2026 Lumma Stealer infection through March 2026 AWS environment access and Google Workspace pivot, to April 10 OpenAI leaked key notification and April 19 public disclosure](/blog/vercel-oauth-breach/image_1.jpg)
+
+
 
 ## Table of Contents
 

@@ -1,14 +1,11 @@
 ---
-title: "Vercel April 2026 OAuth Supply Chain Breach"
+title: "Vercel OAuth Breach (April 2026): How a Supply Chain Attack Exposed Customer Secrets"
 date: "2026-04-25"
 slug: "vercel-oauth-breach"
-excerpt: "A deep technical case study of the Vercel OAuth supply chain breach."
+excerpt: "A detailed technical analysis of the April 2026 Vercel OAuth supply chain breach. Learn how a stolen token led to internal access, environment variable exposure, and widespread credential risk."
 author: "KodeSec Research Team"
 image: "/blog/vercel-oauth-breach/image_1.jpg"
 ---
-
-
-# The Vercel April 2026 OAuth Supply Chain Breach: A Technical Case Study
 
 > *"A Roblox cheat brought down one of the biggest deployment platforms on the internet. Not a zero-day. Not a nation-state. A game cheat."*
 

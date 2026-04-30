@@ -141,24 +141,23 @@ export default async function BlogPost({
             Blog
           </a>
           <span>/</span>
-          <span className="min-w-0 truncate text-secondary">{post.title}</span>
+          <span className="min-w-0 truncate text-secondary">{post.slug}</span>
         </nav>
 
         <article className="overflow-hidden rounded-[1.5rem] border border-surface-border bg-surface-dark/70 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:rounded-[2rem]">
           <header className="border-b border-surface-border bg-gradient-to-br from-surface-dark via-background-dark to-card-dark px-4 py-8 sm:px-6 sm:py-10 md:px-10 md:py-12 lg:px-14">
-            <div className="max-w-3xl">
+            <div className="max-w-6xl">
               <div className="flex flex-wrap items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-primary sm:text-xs sm:tracking-[0.18em]">
                 <span className="hidden h-1 w-1 rounded-full bg-primary/70 sm:inline-block" />
                 <span>{readTime}</span>
               </div>
 
-              <h1 className="mt-4 text-xl font-black leading-tight text-secondary sm:text-2xl md:text-5xl lg:text-6xl">
+              <h1 className="mt-4 text-xl font-black leading-tight text-secondary sm:text-2xl md:text-4xl lg:text-5xl">
                 {post.title}
               </h1>
 
-              <p className="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:text-sm md:text-base lg:text-lg">
-                Technical analysis and security commentary presented in a clean,
-                editorial format, rendered directly from the source markdown.
+              <p className="mt-3 max-w-5xl text-xs leading-relaxed text-muted sm:text-sm md:text-base lg:text-lg">
+                {post.excerpt}
               </p>
 
               <div className="mt-5 flex flex-wrap items-center gap-2 sm:mt-6 sm:gap-3">

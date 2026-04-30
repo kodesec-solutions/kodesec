@@ -70,5 +70,8 @@ export async function getPostBySlug(slug: string) {
     date: data.date,
     contentHtml: processedContent.toString(),
     author: data.author || "Unknown",
+    excerpt: data.excerpt || "",
+    image: data.image || null,
+    slug: data.slug || fileName.replace(".md", ""),
   };
 }

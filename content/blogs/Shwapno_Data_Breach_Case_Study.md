@@ -1,13 +1,15 @@
 ---
-title: "Shwapno Data Breach 2026: A Case Study By KodeSec"
+title: "Shwapno Data Breach 2026: 4 Million Customers Exposed in Major Bangladesh Cyberattack"
 date: "2026-04-25"
 slug: "shwapno-data-breach-2026"
-excerpt: "A deep technical case study of the Shwapno Data Breach 2026"
+excerpt: "A detailed analysis of the Shwapno data breach impacting 4 million customers in Bangladesh. Explore the attack timeline, ransomware links, root causes, and key security lessons."
 author: "KodeSec Research Team"
 featured: true
 image: "/blog/shwapno-data-breach/image_1.jpeg"
 ---
-# Shwapno Data Breach 2026: A Case Study By KodeSec
+![Shwapno Data Breach](/blog/shwapno-data-breach/image_1.jpeg)
+
+---
 
 **𝗜𝗻𝗰𝗶𝗱𝗲𝗻𝘁 𝗢𝘃𝗲𝗿𝘃𝗶𝗲𝘄:**
 In March 2026, Shwapno, one of Bangladesh’s largest retail chains operated by ACI Logistics Limited, suffered a major data breach impacting approximately **𝟰 𝗺𝗶𝗹𝗹𝗶𝗼𝗻 𝗰𝘂𝘀𝘁𝗼𝗺𝗲𝗿𝘀 𝗮𝗰𝗿𝗼𝘀𝘀 𝟲𝟯 𝗱𝗶𝘀𝘁𝗿𝗶𝗰𝘁𝘀**.

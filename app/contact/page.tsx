@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import { toast } from "sonner";
+import { Toaster } from "../../components/ui/sonner";
 
 const serviceOptions = [
   "Penetration Testing",
-  "Secure Development",
+  "Application Development",
   "Network Security",
-  "Cloud & DevOps",
+  "Cloud & Automation",
   "Other",
 ];
 
@@ -62,7 +64,7 @@ function ContactInfo() {
           <div>
             <p className="text-xs uppercase tracking-wider text-muted">Email</p>
             <a href="mailto:kodesec13@gmail.com" className="mt-1 inline-block text-secondary hover:text-primary transition-colors">
-              kodesec13@gmail.com
+              contact@kodesec.com
             </a>
           </div>
         </div>
@@ -118,17 +120,52 @@ function ContactInfo() {
 
 function ContactForm() {
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
+  const [result, setResult] = useState("");
 
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setResult("Sending...");
+    try {
+      const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+      if (!accessKey) {
+        setResult("Missing access key configuration");
+        return;
+      }
+
+      const formData = new FormData(form);
+      formData.append("access_key", accessKey);
+      formData.append("service", selectedService);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data && data.success) {
+        setResult("");
+        toast.success("Message sent", { duration: 2000 });
+        form.reset();
+        setSelectedService(serviceOptions[0]);
+      } else {
+        setResult(data?.message || "Error");
+      }
+    } catch (err) {
+      setResult("Network error");
+    }
+  };
   return (
     <div className="animate-slide-in-right relative overflow-hidden rounded-3xl border border-surface-border bg-card-dark p-6 md:p-8 lg:p-10">
       <div className="absolute -left-8 top-8 h-36 w-36 rounded-full bg-primary/20 blur-3xl animate-float-up" />
       <div className="absolute -right-8 bottom-10 h-40 w-40 rounded-full bg-accent-cyan/20 blur-3xl animate-float-up animation-delay-400" />
 
-      <form className="relative z-10 space-y-6 md:space-y-7">
+      <form className="relative z-10 space-y-6 md:space-y-7" onSubmit={onSubmit}>
         <div className="grid gap-5 md:gap-6 md:grid-cols-2">
           <label className="space-y-2.5">
             <span className="text-sm text-secondary">Full Name</span>
             <input
+              name="name"
               type="text"
               placeholder="Enter your name"
               className="h-12 w-full rounded-xl border border-surface-border bg-surface-dark px-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
@@ -138,6 +175,7 @@ function ContactForm() {
           <label className="space-y-2.5">
             <span className="text-sm text-secondary">Work Email</span>
             <input
+              name="email"
               type="email"
               placeholder="name@company.com"
               className="h-12 w-full rounded-xl border border-surface-border bg-surface-dark px-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
@@ -148,6 +186,7 @@ function ContactForm() {
         <label className="space-y-2.5">
           <span className="text-sm text-secondary">Organization Name</span>
           <input
+            name="organization"
             type="text"
             placeholder="Your Organization"
             className="h-12 w-full rounded-xl border border-surface-border bg-surface-dark px-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
@@ -180,18 +219,27 @@ function ContactForm() {
         <label className="space-y-2.5 pt-1">
           <span className="text-sm text-secondary">Message</span>
           <textarea
+            name="message"
             placeholder="Tell us about your security requirements, goals, and timeline."
             className="min-h-[140px] w-full rounded-xl border border-surface-border bg-surface-dark p-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
           />
         </label>
 
         <button
-          type="button"
+          type="submit"
           className="animate-glow mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-bold text-background-dark transition-all hover:bg-primary-dark md:text-base"
         >
           Send Secure Message
           <span className="material-symbols-outlined text-base">arrow_forward</span>
         </button>
+
+
+        {result && (
+          <p className="text-center text-sm text-muted" aria-live="polite">{result}</p>
+        )}
+
+        {/* Sonner Toaster renders toasts; include the Toaster once in the page */}
+        <Toaster />
 
         <p className="text-center text-xs text-muted">
           Your data is securely transmitted and never shared.

@@ -203,4 +203,147 @@
     },
     "bannerImage": "/assets/Coding.gif"
   }
+  ,
+  {
+    "slug": "website-vulnerability-scan-manual-verification",
+    "title": "Website Vulnerability Scan & Manual Verification",
+    "shortPositioning": "Identify security weaknesses quickly using industry-grade vulnerability scanning combined with expert manual verification.",
+    "keyApproach": [
+      "Full automated web vulnerability scanning with deep crawling",
+      "Expert manual verification to eliminate false positives",
+      "Advanced payload injection and intelligent attack simulation",
+      "Detection of outdated technologies and known CVEs",
+      "Structured vulnerability classification and remediation guidance"
+    ],
+    "scopeFeatures": [
+      "Full automated web vulnerability scanning",
+      "Detection of OWASP Top 10 issues",
+      "SQL Injection & XSS detection",
+      "Security misconfiguration checks",
+      "SSL/TLS configuration review",
+      "Insecure headers analysis",
+      "Common CMS/plugin vulnerability detection",
+      "Open ports & exposed services (basic surface scan)"
+    ],
+    "whatYouGet": [
+      "Structured vulnerability assessment report",
+      "Verified findings only",
+      "Risk severity categorization",
+      "Screenshots / supporting evidence",
+      "Remediation recommendations"
+    ],
+    "technologies": [
+      "Enterprise vulnerability scanners",
+      "Crawling engines",
+      "Burp Suite",
+      "CVE databases",
+      "SSL/TLS analysis tools"
+    ],
+    "delivery": {
+      "title": "Fast, Verified Vulnerability Scans",
+      "description": "A cost-effective primary security check combining automated scanning with manual verification to reduce false positives and validate exploitability.",
+      "primaryLabel": "Request Vulnerability Scan",
+      "primaryHref": "/contact",
+      "secondaryLabel": "Schedule a Verification Review",
+      "secondaryHref": "/contact"
+    },
+    "bannerImage": "/assets/Coding.gif"
+  }
+  ,
+  {
+    "slug": "active-directory-security-assessment",
+    "title": "Active Directory Security Assessment - Domain Infrastructure Testing",
+    "shortPositioning": "Protect your organization’s domain environment from privilege escalation, credential abuse, and internal compromise.",
+    "keyApproach": [
+      "Controlled domain reconnaissance",
+      "Attack path mapping and credential exposure analysis",
+      "Privilege escalation path analysis and exploitation validation",
+      "Kerberos attack exposure checks",
+      "Misconfigured permissions and ACL review"
+    ],
+    "scopeFeatures": [
+      "User & domain enumeration",
+      "Weak password policy assessment",
+      "Privilege escalation path analysis",
+      "Kerberos-related attack exposure checks",
+      "Misconfigured permissions & ACL review",
+      "Lateral movement simulation",
+      "Domain privilege exposure identification",
+      "Insecure authentication configuration checks",
+      "Excessive privilege & delegation review"
+    ],
+    "whatYouGet": [
+      "Professional Active Directory assessment report",
+      "Verified security findings",
+      "Attack path analysis",
+      "Risk severity classification",
+      "Remediation guidance & hardening recommendations",
+      "Executive summary for management review"
+    ],
+    "technologies": [
+      "Active Directory",
+      "BloodHound",
+      "PowerView / PowerShell",
+      "Impacket",
+      "CrackMapExec",
+      "Kerberos tooling",
+      "LDAP analysis"
+    ],
+    "delivery": {
+      "title": "Strengthen Domain Security",
+      "description": "Comprehensive Active Directory assessment identifying attack paths, privilege exposures, and remediation steps while minimizing operational impact.",
+      "primaryLabel": "Request AD Assessment",
+      "primaryHref": "/contact",
+      "secondaryLabel": "Schedule a Domain Review",
+      "secondaryHref": "/contact"
+    },
+    "bannerImage": "/assets/Coding.gif"
+  }
+  ,
+  {
+    "slug": "application-qa-testing",
+    "title": "Application QA Testing - Manual & Functional Software Testing",
+    "shortPositioning": "Ensure your platform works reliably across real-world user scenarios before launch.",
+    "keyApproach": [
+      "Real-user scenario simulation",
+      "Structured test case execution",
+      "Bug reproduction and validation",
+      "Multi-device and browser checks",
+      "Detailed issue documentation"
+    ],
+    "scopeFeatures": [
+      "Functional testing",
+      "User workflow validation",
+      "UI/UX issue identification",
+      "Form & input validation testing",
+      "Cross-browser compatibility testing",
+      "Responsive design testing",
+      "Role-based feature testing",
+      "Error handling & stability checks",
+      "Basic regression testing"
+    ],
+    "whatYouGet": [
+      "Professional bug report",
+      "Screenshots & reproduction steps",
+      "Severity-based issue classification",
+      "Usability observations",
+      "Structured testing summary"
+    ],
+    "technologies": [
+      "Manual QA",
+      "Test case frameworks",
+      "Selenium",
+      "Playwright",
+      "Cross-browser testing tools"
+    ],
+    "delivery": {
+      "title": "Reliable App Behavior Before Launch",
+      "description": "Structured QA testing to surface functional, usability, and compatibility issues so you ship a stable user experience.",
+      "primaryLabel": "Request QA Testing",
+      "primaryHref": "/contact",
+      "secondaryLabel": "Book a QA Review",
+      "secondaryHref": "/contact"
+    },
+    "bannerImage": "/assets/Coding.gif"
+  }
 ]

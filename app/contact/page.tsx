@@ -2,7 +2,6 @@
 
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
-import { Toaster } from "../../components/ui/sonner";
 
 const serviceOptions = [
   "Penetration Testing",
@@ -253,7 +252,6 @@ export default function ContactPage() {
   return (
     <main className="relative min-h-screen bg-background-dark overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-cyber-grid opacity-10" />
-      <Toaster />
 
       <ContactHero />
 

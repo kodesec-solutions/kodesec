@@ -127,7 +127,7 @@ function ContactForm() {
     const form = event.currentTarget;
     setResult("Sending...");
     try {
-      const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
       if (!accessKey) {
         setResult("Missing access key configuration");
         return;
@@ -165,6 +165,7 @@ function ContactForm() {
           <label className="space-y-2.5">
             <span className="text-sm text-secondary">Full Name</span>
             <input
+            required
               name="name"
               type="text"
               placeholder="Enter your name"
@@ -175,6 +176,7 @@ function ContactForm() {
           <label className="space-y-2.5">
             <span className="text-sm text-secondary">Work Email</span>
             <input
+            required
               name="email"
               type="email"
               placeholder="name@company.com"
@@ -219,6 +221,7 @@ function ContactForm() {
         <label className="space-y-2.5 pt-1">
           <span className="text-sm text-secondary">Message</span>
           <textarea
+            required
             name="message"
             placeholder="Tell us about your security requirements, goals, and timeline."
             className="min-h-[140px] w-full rounded-xl border border-surface-border bg-surface-dark p-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
@@ -238,9 +241,6 @@ function ContactForm() {
           <p className="text-center text-sm text-muted" aria-live="polite">{result}</p>
         )}
 
-        {/* Sonner Toaster renders toasts; include the Toaster once in the page */}
-        <Toaster />
-
         <p className="text-center text-xs text-muted">
           Your data is securely transmitted and never shared.
         </p>
@@ -253,6 +253,7 @@ export default function ContactPage() {
   return (
     <main className="relative min-h-screen bg-background-dark overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-cyber-grid opacity-10" />
+      <Toaster />
 
       <ContactHero />
 

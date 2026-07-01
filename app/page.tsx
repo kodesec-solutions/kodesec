@@ -1,311 +1,409 @@
+import React from "react";
 import Link from "next/link";
+import SecurityDashboard from "@/components/SecurityDashboard";
+import MethodologyTimeline from "@/components/home/MethodologyTimeline";
+import TestimonialCarousel from "@/components/home/TestimonialCarousel";
+import SecurityEstimator from "@/components/home/SecurityEstimator";
 
-function HeroSection() {
-  return (
-    <section className="px-6 py-20 lg:px-20">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
-        <div className="animate-slide-in-left">
-          <p className="inline-flex items-center rounded-full border border-surface-border bg-surface-dark px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            KODESEC
-          </p>
-          <h1 className="mt-6 text-4xl font-black leading-[1.05] text-secondary md:text-5xl lg:text-6xl">
-            Secure Digital Systems. Built Right. Tested Thoroughly.
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg font-body">
-            We design, develop, and secure web applications and infrastructure with a security-first approach.
-          </p>
+// Primitives
+import { Section } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
+import { MetricCard } from "@/components/ui/metric-card";
+import { FeatureCard } from "@/components/ui/feature-card";
+import { Badge } from "@/components/ui/badge";
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="/contact"
-              className="animate-glow inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-7 text-sm font-bold text-background-dark transition-all hover:bg-primary-hover md:text-base"
-            >
-              Get a Security Assessment
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex h-12 items-center justify-center rounded-2xl border border-surface-border bg-surface-dark px-7 text-sm font-bold text-secondary transition-all hover:border-primary md:text-base"
-            >
-              View Services
-            </Link>
-          </div>
+// Icons
+import { 
+  Shield, 
+  Terminal, 
+  Cloud, 
+  Workflow, 
+  Cpu, 
+  ChevronRight, 
+  Calendar, 
+  CheckCircle2, 
+  Lock,
+  Zap,
+  ArrowRight
+} from "lucide-react";
 
-          <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted">
-            <span className="rounded-full border border-surface-border bg-card-dark px-3 py-1">OWASP Aligned</span>
-            <span className="rounded-full border border-surface-border bg-card-dark px-3 py-1">Secure Development</span>
-            <span className="rounded-full border border-surface-border bg-card-dark px-3 py-1">Manual Testing</span>
-          </div>
-        </div>
+// Config data
+import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { homeConfig } from "@/config/site";
 
-        <div className="animate-slide-in-right">
-          <div className="relative overflow-hidden rounded-2xl border border-surface-border bg-surface-dark p-6 md:p-8">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent-cyan/20" />
-            <div className="relative grid gap-4">
-              <div className="rounded-2xl border border-surface-border bg-card-dark p-4">
-                <p className="text-xs uppercase tracking-[0.14em] text-primary">Threat Surface</p>
-                <p className="mt-2 text-2xl font-black text-secondary">Mapped & Controlled</p>
-              </div>
-              <div className="rounded-2xl border border-surface-border bg-card-dark p-4">
-                <p className="text-xs uppercase tracking-[0.14em] text-accent-cyan">Security Validation</p>
-                <p className="mt-2 text-2xl font-black text-secondary">Evidence-Based</p>
-              </div>
-              <div className="rounded-2xl border border-surface-border bg-card-dark p-4">
-                <p className="text-xs uppercase tracking-[0.14em] text-accent-purple">Delivery Outcome</p>
-                <p className="mt-2 text-2xl font-black text-secondary">Actionable Remediation</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ServicesSection() {
-  const items = [
-    {
-      icon: "code",
-      title: "Secure Development",
-      desc: "Security-first application engineering from architecture to release.",
-    },
-    {
-      icon: "bug_report",
-      title: "Penetration Testing",
-      desc: "Manual exploitation to find real risks, not scanner noise.",
-    },
-    {
-      icon: "lan",
-      title: "Network Security Testing",
-      desc: "Internal attack-path validation across services and segmentation.",
-    },
-    {
-      icon: "cloud_sync",
-      title: "Cloud & DevOps",
-      desc: "Reliable automation, CI/CD hardening, and secure cloud operations.",
-    },
-  ];
-
-  return (
-    <section className="bg-surface-dark px-6 py-20 lg:px-20">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="animate-fade-in-up text-3xl font-bold text-secondary md:text-4xl">Services</h2>
-        <p className="mt-3 max-w-2xl text-muted font-body">Specialized services aligned to modern cyber and engineering needs.</p>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {items.map((item, idx) => (
-            <article
-              key={item.title}
-              className={`animate-fade-in-up rounded-2xl border border-surface-border bg-card-dark p-6 transition-all hover:-translate-y-1 hover:border-primary/50 ${idx === 1 ? "animation-delay-200" : ""} ${idx === 2 ? "animation-delay-400" : ""} ${idx === 3 ? "animation-delay-600" : ""}`}
-            >
-              <span className="material-symbols-outlined text-primary">{item.icon}</span>
-              <h3 className="mt-4 text-xl font-semibold text-secondary">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted font-body">{item.desc}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WhySection() {
-  const points = [
-    "Security-first development approach",
-    "Manual testing (not automated only)",
-    "Real-world attack simulation",
-    "Actionable reporting",
-  ];
-
-  return (
-    <section className="px-6 py-20 lg:px-20">
-      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:items-center">
-        <div className="animate-slide-in-left">
-          <h2 className="text-3xl font-bold text-secondary md:text-4xl">
-            Security Is Not an Add-On - It&apos;s Our Foundation
-          </h2>
-          <ul className="mt-6 space-y-3">
-            {points.map((point) => (
-              <li key={point} className="flex items-start gap-3 rounded-2xl border border-surface-border bg-surface-dark p-4">
-                <span className="material-symbols-outlined text-primary">check_circle</span>
-                <span className="text-sm text-muted md:text-base font-body">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="animate-slide-in-right rounded-2xl border border-surface-border bg-card-dark p-6 md:p-8">
-          <div className="rounded-2xl border border-surface-border bg-surface-dark p-6">
-            <div className="rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-accent-cyan/20 p-6">
-              <p className="text-xs uppercase tracking-[0.14em] text-primary">Security Posture</p>
-              <p className="mt-3 text-2xl font-black text-secondary">Validated. Prioritized. Hardened.</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted font-body">
-                We combine secure engineering and offensive testing to reduce practical business risk.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProcessSection() {
-  const steps = [
-    { icon: "manage_search", title: "Scope & Analysis" },
-    { icon: "account_tree", title: "Architecture Review" },
-    { icon: "integration_instructions", title: "Secure Development / Testing" },
-    { icon: "travel_explore", title: "Exploitation & Validation" },
-    { icon: "description", title: "Reporting & Remediation" },
-  ];
-
-  return (
-    <section className="bg-surface-dark px-6 py-20 lg:px-20">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold text-secondary md:text-4xl">Process</h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-5">
-          {steps.map((step, idx) => (
-            <div key={step.title} className="rounded-2xl border border-surface-border bg-card-dark p-4 text-center">
-              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-surface-border bg-surface-dark text-primary">
-                <span className="material-symbols-outlined text-base">{step.icon}</span>
-              </div>
-              <p className="mt-3 text-xs uppercase tracking-wider text-primary">Step {idx + 1}</p>
-              <p className="mt-2 text-sm font-medium text-secondary">{step.title}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedServiceSection() {
-  const bullets = ["OWASP Top 10", "Real exploitation", "Proof-of-concept", "Clear remediation"];
-
-  return (
-    <section className="px-6 py-20 lg:px-20">
-      <div className="mx-auto max-w-7xl rounded-2xl border border-surface-border bg-card-dark p-8 md:p-10">
-        <p className="text-xs uppercase tracking-[0.16em] text-primary">Featured Service</p>
-        <h2 className="mt-3 text-3xl font-bold text-secondary md:text-4xl">Manual Penetration Testing</h2>
-        <p className="mt-4 max-w-3xl text-muted font-body">
-          Professional manual assessment focused on real exploitability, severity-backed findings, and practical remediation planning.
-        </p>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {bullets.map((item) => (
-            <div key={item} className="rounded-2xl border border-surface-border bg-surface-dark px-4 py-3 text-sm text-secondary">
-              <span className="text-primary">✔</span> {item}
-            </div>
-          ))}
-        </div>
-        <Link
-          href="/contact"
-          className="mt-7 inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-7 text-sm font-bold text-background-dark transition-all hover:bg-primary-hover md:text-base"
-        >
-          Request Testing
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function TechStackSection() {
-  const tech = ["React", "Next.js", "Node.js", "AWS", "Kubernetes", "MongoDB", "PostgreSQL"];
-
-  return (
-    <section className="bg-surface-dark px-6 py-20 lg:px-20">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold text-secondary md:text-4xl">Tech Stack</h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {tech.map((item) => (
-            <div key={item} className="rounded-2xl border border-surface-border bg-card-dark px-5 py-4 text-center text-sm font-semibold text-secondary transition-all hover:border-primary/40 hover:text-primary">
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AudienceSection() {
-  const audience = [
-    "Startups",
-    "SaaS Companies",
-    "Enterprises",
-    "Security-focused teams",
-    "Businesses handling sensitive data",
-  ];
-
-  return (
-    <section className="px-6 py-20 lg:px-20">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold text-secondary md:text-4xl">Who We Work With</h2>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {audience.map((item) => (
-            <div key={item} className="rounded-2xl border border-surface-border bg-surface-dark px-5 py-4 text-secondary">
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CtaSection() {
-  return (
-    <section className="px-6 pb-20 lg:px-20">
-      <div className="mx-auto max-w-7xl rounded-2xl border border-surface-border bg-card-dark p-8 md:p-12">
-        <h2 className="text-3xl font-black text-secondary md:text-5xl">
-          Don&apos;t Wait for a Breach to Take Security Seriously
-        </h2>
-        <div className="mt-7 flex flex-wrap gap-4">
-          <Link
-            href="/contact"
-            className="animate-glow inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-8 text-sm font-bold text-background-dark transition-all hover:bg-primary-hover md:text-base"
-          >
-            Get a Security Audit
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex h-12 items-center justify-center rounded-2xl border border-surface-border bg-surface-dark px-8 text-sm font-bold text-secondary transition-all hover:border-primary md:text-base"
-          >
-            Contact Us
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FooterSection() {
-  return (
-    <footer className="border-t border-surface-border bg-surface-dark px-6 py-10 lg:px-20">
-      <div className="mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="text-lg font-black text-secondary">KODESEC</p>
-          <p className="text-sm text-muted">Security-focused engineering and testing services.</p>
-        </div>
-        <div className="flex flex-wrap gap-4 text-sm">
-          <Link href="/services" className="text-secondary hover:text-primary">Services</Link>
-          <Link href="/contact" className="text-secondary hover:text-primary">Contact</Link>
-          <a href="mailto:security@kodesec.com" className="text-secondary hover:text-primary">security@kodesec.com</a>
-        </div>
-        <p className="text-xs text-muted">© {new Date().getFullYear()} KODESEC. All rights reserved.</p>
-      </div>
-    </footer>
-  );
-}
+export const metadata: Metadata = {
+  title: "Kodesec | Cybersecurity & Software Engineering",
+  description: "KodeSec delivers secure software development, offensive penetration testing, and QA validation. We build zero-trust platforms and execute compliance audits.",
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "cybersecurity firm",
+    "software development agency",
+    "penetration testing",
+    "secure coding",
+    "web application security",
+    "Kubernetes hardening",
+  ],
+};
 
 export default function Home() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://kodesec.com/#localbusiness",
+    "name": "Kodesec",
+    "image": "https://kodesec.com/assets/Logo.png",
+    "url": "https://kodesec.com",
+    "telephone": "",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  };
+  const services = [
+    {
+      id: "pentesting",
+      title: "Penetration Testing",
+      description: "Offensive simulations detecting vulnerabilities before exploit.",
+      bullets: [
+        "API & Web Application Pentests",
+        "Infrastructure Attack-Path Validation",
+        "Actionable Remediation Advisories"
+      ],
+      icon: Shield,
+      glow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.15)] hover:border-red-500/30",
+      iconColor: "text-red-400"
+    },
+    {
+      id: "cloudsec",
+      title: "Cloud Security",
+      description: "Posture hardening for multi-tenant and hybrid cloud setups.",
+      bullets: [
+        "AWS, Azure & GCP Audits",
+        "Least-Privilege IAM Guardrails",
+        "IaC Configuration Drift Tracking"
+      ],
+      icon: Cloud,
+      glow: "hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:border-cyan-500/30",
+      iconColor: "text-cyan-400"
+    },
+    {
+      id: "devsecops",
+      title: "DevSecOps",
+      description: "Automated security checkpoints baked directly into CI/CD.",
+      bullets: [
+        "Automated SAST/DAST Gateways",
+        "Container & Image Hardening",
+        "Secrets & Credentials Scanning"
+      ],
+      icon: Workflow,
+      glow: "hover:shadow-[0_0_30px_rgba(192,132,252,0.15)] hover:border-purple-500/30",
+      iconColor: "text-purple-400"
+    },
+    {
+      id: "securedev",
+      title: "Secure Development",
+      description: "Resilient software engineered with zero-trust principles.",
+      bullets: [
+        "Secure Architecture & Design",
+        "OWASP ASVS Standard Alignment",
+        "Compliance-Grade Crypto Auditing"
+      ],
+      icon: Cpu,
+      glow: "hover:shadow-[0_0_30px_rgba(54,226,123,0.15)] hover:border-primary/30",
+      iconColor: "text-primary"
+    }
+  ];
+
   return (
-    <main className="bg-background-dark">
-      <HeroSection />
-      <ServicesSection />
-      <WhySection />
-      <ProcessSection />
-      <FeaturedServiceSection />
-      <AudienceSection />
-      <CtaSection />
+    <main className="bg-background-dark overflow-hidden relative">
+      <JsonLd schema={localBusinessSchema} />
+      {/* Global CSS Inject for scrolling marquee */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          width: max-content;
+          animation: marquee 25s linear infinite;
+        }
+      `}} />
+
+      {/* Radial Ambient Lights */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-accent-purple/5 blur-[120px] pointer-events-none" />
+
+      {/* ================= HERO SECTION ================= */}
+      <Section className="px-6 pt-12 pb-24 md:pt-20 md:pb-32 lg:px-20">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-6 flex flex-col items-start text-left z-10">
+              <Badge variant="default" className="mb-6 animate-pulse">
+                KODESEC ENTERPRISE SHIELD
+              </Badge>
+
+              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-[1.05] lg:max-w-xl">
+                Build Faster. <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent-cyan font-black">
+                  Ship Securely.
+                </span>
+              </h1>
+
+              <p className="mt-6 text-base leading-relaxed text-gray-400 max-w-lg font-medium">
+                Cybersecurity, DevSecOps, and Secure Development services engineered for modern businesses, fintechs, and SaaS platforms.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-auto">
+                <Link
+                  href="/contact"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+                >
+                  Get Security Assessment
+                  <ChevronRight size={16} />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-6 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+                >
+                  <Calendar size={16} />
+                  Book Consultation
+                </Link>
+              </div>
+
+              {/* Bullet Trust indicators */}
+              <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono text-gray-500">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-primary" />
+                  OWASP Aligned
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-primary" />
+                  Zero-Trust Architectures
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-primary" />
+                  Manual Exploit Delivery
+                </div>
+              </div>
+            </div>
+
+            {/* Right Visual: Security Dashboard Widget */}
+            <div className="lg:col-span-6 flex justify-center z-10 w-full">
+              <SecurityDashboard />
+            </div>
+
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= TRUST BAR ================= */}
+      <section className="py-10 border-y border-white/5 bg-[#0B0F1A]/50 relative z-10">
+        <Container className="overflow-hidden">
+          <p className="text-center text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">
+            TRUSTED FOR COMPLIANCE AND SECURITY ALIGNMENT
+          </p>
+          
+          <div className="relative w-full flex overflow-x-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]">
+            <div className="animate-marquee flex gap-16 items-center">
+              {/* Set 1 */}
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Lock size={16} className="text-primary" />OWASP FOUNDATION</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cloud size={16} className="text-cyan-400" />AWS CERTIFIED</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cpu size={16} className="text-purple-400" />KUBERNETES SECURE</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Zap size={16} className="text-sky-400" />DOCKER HARDENED</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Terminal size={16} className="text-white" />GITHUB COMPLIANT</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Shield size={16} className="text-primary" />SOC2 TYPE II</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><CheckCircle2 size={16} className="text-emerald-400" />ISO 27001 AUDITED</span>
+
+              {/* Set 2 */}
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Lock size={16} className="text-primary" />OWASP FOUNDATION</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cloud size={16} className="text-cyan-400" />AWS CERTIFIED</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cpu size={16} className="text-purple-400" />KUBERNETES SECURE</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Zap size={16} className="text-sky-400" />DOCKER HARDENED</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Terminal size={16} className="text-white" />GITHUB COMPLIANT</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Shield size={16} className="text-primary" />SOC2 TYPE II</span>
+              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><CheckCircle2 size={16} className="text-emerald-400" />ISO 27001 AUDITED</span>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ================= SERVICES SECTION ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Expertise & Services</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Securing Every Layer of Your Product</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {services.map((service) => (
+              <FeatureCard
+                key={service.id}
+                title={service.title}
+                description={service.description}
+                icon={service.icon}
+                iconColorClass={service.iconColor}
+                glowClass={service.glow}
+                bullets={service.bullets}
+              />
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= METRICS SECTION ================= */}
+      <Section className="py-20 border-y border-white/5 bg-[#101525]/40 backdrop-blur-sm relative z-10">
+        <Container>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {homeConfig.metrics.map((metric, idx) => (
+              <MetricCard
+                key={idx}
+                value={metric.value}
+                label={metric.label}
+                description={metric.desc}
+              />
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= PROCESS SECTION ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Methodology</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Our Security Pipeline Lifecycle</p>
+          </div>
+
+          <MethodologyTimeline />
+        </Container>
+      </Section>
+
+      {/* ================= CASE STUDIES ================= */}
+      <Section className="py-24 border-t border-white/5 bg-[#101525]/30 relative z-10">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Case Studies</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Proven Security Outcomes</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {homeConfig.caseStudies.map((study, idx) => {
+              const borderColors = [
+                "hover:border-primary/30 hover:shadow-[0_0_20px_rgba(54,226,123,0.08)]",
+                "hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.08)]",
+                "hover:border-purple-500/30 hover:shadow-[0_0_20px_rgba(192,132,252,0.08)]"
+              ];
+              const accentColor = ["text-primary", "text-cyan-400", "text-purple-400"];
+
+              return (
+                <div 
+                  key={idx} 
+                  className={`rounded-3xl border border-white/5 bg-[#0B0F1A]/80 p-6 flex flex-col justify-between transition-all duration-300 ${borderColors[idx]}`}
+                >
+                  <div className="text-left">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-white/5 text-gray-400 border border-white/5">
+                      {study.industry}
+                    </span>
+                    
+                    <h3 className="mt-5 text-lg font-black text-white tracking-tight">{study.title}</h3>
+                    
+                    <div className="mt-6 space-y-3.5 border-t border-white/5 pt-4 text-xs font-medium">
+                      <div>
+                        <span className="text-gray-500 uppercase tracking-wider font-mono text-[9px] block">Challenge</span>
+                        <p className="text-gray-300 mt-1 leading-relaxed font-sans">{study.challenge}</p>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 uppercase tracking-wider font-mono text-[9px] block">Remediation</span>
+                        <p className="text-gray-300 mt-1 leading-relaxed font-sans">{study.result}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between text-left">
+                    <div>
+                      <span className="text-[9px] uppercase tracking-wider text-gray-500 font-mono block">Metric Achieved</span>
+                      <span className={`text-lg font-black font-mono tracking-tight mt-0.5 block ${accentColor[idx]}`}>{study.stat}</span>
+                    </div>
+                    <p className="text-[10px] text-gray-400 leading-snug font-medium max-w-[130px] text-right">
+                      {study.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= TECHNOLOGY ECOSYSTEM ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Ecosystem</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Security Integrations</p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
+            {homeConfig.techEcosystem.map((tech) => (
+              <div
+                key={tech.name}
+                className="px-5 py-3.5 rounded-full border border-white/5 bg-[#0F1424]/40 text-sm font-bold font-mono tracking-wide text-gray-400 transition-all duration-300 cursor-default hover:text-white hover:bg-[#0F1424]/80"
+              >
+                <span className="text-gray-500 mr-1.5 opacity-60">#</span>
+                {tech.name}
+                <span className="text-[10px] bg-white/5 border border-white/5 text-gray-500 px-1.5 py-0.5 rounded-full ml-2 opacity-80 group-hover:opacity-100 font-sans font-medium">
+                  {tech.category}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= TESTIMONIALS ================= */}
+      <Section className="py-24 border-y border-white/5 bg-[#101525]/30 relative z-10">
+        <Container>
+          <div className="text-center mb-10">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Testimonials</h2>
+          </div>
+
+          <TestimonialCarousel />
+        </Container>
+      </Section>
+
+      {/* ================= FINAL CTA SECTION ================= */}
+      <Section id="cta" className="py-24 px-6 lg:px-20 relative z-10">
+        <Container className="max-w-6xl rounded-3xl border border-white/10 bg-gradient-to-b from-[#101525] to-[#0A0D18] p-8 md:p-16 relative overflow-hidden shadow-2xl">
+          <SecurityEstimator />
+        </Container>
+      </Section>
     </main>
   );
 }

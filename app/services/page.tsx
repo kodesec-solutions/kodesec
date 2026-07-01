@@ -1,204 +1,426 @@
-import React from 'react';
-import Link from 'next/link';
-import { servicesData } from '@/app/data/services';
+import React from "react";
+import Link from "next/link";
+import AttackGraph from "@/components/AttackGraph";
+import ProcessTimeline from "@/components/services/ProcessTimeline";
+
+// Primitives
+import { Section } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
+import { Badge } from "@/components/ui/badge";
+
+// Icons
+import { 
+  Shield, 
+  Terminal, 
+  Cloud, 
+  Workflow, 
+  Cpu, 
+  ChevronRight, 
+  ArrowRight, 
+  Calendar, 
+  FileText, 
+  Server, 
+  ShieldCheck
+} from "lucide-react";
+
+import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+
+// Config data
+import { servicesData } from "@/app/data/services";
+
+export const metadata: Metadata = {
+  title: "Security & Software Development Services Catalog",
+  description: "Browse KodeSec's professional cybersecurity, penetration testing, secure app development, cloud hardening, and software QA capabilities.",
+  alternates: {
+    canonical: "/services",
+  },
+  keywords: [
+    "cybersecurity services",
+    "penetration testing services",
+    "secure development catalog",
+    "DevSecOps consultancy",
+    "Active Directory security assessment",
+  ],
+};
+
+const iconMap: Record<string, any> = {
+  "secure-application-development": CodeIcon,
+  "manual-website-penetration-testing": Terminal,
+  "network-infrastructure-penetration-testing": Server,
+  "infrastructure-automation-cloud-solutions": Workflow,
+  "website-vulnerability-scan-manual-verification": Shield,
+  "active-directory-security-assessment": ShieldCheck,
+  "application-qa-testing": Cpu,
+};
+
+function CodeIcon(props: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  );
+}
 
 export default function Services() {
-  const serviceIcons = ['verified_user', 'cloud_sync', 'policy', 'lan'];
-  const servicePillars = [
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://kodesec.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://kodesec.com/services"
+      }
+    ]
+  };
+
+  const serviceListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Kodesec Cybersecurity & Software Engineering Services",
+    "itemListElement": servicesData.map((service, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "item": {
+        "@type": "Service",
+        "name": service.title.split(" - ")[0],
+        "description": service.shortPositioning.split(". ")[0] + ".",
+        "url": `https://kodesec.com/services/${service.slug}`
+      }
+    }))
+  };
+
+  const industries = [
     {
-      icon: 'deployed_code',
-      title: 'Secure Application Development',
-      desc: 'Cybersecurity-first web and platform engineering from architecture to secure production launch.'
+      name: "SaaS",
+      focus: "Multi-tenant logic segregation",
+      compliance: "SOC2 Alignment",
+      glow: "hover:shadow-[0_0_20px_rgba(54,226,123,0.06)] hover:border-primary/20"
     },
     {
-      icon: 'settings_suggest',
-      title: 'Infrastructure Automation',
-      desc: 'Automated provisioning, deployment, and cloud operations for speed, consistency, and scale.'
+      name: "FinTech",
+      focus: "Ledger and billing validation",
+      compliance: "PCI-DSS Scopes",
+      glow: "hover:shadow-[0_0_20px_rgba(34,211,238,0.06)] hover:border-cyan-500/20"
     },
     {
-      icon: 'web_traffic',
-      title: 'Manual Web Pentesting',
-      desc: 'Controlled exploitation testing to uncover real web vulnerabilities with actionable fixes.'
+      name: "Healthcare",
+      focus: "HIPAA PHI access audits",
+      compliance: "HIPAA Compliant",
+      glow: "hover:shadow-[0_0_20px_rgba(192,132,252,0.06)] hover:border-purple-500/20"
     },
     {
-      icon: 'router',
-      title: 'Network Pentesting',
-      desc: 'Internal security assessment for lateral movement, privilege escalation, and segmentation risks.'
+      name: "Enterprise",
+      focus: "Kubernetes IAM/RBAC hardening",
+      compliance: "ISO 27001 Controls",
+      glow: "hover:shadow-[0_0_20px_rgba(255,255,255,0.08)] hover:border-white/20"
+    },
+    {
+      name: "E-commerce",
+      focus: "API gateway & payment audits",
+      compliance: "OWASP Top 10 Protected",
+      glow: "hover:shadow-[0_0_20px_rgba(244,63,94,0.06)] hover:border-rose-500/20"
     }
   ];
 
-  const technologyChips = Array.from(
-    new Set(servicesData.flatMap((service) => service.technologies ?? []))
-  ).slice(0, 14);
-
-  const getServicePreview = (text: string) => {
-    if (text.length <= 190) return text;
-    return `${text.slice(0, 187)}...`;
-  };
+  const trustPillars = [
+    {
+      title: "OWASP Aligned",
+      desc: "Methodology strictly mapped to OWASP ASVS v4.0 and Top 10 standards.",
+      icon: ShieldCheck,
+      color: "text-primary"
+    },
+    {
+      title: "Manual Exploitation Focus",
+      desc: "Our offensive engineers manually exploit business logic, leaving scanners behind.",
+      icon: Terminal,
+      color: "text-red-400"
+    },
+    {
+      title: "Security-First Engineering",
+      desc: "We write clean patch advisory code blocks directly in your target language.",
+      icon: Cpu,
+      color: "text-cyan-400"
+    },
+    {
+      title: "Evidence-Based Reports",
+      desc: "No automated copy-paste scanner sheets. Every finding is backed by a verified PoC.",
+      icon: FileText,
+      color: "text-purple-400"
+    }
+  ];
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="relative px-6 lg:px-20 py-12 lg:py-24 flex justify-center overflow-hidden font-display">
-        <div className="flex flex-col max-w-[1200px] w-full gap-10">
-          <div className="rounded-[2.5rem] bg-surface-dark p-8 lg:p-16 relative overflow-hidden min-h-[500px] flex flex-col justify-center items-start">
-            <div className="absolute inset-0 z-0 bg-cover bg-center opacity-40 mix-blend-overlay" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3hsnGhLxUfRSz0lPhrt4kMDIpSJlm_MXgfVk4vHWD-LISBAGoKSM-P4HW3pWLDbHBn9KDkNkw5SIb06BLYiaP6cU1stqZQe8CxbQNfZqq2d2aVOnVSygJjNtWNesOA4C1HT5MKMI-LFPQHJZH_HQ2lPvDtpbMigz9OumOvTSrccKEWdr5v4aMxmiZYFA3w4B9dZ4ZnUFwokEipz9my7vL8LpYlWSDRcXBL09xQiVpH-HKFObJocmJNoKdht6wievL1Dm60vVdOUr2")'}}></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/80 to-transparent z-0"></div>
-            <div className="relative z-10 max-w-2xl flex flex-col gap-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 w-fit">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                <span className="text-primary text-xs font-bold tracking-wide uppercase">SECURITY-FIRST ENGINEERING</span>
-              </div>
-              <h1 className="text-white text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                Engineered for<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Modern Systems</span>
+    <main className="bg-background-dark overflow-hidden relative min-h-screen">
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={serviceListSchema} />
+      
+      {/* Dynamic Grid Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none" />
+
+      {/* ================= HERO SECTION ================= */}
+      <Section className="relative px-6 pt-12 pb-24 md:pt-20 md:pb-32 lg:px-20">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-6 flex flex-col items-start text-left z-10">
+              <Badge className="mb-6 animate-pulse">
+                CYBERSECURITY OUTCOMES DELIVERED
+              </Badge>
+
+              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-[1.05] lg:max-w-xl">
+                Security Services <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent-cyan font-black">
+                  Built for Devs.
+                </span>
               </h1>
-              <p className="text-gray-400 text-lg lg:text-xl font-light max-w-xl leading-relaxed font-body">
-                From secure application development to advanced penetration testing and infrastructure automation — we protect your systems before attackers find a way in.
+
+              <p className="mt-6 text-base leading-relaxed text-gray-400 max-w-lg font-medium">
+                From secure software architecture to offensive penetration testing and DevSecOps pipelines. We evaluate systems from an attacker&apos;s perspective.
               </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Link href="/contact" className="bg-primary hover:bg-primary-hover text-background-dark font-bold text-base px-8 py-3.5 rounded-full transition-all hover:shadow-[0_0_20px_rgba(54,226,123,0.3)]">
-                  Get a Security Assessment
-                </Link>
-                <Link href="#service-list" className="bg-surface-border/50 hover:bg-surface-border text-white font-medium text-base px-8 py-3.5 rounded-full backdrop-blur-sm transition-all border border-white/10">
-                  Explore Services
+
+              <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-auto">
+                <a
+                  href="#services-grid"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+                >
+                  Explore Offerings
+                  <ArrowRight size={16} />
+                </a>
+                <Link
+                  href="/contact"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+                >
+                  <Calendar size={16} />
+                  Book Scope Consultation
                 </Link>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* What We Secure Section */}
-      <section className="px-6 lg:px-20 py-12 flex justify-center font-display">
-        <div className="flex flex-col max-w-[1200px] w-full">
-          <div className="flex flex-col gap-4 mb-12">
-            <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight">What We Deliver</h2>
-            <p className="text-gray-400 text-lg max-w-2xl font-body">Four focused services that strengthen your application and infrastructure security posture end to end.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {servicePillars.map((item, idx) => (
-              <div key={idx} className="group flex flex-col gap-4 p-6 rounded-2xl bg-surface-dark/90 border border-surface-border transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_14px_35px_rgba(0,0,0,0.28)]">
-                <div className="size-12 rounded-xl bg-background-dark border border-surface-border flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background-dark transition-colors">
-                  <span className="material-symbols-outlined">{item.icon}</span>
-                </div>
-                <div>
-                  <h3 className="text-white text-lg font-bold mb-1">{item.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed font-body">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Services Section */}
-      <section id="service-list" className="px-6 lg:px-20 py-16 flex justify-center bg-surface-dark/30 border-y border-surface-border font-display">
-        <div className="flex flex-col max-w-[1200px] w-full">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-            <div className="flex flex-col gap-3">
-              <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight">Choose the Right & Secure Solution</h2>
-              <p className="text-gray-400 text-lg font-body">From development to deployment, our services are engineered to identify risks, eliminate vulnerabilities, and strengthen your security posture.</p>
+            {/* Right Attack Graph Simulator */}
+            <div className="lg:col-span-6 flex justify-center z-10 w-full">
+              <AttackGraph />
             </div>
+
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {servicesData.map((service, idx) => (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                className="group flex gap-5 p-6 rounded-2xl bg-background-dark border border-surface-border hover:border-primary/40 transition-all hover:-translate-y-1 hover:shadow-[0_14px_35px_rgba(0,0,0,0.3)]"
-              >
-                <div className="shrink-0 mt-1">
-                  <span className="material-symbols-outlined text-primary text-3xl">{serviceIcons[idx] ?? 'shield'}</span>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-white text-xl font-bold group-hover:text-primary transition-colors">{service.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed font-body">{getServicePreview(service.shortPositioning)}</p>
-                  <span className="text-primary text-sm font-semibold mt-2 inline-flex items-center gap-1">
-                    Explore service
-                    <span className="material-symbols-outlined text-base">arrow_forward</span>
-                  </span>
-                </div>
-              </Link>
-            ))}
+        </Container>
+      </Section>
+
+      {/* ================= SERVICES GRID ================= */}
+      <Section id="services-grid" className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Service Matrix</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Our Core Audits & Engineering</p>
           </div>
-        </div>
-      </section>
 
-      {/* Tools & Standards */}
-      <section className="px-6 lg:px-20 py-20 flex justify-center font-display">
-        <div className="flex flex-col items-center max-w-[1200px] w-full text-center">
-          <h2 className="text-white text-2xl font-bold mb-10">Frameworks, Standards & Platforms We Work With</h2>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-            {technologyChips.map((tech, idx) => (
-              <div key={idx} className="px-6 py-3 rounded-full border border-surface-border bg-surface-dark text-gray-300 font-semibold text-sm flex items-center gap-2 hover:border-primary/50 hover:text-white transition-colors cursor-default">
-                <span className="material-symbols-outlined text-primary text-lg">memory</span> {tech}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="grid gap-8 md:grid-cols-2">
+            {servicesData.map((service, idx) => {
+              const IconComp = iconMap[service.slug] || Shield;
+              const glows = [
+                "hover:shadow-[0_0_30px_rgba(54,226,123,0.15)] hover:border-primary/30",
+                "hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:border-cyan-500/30",
+                "hover:shadow-[0_0_30px_rgba(239,68,68,0.15)] hover:border-red-500/30",
+                "hover:shadow-[0_0_30px_rgba(192,132,252,0.15)] hover:border-purple-500/30"
+              ];
+              const glowClass = glows[idx % glows.length];
+              const colors = ["text-primary", "text-cyan-400", "text-red-400", "text-purple-400"];
+              const iconColor = colors[idx % colors.length];
 
-      {/* Bottom CTA */}
-      <section className="px-6 lg:px-20 pb-24 flex justify-center font-display">
-        <div className="w-full max-w-[1200px]">
-          <div className="rounded-[2rem] p-[1px] bg-gradient-to-r from-primary/50 via-cyan-300/40 to-white/20 relative overflow-hidden shadow-[0_20px_70px_rgba(0,0,0,0.35)]">
-            <div className="relative rounded-[2rem] bg-[radial-gradient(circle_at_14%_20%,rgba(54,226,123,0.2),transparent_45%),radial-gradient(circle_at_85%_75%,rgba(34,211,238,0.16),transparent_42%),linear-gradient(135deg,#0b111f_0%,#0e1a2c_55%,#12142b_100%)] p-8 md:p-12 lg:p-14 overflow-hidden">
-              <div className="absolute -top-14 -right-10 w-56 h-56 rounded-full border border-white/10 bg-white/5 blur-2xl" />
-              <div className="absolute -bottom-16 -left-10 w-64 h-64 rounded-full border border-primary/20 bg-primary/10 blur-2xl" />
-
-              <div className="relative z-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
-                <div className="text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 mb-5">
-                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    <span className="text-primary text-xs font-bold tracking-[0.16em] uppercase">Security Engagement</span>
-                  </div>
-                  <h2 className="text-white text-3xl md:text-5xl font-bold leading-[1.08] max-w-3xl">
-                    Let&apos;s define your security scope and ship with confidence.
-                  </h2>
-                  <p className="mt-5 text-gray-300 text-base md:text-lg max-w-2xl font-body leading-relaxed">
-                    From secure development to infrastructure automation and penetration testing, we deliver practical security outcomes your team can implement fast.
-                  </p>
-
-                  <div className="mt-8 flex flex-wrap gap-4">
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-background-dark font-bold text-base px-8 py-3.5 rounded-full transition-all shadow-lg shadow-primary/20"
-                    >
-                      Book a Consultation
-                      <span className="material-symbols-outlined text-[18px]">arrow_outward</span>
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-semibold text-base px-8 py-3.5 rounded-full transition-all"
-                    >
-                      Request Security Assessment
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
-                  {[
-                    { icon: 'schedule', title: 'Fast Kickoff', text: 'Scope alignment and engagement planning without friction.' },
-                    { icon: 'verified', title: 'Actionable Reports', text: 'Clear findings, real risk context, and remediation guidance.' },
-                    { icon: 'shield_lock', title: 'Security-First Delivery', text: 'Built for resilience, scale, and long-term maintainability.' }
-                  ].map((item) => (
-                    <div key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm">
-                      <div className="flex items-start gap-3">
-                        <span className="material-symbols-outlined text-primary">{item.icon}</span>
-                        <div>
-                          <p className="text-white font-semibold text-sm">{item.title}</p>
-                          <p className="text-gray-400 text-xs leading-relaxed mt-1">{item.text}</p>
-                        </div>
+              return (
+                <div
+                  key={service.slug}
+                  className={`group relative rounded-[2rem] border border-white/5 bg-[#0F1424]/40 p-8 backdrop-blur-md transition-all duration-300 ${glowClass} flex flex-col justify-between text-left`}
+                >
+                  <div>
+                    {/* Top Header */}
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/[0.02] border border-white/10">
+                        <IconComp className={`h-7 w-7 ${iconColor}`} />
                       </div>
+                      <span className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded">
+                        SERVICE 0{idx + 1}
+                      </span>
                     </div>
-                  ))}
+
+                    <h3 className="text-xl md:text-2xl font-black text-white tracking-tight group-hover:text-primary transition-colors">
+                      {service.title.split(" - ")[0]}
+                    </h3>
+                    <p className="mt-3.5 text-xs text-gray-400 leading-relaxed font-medium">
+                      {service.shortPositioning.split(". ")[0]}.
+                    </p>
+
+                    {/* Capability Tags */}
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {service.keyApproach.slice(0, 3).map((tag) => (
+                        <span 
+                          key={tag} 
+                          className="px-2.5 py-1 rounded-full border border-white/5 bg-white/[0.02] text-[10px] font-mono font-bold text-gray-300 truncate max-w-[200px]"
+                        >
+                          #{tag.split(" ")[0]} {tag.split(" ").slice(1, 3).join(" ")}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA buttons */}
+                  <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap gap-3 justify-between items-center">
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="inline-flex h-10 items-center justify-center gap-1 text-xs font-mono font-bold text-gray-400 hover:text-white transition-all cursor-pointer"
+                    >
+                      View Details
+                      <ArrowRight size={12} />
+                    </Link>
+                    <Link
+                      href="/contact?type=assessment"
+                      className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-5 text-xs font-bold text-white hover:bg-primary hover:text-black hover:border-primary transition-all cursor-pointer"
+                    >
+                      Scope Assessment
+                      <ChevronRight size={14} />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= INDUSTRIES SECTION ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#101525]/30">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Sector Experience</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Compliance & Target Alignment</p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {industries.map((ind, idx) => (
+              <div
+                key={ind.name}
+                className={`group rounded-2xl border border-white/5 bg-[#0B0F1A]/80 p-5 flex flex-col justify-between transition-all duration-300 ${ind.glow} hover:-translate-y-1 text-left`}
+              >
+                <div>
+                  <span className="text-[10px] font-mono font-bold text-primary tracking-wider block">
+                    0{idx + 1}
+                  </span>
+                  <h3 className="mt-3 text-lg font-black text-white tracking-tight">{ind.name}</h3>
+                  <p className="mt-2 text-[11px] text-gray-400 leading-relaxed font-medium">{ind.focus}</p>
+                </div>
+                <div className="mt-6 border-t border-white/5 pt-3">
+                  <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest block">Audit Compliance</span>
+                  <span className="text-xs font-bold font-mono text-white block mt-0.5">{ind.compliance}</span>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
-      </section>
-    </>
+        </Container>
+      </Section>
+
+      {/* ================= DELIVERY PROCESS ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Delivery Framework</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Our Security Engagement Lifecycle</p>
+          </div>
+
+          <ProcessTimeline />
+        </Container>
+      </Section>
+
+      {/* ================= TRUST SECTION ================= */}
+      <Section className="py-24 border-t border-white/5 bg-[#101525]/30 relative z-10">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Our Standards</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Quality Outcomes, Zero Scanner Noise</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {trustPillars.map((pillar, idx) => {
+              const IconComp = pillar.icon;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-3xl border border-white/5 bg-[#0B0F1A]/80 p-6 flex flex-col items-start text-left transition-all hover:border-primary/20 group hover:shadow-[0_0_20px_rgba(54,226,123,0.05)]"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/[0.02] border border-white/10 mb-5">
+                    <IconComp className={`h-5.5 w-5.5 ${pillar.color}`} />
+                  </div>
+                  <h3 className="text-base font-black text-white tracking-tight">{pillar.title}</h3>
+                  <p className="mt-3 text-[11px] text-gray-400 leading-relaxed font-medium">{pillar.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= FINAL CTA SECTION ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
+        <Container className="max-w-5xl rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101525] to-[#0A0D18] p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
+          
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
+
+          {/* Shield Badge */}
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6">
+            <Shield className="h-6 w-6 text-primary animate-pulse" />
+          </div>
+
+          <h2 className="text-3xl font-black text-white sm:text-5xl leading-tight tracking-tight max-w-2xl">
+            Ready to Improve Your Security Posture?
+          </h2>
+          
+          <p className="mt-4 text-sm text-gray-400 max-w-lg leading-relaxed font-medium">
+            Deploy defensive capabilities and offensive validations. Select Request Assessment to kick off or schedule a general scope call.
+          </p>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
+            <Link
+              href="/contact?type=assessment"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+            >
+              Request Assessment
+              <ChevronRight size={16} />
+            </Link>
+            <Link
+              href="/contact?type=consultation"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+            >
+              <Calendar size={16} />
+              Book Consultation
+            </Link>
+          </div>
+
+        </Container>
+      </Section>
+
+    </main>
   );
 }

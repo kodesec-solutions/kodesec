@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Terms and conditions governing the use of KodeSec cybersecurity, software engineering, and penetration testing services.",
+  alternates: {
+    canonical: "/terms-of-service",
+  },
+};
+
 type TermsSection = {
   title: string;
   body: React.ReactNode;

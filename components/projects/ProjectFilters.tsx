@@ -1,4 +1,4 @@
-import { ProjectCategory } from "@/app/components/projects/types";
+import { ProjectCategory } from "@/components/projects/types";
 
 type ProjectFiltersProps = {
   activeCategory: ProjectCategory;

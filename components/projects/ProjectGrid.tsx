@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { ProjectCaseStudy, ProjectCategory } from "@/app/components/projects/types";
+import { ProjectCaseStudy, ProjectCategory } from "@/components/projects/types";
 
 type ProjectGridProps = {
   projects: ProjectCaseStudy[];

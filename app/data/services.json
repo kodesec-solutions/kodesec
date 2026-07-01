@@ -49,7 +49,19 @@
       "secondaryLabel": "Schedule a Security-First Consultation",
       "secondaryHref": "/contact"
     },
-    "bannerImage": "/assets/Coding.gif"
+    "bannerImage": "/assets/Coding.gif",
+    "problems": [
+      { "title": "Plaintext Secret Leaks", "desc": "Hardcoded environment keys and API credentials in source repositories." },
+      { "title": "Broken Authorization Loops", "desc": "Horizontal and vertical IDOR privilege escalation logic flaws." },
+      { "title": "Cryptographic Failure", "desc": "Insecure envelope encryption, state keys, and TLS transport hashes." }
+    ],
+    "caseStudy": {
+      "industry": "Fintech",
+      "title": "Securing Core Ledger APIs",
+      "metric": "SOC2 Compliance Passed",
+      "desc": "Designed and engineered secure OAuth loops and mTLS gateway bindings. zero CVE findings during annual audit."
+    },
+    "badges": ["OWASP ASVS Alignment", "SSDLC Secure Gateways", "Shift Left Security", "mTLS Zero-Trust"]
   },
   {
     "slug": "infrastructure-automation-cloud-solutions",
@@ -100,7 +112,19 @@
       "secondaryLabel": "Book Cloud and DevOps Consultation",
       "secondaryHref": "/contact"
     },
-    "bannerImage": "/assets/Coding.gif"
+    "bannerImage": "/assets/Coding.gif",
+    "problems": [
+      { "title": "Configuration Drift", "desc": "Manual updates in AWS/Azure consoles leaving infrastructure exposed." },
+      { "title": "IAM Permission Creep", "desc": "Over-privileged service roles allowing container escape paths." },
+      { "title": "Public S3 / Database Ports", "desc": "Misconfigured security groups exposing backend databases." }
+    ],
+    "caseStudy": {
+      "industry": "SaaS",
+      "title": "Kubernetes DevSecOps Shift",
+      "metric": "94% Less Cloud Drift",
+      "desc": "Configured Terraform IaC checks and automated secrets scanning in GitHub Action pipelines."
+    },
+    "badges": ["DevSecOps Automated", "Kubernetes Hardened", "IaC Drift Auditing", "AWS Security Certified"]
   },
   {
     "slug": "manual-website-penetration-testing",
@@ -152,7 +176,19 @@
       "secondaryLabel": "Define Scope with Us",
       "secondaryHref": "/contact"
     },
-    "bannerImage": "/assets/Coding.gif"
+    "bannerImage": "/assets/Coding.gif",
+    "problems": [
+      { "title": "OWASP Top 10 Exploits", "desc": "Preventing SQL Injection, XSS, CSRF, and broken access controls." },
+      { "title": "Business Logic Bypass", "desc": "Validation flaws in multi-tenant API scopes and shopping carts." },
+      { "title": "Outdated CVE Packages", "desc": "Libraries containing known remote code execution (RCE) flaws." }
+    ],
+    "caseStudy": {
+      "industry": "Scale SaaS",
+      "title": "Pre-Series A Exploitation Audit",
+      "metric": "4 Critical Flaws Mitigated",
+      "desc": "Identified and patched logical API authentication bypasses prior to vendor code launch."
+    },
+    "badges": ["OWASP Top 10 Aligned", "Manual Exploits", "Proof-of-Concept Proven", "Rapid CVE Isolation"]
   },
   {
     "slug": "network-infrastructure-penetration-testing",
@@ -201,9 +237,20 @@
       "secondaryLabel": "Define Testing Scope",
       "secondaryHref": "/contact"
     },
-    "bannerImage": "/assets/Coding.gif"
-  }
-  ,
+    "bannerImage": "/assets/Coding.gif",
+    "problems": [
+      { "title": "Permissive Subnet Routing", "desc": "Lack of internal network boundaries enabling easy lateral movement." },
+      { "title": "AD Delegation Risks", "desc": "Orphaned domain admin credentials and insecure Kerberos configurations." },
+      { "title": "Exposed Server Port Access", "desc": "Unencrypted RDP, SMB, and SSH bindings open to remote exploits." }
+    ],
+    "caseStudy": {
+      "industry": "Enterprise Retail",
+      "title": "Network Segmentation Audit",
+      "metric": "0 Pivot Paths Left",
+      "desc": "Audited 12 internal subnets, simulated attacker pivots, and hardened Active Directory policies."
+    },
+    "badges": ["Domain Hardened", "mTLS Microsegments", "Active Directory Safe", "AD-Kerberos Audited"]
+  },
   {
     "slug": "website-vulnerability-scan-manual-verification",
     "title": "Website Vulnerability Scan & Manual Verification",
@@ -247,9 +294,20 @@
       "secondaryLabel": "Schedule a Verification Review",
       "secondaryHref": "/contact"
     },
-    "bannerImage": "/assets/Coding.gif"
-  }
-  ,
+    "bannerImage": "/assets/Coding.gif",
+    "problems": [
+      { "title": "OWASP Top 10 Exploits", "desc": "Preventing SQL Injection, XSS, CSRF, and broken access controls." },
+      { "title": "Business Logic Bypass", "desc": "Validation flaws in multi-tenant API scopes and shopping carts." },
+      { "title": "Outdated CVE Packages", "desc": "Libraries containing known remote code execution (RCE) flaws." }
+    ],
+    "caseStudy": {
+      "industry": "Scale SaaS",
+      "title": "Pre-Series A Exploitation Audit",
+      "metric": "4 Critical Flaws Mitigated",
+      "desc": "Identified and patched logical API authentication bypasses prior to vendor code launch."
+    },
+    "badges": ["OWASP Top 10 Aligned", "Manual Exploits", "Proof-of-Concept Proven", "Rapid CVE Isolation"]
+  },
   {
     "slug": "active-directory-security-assessment",
     "title": "Active Directory Security Assessment - Domain Infrastructure Testing",
@@ -297,9 +355,20 @@
       "secondaryLabel": "Schedule a Domain Review",
       "secondaryHref": "/contact"
     },
-    "bannerImage": "/assets/Coding.gif"
-  }
-  ,
+    "bannerImage": "/assets/Coding.gif",
+    "problems": [
+      { "title": "Permissive Subnet Routing", "desc": "Lack of internal network boundaries enabling easy lateral movement." },
+      { "title": "AD Delegation Risks", "desc": "Orphaned domain admin credentials and insecure Kerberos configurations." },
+      { "title": "Exposed Server Port Access", "desc": "Unencrypted RDP, SMB, and SSH bindings open to remote exploits." }
+    ],
+    "caseStudy": {
+      "industry": "Enterprise Retail",
+      "title": "Network Segmentation Audit",
+      "metric": "0 Pivot Paths Left",
+      "desc": "Audited 12 internal subnets, simulated attacker pivots, and hardened Active Directory policies."
+    },
+    "badges": ["Domain Hardened", "mTLS Microsegments", "Active Directory Safe", "AD-Kerberos Audited"]
+  },
   {
     "slug": "application-qa-testing",
     "title": "Application QA Testing - Manual & Functional Software Testing",
@@ -344,6 +413,18 @@
       "secondaryLabel": "Book a QA Review",
       "secondaryHref": "/contact"
     },
-    "bannerImage": "/assets/Coding.gif"
+    "bannerImage": "/assets/Coding.gif",
+    "problems": [
+      { "title": "Permissive Subnet Routing", "desc": "Lack of internal network boundaries enabling easy lateral movement." },
+      { "title": "AD Delegation Risks", "desc": "Orphaned domain admin credentials and insecure Kerberos configurations." },
+      { "title": "Exposed Server Port Access", "desc": "Unencrypted RDP, SMB, and SSH bindings open to remote exploits." }
+    ],
+    "caseStudy": {
+      "industry": "Enterprise Retail",
+      "title": "Network Segmentation Audit",
+      "metric": "0 Pivot Paths Left",
+      "desc": "Audited 12 internal subnets, simulated attacker pivots, and hardened Active Directory policies."
+    },
+    "badges": ["Domain Hardened", "mTLS Microsegments", "Active Directory Safe", "AD-Kerberos Audited"]
   }
 ]

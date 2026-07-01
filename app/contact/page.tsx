@@ -1,268 +1,246 @@
-"use client";
+import React from "react";
+import Link from "next/link";
+import NetworkGraph from "@/components/NetworkGraph";
+import ContactForm from "@/components/contact/ContactForm";
 
-import { useState, type FormEvent } from "react";
-import { toast } from "sonner";
+// Primitives
+import { Section } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
+import { Badge } from "@/components/ui/badge";
 
-const serviceOptions = [
-  "Penetration Testing",
-  "Application Development",
-  "Network Security",
-  "Cloud & Automation",
-  "Other",
-];
+// Icons
+import { 
+  Mail, 
+  Calendar, 
+  ChevronRight, 
+  Sparkles
+} from "lucide-react";
 
-function ContactHero() {
+import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { contactConfig, socialLinksConfig } from "@/config/site";
+
+export const metadata: Metadata = {
+  title: "Contact Our Security Architects",
+  description: "Get in touch directly with technical founders at KodeSec. Request a manual penetration test, secure code audit, or cloud infrastructure hardening.",
+  alternates: {
+    canonical: "/contact",
+  },
+  keywords: ["contact KodeSec", "hire penetration testing team", "secure developer consultation", "scoping security review"],
+};
+
+export default function ContactPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://kodesec.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://kodesec.com/contact"
+      }
+    ]
+  };
+
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": "https://kodesec.com/contact/#contactpage",
+    "url": "https://kodesec.com/contact",
+    "name": "Contact Kodesec Team",
+    "description": "Secure communication channel to coordinate penetration testing audits and software validation.",
+    "publisher": {
+      "@id": "https://kodesec.com/#organization"
+    }
+  };
+
   return (
-    <section className="px-6 py-20 lg:px-20">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
-        <div className="animate-slide-in-left">
-          <p className="inline-flex items-center rounded-full border border-surface-border bg-surface-dark px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            Contact Us
-          </p>
-          <h1 className="mt-6 text-4xl font-black leading-[1.05] text-secondary md:text-5xl lg:text-6xl">
-            Let&apos;s Build Something <span className="text-primary">Secure</span> Together
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg font-body">
-            Reach out for security testing, secure development, or infrastructure solutions. Our team responds within 24 hours.
-          </p>
-        </div>
+    <main className="bg-background-dark overflow-hidden relative min-h-screen">
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={contactPageSchema} />
+      {/* Background decorations */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-[20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none" />
 
-        <div className="animate-slide-in-right">
-          <div className="relative overflow-hidden rounded-3xl border border-surface-border bg-card-dark p-6 md:p-8">
-            <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl animate-float-up" />
-            <div className="absolute -bottom-10 -right-10 h-44 w-44 rounded-full bg-accent-cyan/20 blur-3xl animate-float-up animation-delay-400" />
-            <div className="relative grid gap-4">
-              <div className="rounded-2xl border border-surface-border bg-surface-dark p-4">
-                <p className="text-xs uppercase tracking-[0.14em] text-primary">Secure Channel</p>
-                <p className="mt-2 text-xl font-black text-secondary">Encrypted Communication</p>
+      {/* ================= 1. HERO SECTION ================= */}
+      <Section className="relative px-6 pt-12 pb-20 md:pt-20 md:pb-28 lg:px-20 z-10">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            {/* Left Content */}
+            <div className="lg:col-span-6 flex flex-col items-start text-left">
+              <Badge className="mb-6 animate-pulse">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-ping mr-2"></span>
+                ACCESS TO ACTIVE ENGINEERS
+              </Badge>
+
+              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-[1.05]">
+                Let's Build Something<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent-cyan font-black">
+                  Secure Together
+                </span>
+              </h1>
+
+              <p className="mt-6 text-base leading-relaxed text-gray-400 max-w-lg font-medium">
+                Whether you are launching a product, securing cloud networks, or planning an audit, we are ready to assist.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-auto">
+                <a
+                  href="#contact-form-section"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+                >
+                  Contact Form
+                  <ChevronRight size={16} />
+                </a>
+                <a
+                  href={`mailto:${socialLinksConfig.email}`}
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+                >
+                  <Mail size={16} />
+                  Email Team
+                </a>
               </div>
-              <div className="rounded-2xl border border-surface-border bg-surface-dark p-4">
-                <p className="text-xs uppercase tracking-[0.14em] text-accent-cyan">Response Window</p>
-                <p className="mt-2 text-xl font-black text-secondary">Within 24 Hours</p>
-              </div>
-              <div className="rounded-2xl border border-surface-border bg-surface-dark p-4">
-                <p className="text-xs uppercase tracking-[0.14em] text-primary">Engagement Style</p>
-                <p className="mt-2 text-xl font-black text-secondary">Confidential by Default</p>
+            </div>
+
+            {/* Right Visual Network Graph Panel */}
+            <div className="lg:col-span-6 flex justify-center w-full">
+              <div className="relative w-full max-w-lg rounded-3xl border border-white/10 bg-[#0F1424]/60 p-1 backdrop-blur-md overflow-hidden shadow-2xl">
+                <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/5 font-mono text-[9px] text-gray-500 uppercase tracking-widest">
+                  <span>ACTIVE_SIMULATION.EXE</span>
+                  <div className="flex gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-red-500/60" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-yellow-500/60" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-500/60" />
+                  </div>
+                </div>
+                <div className="h-[280px] w-full flex items-center justify-center relative bg-black/10">
+                  <NetworkGraph />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+        </Container>
+      </Section>
 
-function ContactInfo() {
-  return (
-    <div className="animate-fade-in-up space-y-4">
-      <article className="group rounded-2xl border border-surface-border bg-card-dark p-5 transition-all hover:-translate-y-1 hover:border-primary/50">
-        <div className="flex items-start gap-4">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-surface-border bg-surface-dark text-primary">
-            <span className="material-symbols-outlined">mail</span>
+      {/* ================= FORM SECTION & SELECTOR ================= */}
+      <Section id="contact-form-section" className="py-16 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
+        <Container>
+          <ContactForm />
+        </Container>
+      </Section>
+
+      {/* ================= 5. WHAT HAPPENS NEXT ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs font-mono font-bold tracking-widest text-accent-cyan uppercase">Lifecycle</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Onboarding Timeline</p>
+            <p className="mt-2 text-sm text-gray-400">What to expect after submitting your scoping details.</p>
           </div>
-          <div>
-            <p className="text-xs uppercase tracking-wider text-muted">Email</p>
-            <a href="mailto:kodesec13@gmail.com" className="mt-1 inline-block text-secondary hover:text-primary transition-colors">
-              contact@kodesec.com
-            </a>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 relative">
+            {contactConfig.timelineSteps.map((step) => (
+              <div
+                key={step.num}
+                className="relative rounded-3xl border border-white/5 bg-[#0F1424]/30 p-6 text-left flex flex-col justify-between min-h-[160px] hover:border-accent-cyan/20 transition-all duration-300"
+              >
+                <div>
+                  <span className="text-2xl font-black font-mono text-accent-cyan/20 transition-colors">
+                    {step.num}
+                  </span>
+                  <h4 className="text-sm font-bold text-white mt-3">{step.name}</h4>
+                  <p className="text-xs text-gray-400 mt-2 leading-relaxed font-medium">{step.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      </article>
+        </Container>
+      </Section>
 
-      <article className="group rounded-2xl border border-surface-border bg-card-dark p-5 transition-all hover:-translate-y-1 hover:border-primary/50">
-        <div className="flex items-start gap-4">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-surface-border bg-surface-dark text-primary">
-            <span className="material-symbols-outlined">location_on</span>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-wider text-muted">Location</p>
-            <p className="mt-1 text-secondary">Dhaka, Bangladesh</p>
-          </div>
-        </div>
-      </article>
-
-      <article className="group rounded-2xl border border-surface-border bg-card-dark p-5 transition-all hover:-translate-y-1 hover:border-primary/50">
-        <div className="flex items-start gap-4">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-surface-border bg-surface-dark text-primary">
-            <span className="material-symbols-outlined">lock</span>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-wider text-muted">Trust Badge</p>
-            <p className="mt-1 text-secondary">256-bit Encrypted Communication</p>
-          </div>
-        </div>
-      </article>
-
-      <p className="rounded-2xl border border-surface-border bg-surface-dark p-5 text-sm leading-relaxed text-muted font-body">
-        We prioritize secure communication. All messages are handled with strict confidentiality.
-      </p>
-
-      <div className="flex items-center gap-3 pt-1">
-        <a
-          href="#"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-surface-border bg-card-dark text-muted transition-all hover:-translate-y-1 hover:border-primary hover:text-primary"
-          aria-label="LinkedIn"
-        >
-          <span className="material-symbols-outlined text-base">business</span>
-        </a>
-        <a
-          href="#"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-surface-border bg-card-dark text-muted transition-all hover:-translate-y-1 hover:border-primary hover:text-primary"
-          aria-label="Twitter"
-        >
-          <span className="material-symbols-outlined text-base">alternate_email</span>
-        </a>
-      </div>
-    </div>
-  );
-}
-
-function ContactForm() {
-  const [selectedService, setSelectedService] = useState(serviceOptions[0]);
-  const [result, setResult] = useState("");
-
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    setResult("Sending...");
-    try {
-      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-      if (!accessKey) {
-        setResult("Missing access key configuration");
-        return;
-      }
-
-      const formData = new FormData(form);
-      formData.append("access_key", accessKey);
-      formData.append("service", selectedService);
-
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await response.json();
-      if (data && data.success) {
-        setResult("");
-        toast.success("Message sent", { duration: 2000 });
-        form.reset();
-        setSelectedService(serviceOptions[0]);
-      } else {
-        setResult(data?.message || "Error");
-      }
-    } catch (err) {
-      setResult("Network error");
-    }
-  };
-  return (
-    <div className="animate-slide-in-right relative overflow-hidden rounded-3xl border border-surface-border bg-card-dark p-6 md:p-8 lg:p-10">
-      <div className="absolute -left-8 top-8 h-36 w-36 rounded-full bg-primary/20 blur-3xl animate-float-up" />
-      <div className="absolute -right-8 bottom-10 h-40 w-40 rounded-full bg-accent-cyan/20 blur-3xl animate-float-up animation-delay-400" />
-
-      <form className="relative z-10 space-y-6 md:space-y-7" onSubmit={onSubmit}>
-        <div className="grid gap-5 md:gap-6 md:grid-cols-2">
-          <label className="space-y-2.5">
-            <span className="text-sm text-secondary">Full Name</span>
-            <input
-            required
-              name="name"
-              type="text"
-              placeholder="Enter your name"
-              className="h-12 w-full rounded-xl border border-surface-border bg-surface-dark px-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
-            />
-          </label>
-
-          <label className="space-y-2.5">
-            <span className="text-sm text-secondary">Work Email</span>
-            <input
-            required
-              name="email"
-              type="email"
-              placeholder="name@company.com"
-              className="h-12 w-full rounded-xl border border-surface-border bg-surface-dark px-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
-            />
-          </label>
-        </div>
-
-        <label className="space-y-2.5">
-          <span className="text-sm text-secondary">Organization Name</span>
-          <input
-            name="organization"
-            type="text"
-            placeholder="Your Organization"
-            className="h-12 w-full rounded-xl border border-surface-border bg-surface-dark px-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
-          />
-        </label>
-
-        <div className="space-y-3 pt-4">
-          <span className="text-sm text-secondary">Service Needed</span>
-          <div className="flex flex-wrap gap-2.5">
-            {serviceOptions.map((option) => {
-              const active = selectedService === option;
+      {/* ================= 6. RESPONSE COMMITMENT ================= */}
+      <Section className="py-20 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#101525]/30">
+        <Container>
+          <div className="grid gap-6 md:grid-cols-3">
+            {contactConfig.onboardingBadges.map((badge, idx) => {
+              const Icon = badge.icon;
+              const borderStyles = [
+                "hover:border-primary/20",
+                "hover:border-cyan-500/20",
+                "hover:border-purple-500/20"
+              ];
+              const iconColors = [
+                "bg-primary/10 text-primary",
+                "bg-cyan-500/10 text-cyan-400",
+                "bg-purple-500/10 text-purple-400"
+              ];
+              
               return (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => setSelectedService(option)}
-                  className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
-                    active
-                      ? "border-primary bg-primary text-background-dark"
-                      : "border-surface-border bg-surface-dark text-muted hover:border-primary hover:text-primary"
-                  }`}
-                >
-                  {option}
-                </button>
+                <div key={idx} className={`rounded-3xl border border-white/5 bg-[#0B0F1A]/60 p-6 flex gap-4 text-left items-start transition-all duration-300 ${borderStyles[idx]}`}>
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${iconColors[idx]}`}>
+                    <Icon size={16} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white">{badge.title}</h4>
+                    <p className="text-xs text-gray-500 mt-1.5 leading-relaxed font-medium">{badge.desc}</p>
+                  </div>
+                </div>
               );
             })}
           </div>
-        </div>
+        </Container>
+      </Section>
 
-        <label className="space-y-2.5 pt-1">
-          <span className="text-sm text-secondary">Message</span>
-          <textarea
-            required
-            name="message"
-            placeholder="Tell us about your security requirements, goals, and timeline."
-            className="min-h-[140px] w-full rounded-xl border border-surface-border bg-surface-dark p-4 text-secondary placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
-          />
-        </label>
+      {/* ================= 8. FINAL CTA ================= */}
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
+        <Container className="max-w-4xl rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101525] to-[#0A0D18] p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
 
-        <button
-          type="submit"
-          className="animate-glow mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-bold text-background-dark transition-all hover:bg-primary-dark md:text-base"
-        >
-          Send Secure Message
-          <span className="material-symbols-outlined text-base">arrow_forward</span>
-        </button>
-
-
-        {result && (
-          <p className="text-center text-sm text-muted" aria-live="polite">{result}</p>
-        )}
-
-        <p className="text-center text-xs text-muted">
-          Your data is securely transmitted and never shared.
-        </p>
-      </form>
-    </div>
-  );
-}
-
-export default function ContactPage() {
-  return (
-    <main className="relative min-h-screen bg-background-dark overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-cyber-grid opacity-10" />
-
-      <ContactHero />
-
-      <section className="px-6 pb-20 lg:px-20">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="animate-slide-in-left">
-            <ContactInfo />
+          {/* Icon Badge */}
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6">
+            <Sparkles className="h-6 w-6 text-primary animate-pulse" />
           </div>
-          <ContactForm />
-        </div>
-      </section>
+
+          <h2 className="text-3xl font-black text-white sm:text-4xl leading-tight tracking-tight max-w-xl">
+            Prefer talking directly with the team?
+          </h2>
+          
+          <p className="mt-4 text-sm text-gray-400 max-w-md leading-relaxed font-medium">
+            Skip the intake form. Schedule an introductory call, drop us an email, or connect via LinkedIn.
+          </p>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+            >
+              Book a Call
+            </Link>
+            <a
+              href={`mailto:${socialLinksConfig.email}`}
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+            >
+              Send an Email
+            </a>
+            <a
+              href={socialLinksConfig.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+            >
+              LinkedIn Connect
+            </a>
+          </div>
+        </Container>
+      </Section>
     </main>
   );
 }

@@ -100,7 +100,7 @@ export default function SecurityEstimator() {
             {estimatorStep === 1 && (
               <div className="space-y-4 flex-1">
                 <h4 className="text-base font-black text-white">What is your primary security target?</h4>
-                <div className="grid grid-cols-2 gap-3 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   {[
                     { id: "webapp", label: "Web Apps & APIs", desc: "OWASP Top 10 focus" },
                     { id: "cloud", label: "Cloud & IAM", desc: "AWS/Azure drift audit" },
@@ -123,7 +123,7 @@ export default function SecurityEstimator() {
                     type="button"
                     disabled={!selectedTarget}
                     onClick={() => setEstimatorStep(2)}
-                    className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-primary px-5 text-xs font-bold text-[#0B0F1A] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-light transition-all cursor-pointer"
+                    className="inline-flex h-11 items-center justify-center gap-1.5 rounded-full bg-primary px-6 text-xs font-bold text-[#0B0F1A] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-light transition-all cursor-pointer"
                   >
                     Next Step
                     <ChevronRight size={14} />
@@ -135,7 +135,7 @@ export default function SecurityEstimator() {
             {estimatorStep === 2 && (
               <div className="space-y-4 flex-1">
                 <h4 className="text-base font-black text-white">Select your system or team scale:</h4>
-                <div className="grid grid-cols-3 gap-3 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                   {[
                     { id: "startup", label: "Startup / MVP", desc: "Rapid validation" },
                     { id: "mid", label: "Growth / SaaS", desc: "IAM & cloud scale" },
@@ -145,7 +145,7 @@ export default function SecurityEstimator() {
                       key={scale.id}
                       type="button"
                       onClick={() => setSelectedScale(scale.id)}
-                      className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-24 ${selectedScale === scale.id ? "bg-primary/5 border-primary text-primary" : "border-white/5 bg-white/[0.01] hover:border-white/20 text-gray-400 hover:text-white"}`}
+                      className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between min-h-[5.5rem] ${selectedScale === scale.id ? "bg-primary/5 border-primary text-primary" : "border-white/5 bg-white/[0.01] hover:border-white/20 text-gray-400 hover:text-white"}`}
                     >
                       <p className="text-xs font-bold">{scale.label}</p>
                       <p className="text-[10px] opacity-75 mt-1 font-medium">{scale.desc}</p>
@@ -156,7 +156,7 @@ export default function SecurityEstimator() {
                   <button
                     type="button"
                     onClick={() => setEstimatorStep(1)}
-                    className="inline-flex h-10 items-center justify-center rounded-full border border-white/10 px-5 text-xs font-bold text-white hover:bg-white/5 transition-all cursor-pointer"
+                    className="inline-flex h-11 items-center justify-center rounded-full border border-white/10 px-5 text-xs font-bold text-white hover:bg-white/5 transition-all cursor-pointer"
                   >
                     Back
                   </button>
@@ -164,7 +164,7 @@ export default function SecurityEstimator() {
                     type="button"
                     disabled={!selectedScale}
                     onClick={() => setEstimatorStep(3)}
-                    className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-primary px-5 text-xs font-bold text-[#0B0F1A] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-light transition-all cursor-pointer"
+                    className="inline-flex h-11 items-center justify-center gap-1.5 rounded-full bg-primary px-6 text-xs font-bold text-[#0B0F1A] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-light transition-all cursor-pointer"
                   >
                     Build Estimate
                     <ChevronRight size={14} />

@@ -53,17 +53,21 @@ export default function TestimonialCarousel() {
       </div>
 
       {/* Navigation Indicators */}
-      <div className="mt-8 flex justify-center gap-2">
+      <div className="mt-8 flex justify-center gap-0.5">
         {testimonialsConfig.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setActiveTestimonial(idx)}
-            className={cn(
-              "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
-              idx === activeTestimonial ? "w-6 bg-primary" : "w-1.5 bg-white/10 hover:bg-white/30"
-            )}
+            className="w-11 h-11 flex items-center justify-center cursor-pointer"
             aria-label={`Go to testimonial ${idx + 1}`}
-          />
+          >
+            <span
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-300",
+                idx === activeTestimonial ? "w-6 bg-primary" : "w-1.5 bg-white/10 hover:bg-white/30"
+              )}
+            />
+          </button>
         ))}
       </div>
     </div>

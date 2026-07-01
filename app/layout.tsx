@@ -118,7 +118,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} transition-colors duration-300 bg-[#0B0F1A] text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} transition-colors duration-300 bg-background text-foreground antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

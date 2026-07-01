@@ -60,7 +60,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
           <div className="grid items-center gap-12 lg:grid-cols-12">
             
             {/* Left Content */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left z-10">
+            <div className="lg:col-span-6 flex flex-col items-start text-left z-10 w-full min-w-0">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-mono font-bold tracking-wider text-primary mb-6 animate-pulse">
                 <span className="h-2 w-2 rounded-full bg-primary block"></span>
@@ -97,7 +97,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
             </div>
 
             {/* Right Visual: Service-specific visualization */}
-            <div className="lg:col-span-6 flex justify-center z-10 w-full">
+            <div className="lg:col-span-6 flex justify-center z-10 w-full min-w-0">
               <ServiceVisualizer slug={service.slug} />
             </div>
 

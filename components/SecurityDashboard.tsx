@@ -86,30 +86,30 @@ export default function SecurityDashboard() {
   ];
 
   return (
-    <div className="relative w-full max-w-2xl rounded-3xl border border-white/10 bg-[#0F1424]/80 p-6 backdrop-blur-2xl shadow-2xl transition-all hover:border-primary/30">
+    <div className="relative w-full max-w-2xl rounded-3xl border border-white/10 bg-[#0F1424]/80 p-4 sm:p-6 backdrop-blur-2xl shadow-2xl transition-all hover:border-primary/30">
       {/* Decorative window controls */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-white/5 pb-4 mb-6 gap-3">
         <div className="flex gap-2">
           <span className="h-3.5 w-3.5 rounded-full bg-red-500/80 block"></span>
           <span className="h-3.5 w-3.5 rounded-full bg-yellow-500/80 block"></span>
           <span className="h-3.5 w-3.5 rounded-full bg-green-500/80 block"></span>
         </div>
-        <div className="flex rounded-full bg-[#1A2238] p-1 border border-white/5 text-xs text-gray-400 font-semibold font-mono">
+        <div className="flex rounded-full bg-[#1A2238] p-1 border border-white/5 text-xs text-gray-400 font-semibold font-mono overflow-x-auto no-scrollbar whitespace-nowrap w-full sm:w-auto sm:max-w-none">
           <button 
             onClick={() => setActiveTab("monitor")} 
-            className={`px-3 py-1 rounded-full transition-all ${activeTab === "monitor" ? "bg-primary text-black cursor-pointer font-bold" : "hover:text-white cursor-pointer font-medium"}`}
+            className={`px-3 py-1 rounded-full transition-all flex-shrink-0 ${activeTab === "monitor" ? "bg-primary text-black cursor-pointer font-bold" : "hover:text-white cursor-pointer font-medium"}`}
           >
             Threat Monitor
           </button>
           <button 
             onClick={() => setActiveTab("heatmap")} 
-            className={`px-3 py-1 rounded-full transition-all ${activeTab === "heatmap" ? "bg-primary text-black cursor-pointer font-bold" : "hover:text-white cursor-pointer font-medium"}`}
+            className={`px-3 py-1 rounded-full transition-all flex-shrink-0 ${activeTab === "heatmap" ? "bg-primary text-black cursor-pointer font-bold" : "hover:text-white cursor-pointer font-medium"}`}
           >
             Vulnerabilities
           </button>
           <button 
             onClick={() => setActiveTab("cloud")} 
-            className={`px-3 py-1 rounded-full transition-all ${activeTab === "cloud" ? "bg-primary text-black cursor-pointer font-bold" : "hover:text-white cursor-pointer font-medium"}`}
+            className={`px-3 py-1 rounded-full transition-all flex-shrink-0 ${activeTab === "cloud" ? "bg-primary text-black cursor-pointer font-bold" : "hover:text-white cursor-pointer font-medium"}`}
           >
             Infrastructure
           </button>
@@ -120,7 +120,7 @@ export default function SecurityDashboard() {
       {activeTab === "monitor" && (
         <div className="space-y-6">
           {/* Metrics summary */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="rounded-2xl bg-white/[0.02] border border-white/5 p-4">
               <span className="text-[10px] uppercase tracking-wider text-gray-400 font-mono font-bold">Threat Score</span>
               <div className="mt-1 flex items-baseline gap-2">
@@ -190,12 +190,12 @@ export default function SecurityDashboard() {
           </div>
 
           {/* Logs Terminal */}
-          <div className="rounded-2xl border border-white/5 bg-[#070A14] p-4 font-mono text-[11px] leading-relaxed overflow-hidden">
+          <div className="rounded-2xl border border-white/5 bg-[#070A14] p-4 font-mono text-[11px] leading-relaxed overflow-hidden min-w-0 w-full">
             <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-3 text-gray-500 font-bold">
               <span>SECURITY LOGS STREAM</span>
               <span>PORT: 443</span>
             </div>
-            <div className="space-y-2 h-[120px] overflow-y-auto scrollbar-none">
+            <div className="space-y-2 h-[120px] overflow-y-auto scrollbar-none min-w-0">
               {logs.map((log) => {
                 const colorMap = {
                   success: "text-emerald-400",
@@ -211,11 +211,11 @@ export default function SecurityDashboard() {
                 };
 
                 return (
-                  <div key={log.id} className="flex gap-2 transition-all hover:bg-white/[0.02] py-0.5 rounded px-1 duration-300">
-                    <span className="text-gray-500 select-none">{log.time}</span>
-                    <span className={`font-bold ${colorMap[log.type]}`}>{badgeMap[log.type]}</span>
-                    <span className="text-primary font-bold">{log.service}:</span>
-                    <span className="text-gray-300 flex-1 truncate">{log.message}</span>
+                  <div key={log.id} className="flex gap-2 transition-all hover:bg-white/[0.02] py-0.5 rounded px-1 duration-300 min-w-0">
+                    <span className="text-gray-500 select-none flex-shrink-0">{log.time}</span>
+                    <span className={`font-bold flex-shrink-0 ${colorMap[log.type]}`}>{badgeMap[log.type]}</span>
+                    <span className="text-primary font-bold flex-shrink-0">{log.service}:</span>
+                    <span className="text-gray-300 flex-1 truncate min-w-0">{log.message}</span>
                   </div>
                 );
               })}
@@ -232,31 +232,33 @@ export default function SecurityDashboard() {
             <span className="text-xs text-gray-500 font-mono">Hover cells for CVE details</span>
           </div>
 
-          <div className="grid grid-cols-4 gap-3">
-            {checks.map((check, idx) => {
-              const severityColorMap = {
-                Critical: "border-red-500/30 bg-red-950/10 text-red-400 hover:bg-red-500/20",
-                High: "border-orange-500/30 bg-orange-950/10 text-orange-400 hover:bg-orange-500/20",
-                Medium: "border-amber-500/30 bg-amber-950/10 text-amber-400 hover:bg-amber-500/20",
-                Low: "border-emerald-500/30 bg-emerald-950/10 text-emerald-400 hover:bg-emerald-500/20"
-              };
+          <div className="w-full overflow-x-auto no-scrollbar">
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 min-w-[580px] sm:min-w-0">
+              {checks.map((check, idx) => {
+                const severityColorMap = {
+                  Critical: "border-red-500/30 bg-red-950/10 text-red-400 hover:bg-red-500/20",
+                  High: "border-orange-500/30 bg-orange-950/10 text-orange-400 hover:bg-orange-500/20",
+                  Medium: "border-amber-500/30 bg-amber-950/10 text-amber-400 hover:bg-amber-500/20",
+                  Low: "border-emerald-500/30 bg-emerald-950/10 text-emerald-400 hover:bg-emerald-500/20"
+                };
 
-              return (
-                <div
-                  key={check.name}
-                  onMouseEnter={() => setHoveredCheck(check)}
-                  onMouseLeave={() => setHoveredCheck(null)}
-                  className={`flex flex-col justify-between p-3 h-20 rounded-xl border transition-all cursor-crosshair duration-200 ${severityColorMap[check.severity as keyof typeof severityColorMap]}`}
-                >
-                  <span className="text-[9px] uppercase font-mono tracking-wider font-semibold opacity-70">Audit {100 + idx}</span>
-                  <span className="text-[11px] font-bold tracking-tight line-clamp-1">{check.name}</span>
-                  <div className="flex items-center justify-between text-[9px] font-mono">
-                    <span className="opacity-90 font-semibold">{check.status}</span>
-                    <span className="px-1.5 py-0.2 rounded bg-white/10 font-bold">{check.severity[0]}</span>
+                return (
+                  <div
+                    key={check.name}
+                    onMouseEnter={() => setHoveredCheck(check)}
+                    onMouseLeave={() => setHoveredCheck(null)}
+                    className={`flex flex-col justify-between p-3 h-20 rounded-xl border transition-all cursor-crosshair duration-200 min-w-0 ${severityColorMap[check.severity as keyof typeof severityColorMap]}`}
+                  >
+                    <span className="text-[9px] uppercase font-mono tracking-wider font-semibold opacity-70">Audit {100 + idx}</span>
+                    <span className="text-[11px] font-bold tracking-tight line-clamp-1">{check.name}</span>
+                    <div className="flex items-center justify-between text-[9px] font-mono">
+                      <span className="opacity-90 font-semibold">{check.status}</span>
+                      <span className="px-1.5 py-0.2 rounded bg-white/10 font-bold">{check.severity[0]}</span>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           {/* Info Details Panel */}
@@ -292,97 +294,97 @@ export default function SecurityDashboard() {
             <svg className="w-full h-full" viewBox="0 0 100 60">
               {/* Connecting Grid Lines */}
               {/* Public to Ingress */}
-              <line x1="12" y1="30" x2="30" y2="30" stroke="rgba(54, 226, 123, 0.4)" strokeWidth="0.5" strokeDasharray="2, 2" />
+              <line x1="10" y1="30" x2="28" y2="30" stroke="rgba(54, 226, 123, 0.4)" strokeWidth="0.5" strokeDasharray="2, 2" />
               {/* Ingress to Services */}
-              <line x1="30" y1="30" x2="55" y2="15" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
-              <line x1="30" y1="30" x2="55" y2="30" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
-              <line x1="30" y1="30" x2="55" y2="45" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
+              <line x1="28" y1="30" x2="52" y2="15" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
+              <line x1="28" y1="30" x2="52" y2="30" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
+              <line x1="28" y1="30" x2="52" y2="45" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
               {/* Services to Databases */}
-              <line x1="55" y1="15" x2="80" y2="20" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
-              <line x1="55" y1="30" x2="80" y2="20" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
-              <line x1="55" y1="45" x2="80" y2="40" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
+              <line x1="52" y1="15" x2="76" y2="20" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
+              <line x1="52" y1="30" x2="76" y2="20" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
+              <line x1="52" y1="45" x2="76" y2="40" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.5" />
 
               {/* Data streams along connections (animated circles) */}
               <circle r="0.8" fill="#36e27b">
-                <animateMotion dur="2.5s" repeatCount="indefinite" path="M 12 30 L 30 30 L 55 15 L 80 20" />
+                <animateMotion dur="2.5s" repeatCount="indefinite" path="M 10 30 L 28 30 L 52 15 L 76 20" />
               </circle>
               <circle r="0.8" fill="#22d3ee">
-                <animateMotion dur="3.5s" repeatCount="indefinite" path="M 30 30 L 55 45 L 80 40" />
+                <animateMotion dur="3.5s" repeatCount="indefinite" path="M 28 30 L 52 45 L 76 40" />
               </circle>
 
               {/* Nodes */}
               {/* Public Traffic Node */}
               <circle 
-                cx="12" cy="30" r="4.5" 
+                cx="10" cy="30" r="4.5" 
                 fill="#131926" stroke="#22d3ee" strokeWidth="1"
                 className="cursor-pointer hover:stroke-accent-cyan/80 transition-all duration-200"
                 onClick={() => setActiveNode("public")}
               />
-              <text x="12" y="38" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Client-WAN</text>
-              <circle cx="12" cy="30" r="1.5" fill="#22d3ee" />
+              <text x="10" y="38" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Client-WAN</text>
+              <circle cx="10" cy="30" r="1.5" fill="#22d3ee" />
 
               {/* WAF/Ingress Node */}
               <circle 
-                cx="30" cy="30" r="5" 
+                cx="28" cy="30" r="5" 
                 fill="#131926" stroke="#36e27b" strokeWidth="1"
                 className="cursor-pointer hover:stroke-primary/80 transition-all duration-200"
                 onClick={() => setActiveNode("ingress")}
               />
-              <text x="30" y="38.5" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">API-Gateway</text>
+              <text x="28" y="38.5" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">API-Gateway</text>
               {/* Shield Icon in center of gateway node */}
-              <path d="M 28.5 28 L 30 27 L 31.5 28 L 31.5 30 C 31.5 31.5 30 32.5 30 32.5 C 30 32.5 28.5 31.5 28.5 30 Z" fill="none" stroke="#36e27b" strokeWidth="0.45" />
+              <path d="M 26.5 28 L 28 27 L 29.5 28 L 29.5 30 C 29.5 31.5 28 32.5 28 32.5 C 28 32.5 26.5 31.5 26.5 30 Z" fill="none" stroke="#36e27b" strokeWidth="0.45" />
 
               {/* App Service Nodes */}
               <circle 
-                cx="55" cy="15" r="4.5" 
+                cx="52" cy="15" r="4.5" 
                 fill="#131926" stroke="#c084fc" strokeWidth="1"
                 className="cursor-pointer hover:stroke-accent-purple/80 transition-all duration-200"
                 onClick={() => setActiveNode("app-svc")}
               />
-              <text x="55" y="23" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Auth-Svc</text>
-              <rect x="53.5" y="13.5" width="3" height="3" rx="0.5" fill="none" stroke="#c084fc" strokeWidth="0.45" />
+              <text x="52" y="23" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Auth-Svc</text>
+              <rect x="50.5" y="13.5" width="3" height="3" rx="0.5" fill="none" stroke="#c084fc" strokeWidth="0.45" />
 
               <circle 
-                cx="55" cy="30" r="4.5" 
+                cx="52" cy="30" r="4.5" 
                 fill="#131926" stroke="#36e27b" strokeWidth="1"
                 className="cursor-pointer hover:stroke-primary/80 transition-all duration-200"
                 onClick={() => setActiveNode("trans-svc")}
               />
-              <text x="55" y="38" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Core-API</text>
-              <rect x="53.5" y="28.5" width="3" height="3" rx="0.5" fill="none" stroke="#36e27b" strokeWidth="0.45" />
+              <text x="52" y="38" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Core-API</text>
+              <rect x="50.5" y="28.5" width="3" height="3" rx="0.5" fill="none" stroke="#36e27b" strokeWidth="0.45" />
 
               <circle 
-                cx="55" cy="45" r="4.5" 
+                cx="52" cy="45" r="4.5" 
                 fill="#131926" stroke="#36e27b" strokeWidth="1"
                 className="cursor-pointer hover:stroke-primary/80 transition-all duration-200"
                 onClick={() => setActiveNode("notify-svc")}
               />
-              <text x="55" y="53" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Queue-Worker</text>
-              <rect x="53.5" y="43.5" width="3" height="3" rx="0.5" fill="none" stroke="#36e27b" strokeWidth="0.45" />
+              <text x="52" y="53" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Queue-Worker</text>
+              <rect x="50.5" y="43.5" width="3" height="3" rx="0.5" fill="none" stroke="#36e27b" strokeWidth="0.45" />
 
               {/* Secure Databases */}
               <circle 
-                cx="80" cy="20" r="4.5" 
+                cx="76" cy="20" r="4.5" 
                 fill="#131926" stroke="#36e27b" strokeWidth="1"
                 className="cursor-pointer hover:stroke-primary/80 transition-all duration-200"
                 onClick={() => setActiveNode("db-vault")}
               />
-              <text x="80" y="28" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">DB-Vault</text>
-              <path d="M 78.5 18 L 81.5 18 L 81.5 22 L 78.5 22 Z M 78.5 19.5 L 81.5 19.5 M 78.5 21 L 81.5 21" fill="none" stroke="#36e27b" strokeWidth="0.45" />
+              <text x="76" y="28" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">DB-Vault</text>
+              <path d="M 74.5 18 L 77.5 18 L 77.5 22 L 74.5 22 Z M 74.5 19.5 L 77.5 19.5 M 74.5 21 L 77.5 21" fill="none" stroke="#36e27b" strokeWidth="0.45" />
 
               <circle 
-                cx="80" cy="40" r="4.5" 
+                cx="76" cy="40" r="4.5" 
                 fill="#131926" stroke="#c084fc" strokeWidth="1"
                 className="cursor-pointer hover:stroke-accent-purple/80 transition-all duration-200"
                 onClick={() => setActiveNode("db-audit")}
               />
-              <text x="80" y="48" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Audit-DB</text>
-              <path d="M 78.5 38 L 81.5 38 L 81.5 42 L 78.5 42 Z M 78.5 39.5 L 81.5 39.5 M 78.5 41 L 81.5 41" fill="none" stroke="#c084fc" strokeWidth="0.45" />
+              <text x="76" y="48" fontSize="2.8" fill="#9ca3af" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Audit-DB</text>
+              <path d="M 74.5 38 L 77.5 38 L 77.5 42 L 74.5 42 Z M 74.5 39.5 L 77.5 39.5 M 74.5 41 L 77.5 41" fill="none" stroke="#c084fc" strokeWidth="0.45" />
             </svg>
 
             {/* Hover Node Overlay */}
             {activeNode && (
-              <div className="absolute bottom-3 right-3 max-w-xs rounded-xl border border-white/10 bg-[#0F1424] p-3 text-left shadow-lg">
+              <div className="absolute bottom-3 right-3 max-w-[calc(100%-24px)] rounded-xl border border-white/10 bg-[#0F1424] p-3 text-left shadow-lg">
                 <div className="flex items-center justify-between gap-4">
                   <h5 className="text-[10px] font-bold text-white font-mono uppercase">
                     {activeNode === "public" && "Client-WAN Traffic"}

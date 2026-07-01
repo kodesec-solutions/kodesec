@@ -157,12 +157,12 @@ export default function Home() {
       <div className="absolute bottom-[10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-accent-purple/5 blur-[120px] pointer-events-none" />
 
       {/* ================= HERO SECTION ================= */}
-      <Section className="px-6 pt-12 pb-24 md:pt-20 md:pb-32 lg:px-20">
+      <Section className="pt-28 pb-24 md:pt-36 md:pb-32">
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-12">
             
             {/* Left Content */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left z-10">
+            <div className="lg:col-span-6 flex flex-col items-start text-left z-10 w-full min-w-0">
               <Badge variant="default" className="mb-6 animate-pulse">
                 KODESEC ENTERPRISE SHIELD
               </Badge>
@@ -179,7 +179,7 @@ export default function Home() {
               </p>
 
               {/* Action Buttons */}
-              <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-auto">
+              <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-full">
                 <Link
                   href="/contact"
                   className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
@@ -214,7 +214,7 @@ export default function Home() {
             </div>
 
             {/* Right Visual: Security Dashboard Widget */}
-            <div className="lg:col-span-6 flex justify-center z-10 w-full">
+            <div className="lg:col-span-6 flex justify-center z-10 w-full min-w-0">
               <SecurityDashboard />
             </div>
 
@@ -225,36 +225,36 @@ export default function Home() {
       {/* ================= TRUST BAR ================= */}
       <section className="py-10 border-y border-white/5 bg-[#0B0F1A]/50 relative z-10">
         <Container className="overflow-hidden">
-          <p className="text-center text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">
+          <p className="text-center text-xs font-mono font-bold uppercase tracking-[0.2em] text-secondary mb-6">
             TRUSTED FOR COMPLIANCE AND SECURITY ALIGNMENT
           </p>
           
           <div className="relative w-full flex overflow-x-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]">
-            <div className="animate-marquee flex gap-16 items-center">
+            <div className="animate-marquee flex gap-16 items-center whitespace-nowrap">
               {/* Set 1 */}
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Lock size={16} className="text-primary" />OWASP FOUNDATION</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cloud size={16} className="text-cyan-400" />AWS CERTIFIED</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cpu size={16} className="text-purple-400" />KUBERNETES SECURE</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Zap size={16} className="text-sky-400" />DOCKER HARDENED</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Terminal size={16} className="text-white" />GITHUB COMPLIANT</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Shield size={16} className="text-primary" />SOC2 TYPE II</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><CheckCircle2 size={16} className="text-emerald-400" />ISO 27001 AUDITED</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Lock size={16} className="text-primary" />OWASP FOUNDATION</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Cloud size={16} className="text-cyan-400" />AWS CERTIFIED</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Cpu size={16} className="text-purple-400" />KUBERNETES SECURE</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Zap size={16} className="text-sky-400" />DOCKER HARDENED</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Terminal size={16} className="text-foreground" />GITHUB COMPLIANT</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Shield size={16} className="text-primary" />SOC2 TYPE II</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><CheckCircle2 size={16} className="text-emerald-400" />ISO 27001 AUDITED</span>
 
               {/* Set 2 */}
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Lock size={16} className="text-primary" />OWASP FOUNDATION</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cloud size={16} className="text-cyan-400" />AWS CERTIFIED</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Cpu size={16} className="text-purple-400" />KUBERNETES SECURE</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Zap size={16} className="text-sky-400" />DOCKER HARDENED</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Terminal size={16} className="text-white" />GITHUB COMPLIANT</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><Shield size={16} className="text-primary" />SOC2 TYPE II</span>
-              <span className="text-sm font-mono font-black text-gray-400 flex items-center gap-2 tracking-widest"><CheckCircle2 size={16} className="text-emerald-400" />ISO 27001 AUDITED</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Lock size={16} className="text-primary" />OWASP FOUNDATION</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Cloud size={16} className="text-cyan-400" />AWS CERTIFIED</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Cpu size={16} className="text-purple-400" />KUBERNETES SECURE</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Zap size={16} className="text-sky-400" />DOCKER HARDENED</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Terminal size={16} className="text-foreground" />GITHUB COMPLIANT</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><Shield size={16} className="text-primary" />SOC2 TYPE II</span>
+              <span className="text-sm font-mono font-black text-secondary flex items-center gap-2 tracking-widest shrink-0"><CheckCircle2 size={16} className="text-emerald-400" />ISO 27001 AUDITED</span>
             </div>
           </div>
         </Container>
       </section>
 
       {/* ================= SERVICES SECTION ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10">
+      <Section className="py-24 relative z-10">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Expertise & Services</h2>
@@ -294,7 +294,7 @@ export default function Home() {
       </Section>
 
       {/* ================= PROCESS SECTION ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10">
+      <Section className="py-24 relative z-10">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Methodology</h2>
@@ -325,10 +325,10 @@ export default function Home() {
               return (
                 <div 
                   key={idx} 
-                  className={`rounded-3xl border border-white/5 bg-[#0B0F1A]/80 p-6 flex flex-col justify-between transition-all duration-300 ${borderColors[idx]}`}
+                  className={`rounded-3xl border border-white/5 bg-[#101525]/85 p-6 flex flex-col justify-between transition-all duration-300 ${borderColors[idx]}`}
                 >
                   <div className="text-left">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-white/5 text-gray-400 border border-white/5">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-white/5 text-gray-500 border border-white/5">
                       {study.industry}
                     </span>
                     
@@ -351,7 +351,7 @@ export default function Home() {
                       <span className="text-[9px] uppercase tracking-wider text-gray-500 font-mono block">Metric Achieved</span>
                       <span className={`text-lg font-black font-mono tracking-tight mt-0.5 block ${accentColor[idx]}`}>{study.stat}</span>
                     </div>
-                    <p className="text-[10px] text-gray-400 leading-snug font-medium max-w-[130px] text-right">
+                    <p className="text-[10px] text-gray-300 leading-snug font-medium max-w-[130px] text-right">
                       {study.desc}
                     </p>
                   </div>
@@ -363,22 +363,22 @@ export default function Home() {
       </Section>
 
       {/* ================= TECHNOLOGY ECOSYSTEM ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10">
+      <Section className="py-24 relative z-10">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Ecosystem</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Security Integrations</p>
+            <p className="mt-3 text-3xl font-black text-foreground sm:text-4xl tracking-tight">Security Integrations</p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
             {homeConfig.techEcosystem.map((tech) => (
               <div
                 key={tech.name}
-                className="px-5 py-3.5 rounded-full border border-white/5 bg-[#0F1424]/40 text-sm font-bold font-mono tracking-wide text-gray-400 transition-all duration-300 cursor-default hover:text-white hover:bg-[#0F1424]/80"
+                className="px-5 py-3.5 rounded-full border border-border bg-card/40 text-sm font-bold font-mono tracking-wide text-muted-foreground transition-all duration-300 cursor-default hover:text-foreground hover:bg-card"
               >
-                <span className="text-gray-500 mr-1.5 opacity-60">#</span>
+                <span className="text-muted-foreground/50 mr-1.5 opacity-60">#</span>
                 {tech.name}
-                <span className="text-[10px] bg-white/5 border border-white/5 text-gray-500 px-1.5 py-0.5 rounded-full ml-2 opacity-80 group-hover:opacity-100 font-sans font-medium">
+                <span className="text-[10px] bg-muted border border-border text-muted-foreground px-1.5 py-0.5 rounded-full ml-2 opacity-80 group-hover:opacity-100 font-sans font-medium">
                   {tech.category}
                 </span>
               </div>
@@ -388,7 +388,7 @@ export default function Home() {
       </Section>
 
       {/* ================= TESTIMONIALS ================= */}
-      <Section className="py-24 border-y border-white/5 bg-[#101525]/30 relative z-10">
+      <Section className="py-24 border-y border-border bg-card/30 relative z-10">
         <Container>
           <div className="text-center mb-10">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Testimonials</h2>
@@ -399,8 +399,8 @@ export default function Home() {
       </Section>
 
       {/* ================= FINAL CTA SECTION ================= */}
-      <Section id="cta" className="py-24 px-6 lg:px-20 relative z-10">
-        <Container className="max-w-6xl rounded-3xl border border-white/10 bg-gradient-to-b from-[#101525] to-[#0A0D18] p-8 md:p-16 relative overflow-hidden shadow-2xl">
+      <Section id="cta" className="py-24 relative z-10">
+        <Container className="max-w-6xl rounded-3xl border border-border bg-card-gradient p-8 md:p-16 relative overflow-hidden shadow-2xl">
           <SecurityEstimator />
         </Container>
       </Section>

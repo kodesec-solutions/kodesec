@@ -183,12 +183,12 @@ export default function WhyUs() {
       <div className="absolute bottom-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none" />
 
       {/* ================= HERO SECTION ================= */}
-      <Section className="relative px-6 pt-12 pb-24 md:pt-20 md:pb-32 lg:px-20">
+      <Section className="relative px-6 pt-28 pb-24 md:pt-36 md:pb-32 lg:px-20">
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-12">
             
             {/* Left Content */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left z-10">
+            <div className="lg:col-span-6 flex flex-col items-start text-left z-10 w-full min-w-0">
               <Badge className="mb-6 animate-pulse">
                 THE KODESEC DIFFERENCE
               </Badge>
@@ -207,14 +207,14 @@ export default function WhyUs() {
               <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-auto">
                 <Link
                   href="/contact"
-                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer animate-pulse"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer animate-pulse"
                 >
                   Schedule Consultation
                   <ChevronRight size={16} />
                 </Link>
                 <Link
                   href="/services"
-                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
                 >
                   View Our Services
                 </Link>
@@ -222,7 +222,7 @@ export default function WhyUs() {
             </div>
 
             {/* Right Visual Mesh */}
-            <div className="lg:col-span-6 flex justify-center z-10 w-full">
+            <div className="lg:col-span-6 flex justify-center z-10 w-full min-w-0">
               <DataFlowVisual />
             </div>
 
@@ -253,7 +253,7 @@ export default function WhyUs() {
       </Section>
 
       {/* ================= COMPARATIVE MATRIX ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Comparative Analysis</h2>
@@ -263,13 +263,13 @@ export default function WhyUs() {
           <div className="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-[#0F1424]/60 p-6 md:p-8 backdrop-blur-md overflow-hidden text-left shadow-2xl">
             <div className="space-y-6">
               {compareRows.map((row) => (
-                <div key={row.factor} className="grid md:grid-cols-12 gap-4 border-b border-white/5 pb-6 last:border-b-0 last:pb-0">
-                  <div className="md:col-span-3 text-sm font-black text-white">{row.factor}</div>
-                  <div className="md:col-span-4 text-xs text-gray-500 leading-relaxed font-medium">
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-red-400 block mb-1">Traditional Agencies</span>
+                <div key={row.factor} className="grid md:grid-cols-12 gap-4 border-b border-border pb-6 last:border-b-0 last:pb-0">
+                  <div className="md:col-span-3 text-sm font-black text-foreground">{row.factor}</div>
+                  <div className="md:col-span-4 text-xs text-muted-foreground leading-relaxed font-medium">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-destructive block mb-1">Traditional Agencies</span>
                     {row.typical}
                   </div>
-                  <div className="md:col-span-5 text-xs text-emerald-100 leading-relaxed font-medium">
+                  <div className="md:col-span-5 text-xs text-foreground/80 leading-relaxed font-medium">
                     <span className="font-mono text-[9px] uppercase tracking-wider text-primary block mb-1">KodeSec Delivery</span>
                     {row.kodesec}
                   </div>
@@ -281,7 +281,7 @@ export default function WhyUs() {
       </Section>
 
       {/* ================= ENGAGEMENT CYCLE ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#101525]/30">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Engagement Cycle</h2>
@@ -293,7 +293,7 @@ export default function WhyUs() {
       </Section>
 
       {/* ================= IDEAL PARTNERS SECTION ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Who We Help</h2>
@@ -306,14 +306,14 @@ export default function WhyUs() {
               return (
                 <div
                   key={idx}
-                  className="rounded-3xl border border-white/5 bg-[#0F1424]/40 p-6 flex flex-col justify-between items-start text-left transition-all hover:border-primary/20 hover:shadow-[0_0_20px_rgba(54,226,123,0.04)]"
+                  className="rounded-3xl border border-border bg-card/45 p-6 flex flex-col justify-between items-start text-left transition-all hover:border-primary/20 hover:shadow-[0_0_20px_rgba(54,226,123,0.04)]"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.02] border border-white/10 text-primary mb-5">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted border border-border text-primary mb-5">
                     <IconComp size={18} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-black text-white tracking-tight">{partner.title}</h3>
-                    <p className="mt-2 text-[10px] text-gray-400 leading-relaxed font-medium">{partner.desc}</p>
+                    <h3 className="text-sm font-black text-foreground tracking-tight">{partner.title}</h3>
+                    <p className="mt-2 text-[10px] text-muted-foreground leading-relaxed font-medium">{partner.desc}</p>
                   </div>
                 </div>
               );
@@ -327,68 +327,70 @@ export default function WhyUs() {
         <Container className="max-w-4xl">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Technical Coverage</h2>
-            <p className="mt-3 text-3xl font-black text-white tracking-tight">Founder Expertise Matrix</p>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Founder Expertise Matrix</p>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-[#0B0F1A]/85 overflow-hidden shadow-2xl">
-            {/* Headers */}
-            <div className="grid grid-cols-5 border-b border-white/10 bg-white/[0.02] font-mono text-[9px] font-bold text-gray-400 tracking-wider text-center">
-              {matrixHeaders.map((header, idx) => (
-                <div key={idx} className={`p-4 ${idx === 0 ? "text-left border-r border-white/5 font-black text-white" : "border-r border-white/5 last:border-r-0"}`}>
-                  {header.toUpperCase()}
+          <div className="w-full overflow-x-auto no-scrollbar">
+            <div className="rounded-3xl border border-white/10 bg-[#101525]/80 overflow-hidden shadow-2xl min-w-[600px]">
+              {/* Headers */}
+              <div className="grid grid-cols-5 border-b border-white/10 bg-[#0F1424]/60 font-mono text-[9px] font-bold text-white/80 tracking-wider text-center">
+                {matrixHeaders.map((header, idx) => (
+                  <div key={idx} className={`p-4 ${idx === 0 ? "text-left border-r border-white/10 font-black text-white" : "border-r border-white/10 last:border-r-0"}`}>
+                    {header.toUpperCase()}
+                  </div>
+                ))}
+              </div>
+
+              {/* Matrix Data Rows */}
+              {matrixData.map((row, rowIdx) => (
+                <div key={rowIdx} className="grid grid-cols-5 border-b border-border last:border-b-0 text-center font-sans text-xs">
+                  <div className="p-4 border-r border-border text-left font-black text-foreground bg-muted/10">
+                    {row.discipline}
+                  </div>
+                  <div className="p-4 border-r border-border flex items-center justify-center">
+                    {row.alex ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-muted-foreground/40 font-mono">-</span>}
+                  </div>
+                  <div className="p-4 border-r border-border flex items-center justify-center">
+                    {row.liam ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-muted-foreground/40 font-mono">-</span>}
+                  </div>
+                  <div className="p-4 border-r border-border flex items-center justify-center">
+                    {row.sofia ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-muted-foreground/40 font-mono">-</span>}
+                  </div>
+                  <div className="p-4 flex items-center justify-center">
+                    {row.marcus ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-muted-foreground/40 font-mono">-</span>}
+                  </div>
                 </div>
               ))}
             </div>
-
-            {/* Matrix Data Rows */}
-            {matrixData.map((row, rowIdx) => (
-              <div key={rowIdx} className="grid grid-cols-5 border-b border-white/5 last:border-b-0 text-center font-sans text-xs">
-                <div className="p-4 border-r border-white/5 text-left font-black text-white bg-white/[0.01]">
-                  {row.discipline}
-                </div>
-                <div className="p-4 border-r border-white/5 flex items-center justify-center">
-                  {row.alex ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-gray-700 font-mono">-</span>}
-                </div>
-                <div className="p-4 border-r border-white/5 flex items-center justify-center">
-                  {row.liam ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-gray-700 font-mono">-</span>}
-                </div>
-                <div className="p-4 border-r border-white/5 flex items-center justify-center">
-                  {row.sofia ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-gray-700 font-mono">-</span>}
-                </div>
-                <div className="p-4 flex items-center justify-center">
-                  {row.marcus ? <Check className="text-primary h-4.5 w-4.5" /> : <span className="text-gray-700 font-mono">-</span>}
-                </div>
-              </div>
-            ))}
           </div>
         </Container>
       </Section>
 
       {/* ================= CONNECT WITH THE TEAM ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
-        <Container className="max-w-4xl rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101525] to-[#0A0D18] p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-border">
+        <Container className="max-w-4xl rounded-[2.5rem] border border-border bg-card-gradient p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
 
-          <h2 className="text-3xl font-black text-white sm:text-5xl leading-tight tracking-tight">
+          <h2 className="text-3xl font-black text-foreground sm:text-5xl leading-tight tracking-tight">
             Ready to secure your releases?
           </h2>
           
-          <p className="mt-4 text-sm text-gray-400 max-w-lg leading-relaxed font-medium">
+          <p className="mt-4 text-sm text-muted-foreground max-w-lg leading-relaxed font-medium">
             Contact Kodesec security architects for high-fidelity penetration testing, infrastructure hardening, and secure development advisory.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
             <Link
               href="/contact?type=assessment"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
             >
               Get Security Assessment
               <ChevronRight size={16} />
             </Link>
             <Link
               href="/contact?type=consultation"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
             >
               Book Scoping Call
             </Link>

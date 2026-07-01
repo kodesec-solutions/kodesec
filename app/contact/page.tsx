@@ -71,11 +71,11 @@ export default function ContactPage() {
       <div className="absolute bottom-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none" />
 
       {/* ================= 1. HERO SECTION ================= */}
-      <Section className="relative px-6 pt-12 pb-20 md:pt-20 md:pb-28 lg:px-20 z-10">
+      <Section className="relative px-6 pt-28 pb-20 md:pt-36 md:pb-28 lg:px-20 z-10">
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-12">
             {/* Left Content */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left">
+            <div className="lg:col-span-6 flex flex-col items-start text-left w-full min-w-0">
               <Badge className="mb-6 animate-pulse">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary animate-ping mr-2"></span>
                 ACCESS TO ACTIVE ENGINEERS
@@ -111,9 +111,9 @@ export default function ContactPage() {
             </div>
 
             {/* Right Visual Network Graph Panel */}
-            <div className="lg:col-span-6 flex justify-center w-full">
+            <div className="lg:col-span-6 flex justify-center w-full min-w-0">
               <div className="relative w-full max-w-lg rounded-3xl border border-white/10 bg-[#0F1424]/60 p-1 backdrop-blur-md overflow-hidden shadow-2xl">
-                <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/5 font-mono text-[9px] text-gray-500 uppercase tracking-widest">
+                <div className="flex items-center justify-between px-4 py-2.5 border-b border-border font-mono text-[9px] text-muted-foreground uppercase tracking-widest">
                   <span>ACTIVE_SIMULATION.EXE</span>
                   <div className="flex gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-red-500/60" />
@@ -143,21 +143,21 @@ export default function ContactPage() {
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-accent-cyan uppercase">Lifecycle</h2>
             <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Onboarding Timeline</p>
-            <p className="mt-2 text-sm text-gray-400">What to expect after submitting your scoping details.</p>
+            <p className="mt-2 text-sm text-white/50">What to expect after submitting your scoping details.</p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 relative">
             {contactConfig.timelineSteps.map((step) => (
               <div
                 key={step.num}
-                className="relative rounded-3xl border border-white/5 bg-[#0F1424]/30 p-6 text-left flex flex-col justify-between min-h-[160px] hover:border-accent-cyan/20 transition-all duration-300"
+                className="relative rounded-3xl border border-white/5 bg-[#101525]/85 p-6 text-left flex flex-col justify-between min-h-[160px] hover:border-accent-cyan/20 transition-all duration-300"
               >
                 <div>
                   <span className="text-2xl font-black font-mono text-accent-cyan/20 transition-colors">
                     {step.num}
                   </span>
                   <h4 className="text-sm font-bold text-white mt-3">{step.name}</h4>
-                  <p className="text-xs text-gray-400 mt-2 leading-relaxed font-medium">{step.desc}</p>
+                  <p className="text-xs text-white/50 mt-2 leading-relaxed font-medium">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -166,7 +166,7 @@ export default function ContactPage() {
       </Section>
 
       {/* ================= 6. RESPONSE COMMITMENT ================= */}
-      <Section className="py-20 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#101525]/30">
+      <Section className="py-20 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
         <Container>
           <div className="grid gap-6 md:grid-cols-3">
             {contactConfig.onboardingBadges.map((badge, idx) => {
@@ -183,13 +183,13 @@ export default function ContactPage() {
               ];
               
               return (
-                <div key={idx} className={`rounded-3xl border border-white/5 bg-[#0B0F1A]/60 p-6 flex gap-4 text-left items-start transition-all duration-300 ${borderStyles[idx]}`}>
+                <div key={idx} className={`rounded-3xl border border-border bg-card/85 p-6 flex gap-4 text-left items-start transition-all duration-300 ${borderStyles[idx]}`}>
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${iconColors[idx]}`}>
                     <Icon size={16} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white">{badge.title}</h4>
-                    <p className="text-xs text-gray-500 mt-1.5 leading-relaxed font-medium">{badge.desc}</p>
+                    <h4 className="text-sm font-bold text-foreground">{badge.title}</h4>
+                    <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed font-medium">{badge.desc}</p>
                   </div>
                 </div>
               );
@@ -199,8 +199,8 @@ export default function ContactPage() {
       </Section>
 
       {/* ================= 8. FINAL CTA ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
-        <Container className="max-w-4xl rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101525] to-[#0A0D18] p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-border">
+        <Container className="max-w-4xl rounded-[2.5rem] border border-border bg-card-gradient p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
 
@@ -209,24 +209,24 @@ export default function ContactPage() {
             <Sparkles className="h-6 w-6 text-primary animate-pulse" />
           </div>
 
-          <h2 className="text-3xl font-black text-white sm:text-4xl leading-tight tracking-tight max-w-xl">
+          <h2 className="text-3xl font-black text-foreground sm:text-4xl leading-tight tracking-tight max-w-xl">
             Prefer talking directly with the team?
           </h2>
           
-          <p className="mt-4 text-sm text-gray-400 max-w-md leading-relaxed font-medium">
+          <p className="mt-4 text-sm text-muted-foreground max-w-md leading-relaxed font-medium">
             Skip the intake form. Schedule an introductory call, drop us an email, or connect via LinkedIn.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
             >
               Book a Call
             </Link>
             <a
               href={`mailto:${socialLinksConfig.email}`}
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
             >
               Send an Email
             </a>
@@ -234,7 +234,7 @@ export default function ContactPage() {
               href={socialLinksConfig.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
             >
               LinkedIn Connect
             </a>

@@ -15,7 +15,7 @@ export default function LifecycleWorkflow() {
           <button
             key={step.title}
             onClick={() => setActiveWorkflowStep(idx)}
-            className={`w-full flex items-center justify-between p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer 
+            className={`w-full flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer gap-2
               ${activeWorkflowStep === idx 
                 ? "border-primary bg-primary/5 shadow-[0_0_20px_rgba(54,226,123,0.08)]" 
                 : "border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.03]"}`}
@@ -28,7 +28,7 @@ export default function LifecycleWorkflow() {
                 {step.title}
               </span>
             </div>
-            <span className={`text-[10px] font-mono font-medium ${activeWorkflowStep === idx ? "text-primary" : "text-gray-500"}`}>
+            <span className={`text-[10px] font-mono font-medium sm:text-right ${activeWorkflowStep === idx ? "text-primary" : "text-gray-500"}`}>
               {step.desc}
             </span>
           </button>

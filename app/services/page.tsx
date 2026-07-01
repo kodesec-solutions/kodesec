@@ -181,12 +181,12 @@ export default function Services() {
       <div className="absolute bottom-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none" />
 
       {/* ================= HERO SECTION ================= */}
-      <Section className="relative px-6 pt-12 pb-24 md:pt-20 md:pb-32 lg:px-20">
+      <Section className="relative px-6 pt-28 pb-24 md:pt-36 md:pb-32 lg:px-20">
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-12">
             
             {/* Left Content */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left z-10">
+            <div className="lg:col-span-6 flex flex-col items-start text-left z-10 w-full min-w-0">
               <Badge className="mb-6 animate-pulse">
                 CYBERSECURITY OUTCOMES DELIVERED
               </Badge>
@@ -212,7 +212,7 @@ export default function Services() {
                 </a>
                 <Link
                   href="/contact"
-                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
                 >
                   <Calendar size={16} />
                   Book Scope Consultation
@@ -221,7 +221,7 @@ export default function Services() {
             </div>
 
             {/* Right Attack Graph Simulator */}
-            <div className="lg:col-span-6 flex justify-center z-10 w-full">
+            <div className="lg:col-span-6 flex justify-center z-10 w-full min-w-0">
               <AttackGraph />
             </div>
 
@@ -230,11 +230,11 @@ export default function Services() {
       </Section>
 
       {/* ================= SERVICES GRID ================= */}
-      <Section id="services-grid" className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
+      <Section id="services-grid" className="py-24 px-6 lg:px-20 relative z-10 border-t border-border bg-card/30">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Service Matrix</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Our Core Audits & Engineering</p>
+            <p className="mt-3 text-3xl font-black text-foreground sm:text-4xl tracking-tight">Our Core Audits & Engineering</p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
@@ -253,23 +253,23 @@ export default function Services() {
               return (
                 <div
                   key={service.slug}
-                  className={`group relative rounded-[2rem] border border-white/5 bg-[#0F1424]/40 p-8 backdrop-blur-md transition-all duration-300 ${glowClass} flex flex-col justify-between text-left`}
+                  className={`group relative rounded-[2rem] border border-border bg-card/45 p-8 backdrop-blur-md transition-all duration-300 ${glowClass} flex flex-col justify-between text-left`}
                 >
                   <div>
                     {/* Top Header */}
                     <div className="flex justify-between items-center mb-6">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/[0.02] border border-white/10">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-muted border border-border">
                         <IconComp className={`h-7 w-7 ${iconColor}`} />
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded">
+                      <span className="text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-widest bg-muted px-2.5 py-1 rounded border border-border">
                         SERVICE 0{idx + 1}
                       </span>
                     </div>
 
-                    <h3 className="text-xl md:text-2xl font-black text-white tracking-tight group-hover:text-primary transition-colors">
+                    <h3 className="text-xl md:text-2xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors">
                       {service.title.split(" - ")[0]}
                     </h3>
-                    <p className="mt-3.5 text-xs text-gray-400 leading-relaxed font-medium">
+                    <p className="mt-3.5 text-xs text-muted-foreground leading-relaxed font-medium">
                       {service.shortPositioning.split(". ")[0]}.
                     </p>
 
@@ -278,7 +278,7 @@ export default function Services() {
                       {service.keyApproach.slice(0, 3).map((tag) => (
                         <span 
                           key={tag} 
-                          className="px-2.5 py-1 rounded-full border border-white/5 bg-white/[0.02] text-[10px] font-mono font-bold text-gray-300 truncate max-w-[200px]"
+                          className="px-2.5 py-1 rounded-full border border-border bg-muted/40 text-[10px] font-mono font-bold text-muted-foreground truncate max-w-[200px]"
                         >
                           #{tag.split(" ")[0]} {tag.split(" ").slice(1, 3).join(" ")}
                         </span>
@@ -287,17 +287,17 @@ export default function Services() {
                   </div>
 
                   {/* CTA buttons */}
-                  <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap gap-3 justify-between items-center">
+                  <div className="mt-8 pt-6 border-t border-border flex flex-wrap gap-3 justify-between items-center">
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-flex h-10 items-center justify-center gap-1 text-xs font-mono font-bold text-gray-400 hover:text-white transition-all cursor-pointer"
+                      className="inline-flex h-10 items-center justify-center gap-1 text-xs font-mono font-bold text-muted-foreground hover:text-foreground transition-all cursor-pointer"
                     >
                       View Details
                       <ArrowRight size={12} />
                     </Link>
                     <Link
                       href="/contact?type=assessment"
-                      className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-5 text-xs font-bold text-white hover:bg-primary hover:text-black hover:border-primary transition-all cursor-pointer"
+                      className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-muted border border-border px-5 text-xs font-bold text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all cursor-pointer"
                     >
                       Scope Assessment
                       <ChevronRight size={14} />
@@ -311,29 +311,29 @@ export default function Services() {
       </Section>
 
       {/* ================= INDUSTRIES SECTION ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#101525]/30">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-border bg-card/30">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Sector Experience</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Compliance & Target Alignment</p>
+            <p className="mt-3 text-3xl font-black text-foreground sm:text-4xl tracking-tight">Compliance & Target Alignment</p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {industries.map((ind, idx) => (
               <div
                 key={ind.name}
-                className={`group rounded-2xl border border-white/5 bg-[#0B0F1A]/80 p-5 flex flex-col justify-between transition-all duration-300 ${ind.glow} hover:-translate-y-1 text-left`}
+                className={`group rounded-2xl border border-border bg-card/85 p-5 flex flex-col justify-between transition-all duration-300 ${ind.glow} hover:-translate-y-1 text-left`}
               >
                 <div>
                   <span className="text-[10px] font-mono font-bold text-primary tracking-wider block">
                     0{idx + 1}
                   </span>
-                  <h3 className="mt-3 text-lg font-black text-white tracking-tight">{ind.name}</h3>
-                  <p className="mt-2 text-[11px] text-gray-400 leading-relaxed font-medium">{ind.focus}</p>
+                  <h3 className="mt-3 text-lg font-black text-foreground tracking-tight">{ind.name}</h3>
+                  <p className="mt-2 text-[11px] text-muted-foreground leading-relaxed font-medium">{ind.focus}</p>
                 </div>
-                <div className="mt-6 border-t border-white/5 pt-3">
-                  <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest block">Audit Compliance</span>
-                  <span className="text-xs font-bold font-mono text-white block mt-0.5">{ind.compliance}</span>
+                <div className="mt-6 border-t border-border pt-3">
+                  <span className="text-[9px] font-mono text-muted-foreground/60 uppercase tracking-widest block">Audit Compliance</span>
+                  <span className="text-xs font-bold font-mono text-foreground block mt-0.5">{ind.compliance}</span>
                 </div>
               </div>
             ))}
@@ -342,11 +342,11 @@ export default function Services() {
       </Section>
 
       {/* ================= DELIVERY PROCESS ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-border">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Delivery Framework</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Our Security Engagement Lifecycle</p>
+            <p className="mt-3 text-3xl font-black text-foreground sm:text-4xl tracking-tight">Our Security Engagement Lifecycle</p>
           </div>
 
           <ProcessTimeline />
@@ -354,11 +354,11 @@ export default function Services() {
       </Section>
 
       {/* ================= TRUST SECTION ================= */}
-      <Section className="py-24 border-t border-white/5 bg-[#101525]/30 relative z-10">
+      <Section className="py-24 border-t border-border bg-card/30 relative z-10">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Our Standards</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Quality Outcomes, Zero Scanner Noise</p>
+            <p className="mt-3 text-3xl font-black text-foreground sm:text-4xl tracking-tight">Quality Outcomes, Zero Scanner Noise</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -367,13 +367,13 @@ export default function Services() {
               return (
                 <div
                   key={idx}
-                  className="rounded-3xl border border-white/5 bg-[#0B0F1A]/80 p-6 flex flex-col items-start text-left transition-all hover:border-primary/20 group hover:shadow-[0_0_20px_rgba(54,226,123,0.05)]"
+                  className="rounded-3xl border border-border bg-card/85 p-6 flex flex-col items-start text-left transition-all hover:border-primary/20 group hover:shadow-[0_0_20px_rgba(54,226,123,0.05)]"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/[0.02] border border-white/10 mb-5">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-muted border border-border mb-5">
                     <IconComp className={`h-5.5 w-5.5 ${pillar.color}`} />
                   </div>
-                  <h3 className="text-base font-black text-white tracking-tight">{pillar.title}</h3>
-                  <p className="mt-3 text-[11px] text-gray-400 leading-relaxed font-medium">{pillar.desc}</p>
+                  <h3 className="text-base font-black text-foreground tracking-tight">{pillar.title}</h3>
+                  <p className="mt-3 text-[11px] text-muted-foreground leading-relaxed font-medium">{pillar.desc}</p>
                 </div>
               );
             })}
@@ -382,8 +382,8 @@ export default function Services() {
       </Section>
 
       {/* ================= FINAL CTA SECTION ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5">
-        <Container className="max-w-5xl rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#101525] to-[#0A0D18] p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
+      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-border">
+        <Container className="max-w-5xl rounded-[2.5rem] border border-border bg-card-gradient p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
           
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
@@ -393,25 +393,25 @@ export default function Services() {
             <Shield className="h-6 w-6 text-primary animate-pulse" />
           </div>
 
-          <h2 className="text-3xl font-black text-white sm:text-5xl leading-tight tracking-tight max-w-2xl">
+          <h2 className="text-3xl font-black text-foreground sm:text-5xl leading-tight tracking-tight max-w-2xl">
             Ready to Improve Your Security Posture?
           </h2>
           
-          <p className="mt-4 text-sm text-gray-400 max-w-lg leading-relaxed font-medium">
+          <p className="mt-4 text-sm text-muted-foreground max-w-lg leading-relaxed font-medium">
             Deploy defensive capabilities and offensive validations. Select Request Assessment to kick off or schedule a general scope call.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
             <Link
               href="/contact?type=assessment"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
             >
               Request Assessment
               <ChevronRight size={16} />
             </Link>
             <Link
               href="/contact?type=consultation"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
+              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
             >
               <Calendar size={16} />
               Book Consultation

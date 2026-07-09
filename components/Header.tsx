@@ -232,21 +232,6 @@ export default function Header() {
           {/* Right Actions */}
           <div className="hidden lg:flex items-center gap-2">
  
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="w-11 h-11 flex items-center justify-center rounded-full border border-border bg-muted/40 text-foreground hover:bg-muted hover:rotate-12 transition-all cursor-pointer mr-3"
-              aria-label="Toggle theme"
-            >
-              {!mounted ? (
-                <Moon size={16} />
-              ) : theme === "dark" ? (
-                <Sun size={16} className="text-primary" />
-              ) : (
-                <Moon size={16} className="text-slate-700 dark:text-slate-200" />
-              )}
-            </button>
- 
             {/* Magnetic CTA */}
             <Link
               href="/contact"
@@ -262,21 +247,6 @@ export default function Header() {
  
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-3">
-            {/* Mobile Theme Switcher */}
-            <button
-              onClick={toggleTheme}
-              className="w-11 h-11 flex items-center justify-center rounded-full border border-border bg-muted/40 text-foreground hover:bg-muted hover:rotate-12 transition-all"
-              aria-label="Toggle theme"
-            >
-              {!mounted ? (
-                <Moon size={16} />
-              ) : theme === "dark" ? (
-                <Sun size={16} className="text-primary" />
-              ) : (
-                <Moon size={16} className="text-slate-700 dark:text-slate-200" />
-              )}
-            </button>
-
             {/* Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

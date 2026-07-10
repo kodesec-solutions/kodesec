@@ -1,12 +1,12 @@
-import { 
-  Shield, 
-  Terminal, 
-  Code, 
-  Cloud, 
-  Workflow, 
-  Cpu, 
-  Users, 
-  BookOpen, 
+import {
+  Shield,
+  Terminal,
+  Code,
+  Cloud,
+  Workflow,
+  Cpu,
+  Users,
+  BookOpen,
   Zap,
   Lock,
   CheckCircle2,
@@ -75,13 +75,13 @@ export interface Step {
   detail?: string
 }
 
-export interface CaseStudy {
-  industry: string
+export interface securityInsights {
+  category: string
   title: string
-  challenge: string
-  result: string
+  insight: string
+  remediation: string
   stat: string
-  desc: string
+  source: string
 }
 
 export interface TechItem {
@@ -105,8 +105,8 @@ export const siteMetadata = {
   title: "Kodesec - Cybersecurity, Development & Quality Testing",
   description: "Professional technology services including web & application development, comprehensive cybersecurity solutions, and quality assurance testing.",
   keywords: [
-    "web development", "app development", "cybersecurity", "penetration testing", 
-    "QA testing", "quality assurance", "software development", "security audits", 
+    "web development", "app development", "cybersecurity", "penetration testing",
+    "QA testing", "quality assurance", "software development", "security audits",
     "vulnerability assessment", "Kodesec"
   ]
 }
@@ -120,7 +120,7 @@ export const navigationConfig = {
     { href: "/blog", label: "Resources" },
     { href: "/contact", label: "Contact" },
   ] as NavItem[],
-  
+
   cybersecurityItems: [
     { name: "Penetration Testing", desc: "Offensive compliance-mapped audits.", href: "/services/manual-website-penetration-testing", icon: Shield },
     { name: "Security Assessments", desc: "Full-spectrum threat profiling & posture.", href: "/services/network-infrastructure-penetration-testing", icon: Terminal },
@@ -180,7 +180,7 @@ export const teamConfig = {
       name: "Yaser alam reshad",
       role: "Technical Authority",
       bio: "Yeaser leads offensive manual pentesting and threat model mappings. He is obsessed with uncovering logic defects automated scanners miss.",
-      tags: ["Offensive Pentesting", "OWASP ASVS v4.0", "Logic Analysis"],
+      tags: ["Secure Software Architecture", "Cybersecurity Strategy", "Technical Leadership"],
       linkedin: "https://www.linkedin.com/in/yaser-reshad-7b95b53a7",
       email: "yasireshad717@gmail.com",
       avatar: "AR",
@@ -190,7 +190,7 @@ export const teamConfig = {
       name: "Mian Al Ruhanyat",
       role: "Solutions Architect",
       bio: "Mian Perform Cloud Native Solutions for Modern Web Application using K8s, IaC and Secure Pipelines.",
-      tags: ["Kubernetes", "IaC", "AWS/Azure/GCP", "DevOps"],
+      tags: ["Kubernetes", "CI/CD", "AWS/Azure/GCP", "Infrastructure Automation"],
       linkedin: "https://www.linkedin.com/in/alruhanyat/",
       email: "alruhanyat994@gmail.com",
       avatar: "MAR",
@@ -200,7 +200,7 @@ export const teamConfig = {
       name: "Nafiul Islam",
       role: "Security lead ",
       bio: "Nafiul Perform Penetration tests, Identify and validate security vulnerabilities.",
-      tags: ["Offensive Pentesting", "OWASP ASVS v4.0", "Logic Analysis"],
+      tags: ["Web & Network Penetration Testing", "Vulnerability Assessment", "Cloud Security"],
       linkedin: "https://www.linkedin.com/in/nafiul-islam359/",
       email: "nafiul1224@gmail.com",
       avatar: "NV",
@@ -210,7 +210,7 @@ export const teamConfig = {
       name: "Ashikul Islam",
       role: "Engineering Lead",
       bio: "Ashikul designs zero-trust backend authentication modules, cryptographic storage routines, and mTLS proxy layers for API isolation.",
-      tags: ["API Development", "System Architecture", "Web Security"],
+      tags: ["Backend Engineering", "System Architecture", "Database Design"],
       linkedin: "https://www.linkedin.com/in/ashikul-islam-b848271a9/",
       email: "md.ashikul4040@gmail.com",
       avatar: "AI",
@@ -252,10 +252,26 @@ export const socialLinksConfig = {
 // Home Page Configuration
 export const homeConfig = {
   metrics: [
-    { value: "500+", label: "Security Assessments", desc: "Audited SaaS & Enterprise platforms" },
-    { value: "12,400+", label: "Vulns Identified", desc: "Critical vulnerabilities remediated" },
-    { value: "40+", label: "Supported Techs", desc: "Cloud, container, and dev ecosystems" },
-    { value: "7 Days", label: "Average Delivery", desc: "High velocity, zero bottlenecks" }
+    {
+      value: "31%",
+      label: "Breaches Start with Software Vulnerabilities",
+      desc: "Attackers increasingly exploit unpatched software instead of relying on stolen credentials."
+    },
+    {
+      value: "48%",
+      label: "Breaches Involve Ransomware",
+      desc: "Nearly half of analyzed breaches included ransomware activity."
+    },
+    {
+      value: "30%",
+      label: "Third-Party Involvement",
+      desc: "Third-party vendors and supply chains contributed to nearly one-third of investigated breaches."
+    },
+    {
+      value: "43 Days",
+      label: "Median Patch Resolution Time",
+      desc: "Organizations typically require over a month to fully remediate critical vulnerabilities."
+    }
   ] as Metric[],
 
   steps: [
@@ -266,32 +282,38 @@ export const homeConfig = {
     { label: "05", title: "Secure", desc: "Final validation & sign-off." }
   ] as Step[],
 
-  caseStudies: [
+  securityInsights: [
     {
-      industry: "Fintech",
-      title: "Hardening Banking API Gateways",
-      challenge: "Legacy integration exposing internal accounts to rate-limit bypasses.",
-      result: "Redesigned OAuth structure and implemented Web Application Firewall rules.",
-      stat: "SOC2 Compliant",
-      desc: "Zero findings during annual external audit"
+      category: "Application Security",
+      title: "Broken Access Control Remains #1",
+      insight:
+        "Broken Access Control continues to rank as the most critical web application security risk in the OWASP Top 10.",
+      remediation:
+        "Enforce server-side authorization, adopt least-privilege access, validate every request, and implement role-based or attribute-based access control.",
+      stat: "#1 Risk",
+      source: "OWASP Top 10 (2025)"
     },
     {
-      industry: "SaaS",
-      title: "DevSecOps Pipeline Hardening",
-      challenge: "Dynamic cloud provisioning introducing configuration vulnerabilities.",
-      result: "Embedded container scanners and Terraform drift controls in GitHub Actions.",
-      stat: "-94% Drift",
-      desc: "Reduction in staging misconfigurations"
+      category: "Cloud Security",
+      title: "Security Misconfiguration Is a Leading Risk",
+      insight:
+        "Misconfigurations remain one of the most common causes of cloud and application security incidents as modern systems become increasingly configurable.",
+      remediation:
+        "Harden default configurations, automate infrastructure validation, enforce secure baselines, and continuously monitor configuration drift.",
+      stat: "#2 Risk",
+      source: "OWASP Top 10 (2025)"
     },
     {
-      industry: "Enterprise",
-      title: "Secure Cloud Platform Migration",
-      challenge: "Plaintext secrets in transition during large Kubernetes database shift.",
-      result: "Engineered AWS KMS envelope cryptography and decoupled database access.",
-      stat: "3.2M Records",
-      desc: "Migrated securely with zero downtime"
+      category: "DevSecOps",
+      title: "Shift Security Left",
+      insight:
+        "Organizations are integrating security throughout the software development lifecycle to identify vulnerabilities before deployment.",
+      remediation:
+        "Embed SAST, dependency scanning, secrets detection, container scanning, and policy checks directly into CI/CD pipelines.",
+      stat: "Shift Left",
+      source: "DevSecOps Best Practices"
     }
-  ] as CaseStudy[],
+  ] as securityInsights[],
 
   techEcosystem: [
     { name: "AWS", category: "Cloud", glow: "hover:shadow-[0_0_20px_rgba(255,153,0,0.3)] hover:border-[#FF9900]/40" },
@@ -373,7 +395,7 @@ export const contactConfig = {
     { id: "Cloud Setup", label: "Cloud Solutions", desc: "Cloud infrastructure and deployment setups.", icon: Cloud },
     { id: "General Inquiry", label: "General Inquiry", desc: "General collaboration or custom scoping call.", icon: Terminal }
   ] as InquiryType[],
-  
+
   timelineSteps: [
     { num: "01", name: "Submit Inquiry", desc: "Detailed requirements logged under secure parameters." },
     { num: "02", name: "Team Review", desc: "Our core engineers evaluate your project architecture." },

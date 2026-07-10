@@ -82,10 +82,10 @@ export default function Home() {
   const services = [
     {
       id: "pentesting",
-      title: "Penetration Testing",
+      title: "Security Testing",
       description: "Offensive simulations detecting vulnerabilities before exploit.",
       bullets: [
-        "API & Web Application Pentests",
+        "API & Application Pentests",
         "Infrastructure Attack-Path Validation",
         "Actionable Remediation Advisories"
       ],
@@ -121,7 +121,7 @@ export default function Home() {
     },
     {
       id: "securedev",
-      title: "Secure Development",
+      title: "Secure Architecture",
       description: "Resilient software engineered with zero-trust principles.",
       bullets: [
         "Secure Architecture & Design",
@@ -258,7 +258,7 @@ export default function Home() {
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Expertise & Services</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Securing Every Layer of Your Product</p>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Securing Every Layer of Your System</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -314,7 +314,7 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {homeConfig.caseStudies.map((study, idx) => {
+            {homeConfig.securityInsights.map((study, idx) => {
               const borderColors = [
                 "hover:border-primary/30 hover:shadow-[0_0_20px_rgba(54,226,123,0.08)]",
                 "hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.08)]",
@@ -329,30 +329,30 @@ export default function Home() {
                 >
                   <div className="text-left">
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-white/5 text-gray-500 border border-white/5">
-                      {study.industry}
+                      {study.category}
                     </span>
                     
                     <h3 className="mt-5 text-lg font-black text-white tracking-tight">{study.title}</h3>
                     
                     <div className="mt-6 space-y-3.5 border-t border-white/5 pt-4 text-xs font-medium">
                       <div>
-                        <span className="text-gray-500 uppercase tracking-wider font-mono text-[9px] block">Challenge</span>
-                        <p className="text-gray-300 mt-1 leading-relaxed font-sans">{study.challenge}</p>
+                        <span className="text-gray-500 uppercase tracking-wider font-mono text-[9px] block">Insight</span>
+                        <p className="text-gray-300 mt-1 leading-relaxed font-sans">{study.insight}</p>
                       </div>
                       <div>
                         <span className="text-gray-500 uppercase tracking-wider font-mono text-[9px] block">Remediation</span>
-                        <p className="text-gray-300 mt-1 leading-relaxed font-sans">{study.result}</p>
+                        <p className="text-gray-300 mt-1 leading-relaxed font-sans">{study.remediation}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between text-left">
                     <div>
-                      <span className="text-[9px] uppercase tracking-wider text-gray-500 font-mono block">Metric Achieved</span>
+                      <span className="text-[9px] uppercase tracking-wider text-gray-500 font-mono block">{study.source}</span>
                       <span className={`text-lg font-black font-mono tracking-tight mt-0.5 block ${accentColor[idx]}`}>{study.stat}</span>
                     </div>
                     <p className="text-[10px] text-gray-300 leading-snug font-medium max-w-[130px] text-right">
-                      {study.desc}
+                      {study.source}
                     </p>
                   </div>
                 </div>

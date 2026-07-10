@@ -183,7 +183,7 @@ export default function Header() {
                                   href={subItem.href} 
                                   className="group/item flex gap-3.5 p-2 rounded-2xl hover:bg-muted/50 transition-all text-left"
                                 >
-                                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan group-hover/item:bg-accent-cyan group-hover/item:text-white dark:group-hover/item:text-[#1a1f2e] transition-colors">
+                                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan group-hover/item:bg-accent-cyan group-hover/item:text-white transition-colors">
                                     <IconComp size={16} />
                                   </div>
                                   <div>

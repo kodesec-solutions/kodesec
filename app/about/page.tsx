@@ -186,9 +186,11 @@ export default function AboutPage() {
                   <h3 className="text-xl font-black text-foreground tracking-tight">{f.name}</h3>
                   <p className="text-xs font-mono text-primary mt-1 font-bold">{f.role}</p>
 
+                  {/* Tags 
                   <p className="mt-4 text-xs text-muted-foreground leading-relaxed font-medium min-h-[70px]">
                     {f.bio}
                   </p>
+                  */}
 
                   {/* Tags */}
                   <div className="mt-6 flex flex-wrap gap-1.5">

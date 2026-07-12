@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
-import { servicesData } from "@/app/data/services";
+import { solutions } from "@/content/solutions";
 
 export const dynamic = "force-static";
 
@@ -25,9 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1.0 : 0.8,
   }));
 
-  // Dynamic services routes
-  const serviceRoutes = servicesData.map((service) => ({
-    url: `${baseUrl}/services/${service.slug}`,
+  // Dynamic solutions routes
+  const serviceRoutes = solutions.map((sol) => ({
+    url: `${baseUrl}/services/${sol.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,

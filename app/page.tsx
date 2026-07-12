@@ -12,6 +12,10 @@ import { MetricCard } from "@/components/ui/metric-card";
 import { FeatureCard } from "@/components/ui/feature-card";
 import { Badge } from "@/components/ui/badge";
 
+// Solutions Component & Content
+import SolutionCard from "@/components/solutions/SolutionCard";
+import { solutions } from "@/content/solutions";
+
 // Icons
 import { 
   Shield, 
@@ -79,60 +83,7 @@ export default function Home() {
       "closes": "18:00"
     }
   };
-  const services = [
-    {
-      id: "pentesting",
-      title: "Security Testing",
-      description: "Offensive simulations detecting vulnerabilities before exploit.",
-      bullets: [
-        "API & Application Pentests",
-        "Infrastructure Attack-Path Validation",
-        "Actionable Remediation Advisories"
-      ],
-      icon: Shield,
-      glow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.15)] hover:border-red-500/30",
-      iconColor: "text-red-400"
-    },
-    {
-      id: "cloudsec",
-      title: "Cloud Security",
-      description: "Posture hardening for multi-tenant and hybrid cloud setups.",
-      bullets: [
-        "AWS, Azure & GCP Audits",
-        "Least-Privilege IAM Guardrails",
-        "IaC Configuration Drift Tracking"
-      ],
-      icon: Cloud,
-      glow: "hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:border-cyan-500/30",
-      iconColor: "text-cyan-400"
-    },
-    {
-      id: "devsecops",
-      title: "DevSecOps",
-      description: "Automated security checkpoints baked directly into CI/CD.",
-      bullets: [
-        "Automated SAST/DAST Gateways",
-        "Container & Image Hardening",
-        "Secrets & Credentials Scanning"
-      ],
-      icon: Workflow,
-      glow: "hover:shadow-[0_0_30px_rgba(192,132,252,0.15)] hover:border-purple-500/30",
-      iconColor: "text-purple-400"
-    },
-    {
-      id: "securedev",
-      title: "Secure Architecture",
-      description: "Resilient software engineered with zero-trust principles.",
-      bullets: [
-        "Secure Architecture & Design",
-        "OWASP ASVS Standard Alignment",
-        "Compliance-Grade Crypto Auditing"
-      ],
-      icon: Cpu,
-      glow: "hover:shadow-[0_0_30px_rgba(54,226,123,0.15)] hover:border-primary/30",
-      iconColor: "text-primary"
-    }
-  ];
+  // Rendered from content tier
 
   return (
     <main className="bg-background-dark overflow-hidden relative">
@@ -253,24 +204,20 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ================= SERVICES SECTION ================= */}
-      <Section className="py-24 relative z-10">
+      {/* ================= "HOW WE HELP" SECTION ================= */}
+      <Section className="py-24 relative z-10 border-t border-white/5 bg-card/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Expertise & Services</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Securing Every Layer of Your System</p>
+            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">How We Help</h2>
+            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Outcome-Driven Core Solutions</p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {services.map((service) => (
-              <FeatureCard
-                key={service.id}
-                title={service.title}
-                description={service.description}
-                icon={service.icon}
-                iconColorClass={service.iconColor}
-                glowClass={service.glow}
-                bullets={service.bullets}
+          <div className="grid gap-6 md:grid-cols-2">
+            {solutions.map((sol, idx) => (
+              <SolutionCard
+                key={sol.slug}
+                solution={sol}
+                index={idx}
               />
             ))}
           </div>

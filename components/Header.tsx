@@ -22,8 +22,10 @@ import {
   Mail
 } from "lucide-react";
 import { navigationConfig } from "@/config/site";
+import { solutions } from "@/content/solutions";
+import * as LucideIcons from "lucide-react";
 
-const { cybersecurityItems, engineeringItems, navItems } = navigationConfig;
+const { navItems } = navigationConfig;
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -141,70 +143,68 @@ export default function Header() {
                     </button>
                     
                     {/* Mega Menu Dropdown */}
-                    <div className="absolute top-[calc(100%+0.75rem)] left-1/2 -translate-x-1/2 w-[620px] p-6 bg-card border border-border rounded-3xl shadow-2xl backdrop-blur-xl opacity-0 translate-y-2 pointer-events-none group-hover/services:opacity-100 group-hover/services:translate-y-0 group-hover/services:pointer-events-auto transition-all duration-300 ease-out z-50">
+                    <div className="absolute top-[calc(100%+0.75rem)] left-1/2 -translate-x-1/2 w-[980px] p-6 bg-card/95 border border-border rounded-3xl shadow-2xl backdrop-blur-xl opacity-0 translate-y-2 pointer-events-none group-hover/services:opacity-100 group-hover/services:translate-y-0 group-hover/services:pointer-events-auto transition-all duration-300 ease-out z-50">
                       {/* Invisible bridge to prevent mouse-leave when moving to dropdown */}
                       <div className="absolute -top-[0.75rem] left-0 right-0 h-[0.75rem]" />
                       
-                      <div className="grid grid-cols-2 gap-6">
-                        {/* Cybersecurity Column */}
-                        <div>
-                          <h4 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-3 px-2">Cybersecurity</h4>
-                          <div className="space-y-1">
-                            {cybersecurityItems.map((subItem) => {
-                              const IconComp = subItem.icon;
-                              return (
-                                <Link 
-                                  key={subItem.name} 
-                                  href={subItem.href} 
-                                  className="group/item flex gap-3.5 p-2 rounded-2xl hover:bg-muted/50 transition-all text-left"
-                                >
-                                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover/item:bg-primary group-hover/item:text-primary-foreground transition-colors">
-                                    <IconComp size={16} />
-                                  </div>
-                                  <div>
-                                    <p className="text-xs font-bold text-foreground group-hover/item:text-primary transition-colors">{subItem.name}</p>
-                                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">{subItem.desc}</p>
-                                  </div>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
- 
-                        {/* Engineering Column */}
-                        <div>
-                          <h4 className="text-xs font-mono font-bold tracking-widest text-accent-cyan uppercase mb-3 px-2">Engineering</h4>
-                          <div className="space-y-1">
-                            {engineeringItems.map((subItem) => {
-                              const IconComp = subItem.icon;
-                              return (
-                                <Link 
-                                  key={subItem.name} 
-                                  href={subItem.href} 
-                                  className="group/item flex gap-3.5 p-2 rounded-2xl hover:bg-muted/50 transition-all text-left"
-                                >
-                                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan group-hover/item:bg-accent-cyan group-hover/item:text-white transition-colors">
-                                    <IconComp size={16} />
-                                  </div>
-                                  <div>
-                                    <p className="text-xs font-bold text-foreground group-hover/item:text-accent-cyan transition-colors">{subItem.name}</p>
-                                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">{subItem.desc}</p>
-                                  </div>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
+                      <div className="grid grid-cols-4 gap-5">
+                        {solutions.map((sol) => {
+                          const IconComp = (LucideIcons as any)[sol.iconName] || LucideIcons.Shield;
+                          const glows = {
+                            primary: "group-hover/item:shadow-[0_0_20px_rgba(54,226,123,0.15)] group-hover/item:border-primary/20 bg-primary/5 text-primary",
+                            cyan: "group-hover/item:shadow-[0_0_20px_rgba(34,211,238,0.15)] group-hover/item:border-cyan-500/20 bg-cyan-500/5 text-cyan-400",
+                            purple: "group-hover/item:shadow-[0_0_20px_rgba(192,132,252,0.15)] group-hover/item:border-purple-500/20 bg-purple-500/5 text-purple-400",
+                            amber: "group-hover/item:shadow-[0_0_20px_rgba(245,158,11,0.15)] group-hover/item:border-amber-500/20 bg-amber-500/5 text-amber-400"
+                          }[sol.themeColor];
+                          const hoverText = {
+                            primary: "group-hover/item:text-primary",
+                            cyan: "group-hover/item:text-cyan-400",
+                            purple: "group-hover/item:text-purple-400",
+                            amber: "group-hover/item:text-amber-400"
+                          }[sol.themeColor];
+
+                          return (
+                            <Link 
+                              key={sol.slug} 
+                              href={`/services/${sol.slug}`}
+                              className="group/item flex flex-col justify-between p-4 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300 text-left h-full"
+                            >
+                              <div>
+                                <div className={`flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 ${glows} transition-all mb-4`}>
+                                  <IconComp size={16} />
+                                </div>
+                                <h4 className={`text-xs font-bold text-white tracking-tight ${hoverText} transition-colors mb-1`}>
+                                  {sol.title}
+                                </h4>
+                                <p className="text-[10px] text-gray-400 leading-normal mb-3">
+                                  {sol.description}
+                                </p>
+                                <ul className="space-y-1 mb-4 border-t border-white/5 pt-2.5">
+                                  {sol.capabilities.slice(0, 4).map((cap) => (
+                                    <li key={cap.title} className="text-[9px] text-gray-500 flex items-center gap-1">
+                                      <span className="text-[7px] text-gray-600">•</span>
+                                      {cap.title}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <span className={`inline-flex items-center gap-1 text-[9px] font-bold ${hoverText} transition-all mt-auto`}>
+                                Explore
+                                <ArrowRight size={10} className="group-hover/item:translate-x-0.5 transition-transform" />
+                              </span>
+                            </Link>
+                          );
+                        })}
                       </div>
  
-                      {/* Dropdown Footer - View All Services */}
+                      {/* Dropdown Footer */}
                       <div className="mt-5 pt-4 border-t border-border flex items-center justify-between">
-                        <span className="text-[10px] font-mono font-bold text-muted-foreground tracking-wider">KODESEC HUB</span>
+                        <span className="text-[10px] font-mono font-bold text-muted-foreground tracking-wider">KODESEC SOLUTIONS</span>
                         <Link 
                           href="/services"
                           className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-light transition-all group/all"
                         >
-                          View All Services
+                          View All Solutions
                           <ArrowRight size={12} className="group-hover/all:translate-x-0.5 transition-transform duration-200" />
                         </Link>
                       </div>
@@ -298,75 +298,50 @@ export default function Header() {
 
           {/* Drawer Menu List */}
           <div className="flex flex-col space-y-6 text-left">
-            {/* Services Dropdown Accordion */}
+            {/* Solutions Dropdown Accordion */}
             <div className="space-y-2">
               <button 
                 onClick={() => setIsServicesExpanded(!isServicesExpanded)}
                 className="w-full flex items-center justify-between py-2 text-xl font-black text-foreground hover:text-primary transition-all cursor-pointer"
               >
-                <span>Services</span>
+                <span>Solutions</span>
                 <ChevronDown size={18} className={`transition-transform duration-300 ${isServicesExpanded ? "rotate-180 text-primary" : "text-gray-500"}`} />
               </button>
               
               <div 
                 className={`grid gap-3 overflow-hidden transition-all duration-300 ease-in-out ${
-                  isServicesExpanded ? "max-h-[600px] opacity-100 mt-2" : "max-h-0 opacity-0 pointer-events-none"
+                  isServicesExpanded ? "max-h-[800px] opacity-100 mt-2" : "max-h-0 opacity-0 pointer-events-none"
                 }`}
               >
-                {/* Cybersecurity Sub-menu */}
-                <div className="space-y-2">
-                  <p className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase px-1">Cybersecurity</p>
-                  <div className="grid grid-cols-1 gap-2">
-                    {cybersecurityItems.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          onClick={() => {
-                            setIsMobileMenuOpen(false);
-                          }}
-                          className="flex items-center gap-3 p-3 rounded-2xl border border-border bg-muted/20 hover:bg-muted/55 hover:border-primary/20 transition-all group text-left"
-                        >
-                          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-[#1a1f2e] transition-colors shrink-0">
-                            <Icon size={14} />
-                          </div>
-                          <div>
-                            <p className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</p>
-                            <p className="text-[9px] text-muted-foreground mt-0.5 leading-tight">{item.desc}</p>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
+                <div className="space-y-3">
+                  {solutions.map((sol) => {
+                    const IconComp = (LucideIcons as any)[sol.iconName] || LucideIcons.Shield;
+                    const glows = {
+                      primary: "text-primary bg-primary/10 border-primary/20",
+                      cyan: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
+                      purple: "text-purple-400 bg-purple-500/10 border-purple-500/20",
+                      amber: "text-amber-400 bg-amber-500/10 border-amber-500/20"
+                    }[sol.themeColor];
 
-                {/* Engineering Sub-menu */}
-                <div className="space-y-2 mt-4">
-                  <p className="text-[10px] font-mono font-bold tracking-widest text-accent-cyan uppercase px-1">Engineering</p>
-                  <div className="grid grid-cols-1 gap-2">
-                    {engineeringItems.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          onClick={() => {
-                            setIsMobileMenuOpen(false);
-                          }}
-                          className="flex items-center gap-3 p-3 rounded-2xl border border-border bg-muted/20 hover:bg-muted/55 hover:border-accent-cyan/20 transition-all group text-left"
-                        >
-                          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan group-hover:bg-accent-cyan group-hover:text-[#1a1f2e] transition-colors shrink-0">
-                            <Icon size={14} />
-                          </div>
-                          <div>
-                            <p className="text-xs font-bold text-foreground group-hover:text-accent-cyan transition-colors">{item.name}</p>
-                            <p className="text-[9px] text-muted-foreground mt-0.5 leading-tight">{item.desc}</p>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
+                    return (
+                      <Link
+                        key={sol.slug}
+                        href={`/services/${sol.slug}`}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="flex items-center gap-3.5 p-3 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/10 transition-all text-left group"
+                      >
+                        <div className={`flex h-9 w-9 items-center justify-center rounded-xl border shrink-0 ${glows}`}>
+                          <IconComp size={16} />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-white group-hover:text-primary transition-colors">{sol.title}</p>
+                          <p className="text-[9px] text-gray-400 mt-0.5 leading-tight">{sol.tagline}</p>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </div>

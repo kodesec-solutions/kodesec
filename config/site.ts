@@ -114,23 +114,18 @@ export const siteMetadata = {
 // Navigation & Header Configuration
 export const navigationConfig = {
   navItems: [
-    { href: "/services", label: "Services", isDropdown: true },
+    { href: "/services", label: "Solutions", isDropdown: true },
     { href: "/why-us", label: "Why Kodesec" },
     { href: "/about", label: "About" },
     { href: "/blog", label: "Resources" },
     { href: "/contact", label: "Contact" },
   ] as NavItem[],
 
-  cybersecurityItems: [
-    { name: "Penetration Testing", desc: "Offensive compliance-mapped audits.", href: "/services/manual-website-penetration-testing", icon: Shield },
-    { name: "Security Assessments", desc: "Full-spectrum threat profiling & posture.", href: "/services/network-infrastructure-penetration-testing", icon: Terminal },
-    { name: "Secure Development", desc: "Zero-trust app & architecture engineering.", href: "/services/secure-application-development", icon: Code },
-  ] as NavSubItem[],
-
-  engineeringItems: [
-    { name: "Cloud Infrastructure", desc: "Hardened IaC platforms & networks.", href: "/services/infrastructure-automation-cloud-solutions", icon: Cloud },
-    { name: "DevSecOps", desc: "Pipeline automated vulnerability checks.", href: "/services/infrastructure-automation-cloud-solutions", icon: Workflow },
-    { name: "Platform Engineering", desc: "Kubernetes clustering and mTLS API routers.", href: "/services/infrastructure-automation-cloud-solutions", icon: Cpu },
+  solutionsItems: [
+    { name: "Design & Engineering", desc: "Secure digital product design & software building.", href: "/services/design-engineering", icon: Code },
+    { name: "Network & Cyber Security", desc: "Offensive compliance security & pentesting.", href: "/services/cybersecurity", icon: Shield },
+    { name: "Cloud & DevOps", desc: "Hardened cloud, Kubernetes, and IaC pipelines.", href: "/services/cloud-devops", icon: Cloud },
+    { name: "Quality Assurance", desc: "Playwright automation testing & E2E checks.", href: "/services/quality-assurance", icon: CheckCircle2 }
   ] as NavSubItem[]
 }
 
@@ -141,12 +136,12 @@ export const footerConfig = {
   copyright: "© 2026 KODESEC. All rights reserved.",
   sections: [
     {
-      title: "Services",
+      title: "Solutions",
       links: [
-        { label: "Secure Development", href: "/services/secure-application-development" },
-        { label: "Penetration Testing", href: "/services/manual-website-penetration-testing" },
-        { label: "Network Security", href: "/services/network-infrastructure-penetration-testing" },
-        { label: "Cloud & DevOps", href: "/services/infrastructure-automation-cloud-solutions" }
+        { label: "Design & Engineering", href: "/services/design-engineering" },
+        { label: "Network & Cyber Security", href: "/services/cybersecurity" },
+        { label: "Cloud & DevOps", href: "/services/cloud-devops" },
+        { label: "Quality Assurance", href: "/services/quality-assurance" }
       ]
     },
     {
@@ -182,6 +177,7 @@ export const teamConfig = {
       bio: "Yeaser leads offensive manual pentesting and threat model mappings. He is obsessed with uncovering logic defects automated scanners miss.",
       tags: ["Secure Software Architecture", "Cybersecurity Strategy", "Technical Leadership"],
       linkedin: "https://www.linkedin.com/in/yaser-reshad-7b95b53a7",
+      github: "https://github.com/yasireshad",
       email: "yasireshad717@gmail.com",
       avatar: "AR",
       image: "/assets/Reshad.jpeg"
@@ -192,6 +188,7 @@ export const teamConfig = {
       bio: "Mian Perform Cloud Native Solutions for Modern Web Application using K8s, IaC and Secure Pipelines.",
       tags: ["Kubernetes", "CI/CD", "AWS/Azure/GCP", "Infrastructure Automation"],
       linkedin: "https://www.linkedin.com/in/alruhanyat/",
+      github: "https://github.com/alruhanyat",
       email: "alruhanyat994@gmail.com",
       avatar: "MAR",
       image: "/assets/Mian_Al_Ruhaniyat.jpeg"
@@ -202,6 +199,7 @@ export const teamConfig = {
       bio: "Nafiul Perform Penetration tests, Identify and validate security vulnerabilities.",
       tags: ["Web & Network Penetration Testing", "Vulnerability Assessment", "Cloud Security"],
       linkedin: "https://www.linkedin.com/in/nafiul-islam359/",
+      github: "https://github.com/nafiul-islam359",
       email: "nafiul1224@gmail.com",
       avatar: "NV",
       image: "/assets/Nafiul.jpeg"
@@ -212,6 +210,7 @@ export const teamConfig = {
       bio: "Ashikul designs zero-trust backend authentication modules, cryptographic storage routines, and mTLS proxy layers for API isolation.",
       tags: ["Backend Engineering", "System Architecture", "Database Design"],
       linkedin: "https://www.linkedin.com/in/ashikul-islam-b848271a9/",
+      github: "https://github.com/ashikul-islam",
       email: "md.ashikul4040@gmail.com",
       avatar: "AI",
       image: "/assets/Ashik.png"

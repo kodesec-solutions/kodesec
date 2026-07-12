@@ -29,5 +29,14 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/services/manual-website-penetration-testing", "destination": "/services/cybersecurity", "permanent": true },
+    { "source": "/services/network-infrastructure-penetration-testing", "destination": "/services/cybersecurity", "permanent": true },
+    { "source": "/services/website-vulnerability-scan-manual-verification", "destination": "/services/cybersecurity", "permanent": true },
+    { "source": "/services/active-directory-security-assessment", "destination": "/services/cybersecurity", "permanent": true },
+    { "source": "/services/secure-application-development", "destination": "/services/design-engineering", "permanent": true },
+    { "source": "/services/infrastructure-automation-cloud-solutions", "destination": "/services/cloud-devops", "permanent": true },
+    { "source": "/services/application-qa-testing", "destination": "/services/quality-assurance", "permanent": true }
   ]
 }

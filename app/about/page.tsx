@@ -1,50 +1,206 @@
 import React from "react";
-import Link from "next/link";
-import NetworkGraph from "@/components/NetworkGraph";
-import FounderStoryTimeline from "@/components/about/FounderStoryTimeline";
-import LifecycleWorkflow from "@/components/about/LifecycleWorkflow";
+import type { Metadata } from "next";
 
-// Primitives
-import { Section } from "@/components/ui/section";
+// Custom Page Components
+import HeroSection from "@/components/about/HeroSection";
+import StoryTimeline from "@/components/about/StoryTimeline";
+import FounderCard from "@/components/about/FounderCard";
+import ExpertiseCard from "@/components/about/ExpertiseCard";
+import ProcessTimeline from "@/components/about/ProcessTimeline";
+import ValueCard from "@/components/about/ValueCard";
+import TechnologyGrid from "@/components/about/TechnologyGrid";
+import FAQAccordion from "@/components/about/FAQAccordion";
+import CTASection from "@/components/about/CTASection";
+
+// Primitives & Icons
 import { Container } from "@/components/ui/container";
-import { FeatureCard } from "@/components/ui/feature-card";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-
-// Icons
-import { 
-  Shield, 
-  Terminal, 
-  Cloud, 
-  Workflow, 
-  Cpu, 
-  ChevronRight, 
-  ArrowRight, 
-  Calendar, 
-  Lock, 
-  Activity, 
-  Users, 
-  BookOpen, 
+import JsonLd from "@/components/JsonLd";
+import { teamConfig } from "@/config/site";
+import {
+  Code,
+  Shield,
+  Cloud,
+  CheckCircle2,
+  Users,
   MessageSquare,
-  Mail,
-  Zap
+  Compass,
+  Cpu,
+  Activity,
+  Layers,
+  Zap,
+  BookOpen
 } from "lucide-react";
 
-// Config data
-import type { Metadata } from "next";
-import JsonLd from "@/components/JsonLd";
-import { aboutConfig, teamConfig } from "@/config/site";
-
+// SEO Configurations
 export const metadata: Metadata = {
-  title: "About Our Team",
-  description: "Meet the founders and engineering architects of KodeSec. We are a small, highly technical, and founder-led cyber engineering team.",
+  title: "About Kodesec | Secure Software Development & Cybersecurity Company",
+  description: "Meet the founder-led engineering team at Kodesec. We specialize in secure software development, cybersecurity assessments, cloud infrastructure, and DevOps consulting.",
   alternates: {
-    canonical: "/about",
+    canonical: "https://kodesec.com/about",
   },
-  keywords: ["KodeSec team", "security engineers", "Yeaser Alam Reshad", "Mian Al Ruhaniyat", "Nafiul Vai", "Ashikul Islam"],
+  keywords: [
+    "About Kodesec",
+    "Software Engineering Company",
+    "Cybersecurity Company",
+    "Cloud Infrastructure Services",
+    "DevOps Consulting",
+    "Quality Assurance Services",
+    "Startup Technology Partner",
+    "Secure Software Development",
+    "Founder-led Engineering Team"
+  ],
+  openGraph: {
+    title: "About Kodesec | Secure Software Development & Cybersecurity",
+    description: "Meet the founder-led engineering team at Kodesec. We integrate software design, operations, quality testing, and cybersecurity audit loops into a unified practice.",
+    url: "https://kodesec.com/about",
+    siteName: "Kodesec",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Kodesec | Secure Software Development & Cybersecurity",
+    description: "Meet the founder-led engineering team at Kodesec. We integrate software design, operations, quality testing, and cybersecurity audit loops into a unified practice."
+  }
 };
 
+// Section 4 (Expertise Areas) data containing exact target SEO keywords
+const expertiseData = [
+  {
+    title: "Design & Engineering",
+    description: "Helping startups design scalable architectures and deliver modern web and mobile applications as a trusted secure software development partner.",
+    outcomes: [
+      "ASVS-compliant systems and cryptographic APIs",
+      "Scalable multi-tenant databases and isolation logic",
+      "High-performance type-safe codebases using TypeScript",
+      "Clean UI/UX layout prototypes engineered for speed"
+    ],
+    iconName: "code",
+    link: "/services/design-engineering",
+    glowClass: "hover:border-primary/20 hover:shadow-[0_0_30px_rgba(54,226,123,0.06)]"
+  },
+  {
+    title: "Network & Cyber Security",
+    description: "Operating as an elite cybersecurity company providing comprehensive manual penetration testing, threat mapping, and validation services.",
+    outcomes: [
+      "Manual application and cloud API pentesting",
+      "Compliance audits (SOC2 & GDPR readiness alignments)",
+      "Proof-of-concept exploit maps to guide developers",
+      "Actionable security reports without scanner noise"
+    ],
+    iconName: "shield",
+    link: "/services/cybersecurity",
+    glowClass: "hover:border-red-500/20 hover:shadow-[0_0_30px_rgba(239,68,68,0.06)]"
+  },
+  {
+    title: "Cloud & DevOps",
+    description: "Providing expert DevOps consulting and cloud infrastructure services to securely manage, automate, and scale modern platform operations.",
+    outcomes: [
+      "Infrastructure as Code validation loops (Terraform)",
+      "Hardened Kubernetes namespace boundaries",
+      "Secure CI/CD automated vulnerability checkpoints",
+      "Zero-downtime high-availability multi-region setups"
+    ],
+    iconName: "cloud",
+    link: "/services/cloud-devops",
+    glowClass: "hover:border-cyan-500/20 hover:shadow-[0_0_30px_rgba(34,211,238,0.06)]"
+  },
+  {
+    title: "Quality Assurance",
+    description: "Offering premium quality assurance services to safeguard systems against regressions and guarantee flawless user workflows.",
+    outcomes: [
+      "Playwright end-to-end automated testing scripts",
+      "CI/CD build pipeline regression gate integrations",
+      "Robust API payload load testing and validations",
+      "Edge-case manual testing plans for release blocks"
+    ],
+    iconName: "check",
+    link: "/services/quality-assurance",
+    glowClass: "hover:border-purple-500/20 hover:shadow-[0_0_30px_rgba(192,132,252,0.06)]"
+  }
+];
+
+// Section 6 (Principles) data
+const principlesData = [
+  {
+    title: "Security First",
+    desc: "We analyze threat boundaries and threat-model your software before writing the first line of code.",
+    iconName: "shield",
+    glow: "hover:border-red-500/20 hover:shadow-[0_0_20px_rgba(239,68,68,0.05)]"
+  },
+  {
+    title: "Scalable Architecture",
+    desc: "We build systems ready for long-term growth, prioritizing modular code structures and clean databases.",
+    iconName: "layers",
+    glow: "hover:border-cyan-500/20 hover:shadow-[0_0_20px_rgba(34,211,238,0.05)]"
+  },
+  {
+    title: "Engineering Excellence",
+    desc: "We write clean, readable, documented, and type-safe code that developers enjoy maintaining.",
+    iconName: "code",
+    glow: "hover:border-primary/20 hover:shadow-[0_0_20px_rgba(54,226,123,0.05)]"
+  },
+  {
+    title: "Automation by Default",
+    desc: "We eliminate human error by automated testing pipelines, IaC setups, and CI/CD security check gates.",
+    iconName: "zap",
+    glow: "hover:border-yellow-500/20 hover:shadow-[0_0_20px_rgba(234,179,8,0.05)]"
+  },
+  {
+    title: "Continuous Learning",
+    desc: "We constantly research threat profiles, security paradigms, and optimization models to lead tech circles.",
+    iconName: "book",
+    glow: "hover:border-purple-500/20 hover:shadow-[0_0_20px_rgba(192,132,252,0.05)]"
+  },
+  {
+    title: "Transparent Collaboration",
+    desc: "No sales layers or corporate gatekeepers. You speak directly with the engineers delivering your sprint.",
+    iconName: "users",
+    glow: "hover:border-blue-500/20 hover:shadow-[0_0_20px_rgba(59,130,246,0.05)]"
+  }
+];
+
+// Section 8 (Values) data
+const valueData = [
+  {
+    title: "Founder-led collaboration",
+    description: "Collaborate directly with active technical owners, ensuring clear alignment and speed without intermediary sales agents.",
+    iconName: "users",
+    glowColor: "from-primary/20 to-transparent"
+  },
+  {
+    title: "Direct communication",
+    description: "Instant chat channels to active developers. No corporate accounts managers or client relationship layers.",
+    iconName: "message",
+    glowColor: "from-cyan-500/20 to-transparent"
+  },
+  {
+    title: "Transparent recommendations",
+    description: "Honest technical diagnostics. We don't sell bloated scopes, over-engineered features, or licensing fees.",
+    iconName: "compass",
+    glowColor: "from-yellow-500/20 to-transparent"
+  },
+  {
+    title: "Practical engineering solutions",
+    description: "We don't just dump automated scanning reports. We write developer-level code fixes and secure config scripts.",
+    iconName: "cpu",
+    glowColor: "from-purple-500/20 to-transparent"
+  },
+  {
+    title: "Long-term partnerships",
+    description: "We align our design specifications with your multi-year strategy, ensuring stable growth cycles.",
+    iconName: "activity",
+    glowColor: "from-blue-500/20 to-transparent"
+  },
+  {
+    title: "Security integrated from Day 1",
+    description: "Defenses are woven directly into backend functions, storage modules, and network topology from start.",
+    iconName: "shield",
+    glowColor: "from-red-500/20 to-transparent"
+  }
+];
+
 export default function AboutPage() {
+  // Breadcrumb Schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -58,12 +214,27 @@ export default function AboutPage() {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "About",
+        "name": "About Us",
         "item": "https://kodesec.com/about"
       }
     ]
   };
 
+  // Organization Schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Kodesec",
+    "url": "https://kodesec.com",
+    "logo": "https://kodesec.com/assets/logo.png",
+    "description": "Kodesec is a founder-led engineering and cybersecurity company helping startups design, build, secure, and scale digital products.",
+    "sameAs": [
+      "https://linkedin.com/company/kodesec",
+      "https://github.com/kodesec"
+    ]
+  };
+
+  // Person Schemas
   const personSchemas = teamConfig.founders.map((founder) => ({
     "@context": "https://schema.org",
     "@type": "Person",
@@ -81,269 +252,174 @@ export default function AboutPage() {
   }));
 
   return (
-    <main className="bg-background-dark overflow-hidden relative min-h-screen">
+    <main className="bg-background-dark min-h-screen relative overflow-hidden">
+      {/* Schema Injection */}
       <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={organizationSchema} />
       {personSchemas.map((schema, idx) => (
         <JsonLd key={idx} schema={schema} />
       ))}
-      
-      {/* Decorative ambient lights */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none" />
 
-      {/* ================= HERO SECTION ================= */}
-      <Section className="relative px-6 pt-28 pb-24 md:pt-36 md:pb-32 lg:px-20">
+      {/* Decorative ambient backdrop */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+      {/* SECTION 1: Hero */}
+      <HeroSection />
+
+      {/* SECTION 2: Our Story */}
+      <StoryTimeline />
+
+      {/* SECTION 3: Meet the Founders */}
+      <section className="py-24 px-4 lg:px-20 bg-background-dark/30 border-t border-white/5 relative">
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            
-            {/* Left Content */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left z-10 w-full min-w-0">
-              <Badge variant="default" className="mb-6 animate-pulse">
-                FOUNDER-LED CYBER ENGINEERING
-              </Badge>
-
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-[1.05] lg:max-w-xl">
-                Four Engineers. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent-cyan font-black">
-                  One Mission.
-                </span>
-              </h1>
-
-              <p className="mt-6 text-base leading-relaxed text-gray-400 max-w-lg font-medium">
-                Building secure, resilient digital platforms from architecture to release. We are intentionally small, highly technical, and founder-driven.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-auto">
-                <Link
-                  href="/contact"
-                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
-                >
-                  Schedule Consultation
-                  <ChevronRight size={16} />
-                </Link>
-                <Link
-                  href="/contact?type=consultation"
-                  className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
-                >
-                  Book Scope Call
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Clustered Mesh Simulator */}
-            <div className="lg:col-span-6 flex justify-center z-10 w-full min-w-0">
-              <NetworkGraph />
-            </div>
-
-          </div>
-        </Container>
-      </Section>
-
-      {/* ================= WHY WE STARTED KODESEC ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-border bg-card/30">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Founder Story</h2>
-            <p className="mt-3 text-3xl font-black text-foreground sm:text-4xl tracking-tight">Why We Started Kodesec</p>
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase border border-primary/20 bg-primary/5 px-3 py-1 rounded-full">
+              Leadership
+            </span>
+            <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl tracking-tight leading-none">
+              Meet the Founders
+            </h2>
+            <p className="mt-4 text-sm md:text-base text-gray-400 leading-relaxed max-w-2xl mx-auto font-medium">
+              We are an early-stage, founder-led technology partner. No account managers or sales representatives. You collaborate directly with active specialists.
+            </p>
           </div>
 
-          <FounderStoryTimeline />
-        </Container>
-      </Section>
-
-      {/* ================= MEET THE FOUNDERS ================= */}
-      <Section id="founders-section" className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Leadership</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Meet The Founders</p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {teamConfig.founders.map((f) => (
-              <div
-                key={f.name}
-                className="group relative rounded-[2rem] border border-white/5 bg-[#101525]/85 p-6 backdrop-blur-md transition-all duration-300 hover:border-primary/20 hover:shadow-[0_0_20px_rgba(54,226,123,0.05)] hover:-translate-y-1 flex flex-col justify-between text-left"
-              >
-                <div>
-                  {/* Avatar Photo Container */}
-                  <div className="relative mb-6 h-44 w-full overflow-hidden rounded-2xl border border-white/10 bg-black/10 group-hover:border-primary/30 transition-all duration-300">
-                    {f.image ? (
-                      <img
-                        src={f.image}
-                        alt={f.name}
-                        className="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-2xl font-black font-mono text-primary/40 bg-muted">
-                        {f.avatar}
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-                  </div>
-
-                  <h3 className="text-xl font-black text-foreground tracking-tight">{f.name}</h3>
-                  <p className="text-xs font-mono text-primary mt-1 font-bold">{f.role}</p>
-
-                  {/* Tags 
-                  <p className="mt-4 text-xs text-muted-foreground leading-relaxed font-medium min-h-[70px]">
-                    {f.bio}
-                  </p>
-                  */}
-
-                  {/* Tags */}
-                  <div className="mt-6 flex flex-wrap gap-1.5">
-                    {f.tags.map((tag) => (
-                      <span key={tag} className="px-2 py-0.5 rounded border border-border bg-muted/40 text-[9px] font-mono font-bold text-muted-foreground">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Social Badges / Links */}
-                <div className="mt-8 pt-4 border-t border-border flex items-center gap-3">
-                  <a 
-                    href={f.linkedin} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="p-2 rounded-lg bg-muted border border-border text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
-                  >
-                    <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                  </a>
-                  <a 
-                    href={`mailto:${f.email}`}
-                    className="p-2 rounded-lg bg-muted border border-border text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
-                  >
-                    <Mail size={14} />
-                  </a>
-                </div>
-              </div>
+          {/* Dynamic Founder Layout (non-standard grid heights / layout) */}
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+            {teamConfig.founders.map((founder, idx) => (
+              <FounderCard key={founder.name} founder={founder} index={idx} />
             ))}
           </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* ================= EXPERTISE AREAS ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
+      {/* SECTION 4: Our Expertise */}
+      <section id="expertise" className="py-24 px-4 lg:px-20 bg-background-dark/50 border-t border-white/5 relative">
         <Container>
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Expertise</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Our Focus Areas</p>
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase border border-primary/20 bg-primary/5 px-3 py-1 rounded-full">
+              Core Expertise
+            </span>
+            <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl tracking-tight leading-none">
+              Our Disciplines
+            </h2>
+            <p className="mt-4 text-sm md:text-base text-gray-400 leading-relaxed max-w-2xl mx-auto font-medium">
+              We converge design, operations, security engineering, and quality controls to establish a highly unified software pipeline.
+            </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {aboutConfig.expertiseAreas.map((area, idx) => (
-              <FeatureCard
-                key={idx}
-                title={area.title}
-                description={area.desc}
-                icon={area.icon}
-                glowClass={area.glow}
+          {/* Expertise Grid */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {expertiseData.map((exp, idx) => (
+              <ExpertiseCard
+                key={exp.title}
+                title={exp.title}
+                description={exp.description}
+                outcomes={exp.outcomes}
+                iconName={exp.iconName}
+                link={exp.link}
+                glowClass={exp.glowClass}
+                index={idx}
               />
             ))}
           </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* ================= CORE PRINCIPLES ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
+      {/* SECTION 5: How We Work */}
+      <ProcessTimeline />
+
+      {/* SECTION 6: Our Engineering Principles */}
+      <section className="py-24 px-4 lg:px-20 bg-background-dark/50 border-t border-white/5 relative">
         <Container>
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Philosophy</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Our Core Principles</p>
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase border border-primary/20 bg-primary/5 px-3 py-1 rounded-full">
+              Core Principles
+            </span>
+            <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl tracking-tight leading-none">
+              Our Engineering Principles
+            </h2>
+            <p className="mt-4 text-sm md:text-base text-gray-400 leading-relaxed max-w-2xl mx-auto font-medium">
+              Our decisions are guided by a commitment to security, automation, reliability, and extreme technical clarity.
+            </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {aboutConfig.principles.map((pr, idx) => {
-              const IconComp = pr.icon;
+          {/* Principles Grid */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {principlesData.map((pr, idx) => {
+              const iconMap = {
+                shield: Shield,
+                layers: Layers,
+                code: Code,
+                zap: Zap,
+                book: BookOpen,
+                users: Users
+              };
+              const IconComp = iconMap[pr.iconName as keyof typeof iconMap] || Shield;
               return (
                 <div
-                  key={idx}
-                  className="rounded-3xl border border-border bg-card/85 p-6 flex flex-col items-start text-left transition-all hover:border-primary/20 hover:shadow-[0_0_20px_rgba(54,226,123,0.05)]"
+                  key={pr.title}
+                  className={`group rounded-3xl border border-white/5 bg-[#0F1424]/40 p-6 flex flex-col items-start text-left transition-all duration-300 ${pr.glow}`}
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-muted border border-border mb-5">
-                    <IconComp className="h-5.5 w-5.5 text-primary" />
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/[0.02] border border-white/5 mb-5 group-hover:border-primary/20 group-hover:bg-primary/5 transition-all duration-300">
+                    <IconComp className="h-5.5 w-5.5 text-gray-400 group-hover:text-primary transition-colors" />
                   </div>
-                  <h3 className="text-base font-black text-foreground tracking-tight">{pr.title}</h3>
-                  <p className="mt-3 text-[11px] text-muted-foreground leading-relaxed font-medium">{pr.desc}</p>
+                  <h3 className="text-base font-black text-white tracking-tight leading-tight">
+                    {pr.title}
+                  </h3>
+                  <p className="mt-3 text-xs text-gray-400 leading-relaxed font-sans font-medium">
+                    {pr.desc}
+                  </p>
                 </div>
               );
             })}
           </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* ================= HOW WE WORK ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-white/5 bg-[#0B0F1A]/30">
+      {/* SECTION 7: Technology Ecosystem */}
+      <TechnologyGrid />
+
+      {/* SECTION 8: Why Clients Enjoy Working With Us */}
+      <section className="py-24 px-4 lg:px-20 bg-background-dark/30 border-t border-white/5 relative">
         <Container>
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Lifecycle</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">How We Deliver Work</p>
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase border border-primary/20 bg-primary/5 px-3 py-1 rounded-full">
+              Value Propositions
+            </span>
+            <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl tracking-tight leading-none">
+              Why Clients Enjoy Working With Us
+            </h2>
+            <p className="mt-4 text-sm md:text-base text-gray-400 leading-relaxed max-w-2xl mx-auto font-medium">
+              We build authentic partnerships based on clean code, direct channels, flat-rate scoping, and verifiable safety gates.
+            </p>
           </div>
 
-          <LifecycleWorkflow />
-        </Container>
-      </Section>
-
-      {/* ================= CONNECT WITH THE TEAM ================= */}
-      <Section className="py-24 px-6 lg:px-20 relative z-10 border-t border-border">
-        <Container className="max-w-5xl rounded-[2.5rem] border border-border bg-card-gradient p-8 md:p-16 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
-          
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
-
-          {/* Icon Badge */}
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6">
-            <MessageSquare className="h-6 w-6 text-primary animate-pulse" />
-          </div>
-
-          <h2 className="text-3xl font-black text-foreground sm:text-5xl leading-tight tracking-tight max-w-2xl">
-            Collaborate Directly with Technical Owners
-          </h2>
-          
-          <p className="mt-4 text-sm text-muted-foreground max-w-lg leading-relaxed font-medium">
-            No sales calls. Speak directly with the engineers designing, deployment, and testing your digital defenses.
-          </p>
-
-          {/* Connect Founders Badges */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3 mb-8">
-            {teamConfig.founders.map((f) => (
-              <a
-                key={f.name}
-                href={`mailto:${f.email}`}
-                className="flex items-center gap-2 border border-border bg-muted/40 hover:border-primary/40 hover:bg-muted transition-all px-4 py-2 rounded-full text-xs font-semibold text-muted-foreground hover:text-foreground"
-              >
-                <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-mono text-[9px] font-bold">
-                  {f.avatar}
-                </span>
-                {f.name}
-              </a>
+          {/* Value Cards Grid */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {valueData.map((val, idx) => (
+              <ValueCard
+                key={val.title}
+                title={val.title}
+                description={val.description}
+                iconName={val.iconName}
+                glowColor={val.glowColor}
+                index={idx}
+              />
             ))}
           </div>
-
-          <div className="flex flex-wrap justify-center gap-4 w-full sm:w-auto">
-            <Link
-              href="/contact?type=consultation"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
-            >
-              Schedule Consultation
-              <ChevronRight size={16} />
-            </Link>
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-muted/40 px-8 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-border cursor-pointer"
-            >
-              General Inquiry
-            </Link>
-          </div>
-
         </Container>
-      </Section>
+      </section>
 
+      {/* SECTION 9: Frequently Asked Questions */}
+      <FAQAccordion />
+
+      {/* SECTION 10: Call To Action */}
+      <CTASection />
     </main>
   );
 }

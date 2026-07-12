@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getServiceBySlug, servicesData } from "@/app/data/services";
+import { getSolutionBySlug, solutions } from "@/content/solutions";
 
 export const dynamic = "force-static";
 
@@ -16,18 +16,17 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return servicesData.map((service) => ({ slug: service.slug }));
+  return solutions.map((sol) => ({ slug: sol.slug }));
 }
 
 export default async function Image({ params }: Props) {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const solution = getSolutionBySlug(slug);
 
-  const rawTitle = service?.title || "Kodesec Services";
-  const title = rawTitle.split(" - ")[0];
-  const description = service?.shortPositioning || "Secure digital systems engineered with zero-trust principles.";
-  const badges = service?.badges || ["OWASP Aligned", "Zero-Trust", "Manual Exploits"];
-  const keyApproach = service?.keyApproach.slice(0, 3) || [];
+  const title = solution?.title || "Kodesec Solution";
+  const description = solution?.description || "Secure digital systems engineered with zero-trust principles.";
+  const badges = solution ? [solution.tagline] : ["Zero-Trust", "Manual Exploits"];
+  const keyApproach = solution?.challenges.slice(0, 3) || [];
 
   return new ImageResponse(
     (

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 
@@ -89,8 +89,6 @@ const categories: TechCategory[] = [
 ];
 
 export default function TechnologyGrid() {
-  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
-
   return (
     <section className="py-24 px-4 lg:px-20 bg-background-dark/50 border-t border-white/5 relative">
       <Container>
@@ -103,7 +101,7 @@ export default function TechnologyGrid() {
             Our Technology Stack
           </h2>
           <p className="mt-4 text-sm md:text-base text-gray-400 leading-relaxed max-w-2xl mx-auto font-medium">
-            We don't buy into proprietary black boxes. We build and protect your applications using industry-leading, standard, and community-audited tools.
+            We don&apos;t buy into proprietary black boxes. We build and protect your applications using industry-leading, standard, and community-audited tools.
           </p>
         </div>
 
@@ -116,8 +114,6 @@ export default function TechnologyGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
-              onMouseEnter={() => setHoveredCategory(idx)}
-              onMouseLeave={() => setHoveredCategory(null)}
               className={`rounded-3xl border border-white/5 bg-[#0F1424]/30 p-6 md:p-8 backdrop-blur-md transition-all duration-300 flex flex-col justify-between text-left ${category.colorClass}`}
             >
               <div>

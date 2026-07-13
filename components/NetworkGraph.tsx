@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { ShieldAlert, ShieldCheck, Activity, Terminal, Play, Check } from "lucide-react";
+import React, { useState } from "react";
+import { Activity, Play } from "lucide-react";
 
 export default function NetworkGraph() {
   const [scanActive, setScanActive] = useState(false);

@@ -3,11 +3,12 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import JsonLd from "@/components/JsonLd";
+import Loader from "@/components/loader/Loader";
+import AppointmentModal from "@/components/contact/AppointmentModal";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -112,9 +113,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
       <head>
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional"
         />
       </head>
       <body
@@ -125,11 +127,14 @@ export default function RootLayout({
           <JsonLd schema={orgSchema} />
           <JsonLd schema={websiteSchema} />
           <Toaster />
-          <Header />
-          <main className="min-h-screen pt-20">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer />
+          <Loader>
+            <AppointmentModal />
+            <Header />
+            <main className="min-h-screen pt-20">
+              {children}
+            </main>
+            <Footer />
+          </Loader>
         </ThemeProvider>
       </body>
     </html>

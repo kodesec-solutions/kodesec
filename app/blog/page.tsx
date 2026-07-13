@@ -1,5 +1,6 @@
 import { getAllPosts } from "@/lib/blog";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
@@ -127,9 +128,10 @@ export default function BlogPage() {
             >
               {featuredPost.image ? (
                 <>
-                  <img
+                  <Image
                     src={featuredPost.image}
                     alt={featuredPost.title}
+                    fill
                     className="absolute inset-0 h-full w-full object-cover opacity-30"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-surface-dark/80 via-card-dark/70 to-background-dark/80" />
@@ -220,9 +222,10 @@ export default function BlogPage() {
                 >
                   {post.image && (
                     <div className="relative h-48 w-full overflow-hidden bg-surface-border">
-                      <img
+                      <Image
                         src={post.image}
                         alt={post.title}
+                        fill
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background-dark/60 to-transparent" />

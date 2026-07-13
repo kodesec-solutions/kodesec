@@ -244,7 +244,7 @@ export default function SecurityEstimator() {
                   Your custom plan details have been dispatched to <strong className="text-white font-semibold font-mono">{email}</strong>. Our security lead will follow up within 12 hours.
                 </p>
                 <Link
-                  href="/contact"
+                  href="/contact?type=consultation"
                   className="mt-2 inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-5 text-xs font-bold text-white hover:bg-white/10 transition-all cursor-pointer"
                 >
                   <Calendar size={12} />

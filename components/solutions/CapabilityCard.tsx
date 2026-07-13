@@ -14,7 +14,7 @@ interface CapabilityCardProps {
 export default function CapabilityCard({ capability, themeColor, index }: CapabilityCardProps) {
   const { title, description, outcome, iconName } = capability;
 
-  const IconComponent = (LucideIcons as any)[iconName] || LucideIcons.Cpu;
+  const IconComponent = (LucideIcons as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number | string }>>)[iconName] || LucideIcons.Cpu;
 
   const colorConfig = {
     primary: {

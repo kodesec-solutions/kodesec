@@ -3,7 +3,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { ChevronLeft, Calendar, User, BookOpen } from "lucide-react";
+import { ChevronLeft, Calendar, User } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 
 // Import custom MDX components

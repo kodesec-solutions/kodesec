@@ -11,7 +11,6 @@ import { Badge } from "@/components/ui/badge";
 // Icons
 import { 
   Mail, 
-  Calendar, 
   ChevronRight, 
   Sparkles
 } from "lucide-react";
@@ -82,7 +81,7 @@ export default function ContactPage() {
               </Badge>
 
               <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-[1.05]">
-                Let's Build Something<br />
+                Let&apos;s Build Something<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent-cyan font-black">
                   Secure Together
                 </span>
@@ -219,7 +218,7 @@ export default function ContactPage() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
             <Link
-              href="/contact"
+              href="/contact?type=consultation#contact-form-section"
               className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.4)] cursor-pointer"
             >
               Book a Call

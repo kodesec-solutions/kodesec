@@ -47,9 +47,11 @@ export default function TypingText({
           setCharIndex(charIndex - 1);
         }, deleteSpeed);
       } else {
-        setIsDeleting(false);
-        setTextIndex((prev) => (prev + 1) % texts.length);
-        setCharIndex(0);
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+          setTextIndex((prev) => (prev + 1) % texts.length);
+          setCharIndex(0);
+        }, 0);
       }
     } else {
       if (charIndex < currentText.length) {
@@ -58,7 +60,9 @@ export default function TypingText({
           setCharIndex(charIndex + 1);
         }, speed);
       } else {
-        setIsWaiting(true);
+        timer = setTimeout(() => {
+          setIsWaiting(true);
+        }, 0);
       }
     }
 

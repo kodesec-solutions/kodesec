@@ -9,7 +9,6 @@ import SecurityEstimator from "@/components/home/SecurityEstimator";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { MetricCard } from "@/components/ui/metric-card";
-import { FeatureCard } from "@/components/ui/feature-card";
 import { Badge } from "@/components/ui/badge";
 
 // Solutions Component & Content
@@ -21,14 +20,12 @@ import {
   Shield, 
   Terminal, 
   Cloud, 
-  Workflow, 
   Cpu, 
   ChevronRight, 
   Calendar, 
   CheckCircle2, 
   Lock,
-  Zap,
-  ArrowRight
+  Zap
 } from "lucide-react";
 
 // Config data
@@ -139,7 +136,7 @@ export default function Home() {
                   <ChevronRight size={16} />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/contact?type=consultation"
                   className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-6 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
                 >
                   <Calendar size={16} />

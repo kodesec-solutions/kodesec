@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Mail } from "lucide-react"
+import Image from "next/image"
 import { teamConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
@@ -85,9 +86,10 @@ export function AuthorProfile({ className, authorName, ...props }: AuthorProfile
           {/* Avatar */}
           <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] relative">
             {author.image ? (
-              <img
+              <Image
                 src={author.image}
                 alt={author.name}
+                fill
                 className="h-full w-full object-cover"
               />
             ) : (

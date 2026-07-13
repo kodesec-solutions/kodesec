@@ -5,20 +5,17 @@ import {
   Play, 
   RotateCcw,
   CheckCircle, 
-  XCircle, 
   ShieldCheck, 
   ShieldAlert, 
   Terminal, 
   Activity, 
-  Cpu, 
   Server, 
   Workflow, 
   Search,
   Database,
-  ArrowRight,
   RefreshCw
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface VisualizerProps {
   slug: string;
@@ -26,7 +23,7 @@ interface VisualizerProps {
 
 export default function SolutionVisualizer({ slug }: VisualizerProps) {
   // Common states
-  const [isPlaying, setIsPlaying] = useState(true);
+  const isPlaying = true;
   const [step, setStep] = useState(0);
 
   // 1. Design & Engineering states
@@ -42,10 +39,6 @@ export default function SolutionVisualizer({ slug }: VisualizerProps) {
   const [exploitRunning, setExploitRunning] = useState(false);
 
   // 3. DevOps states
-  const [deployLogs, setDeployLogs] = useState<string[]>([
-    "Runner booted.",
-    "Git commit: ad98c21 (feature/auth-refresh)"
-  ]);
   const [replicaCount, setReplicaCount] = useState(2);
 
   // 4. QA states
@@ -426,7 +419,7 @@ export default function SolutionVisualizer({ slug }: VisualizerProps) {
 
       {/* Dynamic Tests List */}
       <div className="space-y-2">
-        {tests.map((t, idx) => (
+        {tests.map((t) => (
           <div 
             key={t.name}
             className="p-2.5 rounded-lg border border-white/5 bg-white/[0.01] text-[9.5px] flex items-center justify-between"

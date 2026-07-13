@@ -337,7 +337,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
               <ChevronRight size={16} />
             </Link>
             <Link
-              href="/contact"
+              href="/contact?type=consultation"
               className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-8 text-sm font-bold text-white transition-all hover:bg-white/[0.06] hover:border-white/20 cursor-pointer"
             >
               <Calendar size={16} />

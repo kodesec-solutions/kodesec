@@ -36,7 +36,7 @@ export default function TestimonialCarousel() {
             )}
           >
             <blockquote className="text-lg md:text-xl font-bold leading-relaxed text-white">
-              "{testimonial.quote}"
+              &ldquo;{testimonial.quote}&rdquo;
             </blockquote>
 
             <div className="mt-8 flex items-center justify-center gap-3">

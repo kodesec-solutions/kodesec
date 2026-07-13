@@ -109,7 +109,7 @@ function TrustSection() {
             "Security-first approach",
             "Real-world attack simulation",
             "Industry-standard methodologies",
-          ].map((point, index) => (
+          ].map((point) => (
             <div
               key={point}
               className="rounded-2xl border border-surface-border bg-card-dark p-4 text-sm font-medium text-secondary"

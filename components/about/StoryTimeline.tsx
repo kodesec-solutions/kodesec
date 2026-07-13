@@ -12,7 +12,7 @@ interface StoryStep {
   description: string;
   problem: string;
   solution: string;
-  icon: any;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   color: string;
 }
 

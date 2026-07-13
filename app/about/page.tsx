@@ -19,13 +19,7 @@ import { teamConfig } from "@/config/site";
 import {
   Code,
   Shield,
-  Cloud,
-  CheckCircle2,
   Users,
-  MessageSquare,
-  Compass,
-  Cpu,
-  Activity,
   Layers,
   Zap,
   BookOpen
@@ -273,7 +267,7 @@ export default function AboutPage() {
       <section className="py-24 px-4 lg:px-20 bg-background-dark/30 border-t border-white/5 relative">
         <Container>
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-24">
             <span className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase border border-primary/20 bg-primary/5 px-3 py-1 rounded-full">
               Leadership
             </span>
@@ -349,7 +343,7 @@ export default function AboutPage() {
 
           {/* Principles Grid */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {principlesData.map((pr, idx) => {
+            {principlesData.map((pr) => {
               const iconMap = {
                 shield: Shield,
                 layers: Layers,

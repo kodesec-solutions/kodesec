@@ -18,20 +18,6 @@ import TechCategory from "@/components/why-us/TechCategory";
 import FAQAccordion from "@/components/why-us/FAQAccordion";
 import CTASection from "@/components/why-us/CTASection";
 
-// Icons
-import {
-  Users,
-  Shield,
-  Cpu,
-  Code,
-  Zap,
-  Workflow,
-  ShieldCheck,
-  Layers,
-  Code2,
-  Activity,
-  RefreshCw,
-} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Why Choose Kodesec | Secure Software Engineering Partner",

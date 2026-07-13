@@ -10,7 +10,7 @@ interface Step {
   title: string;
   desc: string;
   detail: string;
-  icon: any;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   colorClass: string;
   accentText: string;
 }

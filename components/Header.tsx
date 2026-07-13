@@ -3,18 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
 import { gsap } from "gsap";
 import Logo from "@/public/assets/Logo.png";
 import { 
-  Shield, 
-  Terminal, 
-  Code, 
-  Cloud, 
-  Workflow, 
-  Cpu, 
-  Sun, 
-  Moon, 
   ChevronDown, 
   ArrowRight,
   Menu,
@@ -31,16 +22,13 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
   
   const indicatorRef = useRef<HTMLDivElement>(null);
   const navLinksRef = useRef<{ [key: string]: HTMLAnchorElement | HTMLButtonElement | null }>({});
   const buttonRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -80,10 +68,6 @@ export default function Header() {
     const btn = buttonRef.current;
     if (!btn) return;
     btn.style.transform = "translate(0px, 0px)";
-  };
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -143,13 +127,13 @@ export default function Header() {
                     </button>
                     
                     {/* Mega Menu Dropdown */}
-                    <div className="absolute top-[calc(100%+0.75rem)] left-1/2 -translate-x-1/2 w-[980px] p-6 bg-card/95 border border-border rounded-3xl shadow-2xl backdrop-blur-xl opacity-0 translate-y-2 pointer-events-none group-hover/services:opacity-100 group-hover/services:translate-y-0 group-hover/services:pointer-events-auto transition-all duration-300 ease-out z-50">
+                    <div className="absolute top-[calc(100%+0.75rem)] left-1/2 -translate-x-1/2 w-[980px] p-6 bg-card/100 border border-border rounded-3xl shadow-2xl backdrop-blur-xl opacity-0 translate-y-2 pointer-events-none group-hover/services:opacity-100 group-hover/services:translate-y-0 group-hover/services:pointer-events-auto transition-all duration-300 ease-out z-50">
                       {/* Invisible bridge to prevent mouse-leave when moving to dropdown */}
                       <div className="absolute -top-[0.75rem] left-0 right-0 h-[0.75rem]" />
                       
                       <div className="grid grid-cols-4 gap-5">
                         {solutions.map((sol) => {
-                          const IconComp = (LucideIcons as any)[sol.iconName] || LucideIcons.Shield;
+                          const IconComp = (LucideIcons as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number | string }>>)[sol.iconName] || LucideIcons.Shield;
                           const glows = {
                             primary: "group-hover/item:shadow-[0_0_20px_rgba(54,226,123,0.15)] group-hover/item:border-primary/20 bg-primary/5 text-primary",
                             cyan: "group-hover/item:shadow-[0_0_20px_rgba(34,211,238,0.15)] group-hover/item:border-cyan-500/20 bg-cyan-500/5 text-cyan-400",
@@ -234,7 +218,7 @@ export default function Header() {
  
             {/* Magnetic CTA */}
             <Link
-              href="/contact"
+              href="/contact?type=consultation"
               ref={buttonRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -315,7 +299,7 @@ export default function Header() {
               >
                 <div className="space-y-3">
                   {solutions.map((sol) => {
-                    const IconComp = (LucideIcons as any)[sol.iconName] || LucideIcons.Shield;
+                    const IconComp = (LucideIcons as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number | string }>>)[sol.iconName] || LucideIcons.Shield;
                     const glows = {
                       primary: "text-primary bg-primary/10 border-primary/20",
                       cyan: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",

@@ -19,6 +19,7 @@ export default function ProjectGrid({ projects, activeCategory }: ProjectGridPro
   }, [activeCategory, projects]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 

@@ -6,19 +6,19 @@ class Logger {
     return `[KODESEC] [${level.toUpperCase()}] [${timestamp}] - ${message}`;
   }
 
-  info(message: string, ...args: any[]) {
+  info(message: string, ...args: unknown[]) {
     console.info(this.format("info", message), ...args);
   }
 
-  warn(message: string, ...args: any[]) {
+  warn(message: string, ...args: unknown[]) {
     console.warn(this.format("warn", message), ...args);
   }
 
-  error(message: string, ...args: any[]) {
+  error(message: string, ...args: unknown[]) {
     console.error(this.format("error", message), ...args);
   }
 
-  debug(message: string, ...args: any[]) {
+  debug(message: string, ...args: unknown[]) {
     if (process.env.NODE_ENV !== "production") {
       console.debug(this.format("debug", message), ...args);
     }

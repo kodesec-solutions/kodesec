@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShieldCheck, ShieldAlert, Activity, Play, Zap } from "lucide-react";
+import { ShieldCheck, ShieldAlert } from "lucide-react";
 
 export default function DataFlowVisual() {
   const [interceptMode, setInterceptMode] = useState(false);

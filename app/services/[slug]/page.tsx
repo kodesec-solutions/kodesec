@@ -3,13 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { 
   ArrowRight, 
-  CheckCircle, 
-  HelpCircle, 
-  ShieldCheck, 
-  BookOpen, 
-  Zap, 
-  CheckCircle2, 
-  ArrowUpRight 
+  CheckCircle
 } from "lucide-react";
 
 import { solutions, getSolutionBySlug } from "@/content/solutions";
@@ -262,7 +256,7 @@ export default async function SolutionDetailPage({ params }: SolutionDetailPageP
           </div>
 
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-            {solution.deliverables.map((item, idx) => (
+            {solution.deliverables.map((item) => (
               <div 
                 key={item.title} 
                 className={`p-6 rounded-2xl border border-white/5 bg-black/40 flex flex-col text-left transition-all duration-300 ${borderGlow}`}
@@ -290,7 +284,7 @@ export default async function SolutionDetailPage({ params }: SolutionDetailPageP
               <span className={`text-[10px] font-mono font-bold tracking-widest uppercase block mb-3 ${textHighlight}`}>
                 Case Study Highlight
               </span>
-              <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-4">
+              <h3 className="text-xl md:text-2xl font-black text-white tracking-tight mb-4">
                 {solution.featuredProject.title}
               </h3>
               <p className="text-sm text-gray-400 leading-relaxed font-medium mb-6">
@@ -302,10 +296,10 @@ export default async function SolutionDetailPage({ params }: SolutionDetailPageP
               </div>
             </div>
             
-            <div className="md:w-2/5 grid grid-cols-2 gap-4 w-full text-center">
+            <div className="md:w-3/5 grid grid-cols-2 gap-4 w-full text-center">
               {solution.featuredProject.metrics.map((m, idx) => (
                 <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-black/40 flex flex-col justify-center">
-                  <span className={`text-3xl font-black tracking-tight ${textHighlight}`}>
+                  <span className={`text-xl font-black tracking-tight ${textHighlight}`}>
                     {m.value}
                   </span>
                   <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wide mt-1.5 leading-tight">

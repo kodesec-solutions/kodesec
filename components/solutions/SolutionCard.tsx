@@ -16,7 +16,7 @@ export default function SolutionCard({ solution, index }: SolutionCardProps) {
   const { slug, title, tagline, description, themeColor, iconName } = solution;
 
   // Dynamically resolve icon
-  const IconComponent = (LucideIcons as any)[iconName] || LucideIcons.Shield;
+  const IconComponent = (LucideIcons as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number | string }>>)[iconName] || LucideIcons.Shield;
 
   // Resolve theme coloring classes
   const themeClasses = {

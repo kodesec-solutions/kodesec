@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Play, Pause, ShieldCheck, ShieldAlert, Lock, AlertOctagon, Terminal, Activity, FileText, CheckCircle } from "lucide-react";
 
 interface ServiceVisualizerProps {
   slug: string;
@@ -9,7 +8,7 @@ interface ServiceVisualizerProps {
 
 export default function ServiceVisualizer({ slug }: ServiceVisualizerProps) {
   const [step, setStep] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const isPlaying = true;
   const [exploitSuccess, setExploitSuccess] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -144,7 +143,7 @@ export default function ServiceVisualizer({ slug }: ServiceVisualizerProps) {
         </div>
 
         <div className="space-y-3.5">
-          {cloudResources.map((res, idx) => (
+          {cloudResources.map((res) => (
             <div key={res.name} className="p-3 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between text-left">
               <div>
                 <p className="text-xs font-bold text-white">{res.name}</p>

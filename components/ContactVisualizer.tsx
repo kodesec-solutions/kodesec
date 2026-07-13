@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Terminal, Shield, Play, Activity } from "lucide-react";
+import React, { useState } from "react";
+import { Play, Activity } from "lucide-react";
 
 export default function ContactVisualizer() {
   const [sessionActive, setSessionActive] = useState(false);

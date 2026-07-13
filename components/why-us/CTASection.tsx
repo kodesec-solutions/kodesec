@@ -23,7 +23,7 @@ export default function CTASection() {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none -z-10" />
 
           <h2 className="text-3xl font-extrabold text-white sm:text-5xl leading-tight tracking-tight max-w-2xl">
-            Let's Build Something{" "}
+            Let&apos;s Build Something{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400 font-black">
               Secure, Scalable,
             </span>{" "}
@@ -31,7 +31,7 @@ export default function CTASection() {
           </h2>
           
           <p className="mt-6 text-sm md:text-base text-gray-400 max-w-lg leading-relaxed font-medium">
-            Whether you're starting a new project or improving an existing one, we'd love to discuss how we can help.
+            Whether you&apos;re starting a new project or improving an existing one, we&apos;d love to discuss how we can help.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto z-10">

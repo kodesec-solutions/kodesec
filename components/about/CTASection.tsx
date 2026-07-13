@@ -7,15 +7,17 @@ import { ChevronRight, MessageSquare } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
 export default function CTASection() {
-  // Let's create an array of floats to animate subtle particles
-  const particles = Array.from({ length: 8 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 6 + 4,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    delay: Math.random() * 5,
-    duration: Math.random() * 10 + 15
-  }));
+  // Let's create a static array of particles to animate subtle background floating points
+  const particles = [
+    { id: 0, size: 6, x: 12, y: 45, delay: 0.5, duration: 18 },
+    { id: 1, size: 8, x: 35, y: 72, delay: 2.1, duration: 22 },
+    { id: 2, size: 4, x: 58, y: 15, delay: 1.2, duration: 15 },
+    { id: 3, size: 9, x: 80, y: 55, delay: 3.4, duration: 25 },
+    { id: 4, size: 5, x: 22, y: 88, delay: 0.1, duration: 16 },
+    { id: 5, size: 7, x: 67, y: 34, delay: 4.5, duration: 20 },
+    { id: 6, size: 6, x: 92, y: 62, delay: 1.8, duration: 17 },
+    { id: 7, size: 8, x: 45, y: 28, delay: 2.9, duration: 21 },
+  ];
 
   return (
     <section className="py-28 px-4 lg:px-20 relative overflow-hidden bg-background-dark border-t border-white/5">
@@ -86,11 +88,11 @@ export default function CTASection() {
         </motion.div>
 
         <h2 className="text-3xl font-black text-white sm:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-          Let's Build Something Secure, Scalable, and Ready for Growth.
+          Let&apos;s Build Something Secure, Scalable, and Ready for Growth.
         </h2>
         
         <p className="mt-6 text-sm md:text-base text-gray-400 max-w-lg leading-relaxed font-medium">
-          Whether you're launching a new product, strengthening your infrastructure, or improving software quality, we'd love to help.
+          Whether you&apos;re launching a new product, strengthening your infrastructure, or improving software quality, we&apos;d love to help.
         </p>
 
         {/* Action buttons */}

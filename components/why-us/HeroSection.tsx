@@ -38,22 +38,22 @@ export default function HeroSection() {
             </p>
 
             <p className="mt-4 text-sm md:text-base leading-relaxed text-gray-400 font-medium">
-              Whether you're building a new product, strengthening your security posture, modernizing your cloud infrastructure, or improving software quality, Kodesec becomes an extension of your engineering team—not just another vendor.
+              Whether you&apos;re building a new product, strengthening your security posture, modernizing your cloud infrastructure, or improving software quality, Kodesec becomes an extension of your engineering team—not just another vendor.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4 w-full sm:w-auto">
-              <a href="/contact" className="w-full sm:w-auto">
+              <Link href="/contact?type=consultation" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto h-12 px-8 rounded-full font-bold cursor-pointer bg-primary text-black hover:bg-primary/95 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(54,226,123,0.35)] transition-all">
                   Book a Free Consultation
                   <Calendar className="size-4" />
                 </Button>
-              </a>
-              <a href="/services" className="w-full sm:w-auto">
+              </Link>
+              <Link href="/services" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 rounded-full font-bold cursor-pointer border-white/10 hover:bg-white/[0.03] text-white flex items-center justify-center gap-2 transition-all">
                   Explore Our Solutions
                   <ArrowRight className="size-4 group-hover/button:translate-x-1 transition-transform" />
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
 

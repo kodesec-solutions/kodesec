@@ -17,7 +17,6 @@ import { motion } from "framer-motion";
 // Components
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
-import { Badge } from "@/components/ui/badge";
 import SolutionHero from "@/components/solutions/SolutionHero";
 import SolutionVisualizer from "@/components/solutions/SolutionVisualizer";
 import ProcessTimeline from "@/components/solutions/ProcessTimeline";
@@ -107,7 +106,7 @@ export default function ServicesHub() {
                 primaryCtaLabel="Explore Solutions"
                 primaryCtaHref="#solutions-grid"
                 secondaryCtaLabel="Book Consultation"
-                secondaryCtaHref="/contact"
+                secondaryCtaHref="/contact?type=consultation"
                 themeColor="primary"
               />
             </div>

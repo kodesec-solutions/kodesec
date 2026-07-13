@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Play, Pause, RotateCcw, ShieldCheck, AlertOctagon, Info, ShieldAlert, Lock } from "lucide-react";
+import { Play, Pause, RotateCcw, ShieldCheck, Info, ShieldAlert, Lock } from "lucide-react";
 
 interface NodeDetails {
   title: string;

@@ -22,14 +22,34 @@ export default function ContactForm() {
         return;
       }
 
-      const formData = new FormData(form);
-      formData.append("access_key", accessKey);
-      formData.append("service_interest", selectedInquiry);
-      formData.append("project_stage", projectStage);
+      const rawFormData = new FormData(form);
+      const fullname = rawFormData.get("name") as string;
+      const email = rawFormData.get("email") as string;
+      const companyName = rawFormData.get("company") as string;
+      const brief = rawFormData.get("message") as string;
+
+      const submissionData = new FormData();
+      submissionData.append("access_key", accessKey);
+
+      const selectedInquiryLabel = inquiryTypes.find(t => t.id === selectedInquiry)?.label || selectedInquiry;
+      submissionData.append("subject", selectedInquiryLabel);
+
+      if (fullname) {
+        submissionData.append("from_name", fullname);
+      }
+      if (email) {
+        submissionData.append("replyto", email);
+      }
+
+      submissionData.append("Fullname", fullname);
+      submissionData.append("Email", email);
+      submissionData.append("Company Name", companyName);
+      submissionData.append("project stage", projectStage);
+      submissionData.append("brief", brief);
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
+        body: submissionData,
       });
 
       const data = await response.json();
@@ -37,10 +57,12 @@ export default function ContactForm() {
         setResult("");
         toast.success("Message sent successfully!", { duration: 2500 });
         form.reset();
+        setSelectedInquiry(inquiryTypes[0].id);
+        setProjectStage("Concept");
       } else {
         setResult(data?.message || "Error submitting form");
       }
-    } catch (err) {
+    } catch {
       setResult("Network error, please try again.");
     }
   };
@@ -195,3 +217,4 @@ export default function ContactForm() {
     </div>
   );
 }
+

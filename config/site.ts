@@ -1,19 +1,14 @@
+import React from "react";
 import {
   Shield,
   Terminal,
   Code,
   Cloud,
   Workflow,
-  Cpu,
   Users,
   BookOpen,
   Zap,
-  Lock,
   CheckCircle2,
-  Server,
-  Activity,
-  FileText,
-  Mail,
   MessageSquare,
   Clock
 } from "lucide-react"
@@ -23,7 +18,7 @@ export interface NavSubItem {
   name: string
   desc: string
   href: string
-  icon: any
+  icon: React.ComponentType<{ size?: number; className?: string }>
 }
 
 export interface NavItem {
@@ -94,7 +89,7 @@ export interface InquiryType {
   id: string
   label: string
   desc: string
-  icon: any
+  icon: React.ComponentType<{ size?: number; className?: string }>
 }
 
 // ----------------------------------------------------
@@ -242,7 +237,7 @@ export const testimonialsConfig = [
 
 // Social Links Configuration
 export const socialLinksConfig = {
-  linkedin: "https://linkedin.com",
+  linkedin: "https://www.linkedin.com/company/kodesec-solutions/",
   github: "https://github.com",
   twitter: "https://twitter.com",
   email: "contact@kodesec.com"

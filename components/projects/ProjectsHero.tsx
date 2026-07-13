@@ -21,7 +21,7 @@ export default function ProjectsHero() {
               View Projects
             </Link>
             <Link
-              href="/contact"
+              href="/contact?type=consultation"
               className="animate-fade-in-up animation-delay-200 rounded-full bg-primary px-6 py-3 text-sm font-semibold transition-transform duration-300 hover:-translate-y-0.5"
             >
               Get Consultation

@@ -24,8 +24,16 @@ const mdxComponents = {
   AuthorProfile,
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-8 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0F1424]/90 shadow-2xl backdrop-blur-md">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs sm:text-sm border-collapse !m-0 !my-0" {...props} />
+      {/* Mobile Horizontal Scroll Hint */}
+      <div className="flex items-center justify-between border-b border-white/5 bg-[#131926]/60 px-4 py-2 text-[10px] font-mono sm:hidden">
+        <span className="text-primary font-bold uppercase tracking-wider">Table View</span>
+        <span className="flex items-center gap-1.5 text-gray-400 font-medium">
+          <span>Scroll horizontally</span>
+          <span className="text-primary animate-pulse">→</span>
+        </span>
+      </div>
+      <div className="overflow-x-auto touch-pan-x scrollbar-thin scrollbar-thumb-white/10">
+        <table className="min-w-[640px] w-full text-left border-collapse !m-0 !my-0" {...props} />
       </div>
     </div>
   ),
@@ -33,13 +41,13 @@ const mdxComponents = {
     <thead className="border-b border-white/10 bg-[#131926] font-mono text-xs uppercase tracking-wider text-primary !m-0" {...props} />
   ),
   th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
-    <th className="px-4 py-3.5 font-bold text-primary whitespace-nowrap bg-white/[0.02]" {...props} />
+    <th className="px-3.5 py-3 sm:px-4 sm:py-3.5 font-bold text-primary whitespace-nowrap bg-white/[0.02] text-[11px] sm:text-xs" {...props} />
   ),
   tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr className="border-b border-white/5 transition-colors odd:bg-transparent even:bg-white/[0.015] hover:bg-white/[0.04] last:border-0" {...props} />
   ),
   td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
-    <td className="px-4 py-3.5 align-top text-gray-200 leading-relaxed font-sans" {...props} />
+    <td className="px-3.5 py-3 sm:px-4 sm:py-3.5 align-top text-gray-200 leading-relaxed font-sans text-xs sm:text-sm" {...props} />
   ),
 };
 

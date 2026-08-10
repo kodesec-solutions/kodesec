@@ -1,0 +1,105 @@
+---
+title: "The Cost of Assuming Your Network Is Secure"
+date: "2026-08-10"
+slug: "the-cost-of-assuming-your-network-is-secure"
+excerpt: "Why flat networks and over-trusted perimeter devices make breaches catastrophic — and what SMEs can do about it."
+author: "KodeSec Research Team"
+image: "/blog/the-cost-of-assuming-your-network-is-secure/image_1.png"
+---
+
+![Network attack surface diagram](/blog/the-cost-of-assuming-your-network-is-secure/image_1.png)
+
+**Published:** August 10, 2026 | **Category:** Network Security · Penetration Testing | **Reading Time:** ~7 min
+
+# The Cost of Assuming Your Network Is Secure
+
+When most people hear "network security," they picture a firewall blinking quietly in a server closet, doing its job in the background. That picture is outdated — and increasingly, it's the reason breaches happen.
+
+Modern attacks rarely announce themselves. They don't smash through the front door; they walk in through it, using stolen credentials, a phished employee, or a vulnerability in a VPN appliance that was supposed to be the trusted gateway. Once inside, the real damage begins — not because the attacker is unstoppable, but because most internal networks were never built to stop someone who's already in.
+
+![Flat network vs segmented network](/blog/the-cost-of-assuming-your-network-is-secure/image_2.png)
+
+A few concepts sit at the center of almost every serious network compromise today:
+
+**Network Segmentation** — In a well-designed network, not every device can talk to every other device. Segmentation divides the network into zones, so a compromised marketing laptop, for example, has no path to a finance server or a domain controller. Most organizations that suffer large-scale breaches share one trait: a flat network where, once an attacker lands anywhere, they can reach almost everywhere.
+
+**Active Directory (AD)** — Think of AD as the identity system that controls who — and what — is allowed to access resources across the network. It's the single most valuable target for an attacker, because compromising AD doesn't just grant access to one system; it can grant control over the entire environment. Attackers know this, which is why AD compromise shows up again and again as the turning point in major incidents.
+
+**Lateral Movement** — This is what happens between "an attacker got in" and "an attacker caused damage." After initial access, attackers move sideways through the network, hopping from system to system, escalating privileges as they go, until they reach something valuable: financial data, patient records, source code, backups. The faster and more freely they can move, the worse the outcome.
+
+**External vs. Internal Exposure** — External-facing systems (VPNs, firewalls, public servers) get most of the security budget and attention. But once an attacker is inside — through a phished employee, a compromised vendor connection, or an exposed internal service — internal weaknesses matter just as much, if not more.
+
+Understanding these fundamentals matters because the attacks making headlines today rarely rely on exotic techniques. They rely on organizations not knowing where their weak points are until someone else finds them first.
+
+![Attacker moving laterally through a network](/blog/the-cost-of-assuming-your-network-is-secure/image_3.png)
+
+## Case Study: How Network Security Failures Turn Into Business-Ending Events
+
+Every major breach dissected below shares one root cause: an attacker found a way inside the network, and once inside, nothing meaningfully slowed them down. According to CrowdStrike's 2026 Global Threat Report, the average time between initial access and lateral movement — the "breakout time" — now sits at just 29 minutes, down sharply from the year before, with the fastest recorded case at 27 seconds. That's the window security teams have to detect and contain an intruder before they're already moving toward critical systems.
+
+**The numbers behind the trend:**
+
+- 90% of ransomware incidents investigated by Sophos in 2024 involved RDP abuse as an entry or movement vector
+- 82% of intrusions detected by CrowdStrike were malware-free — attackers using valid credentials and legitimate admin tools instead of custom malware
+- 60%+ of enterprise-focused zero-day exploits now target security and network appliances themselves (firewalls, VPNs) rather than applications
+- 30% of breaches now involve a third-party or vendor access path, double the prior year (Verizon DBIR)
+
+### VPN and Firewall Exploitation: The Front Door Attackers Prefer
+
+**Marquis Health (2025–26)** — Over 780,000 individuals had their names, Social Security numbers, dates of birth, and financial account details exposed after attackers exploited a vulnerability tied to SonicWall's cloud backup infrastructure. Marquis maintained that its own firewall was current and MFA was in place — the failure originated in a trusted vendor's network appliance, not Marquis's internal controls. This is a pattern repeating across sectors: firewalls and VPN gateways are increasingly the exploited entry point precisely because they're trusted by everything behind them.
+
+A parallel case: Ivanti Connect Secure and Policy Secure vulnerabilities (CVE-2024-21887, CVE-2024-21893) dominated incident reports through 2025, with attackers using authentication bypasses to establish persistence that outlived normal patch cycles. Once inside, these footholds became launch points for internal reconnaissance and privilege escalation — not just a single stolen record, but a door left open indefinitely.
+
+### Active Directory as the Real Target
+
+**Stryker (March 2026)** — The Iran-linked group Handala didn't exfiltrate data for ransom; they compromised Stryker's Active Directory Services via its own endpoint management tooling (Microsoft Intune) and wiped Windows devices across the organization, disrupting manufacturing operations company-wide. No encryption, no ransom note — just proof that once an attacker owns AD, they own the ability to push commands to every managed endpoint in the environment.
+
+This mirrors a broader pattern documented across 2024–2025 incidents: Kerberoasting attacks against poorly rotated service account passwords (as seen in the Ascension Health breach, which took 140 hospitals to paper-based operations for six weeks) show that AD isn't just an authentication layer — it's the single structure that, once compromised, grants an attacker the keys to nearly everything else on the network.
+
+### Smaller Organizations, Same Playbook, Less Room to Absorb the Hit
+
+Network attacks don't discriminate by company size — but the impact scales very differently for smaller organizations:
+
+- **Pathstone Family Office**, a wealth management firm, had 641,000 records — including Social Security numbers and detailed financial profiles — stolen and held for extortion. A single access-control gap became an existential legal and reputational threat for a firm of its size.
+- **Navia** lost data on 2.7 million people — SSNs, health plan details, dates of birth — through a single exposed API, with attackers active inside for nearly a month before detection.
+- **Aura**, by contrast, detected its phishing-driven breach within an hour and contained it before sensitive data was touched — a rare example of what fast internal detection actually buys an organization.
+
+The difference between Pathstone/Navia and Aura wasn't budget or size. It was whether anomalous internal activity was visible and actionable before an attacker had time to move.
+
+### The Common Thread
+
+None of these organizations were breached because they lacked a firewall or antivirus. They were breached because once an attacker got past the perimeter — through a vendor's appliance, a phished credential, or an exposed API — the internal network offered no meaningful resistance. Flat segmentation, over-permissioned service accounts, and unmonitored east-west traffic turned a single point of entry into full compromise.
+
+## Mitigation: Turning These Lessons Into a Concrete Defense Plan
+
+The good news buried in every case above: none of these breaches happened because the attack was unstoppable. They happened because a specific, identifiable weakness existed — and nobody found it before an attacker did.
+
+That's the gap Network Security Testing is built to close.
+
+### It Starts With Finding the Gaps Before Attackers Do
+
+Every incident above shares a pattern: a vulnerable VPN appliance, a poorly configured firewall rule, an over-permissioned service account, a flat network with no segmentation. These aren't rare, exotic flaws — they're common, and they're findable, if someone actually looks for them with the right methodology.
+
+That's exactly what our Network Infrastructure Penetration Testing service does. We simulate the same techniques real attackers use — from external reconnaissance to internal lateral movement — to answer the one question that matters most:
+
+> "If an attacker gets in — or an insider goes rogue — how far could they actually get?"
+
+### Why This Matters More for SMEs, Not Less
+
+Smaller organizations often assume they're "too small to be a target." The reality, as the incidents above show, is the opposite: attackers use largely automated, repeatable techniques (phishing kits, credential stuffing, exposed RDP scanning) that don't care about company size — they care about which door is open. And when a smaller organization gets hit, there's usually no large security team, no dedicated incident response budget, and no room to absorb a six-figure recovery cost.
+
+![KODESEC network penetration testing overview](/blog/the-cost-of-assuming-your-network-is-secure/image_4.png)
+
+Here's how KODESEC's approach directly addresses that reality:
+
+- **Active Directory Security Assessment** — We specifically test whether your AD environment could become the single point of failure it's become in incidents like these. Weak service account passwords, excessive permissions, and misconfigured trust relationships are identified and fixed before they're exploited.
+- **Network Segmentation Review** — We map how freely an attacker could move if they got a foothold anywhere in your network, and show you exactly where to add boundaries so one compromised device can't become a company-wide incident.
+- **Firewall & VPN Configuration Validation** — Since these are now among the most targeted entry points, we validate that your perimeter devices are configured correctly — not just installed and forgotten.
+- **Manual Validation, Not Just Automated Scans** — Automated tools generate long lists of "potential" issues. Our testers manually verify which ones are actually exploitable, so your team isn't wasting time chasing false positives — they're fixing what genuinely matters.
+- **Executive Summary + Technical Report** — Because SMEs rarely have a dedicated CISO, we translate findings into two clear deliverables: one for leadership to understand business risk in plain terms, and one for your IT team to act on immediately.
+
+### The Outcome
+
+After an engagement, you're not left with a stack of vulnerabilities and no plan — you get a prioritized, risk-based roadmap: what to fix first, why it matters, and how to verify it's actually resolved. For an SME without a large internal security team, that's the difference between finding out about a weakness in a controlled test, or finding out about it in a breach notification letter.
+
+![Secured office network](/blog/the-cost-of-assuming-your-network-is-secure/image_5.png)

@@ -3,6 +3,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { ChevronLeft, Calendar, User } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 
@@ -21,6 +22,25 @@ const mdxComponents = {
   SecurityWarning,
   EmbeddedCTA,
   AuthorProfile,
+  table: (props: React.HTMLAttributes<HTMLTableElement>) => (
+    <div className="my-8 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0F1424]/90 shadow-2xl backdrop-blur-md">
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-xs sm:text-sm border-collapse !m-0 !my-0" {...props} />
+      </div>
+    </div>
+  ),
+  thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <thead className="border-b border-white/10 bg-[#131926] font-mono text-xs uppercase tracking-wider text-primary !m-0" {...props} />
+  ),
+  th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
+    <th className="px-4 py-3.5 font-bold text-primary whitespace-nowrap bg-white/[0.02]" {...props} />
+  ),
+  tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr className="border-b border-white/5 transition-colors odd:bg-transparent even:bg-white/[0.015] hover:bg-white/[0.04] last:border-0" {...props} />
+  ),
+  td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
+    <td className="px-4 py-3.5 align-top text-gray-200 leading-relaxed font-sans" {...props} />
+  ),
 };
 
 function formatDate(date: string) {
@@ -251,8 +271,16 @@ export default async function BlogPost({ params }: Props) {
               </div>
 
               {/* Render serialized MDX content with custom components */}
-              <div className="article-body prose prose-invert prose-base max-w-none sm:prose-lg prose-headings:scroll-mt-24 sm:prose-headings:scroll-mt-28 prose-headings:font-black prose-headings:tracking-tight prose-headings:text-secondary prose-p:text-muted prose-li:text-muted prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-secondary prose-code:rounded prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-primary prose-pre:border prose-pre:border-surface-border prose-pre:bg-[#0a1020] prose-pre:shadow-[0_12px_36px_rgba(0,0,0,0.28)] prose-blockquote:border-l-primary prose-blockquote:text-secondary prose-img:rounded-2xl prose-img:border prose-img:border-surface-border prose-hr:border-surface-border">
-                <MDXRemote source={post.content} components={mdxComponents} />
+              <div className="article-body prose prose-invert prose-base max-w-none sm:prose-lg prose-headings:scroll-mt-24 sm:prose-headings:scroll-mt-28 prose-headings:font-black prose-headings:tracking-tight prose-headings:text-white prose-p:text-gray-300 prose-li:text-gray-300 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:rounded prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-primary prose-pre:border prose-pre:border-white/10 prose-pre:bg-[#0a1020] prose-pre:shadow-[0_12px_36px_rgba(0,0,0,0.28)] prose-blockquote:border-l-primary prose-blockquote:text-gray-200 prose-img:rounded-2xl prose-img:border prose-img:border-white/10 prose-hr:border-white/10">
+                <MDXRemote
+                  source={post.content}
+                  components={mdxComponents}
+                  options={{
+                    mdxOptions: {
+                      remarkPlugins: [remarkGfm],
+                    },
+                  }}
+                />
               </div>
 
               {/* Footer Author Profile */}

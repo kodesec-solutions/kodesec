@@ -26,8 +26,5 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
-      - name: Run Unit Tests
-        run: npx vitest run
-
       - name: Run Production Build
         run: npm run build

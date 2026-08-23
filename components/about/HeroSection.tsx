@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronRight, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import NetworkGraph from "@/components/NetworkGraph";
 
 export default function HeroSection() {
   return (
@@ -31,8 +32,7 @@ export default function HeroSection() {
               Built by Engineers.{" "}
               <span className="block text-gradient-emerald">
                 Driven by Security.
-              </span>{" "}
-              Focused on Success.
+              </span>
             </h1>
 
             <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-400 max-w-lg font-sans">
@@ -64,12 +64,7 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:col-span-6 flex justify-center w-full min-w-0"
           >
-            <div className="relative w-full max-w-md aspect-square rounded-3xl border border-white/10 bg-[#0D121F]/80 p-6 backdrop-blur-xl shadow-2xl overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(54,226,123,0.1),transparent_70%)] pointer-events-none" />
-              <p className="text-xs font-mono font-bold tracking-widest text-primary uppercase">
-                ENGINEERING_TOPOLOGY_V2
-              </p>
-            </div>
+            <NetworkGraph />
           </motion.div>
         </div>
       </Container>

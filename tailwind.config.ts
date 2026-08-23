@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+
 const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,41 +10,53 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      sm: "375px",
+      sm: "640px",
       md: "768px",
-      lg: "1200px",
+      lg: "1024px",
+      xl: "1280px",
     },
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        md: "2rem",
+        DEFAULT: "1.25rem",
+        sm: "1.5rem",
+        lg: "2rem",
       },
     },
     extend: {
       colors: {
-        //F4E9D7 ,
-        background: "#0f1419",
-        surface: "#1a2332",
-        accent: "#91ADC8",
-        "accent-hover": "#6c84a1ff",
-        "text-primary": "#ffffff",
-        "text-secondary": "#94a3b8",
-        "text-muted": "#64748b",
+        background: "#030609",
+        "bg-dark": "#000000",
+        surface: "#0A0E17",
+        "surface-border": "rgba(255, 255, 255, 0.08)",
+        card: "#0D121F",
+        primary: {
+          DEFAULT: "#36E27B",
+          dark: "#2BC96B",
+          light: "#55E994",
+          glow: "rgba(54, 226, 123, 0.15)",
+        },
+        accent: {
+          DEFAULT: "#36E27B",
+          hover: "#2BC96B",
+        },
+        "text-primary": "#FFFFFF",
+        "text-secondary": "#CBD5E1",
+        "text-muted": "#94A3B8",
+        "text-dim": "#64748B",
       },
       fontFamily: {
-        sans: ["Archivo Black", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
         "slide-up": "slideUp 0.6s ease-out",
-        float: "float 3s ease-in-out infinite",
-        marquee: "marquee 20s linear infinite",
+        float: "float 4s ease-in-out infinite",
+        marquee: "marquee 25s linear infinite",
         shimmer: "shimmer 2s infinite",
-        "pulse-ring":
-          "pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite",
-        "spin-slow": "spin-slow 3s linear infinite",
-        "ping-slow": "ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite",
+        "pulse-glow": "pulseGlow 2.5s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -51,18 +64,12 @@ const config: Config = {
           "100%": { opacity: "1" },
         },
         slideUp: {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         float: {
-          "0%, 100%": {
-            transform: "translateY(0px) rotate(0deg)",
-            opacity: "0.4",
-          },
-          "50%": {
-            transform: "translateY(-20px) rotate(180deg)",
-            opacity: "0.8",
-          },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-12px)" },
         },
         marquee: {
           "0%": { transform: "translateX(0%)" },
@@ -72,29 +79,14 @@ const config: Config = {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(100%)" },
         },
-        "pulse-ring": {
-          "0%": {
-            transform: "scale(0.8)",
-            opacity: "1",
-          },
-          "100%": {
-            transform: "scale(2.4)",
-            opacity: "0",
-          },
-        },
-        "spin-slow": {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
-        },
-        "ping-slow": {
-          "75%, 100%": {
-            transform: "scale(1.5)",
-            opacity: "0",
-          },
+        pulseGlow: {
+          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.05)" },
         },
       },
     },
   },
   plugins: [typography],
 };
+
 export default config;

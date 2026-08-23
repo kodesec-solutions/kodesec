@@ -1,6 +1,5 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { Badge } from "./badge"
 
 export interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   badge?: string
@@ -20,7 +19,7 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "max-w-3xl mb-16 flex flex-col",
+        "max-w-3xl mb-16 flex flex-col space-y-3",
         align === "center" && "mx-auto text-center items-center",
         align === "left" && "text-left items-start",
         align === "right" && "ml-auto text-right items-end",
@@ -29,15 +28,15 @@ export function SectionHeader({
       {...props}
     >
       {badge && (
-        <Badge variant="default" className="mb-4 animate-pulse">
+        <span className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase border border-primary/20 bg-primary/10 px-3.5 py-1 rounded-full inline-block">
           {badge}
-        </Badge>
+        </span>
       )}
-      <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl leading-tight">
+      <h2 className="text-3xl sm:text-4xl font-heading font-bold tracking-tight text-white leading-tight">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-sm md:text-base text-gray-400 leading-relaxed max-w-2xl font-medium">
+        <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed max-w-2xl">
           {description}
         </p>
       )}

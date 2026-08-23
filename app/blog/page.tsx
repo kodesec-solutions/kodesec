@@ -3,9 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 
@@ -58,215 +57,232 @@ export default function BlogPage() {
         "@type": "Person",
         "name": post.author
       },
-      "url": `https://kodesec.com/blog/${post.slug}`
+      "mainEntityOfPage": `https://kodesec.com/blog/${post.slug}`
     }))
   };
-  // Prefer a post with frontmatter `featured: true`; fall back to first post.
-  const featuredPost = posts.find((p) => p.featured) ?? posts[0];
-  // Exclude the featured post from the list of other posts to avoid duplicate keys
-  const otherPosts = posts.filter((p) => p.slug !== featuredPost?.slug);
 
-  const formattedDate = (date: string) => {
-    const parsedDate = new Date(date);
-
-    if (Number.isNaN(parsedDate.getTime())) {
-      return date;
+  const formattedDate = (dateStr: string) => {
+    try {
+      return new Date(dateStr).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    } catch {
+      return dateStr;
     }
-
-    return new Intl.DateTimeFormat("en", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(parsedDate);
   };
 
+  const featuredPost = posts.find((p) => p.featured) || posts[0];
+  const otherPosts = posts.filter((p) => p.slug !== featuredPost?.slug);
+
   return (
-    <>
+    <main className="min-h-screen text-white relative overflow-hidden">
       <JsonLd schema={breadcrumbSchema} />
       <JsonLd schema={blogSchema} />
-      <Section grid className="px-6 py-14 lg:px-20 lg:py-20">
+
+      {/* Ambient background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] blur-[150px] pointer-events-none rounded-full" />
+
+      {/* HERO SECTION */}
+      <Section className="pt-12 pb-16 relative z-10">
         <Container>
-        <div className="max-w-6xl text-left">
-          <Badge>Blog</Badge>
-          <h1 className="mt-5 text-4xl font-black leading-tight text-secondary md:text-5xl lg:text-6xl">
-            Security research, technical analysis, and practical engineering
-            notes.
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            Read KodeSec case studies and technical breakdowns covering
-            real-world attacks, secure delivery patterns, and the systems
-            decisions that shape modern infrastructure.
-          </p>
-        </div>
+          <div className="text-center max-w-4xl mx-auto space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary">
+              <span className="h-2 w-2 rounded-full bg-primary animate-pulse shrink-0" />
+              <span className="text-xs font-mono font-bold uppercase tracking-widest whitespace-nowrap">
+                Security Research & Engineering Notes
+              </span>
+            </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {[
-            { label: "Articles", value: `${posts.length}` },
-            { label: "Focus", value: "Security-first" },
-            { label: "Format", value: "Deep dives" },
-          ].map((item) => (
-            <Card
-              key={item.label}
-              className="p-4 bg-surface-dark/80 backdrop-blur-sm"
-              glow="hover:border-primary/10"
-            >
-              <p className="text-xs uppercase tracking-[0.16em] text-muted text-left">
-                {item.label}
-              </p>
-              <p className="mt-2 text-lg font-bold text-secondary text-left">
-                {item.value}
-              </p>
-            </Card>
-          ))}
-        </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white tracking-tight leading-tight">
+              Security Research & <br className="hidden sm:inline" />
+              <span className="text-gradient-emerald">Technical Engineering</span>
+            </h1>
 
-        {featuredPost ? (
-          <section className="mt-12 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <Link
-              href={`/blog/${featuredPost.slug}`}
-              className="group relative overflow-hidden rounded-3xl border border-surface-border bg-gradient-to-br from-surface-dark via-card-dark to-background-dark shadow-2xl transition-transform duration-300 hover:-translate-y-1 block text-left"
-            >
-              {featuredPost.image ? (
-                <>
-                  <Image
-                    src={featuredPost.image}
-                    alt={featuredPost.title}
-                    fill
-                    className="absolute inset-0 h-full w-full object-cover opacity-30"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-surface-dark/80 via-card-dark/70 to-background-dark/80" />
-                </>
-              ) : (
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(54,226,123,0.14),transparent_34%)]" />
-              )}
-              <div className="relative p-7 md:p-10">
-                <div className="flex flex-col justify-between h-full min-h-[320px]">
-                  <div>
-                    <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.18em] text-primary font-mono font-bold">
-                      <span className="px-2 py-0.5 rounded border border-primary/20 bg-primary/5">Featured</span>
-                      <span className="h-1 w-1 rounded-full bg-primary/70" />
-                      <span>{formattedDate(featuredPost.date)}</span>
-                    </div>
-                    <h2 className="mt-5 text-2xl font-black leading-tight text-secondary md:text-3xl lg:text-4xl">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-                      {featuredPost.excerpt ||
-                        "Read the full article for the complete analysis."}
-                    </p>
-                  </div>
+            <p className="text-sm sm:text-base text-gray-400 font-sans leading-relaxed max-w-2xl mx-auto">
+              Read KodeSec case studies and technical breakdowns covering real-world vulnerability disclosures, secure application design patterns, and systems decisions.
+            </p>
 
-                  <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-primary transition-transform duration-300 group-hover:translate-x-1">
-                    <span>Read article</span>
-                    <ArrowUpRight size={16} />
-                  </div>
-                </div>
+            {/* Metrics Bar */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 max-w-2xl mx-auto">
+              <div className="p-4 rounded-2xl border border-white/10 bg-[#0D121F]/80 backdrop-blur-xl text-left">
+                <p className="text-[10px] uppercase font-mono font-bold tracking-widest text-primary">Articles</p>
+                <p className="mt-1 text-2xl font-heading font-bold text-white">{posts.length}+ Published</p>
               </div>
-            </Link>
-
-            <Card className="bg-surface-dark/75 p-7 md:p-8 text-left" glow="hover:border-primary/10">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary font-mono">
-                Latest thinking
-              </p>
-              <div className="mt-5 space-y-5">
-                <div className="rounded-2xl border border-surface-border bg-background-dark/60 p-4">
-                  <p className="text-sm font-semibold text-secondary">
-                    Clean structure
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    Each post is written to be scannable first, then deep enough
-                    for practitioners who want the technical detail.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-surface-border bg-background-dark/60 p-4">
-                  <p className="text-sm font-semibold text-secondary">
-                    Practical context
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    Case studies focus on what happened, why it mattered, and
-                    what teams can do differently.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-surface-border bg-background-dark/60 p-4">
-                  <p className="text-sm font-semibold text-secondary">
-                    Security lens
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    Content centers on attack paths, controls, and design
-                    choices that reduce real-world risk.
-                  </p>
-                </div>
+              <div className="p-4 rounded-2xl border border-white/10 bg-[#0D121F]/80 backdrop-blur-xl text-left">
+                <p className="text-[10px] uppercase font-mono font-bold tracking-widest text-primary">Focus</p>
+                <p className="mt-1 text-2xl font-heading font-bold text-white">Zero-Trust</p>
               </div>
-            </Card>
-          </section>
-        ) : null}
-
-        <section className="mt-16 text-left">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary font-mono">
-                All posts
-              </p>
-              <h2 className="mt-2 text-2xl font-bold text-secondary md:text-3xl">
-                Recent articles
-              </h2>
+              <div className="p-4 rounded-2xl border border-white/10 bg-[#0D121F]/80 backdrop-blur-xl text-left">
+                <p className="text-[10px] uppercase font-mono font-bold tracking-widest text-primary">Format</p>
+                <p className="mt-1 text-2xl font-heading font-bold text-white">Deep Dives</p>
+              </div>
             </div>
           </div>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {(featuredPost ? [featuredPost, ...otherPosts] : posts).map(
-              (post, index) => (
+          {/* FEATURED POST SHOWCASE */}
+          {featuredPost && (
+            <div className="mt-16 grid gap-8 lg:grid-cols-12 items-stretch">
+              
+              {/* Featured Main Card (Split Layout - Image Top/Left, Text Cleanly Separated) */}
+              <div className="lg:col-span-8 flex">
+                <Link
+                  href={`/blog/${featuredPost.slug}`}
+                  className="group relative flex flex-col w-full rounded-3xl border border-white/10 bg-[#0D121F]/80 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_35px_rgba(54,226,123,0.12)] text-left"
+                >
+                  {/* Image Container with Dark Gradient Overlay */}
+                  {featuredPost.image && (
+                    <div className="relative h-64 md:h-80 w-full overflow-hidden bg-black/40 border-b border-white/10">
+                      <Image
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
+                        fill
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0D121F] via-transparent to-black/30" />
+                      
+                      <div className="absolute top-4 left-4 flex items-center gap-2">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-primary text-black">
+                          FEATURED
+                        </span>
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 border border-white/10 text-gray-300 backdrop-blur-md">
+                          {formattedDate(featuredPost.date)}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Text Content Area (No text collision over banner image!) */}
+                  <div className="p-6 md:p-8 flex flex-col justify-between flex-1">
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-heading font-bold text-white tracking-tight leading-snug group-hover:text-primary transition-colors">
+                        {featuredPost.title}
+                      </h2>
+                      <p className="mt-4 text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
+                        {featuredPost.excerpt || "Read the full research article for complete vulnerability analysis and code patches."}
+                      </p>
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+                      <span className="text-xs font-mono font-bold text-primary flex items-center gap-2">
+                        Read full breakdown
+                        <ArrowUpRight size={16} className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </span>
+                      {featuredPost.readingTime && (
+                        <span className="text-[10px] font-mono text-gray-500 flex items-center gap-1">
+                          <Clock size={12} /> {featuredPost.readingTime}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Side Card: Engineering Context */}
+              <div className="lg:col-span-4 flex">
+                <Card className="w-full bg-[#0D121F]/80 border-white/10 p-6 md:p-8 text-left flex flex-col justify-between" glow="hover:border-primary/30">
+                  <div>
+                    <p className="text-xs font-mono font-bold uppercase tracking-widest text-primary">
+                      Editorial Focus
+                    </p>
+                    <h3 className="text-lg font-heading font-bold text-white mt-2 mb-6">
+                      Our Research Approach
+                    </h3>
+
+                    <div className="space-y-4">
+                      <div className="p-4 rounded-2xl border border-white/10 bg-white/5">
+                        <p className="text-xs font-heading font-bold text-white">Clean Structure</p>
+                        <p className="mt-1.5 text-xs text-gray-400 font-sans leading-relaxed">
+                          Each post is structured for quick scanning first, followed by technical deep dives for engineers.
+                        </p>
+                      </div>
+                      <div className="p-4 rounded-2xl border border-white/10 bg-white/5">
+                        <p className="text-xs font-heading font-bold text-white">Practical Context</p>
+                        <p className="mt-1.5 text-xs text-gray-400 font-sans leading-relaxed">
+                          Real threat timelines, root cause analysis, and actionable remediation pull requests.
+                        </p>
+                      </div>
+                      <div className="p-4 rounded-2xl border border-white/10 bg-white/5">
+                        <p className="text-xs font-heading font-bold text-white">Offensive Security Lens</p>
+                        <p className="mt-1.5 text-xs text-gray-400 font-sans leading-relaxed">
+                          Focusing on adversary attack paths and zero-trust controls that eliminate breach risk.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+            </div>
+          )}
+
+          {/* ALL ARTICLES GRID */}
+          <section className="mt-20 text-left">
+            <div className="flex items-center justify-between mb-10 pb-4 border-b border-white/10">
+              <div>
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary">
+                  All Articles
+                </span>
+                <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mt-1">
+                  Recent Publications
+                </h2>
+              </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {(featuredPost ? otherPosts : posts).map((post) => (
                 <article
                   key={post.slug}
-                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-surface-border bg-surface-dark/70 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_16px_40px_rgba(0,0,0,0.28)] text-left"
+                  className="group flex flex-col h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0D121F]/80 backdrop-blur-xl transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_rgba(54,226,123,0.12)] hover:-translate-y-1 text-left"
                 >
                   {post.image && (
-                    <div className="relative h-48 w-full overflow-hidden bg-surface-border">
+                    <div className="relative h-48 w-full overflow-hidden bg-black/40 border-b border-white/10">
                       <Image
                         src={post.image}
                         alt={post.title}
                         fill
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background-dark/60 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0D121F] to-transparent opacity-60" />
                     </div>
                   )}
+
                   <div className="flex flex-1 flex-col p-6">
-                    <div className="flex items-center justify-between gap-3 font-mono">
-                      <span className="inline-flex rounded-full border border-surface-border bg-background-dark/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-                        {index === 0 ? "Featured" : "Article"}
+                    <div className="flex items-center justify-between text-xs font-mono text-gray-400 mb-3">
+                      <span className="px-2.5 py-0.5 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold text-primary uppercase">
+                        ARTICLE
                       </span>
-                      <span className="text-xs text-muted">
-                        {formattedDate(post.date)}
-                      </span>
+                      <span className="text-[11px]">{formattedDate(post.date)}</span>
                     </div>
 
-                    <Link href={`/blog/${post.slug}`} className="mt-5 block">
-                      <h3 className="text-xl font-bold leading-snug text-secondary transition-colors duration-300 group-hover:text-primary">
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      <h3 className="text-lg font-heading font-bold leading-snug text-white group-hover:text-primary transition-colors">
                         {post.title}
                       </h3>
                     </Link>
 
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                      {post.excerpt ||
-                        "Open the post to read the full article and technical detail."}
+                    <p className="mt-3 flex-1 text-xs text-gray-400 font-sans leading-relaxed line-clamp-3">
+                      {post.excerpt || "Read the full article for technical analysis and code patches."}
                     </p>
 
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-transform duration-300 group-hover:translate-x-1 font-mono"
-                    >
-                      <span>Read more</span>
-                      <ArrowUpRight size={16} />
-                    </Link>
+                    <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono font-bold text-primary">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="inline-flex items-center gap-1.5 hover:text-[#FFFFFF] transition-colors"
+                      >
+                        <span>Read article</span>
+                        <ArrowUpRight size={14} className="shrink-0" />
+                      </Link>
+                    </div>
                   </div>
                 </article>
-              ),
-            )}
-          </div>
-        </section>
-      </Container>
-    </Section>
-    </>
+              ))}
+            </div>
+          </section>
+
+        </Container>
+      </Section>
+    </main>
   );
 }

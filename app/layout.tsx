@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Space_Grotesk, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,16 +10,22 @@ import JsonLd from "@/components/JsonLd";
 import Loader from "@/components/loader/Loader";
 import AppointmentModal from "@/components/contact/AppointmentModal";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -111,7 +117,16 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(
+        "font-sans dark",
+        spaceGrotesk.variable,
+        plusJakartaSans.variable,
+        jetBrainsMono.variable
+      )}
+    >
       <head>
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
@@ -120,17 +135,28 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} transition-colors duration-300 bg-background text-foreground antialiased`}
+        className="transition-colors duration-300 bg-[#030609] text-white antialiased selection:bg-primary/30 selection:text-primary relative"
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <JsonLd schema={orgSchema} />
           <JsonLd schema={websiteSchema} />
           <Toaster />
+          
+          {/* FIXED BACKGROUND AMBIENT GLOW SYSTEM (Stays fixed while scrolling like Boraq.io) */}
+          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+            {/* Top Center Glow */}
+            <div className="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/10 blur-[170px] rounded-full" />
+            {/* Right Side Subtle Glow */}
+            <div className="fixed top-[45%] right-[-15%] w-[700px] h-[700px] bg-primary/5 blur-[190px] rounded-full" />
+            {/* Left Side Subtle Glow */}
+            <div className="fixed bottom-[-10%] left-[-15%] w-[700px] h-[700px] bg-primary/5 blur-[190px] rounded-full" />
+          </div>
+
           <Loader>
             <AppointmentModal />
             <Header />
-            <main className="min-h-screen pt-20">
+            <main className="min-h-screen pt-24 relative z-10 bg-transparent">
               {children}
             </main>
             <Footer />

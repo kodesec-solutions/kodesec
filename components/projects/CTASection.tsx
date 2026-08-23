@@ -2,34 +2,24 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="bg-background-dark px-6 pb-24 pt-16 lg:px-20">
-      <div className="mx-auto w-full max-w-[1200px] overflow-hidden rounded-3xl border border-surface-border bg-surface-dark p-8 md:p-10 lg:p-12">
-        <div
-          className="relative rounded-2xl border border-surface-border p-8"
-          style={{
-            background:
-              "radial-gradient(circle at 20% 20%, var(--color-primary) 0%, transparent 40%), radial-gradient(circle at 80% 80%, var(--color-primary) 0%, transparent 35%)",
-          }}
-        >
-          <h2 className="text-secondary text-3xl font-semibold leading-tight md:text-4xl">
+    <section className="bg-[#030609] px-6 pb-24 pt-16 lg:px-20 relative z-10">
+      <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-[#0D121F] p-8 md:p-14 shadow-2xl backdrop-blur-xl">
+        <div className="relative rounded-2xl border border-white/10 p-8 bg-[#0A0E17] text-left">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(54,226,123,0.08),transparent_70%)] pointer-events-none" />
+
+          <h2 className="text-white text-3xl font-heading font-bold leading-tight md:text-4xl">
             Let&apos;s Secure Your Next Project
           </h2>
-          <p className="text-muted mt-4 max-w-2xl text-base leading-relaxed">
+          <p className="text-gray-400 mt-4 max-w-2xl text-xs sm:text-sm font-sans leading-relaxed">
             Bring your architecture, product, and infrastructure goals. We will help you deliver
             with security engineered in from day one.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              href="/contact"
-              className="rounded-full bg-primary px-6 py-3 text-sm font-semibold transition-transform duration-300 hover:-translate-y-0.5"
-            >
-              Start a Project
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link href="/contact" className="btn-primary">
+              <span>Start a Project</span>
             </Link>
-            <Link
-              href="/contact"
-              className="rounded-full border border-surface-border bg-card-dark px-6 py-3 text-sm font-semibold text-secondary transition-transform duration-300 hover:-translate-y-0.5"
-            >
-              Contact Us
+            <Link href="/contact" className="btn-secondary">
+              <span>Contact Us</span>
             </Link>
           </div>
         </div>

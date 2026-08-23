@@ -15,25 +15,22 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
       <Card
         ref={ref}
         className={cn(
-          "relative p-6 flex flex-col justify-between group hover:border-primary/20 hover:shadow-[0_0_20px_rgba(54,226,123,0.05)]",
+          "relative p-6 md:p-8 flex flex-col justify-between group bg-[#0D121F]/80 border-white/10 hover:border-primary/40 hover:shadow-[0_0_30px_rgba(54,226,123,0.12)]",
           className
         )}
         glow={glowClass}
         {...props}
       >
-        {/* Accent glow corner */}
-        <div className="absolute top-0 right-0 h-8 w-8 rounded-tr-3xl border-t border-r border-transparent group-hover:border-primary/20 transition-all duration-300 pointer-events-none" />
-
         <div>
-          <span className="text-4xl sm:text-5xl font-black text-white tracking-tight bg-gradient-to-r from-white via-white to-gray-500 bg-clip-text text-transparent group-hover:to-primary transition-all duration-300 font-mono">
+          <span className="text-4xl sm:text-5xl font-heading font-bold text-white group-hover:text-primary transition-colors tracking-tight block">
             {value}
           </span>
-          <h4 className="mt-2 text-xs font-mono font-bold text-primary uppercase tracking-wider">
+          <h4 className="mt-2 text-xs font-mono font-bold text-primary uppercase tracking-widest">
             {label}
           </h4>
         </div>
         {description && (
-          <p className="mt-4 text-xs text-gray-400 leading-relaxed font-medium">
+          <p className="mt-3 text-xs text-gray-400 font-sans leading-relaxed">
             {description}
           </p>
         )}

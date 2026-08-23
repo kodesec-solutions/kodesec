@@ -2,113 +2,42 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ChevronRight, MessageSquare } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
 export default function CTASection() {
-  // Let's create a static array of particles to animate subtle background floating points
-  const particles = [
-    { id: 0, size: 6, x: 12, y: 45, delay: 0.5, duration: 18 },
-    { id: 1, size: 8, x: 35, y: 72, delay: 2.1, duration: 22 },
-    { id: 2, size: 4, x: 58, y: 15, delay: 1.2, duration: 15 },
-    { id: 3, size: 9, x: 80, y: 55, delay: 3.4, duration: 25 },
-    { id: 4, size: 5, x: 22, y: 88, delay: 0.1, duration: 16 },
-    { id: 5, size: 7, x: 67, y: 34, delay: 4.5, duration: 20 },
-    { id: 6, size: 6, x: 92, y: 62, delay: 1.8, duration: 17 },
-    { id: 7, size: 8, x: 45, y: 28, delay: 2.9, duration: 21 },
-  ];
-
   return (
-    <section className="py-28 px-4 lg:px-20 relative overflow-hidden bg-background-dark border-t border-white/5">
-      {/* Mesh gradients */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
-      
-      {/* Animated Glowing Orbs */}
-      <motion.div
-        animate={{
-          x: [0, 40, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute bottom-[-10%] left-[-10%] w-[45%] h-[45%] rounded-full bg-primary/5 blur-[120px] pointer-events-none"
-      />
-      <motion.div
-        animate={{
-          x: [0, -40, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute top-[-10%] right-[-10%] w-[45%] h-[45%] rounded-full bg-accent-cyan/5 blur-[150px] pointer-events-none"
-      />
+    <section className="py-20 px-4 lg:px-20 relative overflow-hidden bg-transparent">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(54,226,123,0.1),transparent_75%)] pointer-events-none" />
 
-      {/* Floating Particles */}
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          animate={{
-            y: ["0%", "-150%", "0%"],
-            opacity: [0, 0.4, 0]
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: "easeInOut"
-          }}
-          style={{
-            position: "absolute",
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: `${p.size}px`,
-            height: `${p.size}px`,
-          }}
-          className="rounded-full bg-primary pointer-events-none"
-        />
-      ))}
-
-      <Container className="relative z-10 max-w-5xl rounded-[2.5rem] border border-white/5 bg-[#0F1424]/40 p-8 md:p-16 backdrop-blur-2xl shadow-[0_24px_60px_rgba(0,0,0,0.4)] flex flex-col items-center text-center">
+      <Container className="relative z-10 max-w-5xl rounded-3xl border border-white/10 bg-[#0D121F]/90 p-8 md:p-16 backdrop-blur-xl shadow-2xl flex flex-col items-center text-center">
         
-        {/* Animated Icon Badge */}
-        <motion.div
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-8"
-        >
-          <MessageSquare className="h-6 w-6 text-primary" />
-        </motion.div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-6 text-primary shrink-0">
+          <MessageSquare className="h-6 w-6" />
+        </div>
 
-        <h2 className="text-3xl font-black text-white sm:text-5xl leading-[1.1] tracking-tight max-w-2xl">
-          Let&apos;s Build Something Secure, Scalable, and Ready for Growth.
+        <h2 className="text-3xl font-heading font-bold text-white sm:text-5xl leading-tight tracking-tight max-w-2xl">
+          Let&apos;s Build Something <span className="text-gradient-emerald">Secure & Scalable</span>.
         </h2>
         
-        <p className="mt-6 text-sm md:text-base text-gray-400 max-w-lg leading-relaxed font-medium">
+        <p className="mt-6 text-xs sm:text-sm text-gray-400 max-w-lg leading-relaxed font-sans">
           Whether you&apos;re launching a new product, strengthening your infrastructure, or improving software quality, we&apos;d love to help.
         </p>
 
         {/* Action buttons */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
+        <div className="mt-8 flex flex-wrap justify-center gap-4 w-full sm:w-auto">
           <Link
             href="/contact?type=consultation"
-            className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-light hover:shadow-[0_0_20px_rgba(54,226,123,0.3)] cursor-pointer"
+            className="btn-primary"
           >
-            Book Consultation
-            <ChevronRight size={16} />
+            <span>Book Consultation</span>
+            <ChevronRight size={16} className="shrink-0" />
           </Link>
           <Link
             href="/contact"
-            className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 text-sm font-bold text-white transition-all hover:bg-white/10 hover:border-white/20 cursor-pointer"
+            className="btn-secondary"
           >
-            Contact Us
+            <span>Contact Us</span>
           </Link>
         </div>
 

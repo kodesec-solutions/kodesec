@@ -10,6 +10,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import JsonLd from "@/components/JsonLd";
 import Loader from "@/components/loader/Loader";
 import AppointmentModal from "@/components/contact/AppointmentModal";
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -149,6 +151,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional"
         />
       </head>
+      <GoogleTagManager gtmId="GTM-PX3H2865" />
       <body
         className="transition-colors duration-300 bg-[#030609] text-white antialiased selection:bg-primary/30 selection:text-primary relative"
         suppressHydrationWarning
@@ -178,6 +181,7 @@ export default function RootLayout({
           </Loader>
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId="G-LH10BFSBJQ" />
     </html>
   );
 }

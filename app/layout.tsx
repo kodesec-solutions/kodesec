@@ -145,6 +145,15 @@ export default function RootLayout({
             gtag('config', 'G-LH10BFSBJQ');
           `}
         </Script>
+        {/* Google Tag Manager */}
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start':
+            new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-PX3H2865');}`}
+        </Script>
+        {/* End Google Tag Manager */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
@@ -156,11 +165,21 @@ export default function RootLayout({
         className="transition-colors duration-300 bg-[#030609] text-white antialiased selection:bg-primary/30 selection:text-primary relative"
         suppressHydrationWarning
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PX3H2865"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <JsonLd schema={orgSchema} />
           <JsonLd schema={websiteSchema} />
           <Toaster />
-          
+
           {/* FIXED BACKGROUND AMBIENT GLOW SYSTEM (Stays fixed while scrolling like Boraq.io) */}
           <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
             {/* Top Center Glow */}

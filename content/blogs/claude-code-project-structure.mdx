@@ -1,0 +1,84 @@
+---
+title: "Claude Code, Decoded: The Full Project Structure of an Agent-Ready Repo"
+date: "2026-09-15"
+slug: "claude-code-decoded-project-structure"
+excerpt: "Most people dump everything into one CLAUDE.md. The real power is in the structure. Here's how rules, commands, skills, agents, and hooks turn a repo into something you can actually direct, not just prompt."
+author: "KodeSec Research Team"
+image: "/blog/claude-code-decoded-project-structure/claude-code-decoded.png"
+---
+
+Most developers get Claude Code working, then stop. They drop a few instructions into a single `CLAUDE.md`, let the model figure out the rest, and call it a day. It works — until the project grows, the context window fills up, and the model starts guessing instead of following.
+
+The difference between "prompting" Claude Code and *directing* it comes down to one thing: structure. A well-organized `.claude/` directory doesn't just make the model behave better — it makes its behavior predictable, auditable, and repeatable across a team. Here's what that structure actually looks like, and why each piece exists.
+
+## The full project structure
+
+```
+project/                     — your repo root
+├── CLAUDE.md                 — project overview & config
+├── CLAUDE.local.md           — personal overrides (git-ignored)
+├── .mcp.json                 — MCP server integrations
+└── .claude/                  — all Claude config lives here
+    ├── settings.json         — shared team settings
+    ├── settings.local.json   — your personal settings
+    ├── rules/                — coding conventions Claude follows
+    │   ├── code-style.md     — formatting & naming
+    │   ├── testing.md        — how to write tests
+    │   └── api-conventions.md — endpoint & error patterns
+    ├── commands/              — custom /slash workflows
+    │   ├── review.md          — /review — code review
+    │   └── fix-issue.md       — /fix-issue — bug fixes
+    ├── skills/                — auto-loaded when relevant
+    │   └── deploy/             — one skill bundle
+    │       ├── SKILL.md        — what the skill does
+    │       └── deploy-config.md — deploy settings
+    ├── agents/                — specialized sub-agents
+    │   ├── code-reviewer.md    — reviews diffs & style
+    │   └── security-auditor.md — flags vulnerabilities
+    └── hooks/                  — event-driven scripts
+        └── validate-bash.sh    — guards risky commands
+```
+
+## The root: CLAUDE.md
+
+`CLAUDE.md` sits at the top of your repo and acts as project memory — the overview and conventions Claude reads at the start of every session. Alongside it, `CLAUDE.local.md` holds personal overrides that stay out of version control, and `.mcp.json` defines which MCP servers the project connects to for external tools and data.
+
+Everything else — the rules, commands, skills, agents, and hooks that actually shape Claude's behavior — lives one level down, inside `.claude/`.
+
+## rules/ — the conventions Claude actually follows
+
+Dumping every convention into `CLAUDE.md` bloats the context window and buries the instructions that matter. Splitting them into `.claude/rules/` — `code-style.md`, `testing.md`, `api-conventions.md` — keeps each concern isolated and lets Claude load only what's relevant to the task at hand. It's the difference between a style guide the model reads once and forgets, and one it can reference precisely when it matters.
+
+## commands/ — your own slash workflows
+
+`/review`, `/fix-issue` — custom commands turn repeated prompts into reusable workflows. Instead of re-explaining how your team does code review every session, you write it once and invoke it by name. This is where institutional habits become executable.
+
+## skills/ — capability, loaded on demand
+
+Skills are the most underused piece of this structure. A skill bundle — a `SKILL.md` describing what it does, plus supporting config — only loads into context when it's actually relevant to the task. This is what keeps a large project usable: Claude isn't carrying deployment instructions in its head while it fixes a typo. It picks up the `deploy/` skill only when deployment is the job.
+
+## agents/ — specialized sub-agents
+
+A code reviewer and a security auditor don't need the same context, the same tools, or the same instructions. `agents/` lets you define sub-agents with their own scoped responsibilities — `code-reviewer.md`, `security-auditor.md` — so specialized work happens in isolation instead of cluttering the main conversation.
+
+## hooks/ — the guardrails
+
+Hooks are event-driven scripts that fire on specific actions — before a bash command runs, after a file edit, when a session starts. A `validate-bash.sh` hook can block a risky command before it executes, no matter what the model "decided" to do. This is where you stop relying on the model to behave and start enforcing that it does.
+
+## Why this matters
+
+Each of these pieces solves a different failure mode of the "one giant file" approach:
+
+- **rules/** prevents convention drift without bloating context
+- **commands/** captures repeatable workflows instead of re-prompting
+- **skills/** keeps context light by loading capability on demand
+- **agents/** isolates specialized work with its own scope
+- **hooks/** enforces safety at the system level, not the prompt level
+
+Individually, these are configuration details. Together, they're the shift from hoping a model behaves to engineering how it behaves — from *prompting* to *directing*.
+
+There's a second-order effect worth naming: building this structure is itself a skill. Deciding what belongs in a rule versus a skill, what should run as a hook versus a permission check, what a sub-agent should and shouldn't see — that's the same judgment that makes someone a sharper AI engineer generally. You stop trusting output blindly and start reading, structuring, and verifying what the system produces. The project structure is the artifact; the habit it builds is the actual point.
+
+---
+
+*If you're setting up Claude Code on a real project, start small: a `CLAUDE.md`, one rules file, one hook. Add skills and sub-agents as the project's actual complexity demands them — not before.*

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { List, ChevronDown, ChevronRight } from "lucide-react";
 
 interface TocItem {
@@ -16,7 +16,31 @@ interface TableOfContentsDropdownProps {
 export default function TableOfContentsDropdown({ items }: TableOfContentsDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hashId = decodeURIComponent(window.location.hash.replace("#", ""));
+      const element = document.getElementById(hashId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 200);
+      }
+    }
+  }, []);
+
   if (!items || items.length === 0) return null;
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", `#${id}`);
+    } else {
+      window.location.hash = id;
+    }
+  };
 
   return (
     <div className="mb-8 rounded-2xl border border-white/10 bg-[#0D121F]/90 backdrop-blur-xl overflow-hidden shadow-xl transition-all">
@@ -65,7 +89,7 @@ export default function TableOfContentsDropdown({ items }: TableOfContentsDropdo
             <a
               key={item.id}
               href={`#${item.id}`}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleScroll(e, item.id)}
               className={`flex items-center gap-2 py-2 px-3 rounded-lg transition-all hover:bg-white/5 hover:text-primary group ${
                 item.level === 3 ? "ml-4 text-gray-400" : "text-gray-200 font-medium"
               }`}

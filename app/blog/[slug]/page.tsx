@@ -1,3 +1,4 @@
+import React from "react";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -58,10 +59,53 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+function getHeadingText(node: React.ReactNode): string {
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(getHeadingText).join("");
+  if (React.isValidElement(node)) {
+    return getHeadingText((node.props as { children?: React.ReactNode }).children);
+  }
+  return "";
+}
+
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+const createHeading = (Tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
+  return function Heading({ children, id, className = "", ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+    const text = getHeadingText(children);
+    const slug = id || slugifyHeading(text);
+    return (
+      <Tag id={slug} className={`scroll-mt-28 ${className}`} {...props}>
+        {children}
+      </Tag>
+    );
+  };
+};
+
 const mdxComponents = {
   AuthorProfile,
   SecurityWarning,
   EmbeddedCTA,
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+  h4: createHeading("h4"),
+  h5: createHeading("h5"),
+  h6: createHeading("h6"),
+  a: ({ children, id, className = "", ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    return (
+      <a id={id} className={id ? `scroll-mt-28 ${className}` : className} {...props}>
+        {children}
+      </a>
+    );
+  },
 };
 
 function formatDate(dateStr: string) {
@@ -83,13 +127,26 @@ function extractTableOfContents(content: string) {
 
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1] === "##" ? 2 : 3;
-    const label = match[2].trim();
-    const id = label
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-");
+    const rawLabel = match[2].trim();
 
-    matches.push({ level, label, id });
+    // Strip inline markdown (e.g. `code`, **bold**, *italic*, [links](...))
+    const cleanLabel = rawLabel
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/`([^`]+)`/g, "$1")
+      .replace(/\*\*([^*]+)\*\*/g, "$1")
+      .replace(/\*([^*]+)\*/g, "$1")
+      .trim();
+
+    // Ignore self-referencing "Table of Contents" heading
+    if (cleanLabel.toLowerCase() === "table of contents") {
+      continue;
+    }
+
+    const id = slugifyHeading(cleanLabel);
+
+    if (id) {
+      matches.push({ level, label: cleanLabel, id });
+    }
   }
 
   return matches;

@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://kodesec.com";
 
   // Static routes
+  const staticLastMod = new Date("2026-09-20T00:00:00.000Z");
   const staticRoutes = [
     "",
     "/about",
@@ -20,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms-of-service",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: staticLastMod,
     changeFrequency: "weekly" as const,
     priority: route === "" ? 1.0 : 0.8,
   }));
@@ -28,19 +29,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic solutions routes
   const serviceRoutes = solutions.map((sol) => ({
     url: `${baseUrl}/services/${sol.slug}`,
-    lastModified: new Date(),
+    lastModified: staticLastMod,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
   // Dynamic blog routes
   const blogPosts = getAllPosts();
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  const blogRoutes = blogPosts.map((post) => {
+    let postDate = staticLastMod;
+    try {
+      const parsed = new Date(post.date);
+      if (!Number.isNaN(parsed.getTime())) {
+        postDate = parsed;
+      }
+    } catch {
+      // fallback to staticLastMod
+    }
+
+    return {
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: postDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    };
+  });
 
   return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
 }

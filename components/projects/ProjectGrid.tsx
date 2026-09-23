@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { ProjectCaseStudy, ProjectCategory } from "@/components/projects/types";
+import { ArrowRight } from "lucide-react";
 
 type ProjectGridProps = {
   projects: ProjectCaseStudy[];
@@ -83,7 +84,7 @@ export default function ProjectGrid({ projects, activeCategory }: ProjectGridPro
                     className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary"
                   >
                     View Case Study
-                    <span className="material-symbols-outlined text-base">arrow_forward</span>
+                    <ArrowRight size={16} className="shrink-0" />
                   </button>
                 </article>
               );

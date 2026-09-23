@@ -36,9 +36,9 @@ export default function TableOfContentsDropdown({ items }: TableOfContentsDropdo
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    if (typeof window !== "undefined" && window.history) {
       window.history.pushState(null, "", `#${id}`);
-    } else {
-      window.location.hash = id;
     }
   };
 

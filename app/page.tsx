@@ -1,9 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import SecurityDashboard from "@/components/SecurityDashboard";
 import MethodologyTimeline from "@/components/home/MethodologyTimeline";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
-import SecurityEstimator from "@/components/home/SecurityEstimator";
 
 // Primitives
 import { Section } from "@/components/ui/section";
@@ -45,40 +43,25 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const localBusinessSchema = {
+  const professionalServiceSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://kodesec.com/#localbusiness",
+    "@type": "ProfessionalService",
+    "@id": "https://kodesec.com/#service",
     "name": "Kodesec",
     "image": "https://kodesec.com/assets/Logo.png",
     "url": "https://kodesec.com",
-    "telephone": "",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "US"
+    "email": "contact@kodesec.com",
+    "priceRange": "$$$$",
+    "description": "Enterprise cybersecurity, offensive penetration testing, zero-trust cloud infrastructure, and secure application development.",
+    "parentOrganization": {
+      "@id": "https://kodesec.com/#organization"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 37.7749,
-      "longitude": -122.4194
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    }
+    "areaServed": "Worldwide"
   };
 
   return (
     <div className="bg-transparent overflow-hidden relative text-white">
-      <JsonLd schema={localBusinessSchema} />
+      <JsonLd schema={professionalServiceSchema} />
 
       {/* ================= HERO SECTION ================= */}
       <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 z-10">
@@ -142,12 +125,12 @@ export default function Home() {
       <Section className="py-20 relative z-10 bg-transparent">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">
+            <span className="text-xs font-mono font-bold tracking-widest text-primary uppercase block">
               Core Capabilities
-            </h2>
-            <p className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
               Outcome-Driven Security Solutions
-            </p>
+            </h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -182,12 +165,12 @@ export default function Home() {
       <Section className="py-20 relative z-10 bg-transparent">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">
+            <span className="text-xs font-mono font-bold tracking-widest text-primary uppercase block">
               Methodology
-            </h2>
-            <p className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
               Our Security Pipeline Lifecycle
-            </p>
+            </h2>
           </div>
 
           <MethodologyTimeline />
@@ -198,12 +181,12 @@ export default function Home() {
       <Section className="py-20 bg-transparent relative z-10">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">
+            <span className="text-xs font-mono font-bold tracking-widest text-primary uppercase block">
               Case Studies
-            </h2>
-            <p className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
               Proven Security Outcomes
-            </p>
+            </h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -249,12 +232,12 @@ export default function Home() {
       <Section className="py-20 relative z-10 bg-transparent">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">
+            <span className="text-xs font-mono font-bold tracking-widest text-primary uppercase block">
               Ecosystem
-            </h2>
-            <p className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
               Security Integrations & Stack
-            </p>
+            </h2>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
@@ -278,12 +261,12 @@ export default function Home() {
       <Section className="py-20 bg-transparent relative z-10">
         <Container>
           <div className="text-center mb-12 space-y-3">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">
+            <span className="text-xs font-mono font-bold tracking-widest text-primary uppercase block">
               Testimonials
-            </h2>
-            <p className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
               Trusted by Engineering Leaders
-            </p>
+            </h2>
           </div>
 
           <TestimonialCarousel />

@@ -145,15 +145,14 @@ export const footerConfig = {
         { label: "About Us", href: "/about" },
         { label: "Why Us", href: "/why-us" },
         { label: "Contact", href: "/contact" },
-        { label: "Careers", href: "/careers" }
+        { label: "Careers", href: "/contact?type=careers" }
       ]
     },
     {
       title: "Connect",
       links: [
-        { label: "LinkedIn", href: "https://linkedin.com", external: true },
-        { label: "Twitter", href: "https://twitter.com", external: true },
-        { label: "GitHub", href: "https://github.com", external: true }
+        { label: "LinkedIn", href: "https://www.linkedin.com/company/kodesec-solutions/", external: true },
+        { label: "GitHub", href: "https://github.com/kodesec", external: true }
       ]
     }
   ] as FooterSection[],
@@ -238,7 +237,7 @@ export const testimonialsConfig = [
 // Social Links Configuration
 export const socialLinksConfig = {
   linkedin: "https://www.linkedin.com/company/kodesec-solutions/",
-  github: "https://github.com",
+  github: "https://github.com/kodesec",
   twitter: "https://twitter.com",
   email: "contact@kodesec.com"
 }
@@ -327,18 +326,18 @@ export const homeConfig = {
 // About Page Configuration
 export const aboutConfig = {
   storySteps: [
-    { name: "Software Engineering", label: "01", desc: "Alex & Marcus build secure financial ledger databases." },
-    { name: "Cloud Infrastructure", label: "02", desc: "Liam provisions hardened Kubernetes architectures." },
-    { name: "DevOps Automation", label: "03", desc: "Sofia designs secure automated release templates." },
-    { name: "Security Auditing", label: "04", desc: "The team unites to run offensive penetration tests." },
-    { name: "Kodesec Founded", label: "05", desc: "Intentional engineering-first startup is established." }
+    { name: "Software Engineering", label: "01", desc: "Ashikul & team architect secure, zero-trust backend platforms." },
+    { name: "Cloud Infrastructure", label: "02", desc: "Mian provisions hardened Kubernetes & cloud topologies." },
+    { name: "Security Testing", label: "03", desc: "Yaser & Nafiul execute offensive penetration testing." },
+    { name: "DevSecOps Integration", label: "04", desc: "The team integrates automated security release pipelines." },
+    { name: "Kodesec Founded", label: "05", desc: "Engineering-first cybersecurity & software agency is born." }
   ],
   storyPathDetails: [
-    "Alex and Marcus built payment gateway modules, discovering that security is often an afterthought in engineering cycles.",
-    "Liam audited IAM boundary configurations at scale, setting up automated infrastructure validation scripts.",
-    "Sofia streamlined CI/CD templates, automating vulnerability checkpoints directly within developer workflows.",
-    "We realized security testing works best when delivered directly by the software engineers who build systems.",
-    "Kodesec was established as a highly specialized, technical engineering agency. No sales middlemen, just technical owners."
+    "Our engineers built high-throughput web and backend modules, learning firsthand that application security is too often an afterthought in development.",
+    "We hardened Kubernetes clusters and cloud IAM boundaries at scale, automating infrastructure security gates and policy verification.",
+    "We led manual offensive penetration testing and CVE vulnerability research across enterprise web apps and APIs.",
+    "We realized security testing yields the best outcomes when delivered directly by active engineers who understand real codebases.",
+    "Kodesec was founded as a dedicated technical partner. Direct collaboration with technical owners, zero sales friction, and verified patches."
   ],
   expertiseAreas: [
     {

@@ -23,12 +23,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About KodeSec | Security Architects & Software Engineers",
-  description: "Learn about KodeSec's mission: delivering high-resilience engineering, zero-trust cloud platforms, and offensive security testing.",
+  title: "About Us | Security Architects & Software Engineers",
+  description: "Learn about Kodesec's mission: delivering high-resilience engineering, zero-trust cloud platforms, and offensive security testing.",
   alternates: {
     canonical: "/about",
   },
-  keywords: ["about KodeSec", "cybersecurity firm history", "software engineering leaders", "zero trust principles"],
+  keywords: ["about Kodesec", "cybersecurity firm history", "software engineering leaders", "zero trust principles"],
 };
 
 const expertiseData = [
@@ -154,10 +154,66 @@ export default function AboutPage() {
     }))
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why choose a founder-led company?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Working with a founder-led team gives you direct access to technical owners. There are no account managers, sales scripts, or layers of communication. Decisions are fast, technical specifications are understood immediately, and the engineers writing your code are directly accountable for the final outcomes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we work with your existing engineering team?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. We routinely integrate with existing developer squads to act as specialized cloud, testing, or cybersecurity extensions. We can pair-program, run architecture reviews, write custom CI/CD pipelines, audit databases, or run manual penetration tests alongside your in-house developers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you only work with startups?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While early-stage and growing startups are our core partners, we also work with scale-ups, CTOs of mid-sized organizations, and technical teams in larger firms who need senior-level engineering specialists who can deploy secure applications quickly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you handle end-to-end software projects?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our team brings together the exact disciplines needed for end-to-end delivery: clean custom code architecture (Design & Engineering), secure deployment patterns (Cloud & DevOps), robust integration checks (Quality Assurance), and deep vulnerability scanning (Cyber Security)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide long-term support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We don't believe in handing over code and disappearing. We provide long-term retainer agreements, secure cloud operations support, regular code maintenance, recurring penetration tests, and vulnerability patching as threat vectors evolve."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you integrate security into development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Security is integrated at the blueprint stage, not just checked right before launch. We threat-model requirements during planning, enforce zero-trust access parameters during coding, inject automatic SAST/secrets scanners in your CI/CD pipelines, and validate the system with manual offensive exploits."
+        }
+      }
+    ]
+  };
+
   return (
     <main className="bg-transparent min-h-screen relative overflow-hidden text-white">
       <JsonLd schema={breadcrumbSchema} />
       <JsonLd schema={organizationSchema} />
+      <JsonLd schema={faqSchema} />
 
       {/* SECTION 1: Hero */}
       <HeroSection />
@@ -165,7 +221,7 @@ export default function AboutPage() {
       {/* SECTION 2: Our Story */}
       <StoryTimeline />
 
-      {/* SECTION 3: Leadership 
+      {/* SECTION 3: Leadership */}
       <section className="py-20 px-4 lg:px-20 bg-transparent relative">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -186,7 +242,7 @@ export default function AboutPage() {
             ))}
           </div>
         </Container>
-      </section>*/}
+      </section>
 
       {/* SECTION 4: Core Expertise */}
       <section id="expertise" className="py-20 px-4 lg:px-20 bg-transparent relative">

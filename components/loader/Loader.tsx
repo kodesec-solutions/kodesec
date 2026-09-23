@@ -36,21 +36,14 @@ export default function Loader({ children }: LoaderProps) {
     setLoading(false);
   };
 
-  // Prevent server-side rendering mismatch or layout shifts
-  if (!mounted) {
-    return (
-      <div className="bg-background min-h-screen w-full flex items-center justify-center pointer-events-none" />
-    );
-  }
-
   return (
     <>
-      {loading && (
+      {mounted && loading && (
         <LoaderOverlay
           onComplete={handleComplete}
         />
       )}
-      <div className={`transition-opacity duration-700 ease-out ${loading ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+      <div className={`transition-opacity duration-700 ease-out ${mounted && loading ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         {children}
       </div>
     </>

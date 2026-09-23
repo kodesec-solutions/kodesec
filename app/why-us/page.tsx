@@ -17,12 +17,12 @@ import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Why Choose KodeSec | Technical Differentiators",
-  description: "Discover why engineering leaders choose KodeSec: zero false positive security audits, founder-led developer channels, and production-ready code.",
+  title: "Why Choose Kodesec | Technical Differentiators",
+  description: "Discover why engineering leaders choose Kodesec: zero false positive security audits, founder-led developer channels, and production-ready code.",
   alternates: {
     canonical: "/why-us",
   },
-  keywords: ["why choose KodeSec", "penetration testing firm comparison", "DevSecOps value proposition", "secure software development partner"],
+  keywords: ["why choose Kodesec", "penetration testing firm comparison", "DevSecOps value proposition", "secure software development partner"],
 };
 
 export default function WhyUsPage() {
@@ -59,18 +59,58 @@ export default function WhyUsPage() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How does Kodesec guarantee zero false positives?",
+        "name": "Why should we choose Kodesec instead of hiring freelancers?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every automated scan finding is manually reviewed, verified, and paired with a remediation pull request before delivery."
+          "text": "Freelancers typically work in isolation and may lack the specialized cross-functional skills needed for robust platforms. Kodesec delivers a cohesive squad of senior developers and security researchers, led directly by our technical founders. You get code-level engineering, manual vulnerability testing, and secure infrastructure design in a unified, reliable partnership."
         }
       },
       {
         "@type": "Question",
-        "name": "Who will I work with during my project?",
+        "name": "Can you work alongside our existing engineering team?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You communicate directly with senior software architects and offensive security engineers, avoiding non-technical account managers."
+          "text": "Yes. We act as an extension of your active engineering team. We integrate directly into your workflows—sharing real-time findings in Slack or Discord, creating clean pull requests, writing custom infrastructure configurations, and setting up automated CI/CD checks alongside your developers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide end-to-end software development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we handle the entire product lifecycle. From system architecture mapping and database indexing to frontend interfaces, API designs, DevOps pipelines, secure cloud deployments, and manual penetration testing. One partner handles your code quality, reliability, and security."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you integrate security into projects?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We follow a 'Security by Design' philosophy. Security is considered in every architectural planning decision, not checked as a checkbox before release. We verify permission bounds, least-privilege IAM configs, and database access logs. Additionally, our offensive engineers manually test and validate that your runtime systems are secure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you support startups as well as growing businesses?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. We match the rapid iteration speed and agility needed by seed-stage startups launching their first product, while also meeting the rigorous compliance protocols, scalable architectures, and multi-tenant security requirements of growing series A+ and enterprise platforms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What industries do you work with?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We focus on technology-centric and high-compliance sectors. This includes SaaS platforms requiring robust multi-tenant session isolation, FinTech companies handling payments and key management services, and cloud-native enterprises requiring high availability and container security."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer long-term support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We don't just hand off code and leave. We provide ongoing support retainers, active environment monitoring, and recurring security assessments to ensure your software remains secure, stable, and easy to maintain as your business scales."
         }
       }
     ]

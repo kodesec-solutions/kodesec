@@ -221,28 +221,7 @@ export default function AboutPage() {
       {/* SECTION 2: Our Story */}
       <StoryTimeline />
 
-      {/* SECTION 3: Leadership */}
-      <section className="py-20 px-4 lg:px-20 bg-transparent relative">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase border border-primary/20 bg-primary/10 px-3.5 py-1 rounded-full inline-block">
-              Leadership
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight">
-              Meet the Founders
-            </h2>
-            <p className="text-sm text-gray-400 font-sans leading-relaxed max-w-2xl mx-auto">
-              We are an early-stage, founder-led engineering partner. You collaborate directly with active security and software specialists.
-            </p>
-          </div>
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-            {teamConfig.founders.map((founder, idx) => (
-              <FounderCard key={founder.name} founder={founder} index={idx} />
-            ))}
-          </div>
-        </Container>
-      </section>
+      
 
       {/* SECTION 4: Core Expertise */}
       <section id="expertise" className="py-20 px-4 lg:px-20 bg-transparent relative">

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" width="560" height="400" role="img">
+<style>
+text{font-family:Inter, Segoe UI, system-ui, -apple-system, sans-serif}
+.m{font-family:ui-monospace, SFMono-Regular, Consolas, Menlo, monospace}
+.st0{opacity:0;animation:on 7s infinite;animation-delay:0.6s}.op0{animation:off 7s infinite;animation-delay:0.6s}.st1{opacity:0;animation:on 7s infinite;animation-delay:1.3s}.op1{animation:off 7s infinite;animation-delay:1.3s}.st2{opacity:0;animation:on 7s infinite;animation-delay:2.0s}.op2{animation:off 7s infinite;animation-delay:2.0s}.st3{opacity:0;animation:on 7s infinite;animation-delay:2.7s}.op3{animation:off 7s infinite;animation-delay:2.7s}.st4{opacity:0;animation:on 7s infinite;animation-delay:3.4s}.op4{animation:off 7s infinite;animation-delay:3.4s}@keyframes on{0%{opacity:0}6%,80%{opacity:1}90%,100%{opacity:0}}@keyframes off{0%{opacity:1}6%,80%{opacity:0}90%,100%{opacity:1}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect width="560" height="400" rx="20" fill="#0a0f0d"/>
+<rect x="0.5" y="0.5" width="559" height="399" rx="19.5" fill="none" stroke="rgba(255,255,255,0.14)"/>
+<rect x="28" y="28" width="504" height="344" rx="14" fill="#111816" stroke="rgba(255,255,255,0.08)"/>
+<text x="52" y="62" font-size="15" font-weight="600" fill="#e6ede9">Findings</text>
+<text x="508" y="62" text-anchor="end" class="m" font-size="12" fill="#7d8a83"><tspan fill="#2ecc71">5</tspan>/5 fixed</text><g><rect x="44" y="90" width="472" height="44" rx="10" fill="#161f1c" stroke="rgba(255,255,255,0.08)"/>
+<rect x="58" y="103" width="44" height="18" rx="9" fill="#f87171" opacity="0.15"/><text x="80" y="116" text-anchor="middle" class="m" font-size="10" font-weight="700" fill="#f87171">HIGH</text>
+<text x="116" y="117" font-size="13" fill="#e6ede9">IDOR on /api/invoices/:id</text>
+<g class="st st0"><rect x="420" y="101" width="82" height="22" rx="11" fill="#2ecc71" opacity="0.15"/><text x="461" y="116" text-anchor="middle" class="m" font-size="11" font-weight="700" fill="#2ecc71">✓ FIXED</text></g>
+<g class="op op0"><rect x="420" y="101" width="82" height="22" rx="11" fill="none" stroke="rgba(255,255,255,0.14)"/><text x="461" y="116" text-anchor="middle" class="m" font-size="11" fill="#7d8a83">OPEN</text></g></g><g><rect x="44" y="144" width="472" height="44" rx="10" fill="#161f1c" stroke="rgba(255,255,255,0.08)"/>
+<rect x="58" y="157" width="44" height="18" rx="9" fill="#f87171" opacity="0.15"/><text x="80" y="170" text-anchor="middle" class="m" font-size="10" font-weight="700" fill="#f87171">HIGH</text>
+<text x="116" y="171" font-size="13" fill="#e6ede9">Stored XSS in comments</text>
+<g class="st st1"><rect x="420" y="155" width="82" height="22" rx="11" fill="#2ecc71" opacity="0.15"/><text x="461" y="170" text-anchor="middle" class="m" font-size="11" font-weight="700" fill="#2ecc71">✓ FIXED</text></g>
+<g class="op op1"><rect x="420" y="155" width="82" height="22" rx="11" fill="none" stroke="rgba(255,255,255,0.14)"/><text x="461" y="170" text-anchor="middle" class="m" font-size="11" fill="#7d8a83">OPEN</text></g></g><g><rect x="44" y="198" width="472" height="44" rx="10" fill="#161f1c" stroke="rgba(255,255,255,0.08)"/>
+<rect x="58" y="211" width="44" height="18" rx="9" fill="#fbbf24" opacity="0.15"/><text x="80" y="224" text-anchor="middle" class="m" font-size="10" font-weight="700" fill="#fbbf24">MED</text>
+<text x="116" y="225" font-size="13" fill="#e6ede9">Missing rate limit on login</text>
+<g class="st st2"><rect x="420" y="209" width="82" height="22" rx="11" fill="#2ecc71" opacity="0.15"/><text x="461" y="224" text-anchor="middle" class="m" font-size="11" font-weight="700" fill="#2ecc71">✓ FIXED</text></g>
+<g class="op op2"><rect x="420" y="209" width="82" height="22" rx="11" fill="none" stroke="rgba(255,255,255,0.14)"/><text x="461" y="224" text-anchor="middle" class="m" font-size="11" fill="#7d8a83">OPEN</text></g></g><g><rect x="44" y="252" width="472" height="44" rx="10" fill="#161f1c" stroke="rgba(255,255,255,0.08)"/>
+<rect x="58" y="265" width="44" height="18" rx="9" fill="#7d8a83" opacity="0.15"/><text x="80" y="278" text-anchor="middle" class="m" font-size="10" font-weight="700" fill="#7d8a83">LOW</text>
+<text x="116" y="279" font-size="13" fill="#e6ede9">Verbose error messages</text>
+<g class="st st3"><rect x="420" y="263" width="82" height="22" rx="11" fill="#2ecc71" opacity="0.15"/><text x="461" y="278" text-anchor="middle" class="m" font-size="11" font-weight="700" fill="#2ecc71">✓ FIXED</text></g>
+<g class="op op3"><rect x="420" y="263" width="82" height="22" rx="11" fill="none" stroke="rgba(255,255,255,0.14)"/><text x="461" y="278" text-anchor="middle" class="m" font-size="11" fill="#7d8a83">OPEN</text></g></g><g><rect x="44" y="306" width="472" height="44" rx="10" fill="#161f1c" stroke="rgba(255,255,255,0.08)"/>
+<rect x="58" y="319" width="44" height="18" rx="9" fill="#fbbf24" opacity="0.15"/><text x="80" y="332" text-anchor="middle" class="m" font-size="10" font-weight="700" fill="#fbbf24">MED</text>
+<text x="116" y="333" font-size="13" fill="#e6ede9">Weak TLS configuration</text>
+<g class="st st4"><rect x="420" y="317" width="82" height="22" rx="11" fill="#2ecc71" opacity="0.15"/><text x="461" y="332" text-anchor="middle" class="m" font-size="11" font-weight="700" fill="#2ecc71">✓ FIXED</text></g>
+<g class="op op4"><rect x="420" y="317" width="82" height="22" rx="11" fill="none" stroke="rgba(255,255,255,0.14)"/><text x="461" y="332" text-anchor="middle" class="m" font-size="11" fill="#7d8a83">OPEN</text></g></g>
+</svg>

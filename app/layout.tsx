@@ -1,175 +1,64 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Toaster } from "@/components/ui/sonner";
-import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import Header from "@/components/layout/Header";
+import TopBar from "@/components/layout/TopBar";
+import Footer from "@/components/layout/Footer";
+import VideoFacade from "@/components/content/VideoFacade";
+import SceneEffects from "@/components/effects/SceneEffects";
 import JsonLd from "@/components/JsonLd";
-import Loader from "@/components/loader/Loader";
-import AppointmentModal from "@/components/contact/AppointmentModal";
-import { GoogleAnalytics } from '@next/third-parties/google'
-import { GoogleTagManager } from '@next/third-parties/google'
+import { THEME_SCRIPT } from "@/components/theme/theme";
+import { getSite } from "@/lib/content/loaders";
+import { SITE_URL, organizationLd, websiteLd } from "@/lib/seo";
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["500", "600", "700"],
-});
+const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["400", "500", "700"],
-});
+const site = getSite();
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kodesec.com"),
-  title: {
-    default: "Kodesec | Cybersecurity & Software Engineering",
-    template: "%s | Kodesec",
-  },
-  description:
-    "Professional technology services including secure application development, penetration testing, Cloud security audits, DevSecOps pipelines, and quality assurance testing.",
-  keywords: [
-    "web development",
-    "secure coding",
-    "cybersecurity",
-    "penetration testing",
-    "DevSecOps",
-    "QA testing",
-    "quality assurance",
-    "software engineering",
-    "security audits",
-    "vulnerability assessment",
-    "Kodesec",
-    "cloud security",
-  ],
-  authors: [{ name: "Kodesec", url: "https://kodesec.com" }],
-  creator: "Kodesec",
-  publisher: "Kodesec",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Kodesec | Cybersecurity & Software Engineering",
-    description:
-      "Professional Technology Services including secure software development, offensive penetration testing, Cloud security, and quality assurance.",
-    type: "website",
-    locale: "en_US",
-    siteName: "Kodesec",
-    url: "https://kodesec.com",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kodesec | Cybersecurity & Software Engineering",
-    description:
-      "Secure software development, offensive penetration testing, and quality assurance services for SaaS, Fintech, and Enterprise.",
-  },
+  metadataBase: new URL(SITE_URL),
+  title: { default: "Kodesec — Penetration Testing, Secure Engineering & Security Academy", template: "%s | Kodesec" },
+  description: site.description,
+  applicationName: "Kodesec",
+  authors: [{ name: "Kodesec", url: SITE_URL }],
+  alternates: { canonical: "/" },
+  openGraph: { type: "website", siteName: "Kodesec", locale: "en_US", url: SITE_URL },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const orgSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://kodesec.com/#organization",
-    "name": "Kodesec",
-    "url": "https://kodesec.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://kodesec.com/assets/Logo.png"
-    },
-    "sameAs": [
-      "https://github.com/kodesec",
-      "https://www.linkedin.com/company/kodesec-solutions/"
-    ]
-  };
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#030605" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f9f8" },
+  ],
+  colorScheme: "dark light",
+};
 
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://kodesec.com/#website",
-    "url": "https://kodesec.com",
-    "name": "Kodesec",
-    "publisher": {
-      "@id": "https://kodesec.com/#organization"
-    }
-  };
-
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn(
-        "font-sans dark",
-        spaceGrotesk.variable,
-        plusJakartaSans.variable,
-        jetBrainsMono.variable
-      )}
-    >
-      <GoogleTagManager gtmId="GTM-PX3H2865" />
-      <body
-        className="transition-colors duration-300 bg-[#030609] text-white antialiased selection:bg-primary/30 selection:text-primary relative"
-        suppressHydrationWarning
-      >
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PX3H2865"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
-        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-          <JsonLd schema={orgSchema} />
-          <JsonLd schema={websiteSchema} />
-          <Toaster />
-
-          {/* FIXED BACKGROUND AMBIENT GLOW SYSTEM (Stays fixed while scrolling like Boraq.io) */}
-          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            {/* Top Center Glow */}
-            <div className="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/10 blur-[170px] rounded-full" />
-            {/* Right Side Subtle Glow */}
-            <div className="fixed top-[45%] right-[-15%] w-[700px] h-[700px] bg-primary/5 blur-[190px] rounded-full" />
-            {/* Left Side Subtle Glow */}
-            <div className="fixed bottom-[-10%] left-[-15%] w-[700px] h-[700px] bg-primary/5 blur-[190px] rounded-full" />
-          </div>
-
-          <Loader>
-            <AppointmentModal />
-            <Header />
-            <main className="min-h-screen pt-24 relative z-10 bg-transparent">
-              {children}
-            </main>
-            <Footer />
-          </Loader>
-        </ThemeProvider>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${sans.variable} ${mono.variable}`}>
+      <head>
+        {/* apply the saved theme before first paint (no flash) */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
+      {site.analytics.gtmId && <GoogleTagManager gtmId={site.analytics.gtmId} />}
+      <body className="min-h-dvh">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-black">
+          Skip to content
+        </a>
+        <div className="page-rails" aria-hidden="true" />
+        <JsonLd data={[organizationLd(), websiteLd()]} />
+        {site.topBar?.text && <TopBar text={site.topBar.text} href={site.topBar.href} />}
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+        {site.analytics.ga4Id && <GoogleAnalytics gaId={site.analytics.ga4Id} />}
+        <VideoFacade />
+        <SceneEffects />
       </body>
-      <GoogleAnalytics gaId="G-LH10BFSBJQ" />
     </html>
   );
 }

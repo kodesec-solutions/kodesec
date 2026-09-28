@@ -1,0 +1,224 @@
+---
+title: 'Bangladesh''s Data Breach Crisis: Every Major NID Leak From 2023 to 2026, and Why the New Law Still Won''t Stop the Next One'
+slug: bangladesh-nid-data-breach-2026
+description: Bangladesh's NID database has been leaked or resold at least seven times since 2023. A comprehensive breakdown of every major leak from 2023 to 2026, the 'shadow copy' problem, and analysis of the new Data Protection Act.
+date: '2026-08-10'
+updated: '2026-08-10'
+authors:
+- kodesec-research
+category: Breach Analysis
+tags:
+- data breach
+- bangladesh
+- nid
+- data protection
+cover: /blog/bangladesh-nid-data-breach-2026/image-2.jpeg
+coverAlt: 'Bangladesh''s Data Breach Crisis: Every Major NID Leak From 2023 to 2026, and Why the New Law Still Won''t Stop the Next One'
+featured: false
+draft: false
+---
+
+*Bangladesh's National Identity database has now been breached, leaked, or resold on the open market at least seven times since 2023 — most recently on the dark web in August 2026. Here's the full timeline, how each leak happened, and why the country's brand-new data protection law may not be enough to prevent the next one.*
+
+![Bangladesh Data Breach Crisis](/blog/bangladesh-nid-data-breach-2026/image-2.jpeg)
+
+---
+
+## Table of Contents
+- [The Short Version](#the-short-version)
+- [Timeline: Every Confirmed Bangladesh NID/Data Breach (2023–2026)](#timeline-every-confirmed-bangladesh-niddata-breach-20232026)
+- [The Recent Wave (2025–2026): What Actually Happened](#the-recent-wave-20252026-what-actually-happened)
+- [Where This Started: The 2023 Breaches](#where-this-started-the-2023-breaches)
+- [Why the Same Breach Keeps Happening: The "Shadow Copy" Problem](#why-the-same-breach-keeps-happening-the-shadow-copy-problem)
+- [Does Bangladesh's New Data Protection Act Fix This?](#does-bangladeshs-new-data-protection-act-fix-this)
+- [How Bangladesh Compares to the EU, US, and Kenya](#how-bangladesh-compares-to-the-eu-us-and-kenya)
+- [What This Means for Businesses Handling NID-Verified Data](#what-this-means-for-businesses-handling-nid-verified-data)
+- [What You Can Do If Your NID Data May Be Exposed](#what-you-can-do-if-your-nid-data-may-be-exposed)
+- [What Would Actually Fix This](#what-would-actually-fix-this)
+- [FAQ](#faq)
+
+---
+## The Short Version
+
+Bangladesh's National Identity (NID) database holds detailed records — name, date of birth, parents' names, address, photo, and a unique ID number — for roughly **12 crore (120 million) citizens**. Over the past three years, that database and the 180-plus organizations connected to it have leaked, been hacked, or been sold on the open market at least seven separate times.
+
+The pattern is always similar: a breach happens quietly, the data resurfaces months later on Telegram, a dark web forum, or in plain sight on Facebook, and by the time it's reported publicly, the information has already changed hands. Bangladesh passed its first comprehensive data protection law in April 2026 specifically to address this. So far, the leaks haven't stopped — including a fresh report in early August 2026 of NID-linked personal data circulating on dark web channels.
+
+Here's what happened, in order, and what's actually different about the newest law.
+
+---
+## Timeline: Every Confirmed Bangladesh NID/Data Breach (2023–2026)
+
+| Date | Incident | Scale | What Leaked | Where It Surfaced |
+|---|---|---|---|---|
+| **Jul 2023** | Registrar General's Office (Birth & Death Registration) breach | 50 million+ citizens | Names, phone numbers, emails, NID numbers | Indexable via public search on a `.gov.bd` site |
+| **Oct 2023** | Smart NID data leak | Millions of smart NID holders (of 5.5 crore issued) | Full profile: name, gender, parents' names, phone, address, photo | A Telegram bot returning full records from just an NID number + DOB |
+| **Dec 2025 – Mar 2026** | Shwapno (ACI Group) ransomware breach | ~4 million (40 lakh) customers | Names, phone numbers, purchase history | Dark web, published by the Qilin ransomware group with LockBit 5.0 |
+| **Late 2025** | Fake e-Apostille look-alike site | 1,100+ citizens | NID, passport, marriage certificates, education records, business contracts | A spoofed government-service website |
+| **Jan 2026** | Election Commission accreditation portal failure | ~14,000 journalists | NID numbers, phone numbers, full accreditation applications | Publicly visible on the portal's homepage due to a technical fault |
+| **Feb 2026** | Five NID-verification partners caught leaking data | Undisclosed | NID-linked verification data | Passed to unauthorized third parties by partner organizations |
+| **Jun 2026** | 13th Parliamentary Election voter list leak | Tens of millions of voters | Full voter records: name, voter number, parents' names, DOB, occupation, address | Sold openly on Facebook — 500+ posts across 15+ accounts, including paid Ad Library listings |
+| **Aug 2026** | Fresh NID-linked dataset reported in circulation | Reported as "millions" of records | NID-linked personal data | Reported found on dark web channels |
+
+Two more incidents run underneath this list rather than sitting inside it: call detail records (CDRs) — logs of who called whom, when, and for how long — were pulled from a government monitoring server using stolen login credentials and resold through Facebook groups and WhatsApp channels, and a 2024 audit by a cybersecurity volunteer group found thousands of leaked admin credentials for government websites and databases already being advertised on dark web and Telegram marketplaces.
+
+---
+## The Recent Wave (2025–2026): What Actually Happened
+
+### The Shwapno breach: a textbook double-extortion attack
+
+In August 2025, employees at Shwapno — Bangladesh's largest supermarket chain, owned by ACI — received phishing emails. At least one employee clicked. Within days, the Qilin ransomware group, working with LockBit 5.0, had encrypted systems at ACI Logistics' head office and exfiltrated roughly 410 GB of customer data covering about 4 million shoppers.
+
+Shwapno was given a ransom deadline in December and refused to pay. The company believed the incident was contained. It wasn't: the attackers still held a full copy of the stolen data, and on 17 March 2026 they published it on the dark web. News spread across social media well before Shwapno filed a formal police report — seven months after the original breach.
+
+This is the part most coverage of the incident misses: **ransomware recovery and data exfiltration are two separate problems.** Restoring encrypted systems does nothing to undo a copy of your customer database sitting on a leak site. Shwapno's mistake wasn't just the phishing click — it was treating "we're back online" as "we're safe."
+
+![Shwapno Ransomware Leak](/blog/bangladesh-nid-data-breach-2026/image-1.jpeg)
+
+### The voter list: leaked data doesn't need a hacker
+
+The June 2026 Dismislab investigation into the 13th Parliamentary Election voter list is arguably more alarming than Shwapno, precisely because no hacking was involved. The Election Commission had already distributed the list through an authorized process to candidates and their representatives. Somewhere along that chain, copies ended up for sale — openly, not on a hidden forum, but on **Facebook**, priced between 30 and 250 taka, with over 500 posts across at least 15 accounts, some running as paid advertisements visible in Facebook's own Ad Library.
+
+A 250-taka mobile payment could reportedly get a buyer access to a Google Drive folder of voter data organized by division, constituency, and area. Nobody has been clearly held accountable, because Bangladesh's new data law is built to penalize institutions with measurable revenue — not an individual reselling a spreadsheet on social media.
+
+### The August 2026 dark web report
+
+Most recently, reporting has pointed to a fresh set of NID-linked personal records circulating on dark web channels, distinct from the 2023 and Shwapno incidents. As with earlier leaks, the pattern is consistent — data tied to the identity verification ecosystem surfaces on an unregulated marketplace well after the point where it could have been contained. At the time of writing, no government body has issued a detailed public accounting of the dataset's origin or scope, which is itself part of the recurring problem: Bangladesh still has no mandatory breach-notification requirement, so confirmation typically comes from journalists and researchers rather than the institutions responsible for the data.
+
+---
+## Where This Started: The 2023 Breaches
+
+To understand why 2025–2026 looks so familiar, it helps to go back to the incident that first put this on the national radar.
+
+In June 2023, Viktor Markopoulos, a researcher at the South Africa–based firm Bitcrack Cyber Security, stumbled across exposed data on a Bangladeshi government website — by his own account, he wasn't even looking for it. TechCrunch verified the find: names, phone numbers, email addresses, and NID numbers for more than 50 million citizens, some records including parents' names, all retrievable through a basic public search tool on the site. TechCrunch reached out to Bangladesh's e-Government Computer Incident Response Team (BGD e-GOV CIRT) and several government offices; researchers reported getting no meaningful response before publishing.
+
+Officials initially described it as a "global cybersecurity" issue rather than a local failure, and separately maintained that the core NID server itself hadn't been breached — the exposure traced instead to a partner system, the Office of the Registrar General's birth and death registration portal.
+
+By October 2023, a related but distinct problem emerged: smart NID data — including photos, addresses, and parents' names — was accessible through a Telegram bot. Anyone with a person's NID number and date of birth could pull a complete profile. The Election Commission acknowledged the exposure and eventually traced it to one of the then-174 organizations with authorized access to the NID verification server, but couldn't immediately identify who operated the bot.
+
+The throughline from 2023 to 2026 is the same: **the core NID database is rarely hacked directly.** Almost every major leak traces back to one of the dozens (now 180+) of banks, telecoms, hospitals, and government agencies that are allowed to query it.
+
+---
+## Why the Same Breach Keeps Happening: The "Shadow Copy" Problem
+
+The NID system was originally built as a simple identity-verification service. Over time it became the backbone that authenticates almost every digital transaction in the country — opening a bank account, registering a SIM, applying for a government service, accessing healthcare. As demand grew, so did the number of organizations plugged into it.
+
+That's the structural issue. When an organization verifies your identity against the NID database, it typically doesn't just get a yes/no answer — it receives your full record and stores it on its own servers, under its own (often much weaker) security practices. Data-governance researchers call these retained copies "shadow copies": information pulled for one legitimate purpose and then kept indefinitely, outside any consistent logging, auditing, or deletion policy.
+
+This explains why the breaches almost never come from the Election Commission's core system. They come from the shadow copies: a hospital's patient portal, a bank's onboarding database, a port authority's records, a supermarket's loyalty program — none of which were treated as high-value security targets until they became one. Bangladesh's own regulators have already confirmed this pattern directly: in a 2026 preliminary investigation, the Election Commission found that five organizations with legitimate NID-verification access — the Directorate General of Health Services, a major mobile financial service, the Chattogram Port Authority, the Department of Women Affairs, and a finance ministry accounting system — had all leaked data to third parties.
+
+A breach, in other words, usually isn't a sophisticated hack. It's the predictable result of building a system that accumulates and retains data by default, connecting it to more and more organizations, and never revisiting who still needs access to what.
+
+---
+## Does Bangladesh's New Data Protection Act Fix This?
+
+Bangladesh's Personal Data Protection Ordinance was gazetted in November 2025 and became the **Personal Data Protection Act** on 15 April 2026 — the country's first comprehensive data protection law. It establishes citizen rights over personal data, requires consent before collection, and sets penalties for violations. That's a genuinely significant step for a country that had none of this on the books before.
+
+But two structural gaps stand out:
+
+**1. No mandatory breach notification.** There is still no legal requirement for a company or agency to tell you your data has been compromised. Shwapno didn't notify affected customers for seven months. Nothing in the new Act would have forced it to move faster.
+
+**2. Enforcement sits inside government, not outside it.** The body responsible for enforcing the Act operates under the Prime Minister's Office, established by a separate ordinance passed the same week as the Act itself. A specific clause allows the government to direct the enforcement authority "in the interests of national security or public order," and the authority is legally required to comply. Given that some of the most serious data exposures — the NID spine itself, government-run surveillance infrastructure, and the shadow copies inside state agencies — involve the state as either custodian or actor, a regulator that answers to the government it's supposed to police has a structural credibility problem.
+
+There's also a gap the voter-list case exposed directly: the Act's penalty framework is built around institutional data controllers with measurable annual revenue. It has no clear mechanism for prosecuting an individual reselling government-sourced data on Facebook for 40 taka.
+
+None of this means the law is worthless — consent requirements and defined citizen rights matter. But a law is only as strong as the body enforcing it, and right now that body can't fully investigate the institution most likely to be involved in the next major leak.
+
+---
+## How Bangladesh Compares to the EU, US, and Kenya
+
+Looking at how other frameworks enforce data protection makes the gap easier to see:
+
+- **European Union (GDPR):** Data protection authorities are constitutionally independent under the GDPR. The European Data Protection Board issues detailed enforcement guidance, and the Court of Justice of the EU has repeatedly ruled that this independence — including the ability to investigate national governments — is a structural requirement, not a courtesy.
+- **United States:** The Federal Trade Commission acts as an enforcement watchdog with the power to bring actions and compel remedies, including forced deletion of illegally obtained data.
+- **Kenya:** At a broadly comparable stage of digital development, Kenya built a genuinely independent data protection authority in 2019 and is now in active talks with the EU over "adequacy" status — formal recognition that its protections meet EU standards.
+
+That last point has real economic weight for Bangladesh. Its garments sector, BPO industry, and fast-growing fintech sector all move data to and from the EU. Without EU adequacy status, every one of those data transfers requires individually negotiated legal contracts — a compliance burden that lands hardest on smaller businesses least equipped to manage it.
+
+---
+## What This Means for Businesses Handling NID-Verified Data
+
+If your company is one of the 180-plus organizations plugged into the NID verification system — or handles any customer data tied to it — the Shwapno and voter-list cases point to the same three failure points worth auditing now, regardless of what the law eventually requires:
+
+- **Treat verification access as a liability, not a convenience.** If your system only needs a yes/no answer ("is this person over 18," "is this NID valid"), storing the full returned record creates a shadow copy you now have to defend. Minimize what you retain, and set a real deletion schedule for what you can't avoid keeping.
+- **Assume phishing will eventually work.** Every major 2025–2026 incident, including Shwapno, traces back to a single employee clicking a malicious link. Regular, simulated phishing training and email filtering aren't optional line items — they're the actual frontline defense, because perimeter security alone didn't stop any of these breaches.
+- **Plan for exfiltration, not just encryption.** If ransomware hits, decrypting your systems and calling it resolved is the same mistake Shwapno made. Once data has left your network, containment and public disclosure — even without a legal mandate yet — need to happen fast, not seven months later.
+
+---
+## What You Can Do If Your NID Data May Be Exposed
+
+Given how many separate incidents have occurred since 2023, it's realistic to assume that at least some of your basic information — name, phone number, possibly your NID number — has been exposed in one leak or another. A few practical steps:
+
+- **Watch your financial accounts closely.** Identity-linked fraud, including loans taken out fraudulently using leaked NID details, has already been reported in Bangladesh. Check bank and mobile financial service statements regularly for anything unfamiliar.
+- **Be skeptical of calls or messages that already "know" personal details.** Scammers increasingly use leaked data to make phishing attempts feel legitimate. Your bank, NID office, or any government agency will not ask for your PIN, password, or OTP over a call or message.
+- **Never share OTPs, passwords, or full NID numbers over the phone**, even if the caller references accurate details about you — that accuracy is often exactly what makes leaked-data scams convincing.
+- **Report suspected exposure or fraud** to your bank's fraud line and to Bangladesh's Cyber Crime unit or CTTC, rather than assuming nothing can be done.
+
+---
+## What Would Actually Fix This
+
+Beyond stronger enforcement, a few structural shifts get discussed by researchers and would directly address the shadow-copy problem:
+
+- **Minimal disclosure verification.** Instead of an organization receiving your full NID record just to confirm you're over 18 or that you're a registered citizen, a well-designed system can return a cryptographic yes/no — no shadow copy created, because no underlying data ever transferred.
+- **Data cooperatives.** A model where the people generating data — patients, farmers, financial-service users — collectively govern how it can be used, rather than leaving that decision entirely to whichever institution happens to hold it. The EU is actively building this kind of shared infrastructure through its Data Governance Act.
+- **Architecture-level governance**, in the spirit of projects like Tim Berners-Lee's Solid initiative, where individuals retain their own data and grant specific, revocable access — rather than permanently surrendering it the moment they interact with a service.
+
+The core argument researchers keep returning to: governance built into *how a system works* holds up better than governance imposed afterward through rules that can be delayed, ignored, or — as the voter list case showed — simply outrun by how fast leaked data moves once it's out.
+
+---
+## FAQ
+
+**Is Bangladesh's NID data safe right now?**
+Given at least seven confirmed leaks or breaches since 2023 — most recently a report of NID-linked data on the dark web in August 2026 — the realistic answer is that partial exposure of basic personal information (name, phone number, possibly NID number) should be assumed as a baseline risk, even without confirmation your specific record was included.
+
+**How would I know if my NID information has been leaked?**
+Bangladesh has no mandatory breach notification law, so there's no guaranteed way individuals are informed. Leaks typically surface first through journalists, researchers, or cybersecurity investigators — not official notices.
+
+**Does the new Personal Data Protection Act stop these leaks?**
+It creates rights and penalties that didn't exist before, but it lacks a mandatory breach-notification requirement and places enforcement under a body that answers to the Prime Minister's Office rather than an independent regulator — limiting its ability to investigate state-linked leaks.
+
+**Who is legally responsible when NID-verified data leaks from a private company?**
+Under the Act, institutional data controllers can be penalized. But when leaked data is resold by individuals — as with the 2026 voter list on Facebook — the law currently has no clear enforcement path.
+
+**What's the difference between the NID database being "hacked" and NID data being "leaked"?**
+Almost none of the major incidents involved a direct breach of the Election Commission's core NID server. Nearly all trace back to one of the 180+ connected organizations — banks, telecoms, hospitals, government portals — that hold a copy of verified records and failed to secure it.
+
+---
+
+*Sources synthesized from reporting by TechCrunch, The Daily Star, The Business Standard, Dhaka Tribune, Prothom Alo, Anadolu Agency, Asia News Network, bdnews24, and the Dismislab investigation into the 2026 voter list leak, alongside independent breach-tracking reports.*
+
+![NID Data Breach Timeline and Architecture](/blog/bangladesh-nid-data-breach-2026/image-3.jpeg)
+
+## References
+ 
+**2023 breach & background**
+- Wikipedia — [2023 Bangladesh Government Website Data Breach](https://en.wikipedia.org/wiki/2023_Bangladesh_Government_website_data_breach)
+- The Daily Star — [Over 5 crore Bangladeshi citizens' data 'remains exposed' online](https://www.thedailystar.net/tech-startup/news/over-5-crore-bangladeshi-citizens-data-remains-exposed-online-3363866)
+- The Business Standard — [Over 5 crore Bangladeshi citizens' personal data 'exposed' online](https://www.tbsnews.net/bangladesh/millions-bangladeshi-citizens-data-exposed-online-661958)
+- The Daily Star — [Smart NID Data Leak: Voters' info now in Telegram channel](https://www.thedailystar.net/news/bangladesh/crime-justice/news/smart-nid-data-leak-voters-info-now-telegram-channel-3435186)
+- Prothom Alo — [A ministry, some other offices key suspects in NID data leakage](https://en.prothomalo.com/bangladesh/dc3x52c2id)
+
+**Journalist accreditation leak (Jan 2026) & credential trafficking**
+- DataBreaches.Net — [BD: 14,000 journos' personal data leaked online](https://databreaches.net/2026/01/31/bd-14000-journos-personal-data-leaked-online/)
+- Prothom Alo — [Govt data leaked again](https://en.prothomalo.com/bangladesh/v4bcjdzepl)
+
+**Five NID-partner institutions leak (2026 investigation)**
+- The Daily Star — [5 organisations leak NID data to third parties: EC](https://www.thedailystar.net/news/bangladesh/news/5-organisations-leak-nid-data-third-parties-ec-3820761)
+- Dhaka Tribune — [NID data leak: EC finds primary evidence against 5 institutions](https://www.dhakatribune.com/bangladesh/nation/373297/nid-data-leak-ec-finds-primary-evidence-against-5)
+- bdnews24 — [Election Commission uncovers evidence of NID data leaks at five institutions](https://bdnews24.com/bangladesh/4b3025a74f14)
+
+**Shwapno ransomware breach (2025–2026)**
+- KodeSec — [Shwapno Data Breach 2026: Full Incident Analysis](https://www.kodesec.com/blog/shwapno-data-breach-2026)
+- The Business Standard — [Retail chain Shwapno hit by customer data breach, hackers seek $1.5m](https://www.tbsnews.net/bangladesh/retail-chain-shwapno-hit-customer-data-breach-hackers-seek-15m-1396081)
+- The Business Standard — [Shwapno files GD seven months after customer data breach](https://www.tbsnews.net/bangladesh/shwapno-files-gd-seven-months-after-customer-data-breach-1396991)
+- Dhaka Tribune — [Shwapno website hacked, customer data leaked online](https://www.dhakatribune.com/bangladesh/406418/shwapno-website-hacked-customer-data-leaked)
+- DeXpose — [LockBit 5.0 Targets Shwapno in Bangladesh Ransomware Attack](https://www.dexpose.io/lockbit-5-0-targets-shwapno-in-bangladesh-ransomware-attack/)
+- HookPhish — [Ransomware Group Qilin Hits: Shwapno](https://www.hookphish.com/blog/ransomware-group-qilin-hits-shwapno/)
+- Breachsense — [Shwapno Data Breach in 2025](https://www.breachsense.com/breaches/shwapno-data-breach/)
+- ResearchGate — [Analytical Report on the "Shwapno Customer Data Leakage" Incident (PDF)](https://www.researchgate.net/publication/403874292_Analytical_Report_on_the_Shwapno_Customer_Data_Leakage_Incident)
+
+**New data protection law, voter list leak & shadow-copy analysis**
+- The Daily Star — [Why Bangladesh's new data protection law may fail to protect your data](https://www.thedailystar.net/slow-reads/big-picture/news/why-bangladeshs-new-data-protection-law-may-fail-protect-your-data-4217396)
+- Asia News Network — [Why Bangladesh's new data protection law may fail to protect your data](https://asianews.network/why-bangladeshs-new-data-protection-law-may-fail-to-protect-your-data/)
+- DataBreaches.Net — [Mirror/republication of the same investigation](https://databreaches.net/2026/07/08/why-bangladeshs-new-data-protection-law-may-fail-to-protect-your-data/)
+- The Daily Star (opinion) — [Bangladesh Voter Data Leak: Digital protection of data must improve](https://www.thedailystar.net/opinion/news/digital-protection-data-must-improve-4208541)

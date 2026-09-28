@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" width="560" height="400" role="img">
+<style>
+text{font-family:Inter, Segoe UI, system-ui, -apple-system, sans-serif}
+.m{font-family:ui-monospace, SFMono-Regular, Consolas, Menlo, monospace}
+.bar{transform-box:fill-box;transform-origin:bottom;animation:s 6s infinite}.save{opacity:0;animation:v 6s infinite}
+@keyframes s{0%,15%{transform:scaleY(1);opacity:.55}45%,85%{transform:scaleY(var(--lo));opacity:1}100%{transform:scaleY(1);opacity:.55}}
+@keyframes v{0%,40%{opacity:0}50%,85%{opacity:1}100%{opacity:0}}.b0{animation-delay:0.00s}.b1{animation-delay:0.08s}.b2{animation-delay:0.16s}.b3{animation-delay:0.24s}.b4{animation-delay:0.32s}.b5{animation-delay:0.40s}.b6{animation-delay:0.48s}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect width="560" height="400" rx="20" fill="#0a0f0d"/>
+<rect x="0.5" y="0.5" width="559" height="399" rx="19.5" fill="none" stroke="rgba(255,255,255,0.14)"/>
+<rect x="28" y="28" width="504" height="344" rx="14" fill="#111816" stroke="rgba(255,255,255,0.08)"/>
+<text x="52" y="64" font-size="15" font-weight="600" fill="#e6ede9">Monthly cloud spend</text>
+<g class="save"><rect x="382" y="44" width="126" height="28" rx="14" fill="#38bdf8" opacity="0.16"/><text x="445" y="63" text-anchor="middle" class="m" font-size="12" font-weight="700" fill="#38bdf8">−38% / month</text></g><g transform="translate(74 330)"><rect class="bar b0" x="0" y="-220" width="36" height="220" rx="6" fill="#38bdf8" style="--lo:0.682"/></g><text x="92" y="352" text-anchor="middle" class="m" font-size="10" fill="#7d8a83">Jan</text><g transform="translate(138 330)"><rect class="bar b1" x="0" y="-190" width="36" height="190" rx="6" fill="#38bdf8" style="--lo:0.632"/></g><text x="156" y="352" text-anchor="middle" class="m" font-size="10" fill="#7d8a83">Feb</text><g transform="translate(202 330)"><rect class="bar b2" x="0" y="-240" width="36" height="240" rx="6" fill="#38bdf8" style="--lo:0.542"/></g><text x="220" y="352" text-anchor="middle" class="m" font-size="10" fill="#7d8a83">Mar</text><g transform="translate(266 330)"><rect class="bar b3" x="0" y="-210" width="36" height="210" rx="6" fill="#38bdf8" style="--lo:0.524"/></g><text x="284" y="352" text-anchor="middle" class="m" font-size="10" fill="#7d8a83">Apr</text><g transform="translate(330 330)"><rect class="bar b4" x="0" y="-230" width="36" height="230" rx="6" fill="#38bdf8" style="--lo:0.435"/></g><text x="348" y="352" text-anchor="middle" class="m" font-size="10" fill="#7d8a83">May</text><g transform="translate(394 330)"><rect class="bar b5" x="0" y="-200" width="36" height="200" rx="6" fill="#38bdf8" style="--lo:0.475"/></g><text x="412" y="352" text-anchor="middle" class="m" font-size="10" fill="#7d8a83">Jun</text><g transform="translate(458 330)"><rect class="bar b6" x="0" y="-215" width="36" height="215" rx="6" fill="#38bdf8" style="--lo:0.419"/></g><text x="476" y="352" text-anchor="middle" class="m" font-size="10" fill="#7d8a83">Jul</text>
+</svg>

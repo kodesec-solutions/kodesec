@@ -1,0 +1,54 @@
+# Pricing page content. Every engagement is scoped with the client, so plans show what's included
+# and a starting point — the final quote comes from the scoping call.
+# TODO(team): replace the placeholder "from" values (null = "Custom quote") with real starting prices.
+intro:
+  title: Pricing that follows your scope
+  subtitle: Every system is different, so every engagement starts with a free scoping call. Pick a model, book a call, and you get a fixed quote within 48 hours.
+models:
+  - id: assessment
+    name: Assessment
+    description: A one-off, time-boxed test or review with a clear report.
+    from: null
+    unit: per engagement
+    bestFor: Launches, audits, compliance deadlines
+    features:
+      - Scoping call and rules of engagement
+      - Manual testing by senior engineers
+      - Report with risk-rated, reproducible findings
+      - Fix guidance your developers can act on
+      - One free re-test of fixed issues
+    cta: Book a scoping call
+  - id: project
+    name: Project
+    description: We design and build it with you — secure by default.
+    from: null
+    unit: per project
+    bestFor: New products, platforms, migrations
+    highlight: true
+    features:
+      - Architecture and threat model up front
+      - Milestone-based delivery and demos
+      - Security checks in CI from day one
+      - Documentation and handover
+      - 30 days of post-launch support
+    cta: Discuss your project
+  - id: retainer
+    name: Retainer
+    description: Ongoing security and engineering capacity on call.
+    from: null
+    unit: per month
+    bestFor: Teams shipping continuously
+    features:
+      - Reserved hours every month
+      - Continuous testing of new releases
+      - Priority response for incidents
+      - Quarterly posture review
+      - Direct access to the founders
+    cta: Talk about a retainer
+faq:
+  - question: Why don't you publish fixed prices?
+    answer: Cost depends on the size and complexity of what we test or build. A short scoping call lets us give you a fixed, written quote instead of a guess.
+  - question: How fast can you start?
+    answer: Usually within one to two weeks of an agreed quote. Urgent assessments can often start sooner.
+  - question: Do you sign NDAs?
+    answer: Yes. We sign an NDA before any technical details are shared, and every test runs under written rules of engagement.

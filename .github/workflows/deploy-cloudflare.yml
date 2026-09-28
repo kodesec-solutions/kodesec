@@ -1,0 +1,66 @@
+# Deploys the static export to Cloudflare Pages.
+#  - Pull requests  -> preview URL (commented on the PR)
+#  - push to master -> Cloudflare production branch "main" (the project's production branch)
+# Needs repo secrets CLOUDFLARE_API_TOKEN (Pages: Edit) and CLOUDFLARE_ACCOUNT_ID.
+# Until they exist, the deploy job is skipped and CI still runs.
+name: Deploy (Cloudflare Pages)
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    env:
+      HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.HAS_CF == 'true'
+      - uses: actions/setup-node@v4
+        if: env.HAS_CF == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        if: env.HAS_CF == 'true'
+      - run: npm run build
+        if: env.HAS_CF == 'true'
+        env:
+          NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+      - name: Deploy
+        id: cf
+        if: env.HAS_CF == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy out --project-name=kodesec
+            --branch=${{ github.event_name == 'push' && 'main' || format('pr-{0}', github.event.pull_request.number) }}
+            --commit-dirty=true
+      - name: Comment preview URL
+        if: env.HAS_CF == 'true' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = "${{ steps.cf.outputs.deployment-url }}";
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: `🟢 Preview deployed: ${url}`,
+            });
+      - name: Skipped
+        if: env.HAS_CF != 'true'
+        run: echo "CLOUDFLARE_API_TOKEN not set — skipping deploy."

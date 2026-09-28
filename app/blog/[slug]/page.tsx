@@ -1,308 +1,144 @@
-import React from "react";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
-import { Calendar, User, ArrowLeft } from "lucide-react";
-
-import AuthorProfile from "@/components/blog/AuthorProfile";
-import SecurityWarning from "@/components/blog/SecurityWarning";
-import EmbeddedCTA from "@/components/blog/EmbeddedCTA";
-import TableOfContentsDropdown from "@/components/blog/TableOfContentsDropdown";
-
-import type { Metadata } from "next";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { AuroraBars } from "@/components/effects/AuroraBars";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Prose } from "@/components/content/Prose";
+import { Toc } from "@/components/content/Toc";
+import { PostCard } from "@/components/blog/PostCard";
+import { AuthorBox } from "@/components/blog/AuthorBox";
 import JsonLd from "@/components/JsonLd";
+import { getMember, getPost, getPosts, slugify } from "@/lib/content/loaders";
+import { readingTime, renderMarkdown } from "@/lib/content/markdown";
+import { formatDate } from "@/lib/format";
+import { articleLd, breadcrumbLd, buildMetadata } from "@/lib/seo";
 
-type PageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
+type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+export function generateStaticParams() {
+  return getPosts().map((p) => ({ slug: p.slug }));
 }
+export const dynamicParams = false;
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
-
-  if (!post) {
-    return {
-      title: "Post Not Found | KodeSec",
-    };
-  }
-
-  return {
-    title: `${post.title} | KodeSec Research`,
-    description: post.excerpt,
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-    },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
-      images: post.image ? [post.image] : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
-    },
-  };
+  const p = getPost(slug);
+  if (!p) return {};
+  return buildMetadata({
+    title: p.title,
+    description: p.description,
+    path: `/blog/${p.slug}`,
+    image: p.cover,
+    type: "article",
+    publishedTime: p.date,
+    modifiedTime: p.updated ?? p.date,
+  });
 }
 
-function getHeadingText(node: React.ReactNode): string {
-  if (typeof node === "string") return node;
-  if (typeof node === "number") return String(node);
-  if (Array.isArray(node)) return node.map(getHeadingText).join("");
-  if (React.isValidElement(node)) {
-    return getHeadingText((node.props as { children?: React.ReactNode }).children);
-  }
-  return "";
-}
-
-function slugifyHeading(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-}
-
-const createHeading = (Tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
-  return function Heading({ children, id, className = "", ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-    const text = getHeadingText(children);
-    const slug = id || slugifyHeading(text);
-    return (
-      <Tag id={slug} className={`scroll-mt-28 ${className}`} {...props}>
-        {children}
-      </Tag>
-    );
-  };
-};
-
-const mdxComponents = {
-  AuthorProfile,
-  SecurityWarning,
-  EmbeddedCTA,
-  h1: createHeading("h1"),
-  h2: createHeading("h2"),
-  h3: createHeading("h3"),
-  h4: createHeading("h4"),
-  h5: createHeading("h5"),
-  h6: createHeading("h6"),
-  a: ({ children, id, className = "", ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
-    return (
-      <a id={id} className={id ? `scroll-mt-28 ${className}` : className} {...props}>
-        {children}
-      </a>
-    );
-  },
-};
-
-function formatDate(dateStr: string) {
-  try {
-    return new Date(dateStr).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  } catch {
-    return dateStr;
-  }
-}
-
-function extractTableOfContents(content: string) {
-  const headingRegex = /^(##|###)\s+(.*)$/gm;
-  const matches: Array<{ level: number; label: string; id: string }> = [];
-  let match: RegExpExecArray | null;
-
-  while ((match = headingRegex.exec(content)) !== null) {
-    const level = match[1] === "##" ? 2 : 3;
-    const rawLabel = match[2].trim();
-
-    // Strip inline markdown (e.g. `code`, **bold**, *italic*, [links](...))
-    const cleanLabel = rawLabel
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-      .replace(/`([^`]+)`/g, "$1")
-      .replace(/\*\*([^*]+)\*\*/g, "$1")
-      .replace(/\*([^*]+)\*/g, "$1")
-      .trim();
-
-    // Ignore self-referencing "Table of Contents" heading
-    if (cleanLabel.toLowerCase() === "table of contents") {
-      continue;
-    }
-
-    const id = slugifyHeading(cleanLabel);
-
-    if (id) {
-      matches.push({ level, label: cleanLabel, id });
-    }
-  }
-
-  return matches;
-}
-
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  const tocItems = extractTableOfContents(post.content);
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://kodesec.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://kodesec.com/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": post.title,
-        "item": `https://kodesec.com/blog/${post.slug}`
-      }
-    ]
-  };
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": `https://kodesec.com/blog/${post.slug}/#article`,
-    "headline": post.title,
-    "description": post.excerpt,
-    "datePublished": post.date,
-    "dateModified": post.date,
-    "author": {
-      "@type": "Person",
-      "name": post.author
-    },
-    "publisher": {
-      "@id": "https://kodesec.com/#organization"
-    },
-    "mainEntityOfPage": `https://kodesec.com/blog/${post.slug}`,
-    "image": post.image ? `https://kodesec.com${post.image}` : "https://kodesec.com/assets/Logo.png"
-  };
+  const post = getPost(slug);
+  if (!post) notFound();
+  const { html, toc } = await renderMarkdown(post.body);
+  const authors = post.authors.map(getMember).filter((m) => !!m);
+  const related = getPosts()
+    .filter((p) => p.slug !== post.slug && p.category === post.category)
+    .concat(getPosts().filter((p) => p.slug !== post.slug && p.category !== post.category))
+    .slice(0, 3);
 
   return (
-    <div className="relative overflow-hidden px-4 py-8 sm:px-6 lg:px-20 lg:py-16 text-white">
-      <JsonLd schema={breadcrumbSchema} />
-      <JsonLd schema={articleSchema} />
-      
-      {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] blur-[150px] pointer-events-none rounded-full" />
-
-      <div className="mx-auto max-w-7xl relative z-10">
-        {/* Navigation / Breadcrumb Header */}
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <Link 
-            href="/blog" 
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-mono font-medium text-gray-300 hover:text-white hover:border-primary/40 transition-all group shrink-0"
-          >
-            <ArrowLeft size={14} className="text-primary group-hover:-translate-x-1 transition-transform shrink-0" />
-            <span>Back to all articles</span>
-          </Link>
-
-          <nav className="hidden sm:flex items-center gap-2 text-xs font-mono text-gray-400">
-            <Link href="/blog" className="transition-colors hover:text-primary">
-              Blog
-            </Link>
-            <span>/</span>
-            <span className="min-w-0 truncate text-white max-w-[200px]">{post.slug}</span>
-          </nav>
+    <>
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { name: "Blog", path: "/blog" },
+            { name: post.category, path: `/blog/category/${slugify(post.category)}` },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+          articleLd(post),
+        ]}
+      />
+      <header className="relative isolate overflow-hidden pb-12 pt-32 md:pt-40">
+        <AuroraBars intensity="soft" />
+        <div className="container-kd relative max-w-4xl">
+          <Breadcrumbs
+            items={[
+              { name: "Home", path: "/" },
+              { name: "Blog", path: "/blog" },
+              { name: post.category, path: `/blog/category/${slugify(post.category)}` },
+            ]}
+          />
+          <h1 className="mt-8 text-3xl font-semibold leading-[1.12] text-fg sm:text-4xl md:text-5xl">{post.title}</h1>
+          <p className="mt-6 text-lg leading-relaxed text-fg-2">{post.description}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-fg-2">
+            {authors.map((a) => (
+              <span key={a.slug} className="flex items-center gap-2.5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={a.image} alt="" className="h-8 w-8 rounded-full border border-line-2 bg-surface object-cover p-0.5" />
+                <span className="text-fg">{a.name}</span>
+              </span>
+            ))}
+            <time dateTime={post.date} className="font-mono text-xs uppercase tracking-[0.1em] text-fg-3">
+              {formatDate(post.date)}
+            </time>
+            <span className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.1em] text-fg-3">
+              <Clock className="h-3.5 w-3.5" /> {readingTime(post.body)}
+            </span>
+          </div>
         </div>
+      </header>
 
-        {/* MAIN ARTICLE CONTAINER (Full Width, No Sidebar Constraints) */}
-        <article className="overflow-hidden rounded-3xl backdrop-blur-xl">
-          {/* Header */}
-          <header className="px-6 py-10 md:px-12 md:py-14 text-left">
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-3 text-xs font-mono font-bold uppercase tracking-widest text-primary">
-                <span className="px-3 py-1 rounded-full border border-primary/20 bg-primary/10">
-                  {post.readingTime || "5 MIN READ"}
-                </span>
-              </div>
+      <div className="container-kd grid gap-12 pb-20 lg:grid-cols-12">
+        <article className="min-w-0 lg:col-span-8 lg:col-start-1">
+          <Prose html={html} />
+          {post.tags.length > 0 && (
+            <ul className="mt-12 flex flex-wrap gap-2 border-t border-line pt-8">
+              {post.tags.map((t) => (
+                <li key={t} className="chip">
+                  #{t}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="mt-10 space-y-4">
+            {authors.map((a) => (
+              <AuthorBox key={a.slug} member={a} />
+            ))}
+          </div>
+          <Link href="/blog" className="btn btn-ghost mt-10">
+            <ArrowLeft className="h-4 w-4" /> All articles
+          </Link>
+        </article>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white tracking-tight leading-tight">
-                {post.title}
-              </h1>
-
-              <p className="text-sm sm:text-base md:text-lg text-gray-400 font-sans leading-relaxed">
-                {post.excerpt}
+        <aside className="hidden lg:col-span-4 lg:block">
+          <div className="sticky top-28 space-y-6">
+            <Toc items={toc} className="max-h-[55vh] overflow-y-auto pr-2" />
+            <div className="card overflow-hidden p-6">
+              <p className="eyebrow">Kodesec</p>
+              <p className="mt-4 font-semibold text-fg">Worried about the same risk?</p>
+              <p className="mt-2 text-sm leading-relaxed text-fg-2">
+                We test for it every week. Book a free scoping call and get a fixed quote.
               </p>
-
-              <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-mono">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-gray-300">
-                  <Calendar size={14} className="text-primary shrink-0" />
-                  <span>{formatDate(post.date)}</span>
-                </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-gray-300">
-                  <User size={14} className="text-primary shrink-0" />
-                  <span>{post.author}</span>
-                </div>
-              </div>
-            </div>
-          </header>
-
-          {/* Body Content Area with Dropdown Table of Contents */}
-          <main className="p-6 md:p-10 lg:p-12 text-left">
-            
-            {/* Interactive Dropdown Table of Contents */}
-            <TableOfContentsDropdown items={tocItems} />
-
-            {/* MDX Remote Content (Full Width) */}
-            <div className="article-body prose prose-invert prose-base max-w-none sm:prose-lg prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white prose-p:text-gray-300 prose-p:font-sans prose-li:text-gray-300 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:rounded prose-code:bg-primary/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-primary prose-pre:border prose-pre:border-white/10 prose-pre:bg-[#070B12] prose-blockquote:border-l-primary prose-blockquote:text-gray-300 prose-img:rounded-2xl prose-img:border prose-img:border-white/10 prose-hr:border-white/10">
-              <MDXRemote
-                source={post.content}
-                components={mdxComponents}
-                options={{
-                  mdxOptions: {
-                    remarkPlugins: [remarkGfm],
-                  },
-                }}
-              />
-            </div>
-
-            {/* Author Profile */}
-            <div className="mt-12 pt-8 border-t border-white/10">
-              <AuthorProfile authorName={post.author} />
-            </div>
-
-            {/* Bottom Back Button */}
-            <div className="mt-10 pt-6 border-t border-white/10 flex justify-between items-center">
-              <Link
-                href="/blog"
-                className="btn-secondary text-xs font-mono py-2.5 px-5"
-              >
-                <ArrowLeft size={14} className="text-primary shrink-0" />
-                <span>Back to all articles</span>
+              <Link href="/book" className="btn btn-brand btn-sm mt-5">
+                Book a call <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-          </main>
-        </article>
+          </div>
+        </aside>
       </div>
-    </div>
+
+      {related.length > 0 && (
+        <section className="border-t border-line py-20">
+          <div className="container-kd">
+            <h2 className="text-2xl font-semibold text-fg">Keep reading</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {related.map((p) => (
+                <PostCard key={p.slug} post={p} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }

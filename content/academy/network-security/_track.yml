@@ -1,0 +1,7 @@
+title: Network & Active Directory
+slug: network-security
+order: 2
+icon: Network
+status: coming-soon
+summary: Internal networks, segmentation, Active Directory attack paths and how defenders shut them down.
+roles: [red, blue]

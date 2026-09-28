@@ -1,355 +1,188 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  CheckCircle
-} from "lucide-react";
-
-import { solutions, getSolutionBySlug } from "@/content/solutions";
+import { notFound } from "next/navigation";
+import { ArrowRight, Check } from "lucide-react";
+import { Horizon } from "@/components/effects/Aurora";
+import { AuroraBars } from "@/components/effects/AuroraBars";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Section, SectionHeading } from "@/components/ui/Section";
+import { Faq } from "@/components/ui/Faq";
+import { Prose } from "@/components/content/Prose";
+import { ServiceGrid } from "@/components/services/ServiceGrid";
+import { ServiceMedia } from "@/components/services/ServiceMedia";
+import { ACCENT } from "@/components/services/accent";
 import JsonLd from "@/components/JsonLd";
-import { Section } from "@/components/ui/section";
-import { Container } from "@/components/ui/container";
-import SolutionHero from "@/components/solutions/SolutionHero";
-import SolutionVisualizer from "@/components/solutions/SolutionVisualizer";
-import CapabilityCard from "@/components/solutions/CapabilityCard";
-import ProcessTimeline from "@/components/solutions/ProcessTimeline";
-import TechnologyGrid from "@/components/solutions/TechnologyGrid";
-import FAQAccordion from "@/components/solutions/FAQAccordion";
+import { getService, getServices } from "@/lib/content/loaders";
+import { renderMarkdown } from "@/lib/content/markdown";
+import { breadcrumbLd, buildMetadata, faqLd, serviceLd } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 
-type SolutionDetailPageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
+type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  return solutions.map((sol) => ({ slug: sol.slug }));
+export function generateStaticParams() {
+  return getServices().map((s) => ({ slug: s.slug }));
+}
+export const dynamicParams = false;
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const s = getService(slug);
+  if (!s) return {};
+  return buildMetadata({ title: s.seo.title, description: s.seo.description, path: `/services/${s.slug}` });
 }
 
-export async function generateMetadata({ params }: SolutionDetailPageProps): Promise<Metadata> {
+export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
-  const solution = getSolutionBySlug(slug);
-
-  if (!solution) {
-    return {
-      title: "Solution Not Found | Kodesec",
-    };
-  }
-
-  return {
-    title: `${solution.seo.title} | Kodesec Solutions`,
-    description: solution.seo.description,
-    alternates: {
-      canonical: `/services/${solution.slug}`,
-    },
-    keywords: [
-      solution.title.toLowerCase(),
-      ...solution.seo.keywords,
-      "kodesec solutions",
-      "secure development"
-    ],
-  };
-}
-
-export default async function SolutionDetailPage({ params }: SolutionDetailPageProps) {
-  const { slug } = await params;
-  const solution = getSolutionBySlug(slug);
-
-  if (!solution) {
-    notFound();
-  }
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://kodesec.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Solutions",
-        "item": "https://kodesec.com/services"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": solution.title,
-        "item": `https://kodesec.com/services/${solution.slug}`
-      }
-    ]
-  };
-
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `https://kodesec.com/services/${solution.slug}/#service`,
-    "name": solution.title,
-    "description": solution.description,
-    "provider": {
-      "@type": "Organization",
-      "@id": "https://kodesec.com/#organization",
-      "name": "Kodesec",
-      "url": "https://kodesec.com"
-    },
-    "areaServed": "Worldwide"
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": solution.faq.map((q) => ({
-      "@type": "Question",
-      "name": q.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": q.answer
-      }
-    }))
-  };
-
-  // Color mapping for highlights
-  const textHighlight = {
-    primary: "text-primary",
-    cyan: "text-cyan-400",
-    purple: "text-purple-400",
-    amber: "text-amber-400"
-  }[solution.themeColor];
-
-  const borderGlow = {
-    primary: "hover:border-primary/20 hover:shadow-[0_0_30px_rgba(54,226,123,0.06)]",
-    cyan: "hover:border-cyan-500/20 hover:shadow-[0_0_30px_rgba(34,211,238,0.06)]",
-    purple: "hover:border-purple-500/20 hover:shadow-[0_0_30px_rgba(192,132,252,0.06)]",
-    amber: "hover:border-amber-500/20 hover:shadow-[0_0_30px_rgba(245,158,11,0.06)]"
-  }[solution.themeColor];
-
-  const badgeColor = {
-    primary: "bg-primary/5 text-primary border-primary/20",
-    cyan: "bg-cyan-500/5 text-cyan-400 border-cyan-500/20",
-    purple: "bg-purple-500/5 text-purple-400 border-purple-500/20",
-    amber: "bg-amber-500/5 text-amber-400 border-amber-500/20"
-  }[solution.themeColor];
+  const s = getService(slug);
+  if (!s) notFound();
+  const services = getServices();
+  const a = ACCENT[s.accent];
+  const { html } = await renderMarkdown(s.body);
+  const bookHref = `/book?service=${s.slug}`;
 
   return (
-    <main className="bg-background-dark overflow-hidden relative min-h-screen">
-      <JsonLd schema={breadcrumbSchema} />
-      <JsonLd schema={serviceSchema} />
-      <JsonLd schema={faqSchema} />
+    <>
+      <JsonLd
+        data={[
+          breadcrumbLd([{ name: "Services", path: "/services" }, { name: s.title, path: `/services/${s.slug}` }]),
+          serviceLd(s),
+          ...(s.faq.length ? [faqLd(s.faq)] : []),
+        ]}
+      />
 
-      {/* Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-      
-      {/* ================= HERO SECTION ================= */}
-      <Section className="relative px-4 pt-28 pb-20 md:pt-36 md:pb-28">
-        <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            {/* Left Content */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left z-10 w-full min-w-0">
-              <SolutionHero
-                badge={`${solution.title} Solution`}
-                title={solution.tagline}
-                subtitle={solution.longDescription}
-                primaryCtaLabel="Talk to an Lead Engineer"
-                primaryCtaHref="/contact"
-                secondaryCtaLabel="Schedule Scoping Call"
-                secondaryCtaHref="/contact?type=scoping"
-                themeColor={solution.themeColor}
-              />
-            </div>
-
-            {/* Right Visualizer */}
-            <div className="lg:col-span-5 flex justify-center z-10 w-full min-w-0">
-              <SolutionVisualizer slug={solution.slug} />
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ================= BUSINESS CHALLENGES ================= */}
-      <Section className="py-20 border-t border-white/5 bg-card/5 relative z-10">
-        <Container className="max-w-4xl">
-          <div className="p-8 md:p-12 rounded-3xl border border-white/5 bg-white/[0.01] flex flex-col md:flex-row gap-8 items-center text-left">
-            <div className="md:w-1/3">
-              <span className={`text-[10px] font-mono font-bold tracking-widest uppercase block mb-2 ${textHighlight}`}>
-                Target Problems
-              </span>
-              <h3 className="text-2xl font-black text-white tracking-tight leading-none">
-                We help businesses that need to...
-              </h3>
-            </div>
-            
-            <div className="md:w-2/3 grid gap-4 w-full">
-              {solution.challenges.map((challenge, idx) => (
-                <div 
-                  key={idx} 
-                  className="flex items-start gap-3 p-4 rounded-xl border border-white/5 bg-black/40 hover:bg-black/60 transition-all"
-                >
-                  <span className={`flex h-6 w-6 items-center justify-center rounded-full border shrink-0 text-xs font-bold font-mono ${badgeColor}`}>
-                    {idx + 1}
-                  </span>
-                  <p className="text-sm font-semibold text-white leading-relaxed">
-                    {challenge}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ================= CAPABILITIES ================= */}
-      <Section className="py-20 border-t border-white/5 relative z-10">
-        <Container>
-          <div className="max-w-2xl mx-auto mb-16 text-center">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Capabilities</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Structured Expertise Area</p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-center">
-            {solution.capabilities.map((cap, idx) => (
-              <CapabilityCard
-                key={cap.title}
-                capability={cap}
-                themeColor={solution.themeColor}
-                index={idx}
-              />
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* ================= PROCESS ================= */}
-      <Section className="py-20 border-t border-white/5 bg-black/20 relative z-10">
-        <Container>
-          <div className="max-w-2xl mx-auto mb-16 text-center">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Methodology</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Operational Roadmap</p>
-          </div>
-
-          <ProcessTimeline steps={solution.process} themeColor={solution.themeColor} />
-        </Container>
-      </Section>
-
-      {/* ================= TECHNOLOGY CLOUD ================= */}
-      <Section className="py-20 border-t border-white/5 relative z-10">
-        <Container>
-          <div className="max-w-2xl mx-auto mb-16 text-center">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Ecosystem</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">Technologies Integrated</p>
-          </div>
-
-          <TechnologyGrid technologies={solution.technologies} />
-        </Container>
-      </Section>
-
-      {/* ================= DELIVERABLES ================= */}
-      <Section className="py-20 border-t border-white/5 bg-card/10 relative z-10">
-        <Container>
-          <div className="max-w-2xl mx-auto mb-16 text-center">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Deliverables</h2>
-            <p className="mt-3 text-3xl font-black text-white sm:text-4xl tracking-tight">What You Receive</p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-            {solution.deliverables.map((item) => (
-              <div 
-                key={item.title} 
-                className={`p-6 rounded-2xl border border-white/5 bg-black/40 flex flex-col text-left transition-all duration-300 ${borderGlow}`}
-              >
-                <div className={`p-2.5 rounded-xl border w-fit ${badgeColor} mb-4`}>
-                  <CheckCircle className="h-5 w-5" />
-                </div>
-                <h4 className="text-base font-bold text-white tracking-tight leading-none mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-xs text-gray-400 leading-relaxed font-medium">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* ================= FEATURED PROJECT / CASE STUDY ================= */}
-      <Section className="py-20 border-t border-white/5 bg-[#050811] relative z-10">
-        <Container className="max-w-4xl">
-          <div className={`p-8 md:p-12 rounded-3xl border border-white/5 bg-white/[0.01] flex flex-col md:flex-row gap-8 items-center text-left ${borderGlow}`}>
-            <div className="md:w-3/5">
-              <span className={`text-[10px] font-mono font-bold tracking-widest uppercase block mb-3 ${textHighlight}`}>
-                Case Study Highlight
-              </span>
-              <h3 className="text-xl md:text-2xl font-black text-white tracking-tight mb-4">
-                {solution.featuredProject.title}
-              </h3>
-              <p className="text-sm text-gray-400 leading-relaxed font-medium mb-6">
-                {solution.featuredProject.description}
-              </p>
-              <div className="flex items-center gap-1.5 text-xs text-gray-500 font-mono font-bold">
-                <span>CLIENT ROLE:</span>
-                <span className="text-white">{solution.featuredProject.clientRole}</span>
-              </div>
-            </div>
-            
-            <div className="md:w-3/5 grid grid-cols-2 gap-4 w-full text-center">
-              {solution.featuredProject.metrics.map((m, idx) => (
-                <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-black/40 flex flex-col justify-center">
-                  <span className={`text-xl font-black tracking-tight ${textHighlight}`}>
-                    {m.value}
-                  </span>
-                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wide mt-1.5 leading-tight">
-                    {m.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ================= FAQ ================= */}
-      <Section className="py-20 border-t border-white/5 bg-black/10 relative z-10">
-        <Container className="max-w-3xl">
-          <div className="mb-12 text-center">
-            <h2 className="text-xs font-mono font-bold tracking-widest text-primary uppercase">FAQ</h2>
-            <p className="mt-3 text-3xl font-black text-white tracking-tight">Frequently Asked Questions</p>
-          </div>
-
-          <FAQAccordion items={solution.faq} themeColor={solution.themeColor} />
-        </Container>
-      </Section>
-
-      {/* ================= CTA ================= */}
-      <Section className="py-20 border-t border-white/5 bg-card/10 relative z-10">
-        <Container className="max-w-4xl">
-          <div className="p-8 md:p-12 rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 via-transparent to-transparent text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_120%,rgba(54,226,123,0.06),transparent_50%)]" />
-            
-            <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight leading-none mb-4">
-              Redesign Your Infrastructure Boundaries
-            </h3>
-            
-            <p className="text-sm text-gray-400 max-w-lg mx-auto leading-relaxed mb-8">
-              Let&apos;s map out security gaps, configure automatic checking pipelines, and release E2E automated frameworks built for modern products.
+      {/* ------------------------------------------------ hero (Aikido product layout) */}
+      <section data-theme="dark" className="relative isolate overflow-hidden bg-bg pb-16 pt-32 md:pb-24 md:pt-40">
+        <AuroraBars intensity="soft" />
+        <div className="container-kd relative grid items-center gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: s.title }]} />
+            <p className="mt-8 flex items-center gap-2 text-lg font-semibold text-fg">
+              <span className="font-bold">kodesec</span>
+              <span className={a.text}>/{s.label}</span>
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-bold text-[#0B0F1A] hover:bg-primary-light transition-all hover:shadow-[0_0_20px_rgba(54,226,123,0.3)] cursor-pointer"
-              >
-                Initiate Project Scoping
-                <ArrowRight size={16} />
+            <h1 className="mt-4 text-4xl font-semibold leading-[1.05] text-fg sm:text-5xl lg:text-[3.4rem]">{s.tagline}</h1>
+            <p className="mt-6 text-base leading-relaxed text-fg-2 md:text-lg">{s.summary}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href={bookHref} className="btn btn-primary">
+                Book a scoping call <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="#services" className="btn btn-ghost">
+                See all {s.subservices.length} services
               </Link>
             </div>
+            <p className="mt-4 text-xs text-fg-3">Free 30-minute call · NDA available · Fixed quote in 48h</p>
           </div>
-        </Container>
+          <div className="lg:col-span-7">
+            <div className={cn("rounded-[22px] border border-line-2 p-1.5", a.glow)}>
+              <ServiceMedia src={s.media} alt={`${s.title} at Kodesec`} priority />
+            </div>
+          </div>
+        </div>
+        {/* stack row, like Aikido's logo strip */}
+        <div className="container-kd relative mt-16">
+          <p className="text-center font-mono text-[0.68rem] uppercase tracking-[0.16em] text-fg-3">Tools & platforms we work with</p>
+          <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            {s.technologies.map((t) => (
+              <li key={t} className="text-base font-semibold tracking-tight text-fg-3/90">
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------ alternating feature rows */}
+      <section className="relative py-16 md:py-24">
+        <div className="container-kd space-y-16 md:space-y-24">
+          {s.highlights.map((h, i) => (
+            <div key={h.title} className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+              <div data-reveal className={cn(i % 2 === 1 && "md:order-2")}>
+                <div className={cn("rounded-[22px] border border-line-2 p-1.5", a.tint)}>
+                  <ServiceMedia src={h.media} alt={h.title} />
+                </div>
+              </div>
+              <div data-reveal>
+                <h2 className="text-3xl font-semibold leading-tight text-fg md:text-[2.25rem]">{h.title}</h2>
+                <p className="mt-4 max-w-md text-base leading-relaxed text-fg-2 md:text-lg">{h.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ------------------------------------------------ all sub-services (tinted grid) */}
+      <Section id="services" className="scroll-mt-24 border-t border-line">
+        <SectionHeading
+          eyebrow={`kodesec/${s.label}`}
+          title={`Everything in ${s.title}`}
+          lead="Pick one service or combine several — every engagement is scoped with you and ends re-verified."
+        />
+        <div className="mt-12">
+          <ServiceGrid services={services} only={s.slug} />
+        </div>
       </Section>
-    </main>
+
+      {/* ------------------------------------------------ overview + process */}
+      <Section className="border-t border-line">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <SectionHeading eyebrow="How we work" title="From first call to verified result" />
+            <Prose html={html} className="mt-6" />
+          </div>
+          <ol className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line lg:col-span-7">
+            {s.process.map((p, i) => (
+              <li key={p.title} className="flex gap-5 bg-bg p-6">
+                <span className={cn("font-mono text-sm", a.text)}>{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="block font-semibold text-fg">{p.title}</span>
+                  <span className="mt-1 block text-sm leading-relaxed text-fg-2">{p.description}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </Section>
+
+      {/* ------------------------------------------------ deliverables */}
+      {s.deliverables.length > 0 && (
+        <Section className="border-t border-line">
+          <SectionHeading eyebrow="Deliverables" title="What you receive" />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {s.deliverables.map((d) => (
+              <div key={d.title} className="card p-6">
+                <Check className={cn("h-5 w-5", a.text)} />
+                <h3 className="mt-4 font-semibold text-fg">{d.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-fg-2">{d.description}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {s.faq.length > 0 && (
+        <Section className="border-t border-line">
+          <div className="grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <SectionHeading eyebrow="FAQ" title="Questions, answered" />
+            </div>
+            <div className="lg:col-span-8">
+              <Faq items={s.faq} />
+            </div>
+          </div>
+        </Section>
+      )}
+
+      <section className="relative isolate overflow-hidden border-t border-line pb-40 pt-24 md:pb-52">
+        <div className="container-kd relative text-center">
+          <h2 className="mx-auto max-w-2xl text-4xl font-semibold leading-tight md:text-5xl">
+            <span className="text-gradient">Let&apos;s scope your {s.title.toLowerCase()} project</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-lg text-fg-2">A free 30-minute call. You get a clear plan and a fixed quote.</p>
+          <Link href={bookHref} className="btn btn-primary mt-9">
+            Book a call <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <Horizon />
+      </section>
+    </>
   );
 }

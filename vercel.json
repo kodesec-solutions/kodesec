@@ -5,15 +5,19 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.web3forms.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; frame-src 'self' https://www.googletagmanager.com; object-src 'none';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://www.googletagmanager.com https://*.google-analytics.com https://*.cal.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://app.cal.com https://*.cal.com; frame-src https://app.cal.com https://cal.com https://www.youtube-nocookie.com https://www.loom.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'; upgrade-insecure-requests"
         },
         {
-          "key": "X-Frame-Options",
-          "value": "DENY"
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
         },
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
         },
         {
           "key": "Referrer-Policy",
@@ -21,22 +25,79 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
         },
         {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains; preload"
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
+        }
+      ]
+    },
+    {
+      "source": "/opengraph-image",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/png"
         }
       ]
     }
   ],
   "redirects": [
-    { "source": "/services/manual-website-penetration-testing", "destination": "/services/cybersecurity", "permanent": true },
-    { "source": "/services/network-infrastructure-penetration-testing", "destination": "/services/cybersecurity", "permanent": true },
-    { "source": "/services/website-vulnerability-scan-manual-verification", "destination": "/services/cybersecurity", "permanent": true },
-    { "source": "/services/active-directory-security-assessment", "destination": "/services/cybersecurity", "permanent": true },
-    { "source": "/services/secure-application-development", "destination": "/services/design-engineering", "permanent": true },
-    { "source": "/services/infrastructure-automation-cloud-solutions", "destination": "/services/cloud-devops", "permanent": true },
-    { "source": "/services/application-qa-testing", "destination": "/services/quality-assurance", "permanent": true }
+    {
+      "source": "/services/design-engineering",
+      "destination": "/services/software-development",
+      "permanent": true
+    },
+    {
+      "source": "/services/cloud-devops",
+      "destination": "/services/cloud",
+      "permanent": true
+    },
+    {
+      "source": "/services/manual-website-penetration-testing",
+      "destination": "/services/cybersecurity/web-application-penetration-testing",
+      "permanent": true
+    },
+    {
+      "source": "/services/network-infrastructure-penetration-testing",
+      "destination": "/services/cybersecurity/network-security-testing",
+      "permanent": true
+    },
+    {
+      "source": "/services/website-vulnerability-scan-manual-verification",
+      "destination": "/services/cybersecurity/vulnerability-assessment",
+      "permanent": true
+    },
+    {
+      "source": "/services/active-directory-security-assessment",
+      "destination": "/services/cybersecurity/network-security-testing",
+      "permanent": true
+    },
+    {
+      "source": "/services/secure-application-development",
+      "destination": "/services/software-development/secure-software-development",
+      "permanent": true
+    },
+    {
+      "source": "/services/infrastructure-automation-cloud-solutions",
+      "destination": "/services/devops/infrastructure-automation",
+      "permanent": true
+    },
+    {
+      "source": "/services/application-qa-testing",
+      "destination": "/services/quality-assurance",
+      "permanent": true
+    },
+    {
+      "source": "/why-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/services",
+      "permanent": true
+    }
   ]
 }

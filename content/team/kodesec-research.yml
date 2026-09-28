@@ -1,0 +1,8 @@
+name: Kodesec Research
+slug: kodesec-research
+role: Research team
+bio: Posts written jointly by the Kodesec team. TODO(team) — move each post to its real author for E-E-A-T.
+image: /brand/kodesec-mark.svg
+kind: organization
+expertise: [Security research]
+links: {}

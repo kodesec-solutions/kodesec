@@ -1,0 +1,9 @@
+name: Mian Al Ruhanyat
+slug: mian-al-ruhanyat
+role: Solutions Architect
+bio: Designs cloud-native platforms for modern web applications using Kubernetes, infrastructure as code and secure delivery pipelines.
+image: /assets/Mian_Al_Ruhaniyat.jpeg
+expertise: [Kubernetes, CI/CD, AWS / Azure / GCP, Infrastructure automation]
+links:
+  linkedin: https://www.linkedin.com/in/alruhanyat/
+  github: https://github.com/alruhanyat

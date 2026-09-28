@@ -1,59 +1,34 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/blog";
-import { solutions } from "@/content/solutions";
+import { getAcademy, getCategories, getPage, getPosts, getServices } from "@/lib/content/loaders";
+import { SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kodesec.com";
+  const posts = getPosts();
+  const latestPost = posts[0]?.updated ?? posts[0]?.date;
+  const tracks = getAcademy();
+  const lessons = tracks.flatMap((t) => t.modules.flatMap((m) => m.lessons));
+  const latestLesson = lessons.map((l) => l.updated).sort().at(-1);
+  const u = (path: string, lastModified?: string) => ({ url: `${SITE_URL}${path}`, ...(lastModified ? { lastModified } : {}) });
 
-  // Static routes
-  const staticLastMod = new Date("2026-09-20T00:00:00.000Z");
-  const staticRoutes = [
-    "",
-    "/about",
-    "/why-us",
-    "/services",
-    "/projects",
-    "/blog",
-    "/contact",
-    "/privacy-policy",
-    "/terms-of-service",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: staticLastMod,
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
-  }));
-
-  // Dynamic solutions routes
-  const serviceRoutes = solutions.map((sol) => ({
-    url: `${baseUrl}/services/${sol.slug}`,
-    lastModified: staticLastMod,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  // Dynamic blog routes
-  const blogPosts = getAllPosts();
-  const blogRoutes = blogPosts.map((post) => {
-    let postDate = staticLastMod;
-    try {
-      const parsed = new Date(post.date);
-      if (!Number.isNaN(parsed.getTime())) {
-        postDate = parsed;
-      }
-    } catch {
-      // fallback to staticLastMod
-    }
-
-    return {
-      url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: postDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    };
-  });
-
-  return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
+  return [
+    u("/", latestPost),
+    u("/services"),
+    ...getServices().map((s) => u(`/services/${s.slug}`)),
+    ...getServices().flatMap((s) => s.subservices.map((sub) => u(`/services/${s.slug}/${sub.slug}`))),
+    u("/pricing"),
+    u("/book"),
+    u("/contact"),
+    u("/about"),
+    u("/academy", latestLesson),
+    ...tracks.filter((t) => t.lessonCount > 0).map((t) => u(t.href, t.modules.flatMap((m) => m.lessons.map((l) => l.updated)).sort().at(-1))),
+    ...tracks.flatMap((t) => t.modules.map((m) => u(m.href))),
+    ...lessons.map((l) => u(l.href, l.updated)),
+    u("/blog", latestPost),
+    ...getCategories().map((c) => u(`/blog/category/${c.slug}`)),
+    ...posts.map((p) => u(`/blog/${p.slug}`, p.updated ?? p.date)),
+    u("/privacy-policy", getPage("privacy-policy")?.data.updated),
+    u("/terms-of-service", getPage("terms-of-service")?.data.updated),
+  ];
 }

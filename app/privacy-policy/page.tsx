@@ -1,14 +1,12 @@
-import type { Metadata } from "next";
-import PrivacyPolicyClient from "@/components/PrivacyPolicyClient";
+import { LegalPage } from "@/components/content/LegalPage";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Privacy Policy",
-  description: "Learn how KodeSec collects, utilizes, and protects customer personal and operational data.",
-  alternates: {
-    canonical: "/privacy-policy",
-  },
-};
+  description: "How Kodesec collects, uses and protects your information when you use our website or services.",
+  path: "/privacy-policy",
+});
 
-export default function PrivacyPolicyPage() {
-  return <PrivacyPolicyClient />;
+export default function Page() {
+  return <LegalPage slug="privacy-policy" />;
 }

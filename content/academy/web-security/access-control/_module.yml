@@ -1,0 +1,4 @@
+title: Access control
+slug: access-control
+order: 1
+summary: Access control decides who can do what. When it breaks, users can read or change data that isn't theirs. It's the number one risk in the OWASP Top 10.

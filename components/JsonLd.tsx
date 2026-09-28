@@ -1,10 +1,9 @@
-import React from "react";
-
-export default function JsonLd({ schema }: { schema: Record<string, unknown> }) {
+/** Renders a JSON-LD block. `<` is escaped so content can never close the script tag. */
+export default function JsonLd({ data }: { data: Record<string, unknown> | Record<string, unknown>[] }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\u003c") }}
     />
   );
 }

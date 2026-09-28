@@ -1,0 +1,7 @@
+title: Secure Development
+slug: secure-development
+order: 6
+icon: Code
+status: coming-soon
+summary: Writing code that stays secure — threat modelling, secure design patterns and code review.
+roles: [dev]

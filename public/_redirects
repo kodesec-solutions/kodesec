@@ -1,0 +1,12 @@
+# Cloudflare Pages redirects. Keep in sync with vercel.json.
+/services/design-engineering /services/software-development 301
+/services/cloud-devops /services/cloud 301
+/services/manual-website-penetration-testing /services/cybersecurity/web-application-penetration-testing 301
+/services/network-infrastructure-penetration-testing /services/cybersecurity/network-security-testing 301
+/services/website-vulnerability-scan-manual-verification /services/cybersecurity/vulnerability-assessment 301
+/services/active-directory-security-assessment /services/cybersecurity/network-security-testing 301
+/services/secure-application-development /services/software-development/secure-software-development 301
+/services/infrastructure-automation-cloud-solutions /services/devops/infrastructure-automation 301
+/services/application-qa-testing /services/quality-assurance 301
+/why-us /about 301
+/projects /services 301

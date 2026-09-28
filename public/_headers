@@ -1,0 +1,18 @@
+# Cloudflare Pages headers (production host after cutover). Keep in sync with vercel.json.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://www.googletagmanager.com https://*.google-analytics.com https://*.cal.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://app.cal.com https://*.cal.com; frame-src https://app.cal.com https://cal.com https://www.youtube-nocookie.com https://www.loom.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+/opengraph-image
+  Content-Type: image/png
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/blog/*
+  Cache-Control: public, max-age=0, must-revalidate

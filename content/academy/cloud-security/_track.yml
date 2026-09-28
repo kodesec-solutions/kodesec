@@ -1,0 +1,7 @@
+title: Cloud Security
+slug: cloud-security
+order: 3
+icon: Cloud
+status: coming-soon
+summary: IAM, storage exposure, misconfiguration and securing workloads on AWS, Azure and GCP.
+roles: [cloud, red, blue]

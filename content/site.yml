@@ -1,0 +1,99 @@
+# Global site settings. Editable from the admin panel (Settings) — every change goes through a pull request.
+name: Kodesec
+legalName: Kodesec Solutions
+url: https://kodesec.com
+tagline: Security-first engineering, offensive testing and an open security academy.
+description: Kodesec is a founder-led security and engineering firm. We run manual penetration tests, build secure software and cloud platforms, and publish a free security academy.
+email: contact@kodesec.com   # TODO(team): confirm — legal pages currently say hello@kodesec.solutions
+location: Dhaka, Bangladesh
+phone: "+44 7353 814326"
+address:
+  street: "14/2E Docklands Business Centre, 10–16 Tiller Road"
+  city: London
+  postcode: E14 8PX
+  country: GB
+  countryName: United Kingdom
+
+# Cal.com booking link: "<username>/<event-slug>". Create a free account at cal.com.
+# TODO(team): replace with your real Cal.com link, e.g. "kodesec/scoping-call".
+booking:
+  calLink: ""
+  defaultEvent: scoping-call
+
+# Home page film band (video loops muted behind the copy).
+# To change the video: put the new file in public/media/video/ and update `video` (and `poster`).
+# Keep it H.264 .mp4, ~1600px wide, under ~10 MB (see docs/CONTENT_GUIDE.md → Videos).
+film:
+  video: /media/video/kodesec-promo.mp4
+  poster: /media/video/kodesec-promo-poster.jpg
+  heading: ["Security built into", "everything you ship."]
+  lines: ["Trusted by builders, dreaded by attackers.", "Test, fix and verify — faster — with Kodesec."]
+
+# Thin announcement strip at the top of every page. Leave `text` empty to hide it.
+topBar:
+  text: "Kodesec × Integrated-Systems.ai: securing the AI you build, together"
+  href: "/#partners"
+
+# Partners shown on the home page (after the film band) and on /about.
+# `logo` is optional (a file in public/); without it the name is shown as a wordmark.
+# TODO(team): confirm the collaboration wording with Integrated-Systems.ai.
+partners:
+  - name: Integrated-Systems.ai
+    short: ISAI
+    url: https://integrated-systems.ai
+    logo: ""
+    about: "Builds intelligent automation, AI agents, SaaS platforms and enterprise AI systems for manufacturing, healthcare, finance, logistics and agriculture. UK-headquartered with global reach."
+    together: "They build the AI. We make sure it's secure — from threat modelling and secure engineering to penetration testing of AI-powered products."
+
+# Announcement band on the home page (mint section). Paste any YouTube link
+# (watch, youtu.be, shorts or live). Leave `youtube` empty to show the Kodesec film instead.
+# Editable from the admin panel once it ships.
+announcement:
+  label: Announcement
+  title: "Meet Kodesec: security built into everything you ship"
+  summary: "Who we are, what we test, and why every fix gets re-verified. Two minutes, no fluff."
+  date: "2026-09-28"
+  youtube: ""
+  cta: { label: "Book a scoping call", href: "/book" }
+
+analytics:
+  gtmId: GTM-PX3H2865
+  # Same GA4 property the current live site loads directly. If your GTM container also
+  # fires a GA4 tag for this ID, remove this line to avoid double-counting.
+  ga4Id: G-LH10BFSBJQ
+
+social:
+  - { label: LinkedIn, href: "https://www.linkedin.com/company/kodesec-solutions/", icon: linkedin }
+  - { label: GitHub, href: "https://github.com/kodesec", icon: github }
+  # TODO(team): add real handles, then uncomment
+  # - { label: X, href: "https://x.com/kodesec", icon: x }
+  # - { label: YouTube, href: "https://www.youtube.com/@kodesec", icon: youtube }
+
+nav:
+  - label: Services
+    href: /services
+    children: services   # filled from content/services
+  - label: Academy
+    href: /academy
+    children: academy    # filled from content/academy
+  - { label: Blog, href: /blog }
+  - { label: Pricing, href: /pricing }
+  - { label: About, href: /about }
+
+footer:
+  - title: Services
+    links: services
+  - title: Learn
+    links:
+      - { label: Academy, href: /academy }
+      - { label: Blog, href: /blog }
+  - title: Company
+    links:
+      - { label: About, href: /about }
+      - { label: Pricing, href: /pricing }
+      - { label: Contact, href: /contact }
+      - { label: Book a call, href: /book }
+  - title: Legal
+    links:
+      - { label: Privacy Policy, href: /privacy-policy }
+      - { label: Terms of Service, href: /terms-of-service }

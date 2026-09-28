@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { TeamMember } from "@/lib/content/schemas";
 import { SocialIcon } from "@/components/ui/Icon";
 
@@ -10,7 +9,7 @@ export function AuthorBox({ member }: { member: TeamMember }) {
       <div className="min-w-0">
         <p className="font-mono text-[0.68rem] uppercase tracking-[0.12em] text-fg-3">Written by</p>
         <p className="mt-1 font-semibold text-fg">
-          {member.kind === "person" ? <Link href={`/about#${member.slug}`}>{member.name}</Link> : member.name}
+          {member.name}
           <span className="ml-2 text-sm font-normal text-fg-3">{member.role}</span>
         </p>
         {member.kind === "person" && <p className="mt-2 text-sm leading-relaxed text-fg-2">{member.bio}</p>}

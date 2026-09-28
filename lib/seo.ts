@@ -101,7 +101,7 @@ function authorsLd(slugs: string[]) {
     const m = getMember(s);
     if (!m) return { "@type": "Person", name: s };
     if (m.kind === "organization") return { "@id": ORG_ID };
-    return { "@type": "Person", name: m.name, jobTitle: m.role, url: abs(`/about#${m.slug}`), sameAs: Object.values(m.links) };
+    return { "@type": "Person", name: m.name, jobTitle: m.role, sameAs: Object.values(m.links) };
   });
 }
 

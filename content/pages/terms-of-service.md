@@ -82,4 +82,4 @@ These terms are governed by applicable laws of relevant jurisdiction, without li
 
 ## 12. Contact Information
 
-For questions regarding these terms, contact us at [hello@kodesec.solutions](mailto:hello@kodesec.solutions).
+For questions regarding these terms, contact us at [contact@kodesec.com](mailto:contact@kodesec.com).

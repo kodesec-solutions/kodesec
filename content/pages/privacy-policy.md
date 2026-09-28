@@ -84,4 +84,4 @@ While no method is fully risk-free, we continuously improve controls to maintain
 
 For privacy questions or data-related requests, contact us at:
 
-[hello@kodesec.solutions](mailto:hello@kodesec.solutions)
+[contact@kodesec.com](mailto:contact@kodesec.com)

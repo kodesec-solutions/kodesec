@@ -1,0 +1,7 @@
+title: DevOps
+slug: devops
+order: 2
+icon: Workflow
+status: published
+summary: The tools and habits behind shipping software safely and often — starting with Git and GitHub.
+roles: [devops, dev]

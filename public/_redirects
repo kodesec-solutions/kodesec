@@ -10,3 +10,8 @@
 /services/application-qa-testing /services/quality-assurance 301
 /why-us /about 301
 /projects /services 301
+/academy/cloud-security /academy 301
+/academy/network-security /academy 301
+/academy/defensive-security /academy 301
+/academy/devsecops /academy/devops 301
+/academy/secure-development /academy/development 301

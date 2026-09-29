@@ -1,7 +1,0 @@
-title: DevOps & DevSecOps
-slug: devsecops
-order: 4
-icon: Workflow
-status: coming-soon
-summary: Secure pipelines, secrets, containers, Kubernetes and supply-chain security from commit to production.
-roles: [devops, cloud]

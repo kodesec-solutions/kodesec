@@ -1,0 +1,4 @@
+title: Learning Git and GitHub
+slug: git-and-github
+order: 1
+summary: Git records every change to your code so you can undo mistakes and work in parallel. GitHub is where teams share that history, review each other's work and ship it.

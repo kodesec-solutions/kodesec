@@ -1,0 +1,7 @@
+title: Development
+slug: development
+order: 3
+icon: Code
+status: published
+summary: How real software is designed and built — starting with backend systems from an architecture point of view.
+roles: [dev]

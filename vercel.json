@@ -98,6 +98,31 @@
       "source": "/projects",
       "destination": "/services",
       "permanent": true
+    },
+    {
+      "source": "/academy/cloud-security",
+      "destination": "/academy",
+      "permanent": true
+    },
+    {
+      "source": "/academy/network-security",
+      "destination": "/academy",
+      "permanent": true
+    },
+    {
+      "source": "/academy/defensive-security",
+      "destination": "/academy",
+      "permanent": true
+    },
+    {
+      "source": "/academy/devsecops",
+      "destination": "/academy/devops",
+      "permanent": true
+    },
+    {
+      "source": "/academy/secure-development",
+      "destination": "/academy/development",
+      "permanent": true
     }
   ]
 }

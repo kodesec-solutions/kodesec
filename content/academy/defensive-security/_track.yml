@@ -1,7 +1,0 @@
-title: Defensive Security
-slug: defensive-security
-order: 5
-icon: ShieldCheck
-status: coming-soon
-summary: Detection, logging, incident response and hardening — the blue-team side of every attack.
-roles: [blue]

@@ -98,6 +98,7 @@ for (const l of lessons) {
   checkBody(l.body, where);
 }
 for (const t of tracks) {
+  if (t.cover) checkImage(t.cover, `academy/${t.slug} cover`);
   if (t.status === "published" && t.lessonCount === 0) errors.push(`academy/${t.slug}: published track has no lessons`);
   for (const m of t.modules) {
     const orders = m.lessons.map((l) => l.order);

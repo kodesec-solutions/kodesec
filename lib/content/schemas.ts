@@ -58,6 +58,8 @@ export const trackSchema = z.object({
   status: z.enum(["published", "coming-soon"]),
   summary: z.string(),
   roles: z.array(z.enum(roles)).default([]),
+  cover: localPath.nullish(),
+  coverAlt: z.string().optional(),
 });
 export type Track = z.infer<typeof trackSchema>;
 

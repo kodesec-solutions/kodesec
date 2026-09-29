@@ -5,3 +5,5 @@ icon: Code
 status: published
 summary: How real software is designed and built — starting with backend systems from an architecture point of view.
 roles: [dev]
+cover: /academy/development.webp
+coverAlt: "Isometric laptop showing code next to a coffee cup"

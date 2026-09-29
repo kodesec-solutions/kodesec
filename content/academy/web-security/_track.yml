@@ -5,3 +5,5 @@ icon: Globe
 status: published
 summary: How web applications break — and how to find and fix the flaws. Access control, injection, authentication, APIs and more.
 roles: [red, dev]
+cover: /academy/web-security.webp
+coverAlt: "Word cloud of security terms: cyber, security, phishing, access, firewall"

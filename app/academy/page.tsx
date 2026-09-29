@@ -16,6 +16,8 @@ const trackItem = (t: AcademyTrack): ListingItem => ({
   title: t.title,
   description: t.summary,
   meta: t.status === "coming-soon" ? "Coming soon" : `${t.lessonCount} lesson${t.lessonCount === 1 ? "" : "s"} · Free`,
+  cover: t.cover,
+  coverAlt: t.coverAlt,
   coverLabel: `kodesec/${t.slug}`,
   keywords: t.roles.join(" "),
 });

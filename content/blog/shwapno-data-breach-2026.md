@@ -13,7 +13,7 @@ tags:
 - ransomware
 cover: /blog/shwapno-data-breach/image_1.jpeg
 coverAlt: 'Shwapno Data Breach 2026: 4 Million Customers Exposed in Major Bangladesh Cyberattack'
-featured: true
+featured: false
 draft: false
 ---
 

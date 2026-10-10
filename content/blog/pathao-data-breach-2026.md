@@ -1,7 +1,7 @@
 ---
-title: '19 Million Users, 133 GB, 24 Hours: Inside the Pathao Breach That Shook Bangladesh'
+title: 'Pathao Data Breach 2026: 19 Million Users, 133 GB, 24 Hours'
 slug: pathao-data-breach-2026
-description: 'Pathao data breach, October 2026: the timeline, what attackers claim vs. what Pathao confirmed, the impact, likely root causes and what users should do.'
+description: 'Pathao data breach explained: a hacker claims 19 million user records and 133 GB of data and demands a $400,000 ransom. Timeline, impact and what to do.'
 date: '2026-10-10'
 updated: '2026-10-10'
 authors:
@@ -9,11 +9,17 @@ authors:
 category: Breach Analysis
 tags:
 - data breach
+- pathao
 - bangladesh
 - ransomware
+- dark web
+relatedServices:
+- cybersecurity
+- cloud
+- devops
 cover: /blog/pathao-data-breach-2026/cover.jpeg
 coverAlt: '19 Million Users, 133 GB, 24 Hours: Inside the Pathao Breach That Shook Bangladesh'
-featured: false
+featured: true
 draft: false
 ---
 
@@ -25,7 +31,7 @@ On 4 October 2026, Pathao, one of Bangladesh's largest ride-hailing, delivery an
 
 The actor demanded **400,000 USDT (TRC-20)**, about Tk 4.92 crore, within 24 hours, and threatened to release NID, banking, HR and admin data in stages if Pathao stayed silent. The claim was first surfaced by the cyber intelligence platform Daily Dark Web on X on Wednesday, 7 October.
 
-Pathao has confirmed that names, email addresses and phone numbers were obtained by malicious actors. It has not confirmed the number of affected users or the larger dataset described on the dark web. If the attacker's claims hold, this would be the largest consumer data breach Bangladesh has seen, roughly five times the scale of the Shwapno breach earlier this year.
+Pathao has confirmed that names, email addresses and phone numbers were obtained by malicious actors. It has not confirmed the number of affected users or the larger dataset described on the dark web. If the attacker's claims hold, this would be the largest consumer data breach Bangladesh has seen, roughly five times the scale of the [Shwapno breach](/blog/shwapno-data-breach-2026) earlier this year.
 
 > **Note:** This analysis is based only on publicly reported information and the threat actor's own post. Attacker claims are labelled as claims throughout.
 
@@ -49,6 +55,10 @@ The dark web post opens by citing New Age's own report of the outage. That detai
 ## What the Attackers Claim to Hold
 
 The actor's post includes a "Dataset Volume Overview" that goes far beyond the names, emails and phone numbers Pathao acknowledged. It covers customers, drivers, merchants, employees and Pathao's own admin backend.
+
+![Threat actor's DarkForums post about Pathao, sensitive details redacted](/blog/pathao-data-breach-2026/darkforums-post.jpeg)
+
+*Threat actor's post on DarkForums, 7 Oct 2026. Sensitive details redacted by Kodesec.*
 
 **Customer and driver data (claimed)**
 
@@ -149,21 +159,21 @@ A breach like this is never one mistake. It is a chain: a way in, room to move, 
 
 ![Kodesec cybersecurity services](/blog/pathao-data-breach-2026/kodesec-services.jpeg)
 
-**1. We find your way in before attackers do.** Our offensive team runs web, mobile and API penetration testing against the same surface a platform like Pathao exposes to millions of users, plus cloud and Active Directory assessments. We test the admin panel, not just the customer app.
+**1. We find your way in before attackers do.** Our offensive team runs web, mobile and API [penetration testing](/services/cybersecurity/web-application-penetration-testing) against the same surface a platform like Pathao exposes to millions of users, plus cloud and Active Directory [network security assessments](/services/cybersecurity/network-security-testing). We test the admin panel, not just the customer app.
 
-**2. We lock down the cloud, not just the perimeter.** A WAF rule won't remove someone already inside your VPC. We audit AWS, GCP and Azure for misconfigurations, over-privileged IAM roles and leaked keys, and design segmented networks so a compromised app server cannot reach your core databases.
+**2. We lock down the cloud, not just the perimeter.** A WAF rule won't remove someone already inside your VPC. Our [cloud security assessment](/services/cybersecurity/cloud-security-assessment) audits AWS, GCP and Azure for misconfigurations, over-privileged IAM roles and leaked keys, and design segmented networks so a compromised app server cannot reach your core databases.
 
 **3. We design data so one breach doesn't expose everything.** We help you split sensitive identity data (NID, licences, documents) from everyday profile data, encrypt it at field level, and expire third-party tokens. If one table leaks, it shouldn't hold a citizen's entire life.
 
 **4. We secure the admin plane.** Phishing-resistant MFA, just-in-time access and separated admin networks make 5,825 admin accounts far harder to abuse.
 
-**5. We build security into delivery.** Through DevSecOps, we put secret scanning, dependency checks, container and Kubernetes security into your CI/CD pipeline, so credentials and vulnerable code never reach production.
+**5. We build security into delivery.** Through DevSecOps and [CI/CD pipeline engineering](/services/devops/ci-cd-pipeline-engineering), we put secret scanning, dependency checks, container and Kubernetes security into your CI/CD pipeline, so credentials and vulnerable code never reach production.
 
-**6. We shrink dwell time.** SIEM, egress monitoring and anomaly alerts mean 133 GB leaving your network raises an alarm in minutes, not after a post appears on a dark web forum.
+**6. We shrink dwell time.** [Monitoring and observability](/services/devops/monitoring-observability) with SIEM, egress monitoring and anomaly alerts mean 133 GB leaving your network raises an alarm in minutes, not after a post appears on a dark web forum.
 
-**7. We prepare you for the worst day.** Incident response playbooks, tabletop simulations and immutable backups mean that if an attacker does get in, you contain fast, communicate clearly and never depend on paying a ransom.
+**7. We prepare you for the worst day.** [Malware investigation](/services/cybersecurity/malware-detection-investigation), incident response playbooks, tabletop simulations and immutable backups mean that if an attacker does get in, you contain fast, communicate clearly and never depend on paying a ransom.
 
-Security is cheapest before the breach. Every control above costs less than one day of national headlines.
+Security is cheapest before the breach. Every control above costs less than one day of national headlines. [Book a call](/book) and we will scope a test around your platform.
 
 ## Recommended Security Roadmap for Organisations
 
@@ -186,7 +196,7 @@ If you use Pathao as a rider, customer, driver or merchant, act now:
 - **Change your Pathao password**, and any other account where you reused it.
 - **Review Facebook connected apps.** Remove Pathao's access and log out other sessions if you signed in with Facebook.
 - **Never share OTPs, PINs or passwords**, even with callers or SMS claiming to be Pathao. Use only Pathao's official channels.
-- **Watch for NID and SIM misuse.** Be alert to unexpected loan, SIM or account recovery messages.
+- **Watch for NID and SIM misuse.** NID data has leaked before ([see our NID breach analysis](/blog/bangladesh-nid-data-breach-2026)). Be alert to unexpected loan, SIM or account recovery messages.
 - **Merchants:** confirm any request to change bank or payout details by calling a known contact first.
 - **Enable MFA** on email, banking and social accounts.
 

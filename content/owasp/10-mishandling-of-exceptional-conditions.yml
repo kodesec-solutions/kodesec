@@ -1,0 +1,202 @@
+slug: mishandling-of-exceptional-conditions
+rank: 10
+title: Mishandling of exceptional conditions
+tagline: When things break, who wins?
+question: What does your site do when things go wrong?
+summary: "Every system hits errors: a database timeout, a missing field, a payment provider that doesn't answer. This is about whether your site fails safely, or falls open and spills."
+category: website
+readMinutes: 3
+theme: red
+preview:
+  size: wide
+seo:
+  title: "Mishandling of exceptional conditions: explained for busines"
+  description: "Every system hits errors: a database timeout, a missing field, a payment provider that doesn't answer. This is about whether your site fails safely, or falls open and spi"
+vars:
+  shop:
+    person: customer
+    people: customers
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    person: patient
+    people: patients
+    exposed: appointments, contact details and health-related notes
+  school:
+    person: student
+    people: students
+    exposed: grades, attendance and family contact details
+  saas:
+    person: client company
+    people: client companies
+    exposed: client files, user lists and business data
+owasp:
+  summary: Every system meets unexpected situations, such as errors, outages or odd data. If it doesn't handle them safely, it can crash, reveal information, or leave transactions half done.
+  prevent:
+    - Handle errors where they happen, and fail safely.
+    - Check all incoming data strictly.
+    - Undo failed transactions completely, never halfway.
+    - Set limits so overload can't take the system down.
+  url: https://top10.owasp.org/2025/A10_2025-Mishandling_of_Exceptional_Conditions/
+  keywords:
+    - fail safely
+    - undo half-done work
+    - set limits
+quick:
+  title: When something goes wrong, the site fails open.
+  cards:
+    - title: What it is
+      text: "When something unexpected happens, a system should fail safely: stay locked, say little and recover. Mishandling is when an error unlocks a door, reveals technical detail, or leaves a half-finished action behind."
+    - title: Why you care
+      text: Attackers cause errors on purpose, because errors are where checks get skipped. A permission check that crashes into "allow", or a payment that half-succeeds, can reach your {exposed} or your money.
+    - title: What to do
+      text: "Ask: when a check or a service fails, does the site refuse by default? Has anyone tested the bad day, not just the normal flow?"
+simulation:
+  title: "Try it: make a payment fail the wrong way."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: outage
+      title: Cause a hiccup
+      direction: Click “Slow down the payment provider”.
+      explain: "Outside services fail from time to time: a slow reply, a timeout, an odd answer. Every website must expect this."
+    - id: pay
+      title: Pay for the {record}
+      direction: Click “Pay now”.
+      explain: The payment check times out halfway. The code's fallback says “if unsure, allow”, so the {record} is marked as paid although no money arrived.
+    - id: error
+      title: Look at the error page
+      direction: Click “Show details” on the error message.
+      explain: The error reveals technical details such as file paths and software versions. They help an attacker plan the next step.
+    - id: fix
+      title: Fail safely
+      direction: Click “Fail closed, show a friendly error”.
+      explain: "When unsure, the site now stops: the {record} waits, the {person} sees a polite message, and staff are alerted."
+    - id: retry
+      title: Pay again
+      direction: Click “Pay now” again.
+      explain: “We couldn't confirm your payment. You have not been charged.” Nothing leaks, and nothing is handed out for free.
+  definition: "**Mishandling of exceptional conditions** means that when something unexpected happens, the site fails open: it allows, reveals or half-finishes instead of stopping safely."
+map:
+  title: Pick a way things go wrong.
+  lede: Normal use is tested by everyone. These are the situations that get skipped.
+  zones:
+    - label: Checks that fail open
+      url: yourbusiness.com/admin (permission service down)
+      here: What happens when the part that checks permission, payment or identity doesn't answer.
+      wrong: The site is built to carry on if a check fails, so a crash or timeout becomes a green light.
+      ask: If our login, permission or fraud check fails or times out, does the site refuse by default?
+      term: Fail-open logic, missing fail-safe defaults
+      simulate: true
+    - label: Error messages
+      url: yourbusiness.com/login (wrong details)
+      here: What visitors see when something fails.
+      wrong: Errors reveal system details, or whether a given username exists, which helps attackers plan their next step.
+      ask: What does a visitor see when something fails? Is the detail kept in private logs instead?
+      term: Verbose errors, information leakage
+      simulate: true
+    - label: Half-finished actions
+      url: yourbusiness.com/checkout/confirm
+      here: Multi-step actions like payment then order, or transfer then record.
+      wrong: "If the second step fails, the first stays done: money taken with no order, goods sent but never charged, stock reserved forever."
+      ask: If payment works but the order fails, or the reverse, what happens? Is it rolled back or flagged?
+      term: Missing rollback, inconsistent state, partial failures
+    - label: Overload
+      url: yourbusiness.com (traffic spike)
+      here: How the site behaves under heavy load, huge uploads or endless requests.
+      wrong: It runs out of memory or connections and falls over, and some systems restart without their protections. Attackers can trigger this on purpose.
+      ask: What happens under heavy load or a huge upload? Are there limits, and does the site recover safely?
+      term: Resource exhaustion, denial of service, unbounded input
+    - label: Unexpected input
+      url: "yourbusiness.com/cart (quantity: -5)"
+      here: "Missing, empty, oversized or odd input: a blank field, a negative quantity, a date in the wrong format."
+      wrong: The code assumed it would never happen, so it crashes, skips a check, or turns a negative quantity into a credit.
+      ask: Have we tested empty, huge, negative and strange values, not only normal ones?
+      term: Unhandled exceptions, missing input checks, logic errors
+    - label: Outside services failing
+      url: payments.provider.com (timeout)
+      here: Payment providers, email, maps and other services your site depends on.
+      wrong: When they're slow or down, the site hangs, retries forever, double-charges, or skips a step such as fraud checking.
+      ask: What happens when our payment provider or another outside service is slow or down?
+      term: Missing timeouts and retries, failing open on dependency failure
+      simulate: true
+cost:
+  title: The bad day is where the money goes.
+  cards:
+    - title: Failing open
+      text: "A crash becomes a green light: access granted and checks skipped."
+    - title: Money and mess
+      text: Half-finished actions mean wrong charges, lost orders and books that don't match.
+    - title: A free map
+      text: Chatty error messages tell attackers how your system is built.
+    - title: Downtime
+      text: Systems that fall over under strain turn a spike, or an attack, into an outage.
+  note: "**For {bizName}:** a failed check that defaults to allow could expose {exposed}."
+checklist:
+  items:
+    - statement: We rely on separate services to check permissions, payments or fraud
+      question: If one of those services fails or times out, does our site refuse by default?
+      simulate: true
+    - statement: Orders or payments involve several steps
+      question: If payment works but the order fails, or the reverse, what happens? Is it rolled back or flagged?
+    - statement: Visitors can see technical error messages
+      question: What does a visitor see when something breaks, and where do the technical details go?
+    - statement: We've never tested what happens when things go wrong
+      question: Who has tested failure paths, such as outages, timeouts and empty or extreme input, not only the normal flow?
+    - statement: Our site slows or crashes during traffic spikes
+      question: What happens under heavy load or a huge upload? Are there limits, and does it recover safely?
+    - statement: We depend on a payment provider or other outside service
+      question: What happens when our payment provider or another service is slow or down?
+  verdict: Several areas apply. A safe default and a tested bad day pay off here.
+cases:
+  title: Not always an attack. Always costly.
+  items:
+    - tab: Knight Capital 2012
+      tag: No safe default, 2012
+      title: Forty-five minutes, $440 million.
+      what: On 1 August 2012, a software update left old, unused code active on one of Knight Capital's eight trading servers. When markets opened, it began sending huge numbers of unintended orders. Warning emails went out but weren't acted on, and there was no quick way to stop it. In about 45 minutes the firm lost around $440 million.
+      fallout: Knight needed an emergency rescue from investors and was soon merged into another firm. In 2013 the US SEC fined it $12 million for lacking adequate controls.
+      lesson: Not an attack. Unexpected behaviour with no safe default and no kill switch is what mishandled conditions cost.
+      sources: "Sources: US Securities and Exchange Commission order (October 2013), press coverage."
+    - tab: Apple 2014
+      tag: A check that said yes, 2014
+      title: A verification that didn't verify.
+      what: In February 2014 Apple disclosed a flaw in the code that checks websites' security certificates on iPhones, iPads and Macs. A duplicated line made the check skip its final verification step while still reporting success. That let an attacker on the same network pose as a trusted site.
+      fallout: Apple rushed out updates. Until devices were updated, encrypted connections on them could be intercepted.
+      lesson: A failed check that reports success is failing open in its purest form.
+      sources: "Sources: Apple security notes (February 2014), press coverage."
+    - tab: Cloudbleed 2017
+      tag: An odd page, 2017
+      title: Other people's data on the wrong pages.
+      what: In February 2017, a Google researcher found that Cloudflare's page-processing code, when it met a certain kind of malformed web page, read past the end of its memory and spilled other customers' data into responses, including passwords and session cookies. Cloudflare said that at its worst roughly one in 3.3 million requests was affected, and the leak had run for months.
+      fallout: Cloudflare fixed it within hours of the report, but some of the leaked pages had already been stored by search engines, which then had to clean them up.
+      lesson: An unusual input was never handled safely, and the result was one customer's data appearing for another.
+      sources: "Sources: Cloudflare blog (February 2017), Google Project Zero."
+    - tab: Facebook 2021
+      tag: Locked, then stuck, 2021
+      title: Doors that were built too well.
+      what: On 4 October 2021, Facebook, Instagram and WhatsApp went offline for about six hours. Facebook said a routine maintenance command took its backbone network down, and a bug in a safety-audit tool failed to stop it. Because internal tools relied on the same network, engineers struggled to diagnose the problem remotely and had to go to data centres, where strong physical security slowed access.
+      fallout: Businesses and billions of users who depend on the platforms were cut off, and Facebook published a post-mortem.
+      lesson: Failing closed is right, but it needs a plan to get back in. Test recovery as well as protection.
+      sources: "Source: Facebook Engineering post-mortem (October 2021)."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Choose the safe default
+      text: For every check on money, access or data, decide what happens when it fails. Safe usually means refuse and alert.
+    - title: Test the bad day
+      text: "Require testing of failures: outages, timeouts, empty and extreme input, half-finished actions. Not only the normal flow."
+    - title: Plan the way back
+      text: Decide who can override and recover when things fail closed, and rehearse it, so safe doesn't also mean stuck.
+devNotes:
+  - "Fail closed: treat errors, timeouts and missing responses from security checks as deny. Never default to allow inside a catch block."
+  - Handle exceptions centrally. Show users generic messages, log the detail privately with correlation IDs, and never swallow exceptions silently.
+  - Make multi-step operations atomic with transactions, idempotency keys and compensating actions, plus reconciliation jobs for partial failures.
+  - Validate type, range, size and nullability. Handle missing and malformed values explicitly, including negatives and overflow.
+  - Set timeouts, retries with backoff and circuit breakers for dependencies, and cap request size, rate and concurrency.
+  - Test failure paths with negative tests, fuzzing, fault injection and load tests. Add kill switches and alerts for abnormal behaviour.
+  - Provide logged, strongly authenticated break-glass access for recovery.
+takeaways:
+  title: Three things to keep.
+  items:
+    - "Every system hits errors. What matters is whether it fails safe: locked, quiet and logged."
+    - Test the bad day, not just the happy path.
+    - Safe needs a way back. Plan how to recover when things fail closed.

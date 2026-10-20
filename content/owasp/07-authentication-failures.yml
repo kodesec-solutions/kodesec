@@ -1,0 +1,203 @@
+slug: authentication-failures
+rank: 7
+title: Authentication failures
+tagline: Is that really them?
+question: Is that really who they say they are?
+summary: Logging in is how your site decides who's who. This is what happens when that check is weak, guessable or easy to skip, and a stranger walks in as one of your customers or staff.
+category: data
+readMinutes: 3
+theme: indigo
+preview:
+  size: wide
+seo:
+  title: "Authentication failures: explained for business owners"
+  description: Logging in is how your site decides who's who. This is what happens when that check is weak, guessable or easy to skip, and a stranger walks in as one of your customers o
+vars:
+  shop:
+    person: customer
+    people: customers
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    person: patient
+    people: patients
+    exposed: appointments, contact details and health-related notes
+  school:
+    person: student
+    people: students
+    exposed: grades, attendance and family contact details
+  saas:
+    person: client company
+    people: client companies
+    exposed: client files, user lists and business data
+owasp:
+  summary: When login controls are weak, someone can sign in as a real customer or member of staff, often using passwords stolen from other websites.
+  prevent:
+    - Require a second step (MFA) to sign in.
+    - Check new passwords against known leaked ones.
+    - Limit and alert on repeated failed logins.
+    - Never ship with default or built-in passwords.
+  url: https://top10.owasp.org/2025/A07_2025-Authentication_Failures/
+  keywords:
+    - two-step sign-in
+    - screen passwords
+    - limit attempts
+quick:
+  title: A login that cannot tell the real person from an impostor.
+  cards:
+    - title: What it is
+      text: Your login is the front door. Failures are weak passwords allowed, unlimited guesses, no second step, and "stay logged in" tokens that are never ended or are easy to steal.
+    - title: Why you care
+      text: A stranger who logs in as a {person} sees their data and acts in their name. Logged in as staff, they can reach your {exposed}. Most come from passwords reused from other breaches, not clever hacking.
+    - title: What to do
+      text: Ask for a second step on staff and admin logins first, then limits on login attempts, then check how long sessions stay open.
+simulation:
+  title: "Try it: break into an account with a leaked password."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: list
+      title: Open a leaked password list
+      direction: Click “Leaked list” in the attacker panel.
+      explain: Billions of email and password pairs from other websites' breaches circulate online. Many people reuse the same password everywhere.
+    - id: attack
+      title: Let the bot try them
+      direction: Click “Start trying”.
+      explain: A bot tries thousands of pairs on your login page. Nothing limits the number of attempts.
+    - id: match
+      title: One works
+      direction: Click the matching attempt.
+      explain: One {person} used the same password on your site. The bot is now signed in as them, with access to their details, history and saved payment methods.
+    - id: fix
+      title: Add a second step and limits
+      direction: Click “Switch on 2-step sign-in and attempt limits”.
+      explain: Signing in now needs a code sent to the owner's phone, and repeated failures are slowed down and blocked.
+    - id: retry
+      title: Run the bot again
+      direction: Click “Start trying” again.
+      explain: Blocked after five attempts. Even the correct password stops at “Enter the code we sent you”.
+  definition: "**Authentication failures** mean your login cannot tell the real person from someone holding their password, or lets attackers guess without limit."
+map:
+  title: Pick a part of your sign-in.
+  lede: The login screen is only one piece. Each of these can fail on its own.
+  zones:
+    - label: Passwords people choose
+      url: yourbusiness.com/signup
+      here: The rules for what passwords {people} and staff may use.
+      wrong: Weak passwords like "123456" or the company name are allowed, and the same password is reused across many sites.
+      ask: What password rules do we enforce? Do we check new passwords against lists of known leaked ones?
+      term: Weak password policy, breached-password screening
+      simulate: true
+    - label: Login attempts
+      url: yourbusiness.com/login
+      here: The login form that checks a password.
+      wrong: No limit on tries, so attackers run huge lists of stolen email and password pairs from other breaches until some work.
+      ask: What happens after ten wrong attempts? Would we notice a flood of failed logins?
+      term: Credential stuffing, brute force, missing rate limiting
+      simulate: true
+    - label: The second step
+      url: yourbusiness.com/login/verify
+      here: A code or approval, beyond the password, that proves it's really them.
+      wrong: Not required for admin or staff accounts, easy to skip, or sent by text message, which can be hijacked.
+      ask: Is a second step required for every staff and admin login? Which kind do we use?
+      term: Missing or weak multi-factor authentication, SIM swapping
+      simulate: true
+    - label: Staying logged in
+      url: yourbusiness.com/account (session)
+      here: "The session: the digital wristband that keeps someone logged in."
+      wrong: Wristbands that never expire, survive logout, are easy to guess, or travel in the web address, so a stolen one keeps working.
+      ask: How long can someone stay logged in? Is a session fully ended on logout and when the password changes?
+      term: Weak session management, session fixation, no expiry
+    - label: Staff and leavers
+      url: admin > users
+      here: Accounts for staff, contractors and vendors, including shared ones like "support".
+      wrong: Shared or factory passwords that never change, and former staff or contractors whose logins still work.
+      ask: Are any accounts shared or left over from former staff? How fast is access removed when someone leaves?
+      term: Default credentials, shared accounts, missing offboarding
+    - label: '"Sign in with..."'
+      url: yourbusiness.com/login/sso
+      here: Buttons and partner logins where another system vouches for who someone is.
+      wrong: A misconfigured link between systems can accept the wrong person, and one weakly protected partner account can open many doors.
+      ask: Which outside logins do we trust, and who checks how they're set up?
+      term: SSO and OAuth misconfiguration, trust in third-party identity providers
+cost:
+  title: A valid login looks like a real customer.
+  cards:
+    - title: Account takeover
+      text: "A stranger acts as your customer: sees their data, spends their money, changes their details."
+    - title: Staff takeover
+      text: One admin login can open everything, so attackers go for staff accounts first.
+    - title: Not even hacked
+      text: Most come from passwords reused from other breaches. It takes patience and stolen lists, not skill.
+    - title: Hard to spot
+      text: A correct password looks normal in your logs, so takeovers can run unnoticed for a long time.
+  note: "**For {bizName}:** one taken-over staff login could expose {exposed}."
+checklist:
+  items:
+    - statement: Customers or staff log in with a password
+      question: What password rules do we enforce, and do we check new passwords against known leaked ones?
+      simulate: true
+    - statement: Staff and admin logins don't need a second step
+      question: Is a second step required for every staff and admin login, and which kind?
+      simulate: true
+    - statement: Our login page allows unlimited attempts
+      question: What happens after repeated failed logins? Would we notice a flood of them?
+    - statement: People stay logged in for a long time, or use shared computers
+      question: How long can someone stay logged in? Does logout fully end the session?
+    - statement: Staff share accounts, or old accounts remain
+      question: Are any accounts shared or left from former staff? How fast is access removed when someone leaves?
+    - statement: We use "Sign in with Google or Microsoft" or partner logins
+      question: Which outside logins do we trust, and who reviews how they're set up?
+  verdict: Several areas apply. A second step and a leaver process pay off here.
+cases:
+  title: Real logins, wrong people.
+  items:
+    - tab: Colonial Pipeline 2021
+      tag: Old account, no second step, 2021
+      title: One forgotten login shut down a fuel pipeline.
+      what: In May 2021 ransomware attackers shut down Colonial Pipeline, which carries fuel along the US East Coast. The investigation found the way in was a VPN account that was no longer in use but still active. Its password had turned up in leaked credentials, and the account had no second step.
+      fallout: Colonial halted the pipeline and paid a ransom of about $4.4 million in bitcoin. Fuel shortages followed in several US states, and US authorities later recovered part of the ransom.
+      lesson: A leaver-style account plus no second step. One password, with national consequences.
+      sources: "Sources: Colonial Pipeline CEO's testimony to the US Senate (June 2021), US Department of Justice, press coverage."
+    - tab: Uber 2022
+      tag: Second step worn down, 2022
+      title: The approval prompt that kept coming.
+      what: In September 2022 an attacker got a contractor's login details, which Uber said had been sold online. The contractor's account was protected by a second step, so the attacker repeatedly triggered approval prompts until the contractor eventually accepted one, and also messaged them pretending to be IT support.
+      fallout: The attacker reached several of Uber's internal systems. Uber took tools offline while it investigated and notified authorities.
+      lesson: A second step helps enormously, but approval prompts can be worn down. Stronger methods resist this, and people need to know to refuse prompts they didn't start.
+      sources: "Source: Uber security update (September 2022)."
+    - tab: 23andMe 2023
+      tag: Reused passwords, 2023
+      title: Nothing was hacked. The logins were real.
+      what: In 2023 attackers used usernames and passwords stolen from other sites to log into about 14,000 23andMe accounts. Because a feature let relatives see shared information, the company said details of about 6.9 million people were also collected.
+      fallout: The company faced class-action lawsuits. It said the accounts were reached with reused credentials rather than by breaking into its own systems.
+      lesson: Real passwords, reused from elsewhere, with no second step required. The site had no way to tell the owner from the thief.
+      sources: "Sources: 23andMe statements (2023), press coverage."
+    - tab: Dropbox 2012
+      tag: Staff password reuse, 2012
+      title: One reused staff password, four years of silence.
+      what: In 2012 attackers used a Dropbox employee's reused password to reach a document containing user email addresses. In 2016 Dropbox disclosed that emails and password hashes for about 68 million accounts had been leaked, and forced password resets for users who hadn't changed theirs since mid-2012.
+      fallout: The data surfaced publicly years after the original breach, and Dropbox reset passwords for affected users.
+      lesson: A single staff account can expose everyone's data, and the exposure can stay hidden for years.
+      sources: "Source: Dropbox statements (2016)."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Require a second step
+      text: Start with every staff, admin and vendor login, then extend it to customers where the stakes are high.
+    - title: Set the login rules
+      text: Password standards, limits on attempts and how long sessions last are business decisions. Approve them like any other rule.
+    - title: Own leavers and shared accounts
+      text: Make removing access part of every departure, and review who has access on a regular schedule.
+devNotes:
+  - "Follow NIST SP 800-63B: long passphrases, allow password managers, screen new passwords against breached lists, and avoid composition gimmicks."
+  - Rate-limit by account and by source, slow down repeated failures, and detect credential stuffing. Bot defences supplement this, they don't replace it.
+  - Prefer phishing-resistant MFA (passkeys or security keys). Use app codes with number matching over SMS, and guard against push-prompt fatigue.
+  - "Sessions: random identifiers validated on the server, Secure, HttpOnly and SameSite cookies, rotation at login, invalidation on logout and password change, idle and absolute timeouts, never in URLs."
+  - Return generic error messages so the login doesn't reveal which accounts exist.
+  - Hash passwords with Argon2id, scrypt or bcrypt.
+  - Log sign-ins, alert on anomalies, and automate offboarding through your identity provider.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Most account takeovers are logins that look real, usually reused passwords rather than clever hacking.
+    - A second step on staff and admin accounts is the single most valuable fix.
+    - People leave, accounts shouldn't linger. Make removing access part of every departure.

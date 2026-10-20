@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAcademy, getCategories, getPage, getPosts, getServices } from "@/lib/content/loaders";
+import { getAcademy, getCategories, getOwaspTopics, getPage, getPosts, getServices } from "@/lib/content/loaders";
 import { SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/contact"),
     u("/about"),
     u("/academy", latestLesson),
+    ...getOwaspTopics().map((t) => u(t.href)),
     ...tracks.filter((t) => t.lessonCount > 0).map((t) => u(t.href, t.modules.flatMap((m) => m.lessons.map((l) => l.updated)).sort().at(-1))),
     ...tracks.flatMap((t) => t.modules.map((m) => u(m.href))),
     ...lessons.map((l) => u(l.href, l.updated)),

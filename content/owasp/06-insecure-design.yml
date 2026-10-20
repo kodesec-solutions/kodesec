@@ -1,0 +1,193 @@
+slug: insecure-design
+rank: 6
+title: Insecure design
+tagline: Broken before the first line of code.
+question: A perfect build of a flawed blueprint.
+summary: Nothing is coded wrong. The plan never asked "how could someone abuse this?", so no amount of careful programming fixes it later.
+category: running
+readMinutes: 3
+theme: rose
+preview:
+  size: square
+seo:
+  title: "Insecure design: explained for business owners"
+  description: Nothing is coded wrong. The plan never asked "how could someone abuse this?", so no amount of careful programming fixes it later.
+vars:
+  shop:
+    person: customer
+    people: customers
+    abuse: free goods, endless refunds and drained stock
+  clinic:
+    person: patient
+    people: patients
+    abuse: fake bookings that block real patients
+  school:
+    person: student
+    people: students
+    abuse: fake sign-ups and gamed results
+  saas:
+    person: client company
+    people: client companies
+    abuse: free-trial abuse and scraped client data
+owasp:
+  summary: When security isn't part of the plan, features are built without the limits they need. Perfect code can't fix a flaw the design never anticipated.
+  prevent:
+    - Bring security people in at the planning stage.
+    - Ask 'how could this be misused?' for key features.
+    - Write security requirements into every feature brief.
+    - Test critical workflows against misuse before launch.
+  url: https://top10.owasp.org/2025/A06_2025-Insecure_Design/
+  keywords:
+    - plan for misuse
+    - security in briefs
+    - test key flows
+quick:
+  title: A feature that works, with no limits planned.
+  cards:
+    - title: What it is
+      text: A flaw in how a feature was planned, not how it was coded. The code does exactly what the plan says. The plan just never imagined misuse, like unlimited coupons or unlimited password guesses.
+    - title: Why you care
+      text: Scanners and code reviews miss it, because nothing is broken. Attackers simply use your own features in ways nobody planned, and it can cost you {abuse}.
+    - title: What to do
+      text: Have "what could go wrong?" asked before building, not after launch. The rules and limits are business decisions, so this is where owners matter most.
+simulation:
+  title: "Try it: stack a welcome discount until the order is free."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: apply
+      title: Apply the welcome code
+      direction: Click “Apply” next to the code WELCOME10.
+      explain: 10% off, as intended. The feature works.
+    - id: again
+      title: Apply it a second time
+      direction: Click “Apply” again.
+      explain: Another 10% off. Nobody planned for the same code being used twice, so nothing stops it.
+    - id: stack
+      title: Keep applying it
+      direction: Click “Apply” once more to repeat it until the total reaches zero.
+      explain: "The order is now free. There is no bug in the code: the plan simply never said “once per {person}”."
+    - id: fix
+      title: Add the missing rule
+      direction: "Click “Add rule: one use per {person}”."
+      explain: "A rule decided before building: each code works once, per account, per order."
+    - id: retry
+      title: Try to stack it again
+      direction: Click “Apply” again.
+      explain: “This code has already been used.” The offer still works for honest {people}.
+  definition: "**Insecure design** means a feature works exactly as built, but the plan never asked how it could be abused. It is fixed with a rule, decided before the code is written."
+map:
+  title: Pick a feature and ask "what if someone...?"
+  lede: Every feature that handles money, access or stock needs limits in the plan.
+  zones:
+    - label: Discounts and coupons
+      url: yourbusiness.com/checkout?coupon=...
+      here: Promo codes, loyalty points, referral rewards and free trials.
+      wrong: No limit on how often a code is used, stacked or shared, so a welcome offer is claimed thousands of times.
+      ask: What stops one person using an offer many times or stacking several? Who set those rules?
+      term: Business logic abuse, missing limits
+      simulate: true
+    - label: Password reset
+      url: yourbusiness.com/forgot-password
+      here: How {people} get back into their accounts.
+      wrong: Recovery relies on answers a stranger can find out, like a pet's name or birthplace, or allows unlimited guesses.
+      ask: How does someone prove who they are after losing a password, and how many tries do they get?
+      term: Weak account recovery, knowledge-based answers, missing rate limits
+    - label: Refunds and credits
+      url: yourbusiness.com/account/refund
+      here: Money going back to {people}.
+      wrong: Refunds can be requested repeatedly, for more than was paid, or approved by one person acting alone.
+      ask: What are the limits on refunds and credits, and who must approve the large ones?
+      term: Missing business-rule validation, no separation of duties
+    - label: Bookings and sign-ups
+      url: yourbusiness.com/book
+      here: Bookings, reservations, free sign-ups and ticket purchases.
+      wrong: Bots can grab everything at once, or hold slots with no deposit, leaving real {people} with nothing.
+      ask: What stops a bot or one person from booking or buying everything? Is there a limit, deposit or check?
+      term: Bot abuse, resource exhaustion, no rate limiting
+    - label: Trust in the browser
+      url: yourbusiness.com/cart
+      here: Prices, quantities and permissions that the page sends back to your server.
+      wrong: The server believes whatever the browser says, including a changed price, so someone pays what they choose.
+      ask: Does our server work out prices and permissions itself, or trust what the page sends?
+      term: Client-side trust, parameter tampering
+    - label: Staff superpowers
+      url: yourbusiness.com/admin/actions
+      here: "Powerful actions for staff: changing prices, exporting {people}' data, approving payments."
+      wrong: One login can do everything, with no second approval and no alert, so one stolen password causes enormous harm.
+      ask: Which actions should need a second approval, and would we be alerted if one account misused them?
+      term: Separation of duties, least privilege, missing safeguards by design
+cost:
+  title: Real losses, from features working as planned.
+  cards:
+    - title: Direct losses
+      text: "Free goods, endless refunds, drained stock: real money, through your own features."
+    - title: Invisible to tools
+      text: Nothing is broken, so scanners and code reviews stay quiet. You find out from the bill or the customers.
+    - title: Costly to fix late
+      text: Changing a plan after launch means rework across the product. Adding the limits at design time usually costs far less.
+    - title: Your name
+      text: When bots empty your stock or a promo is abused, customers blame you, not the attacker.
+  note: "**For {bizName}:** a feature planned without limits could lead to {abuse}."
+checklist:
+  items:
+    - statement: We offer promo codes, loyalty points, referrals or free trials
+      question: What limits stop one person using offers repeatedly, and who set those rules?
+      simulate: true
+    - statement: Customers can reset or recover their own account
+      question: How does someone prove who they are after losing a password, and how many tries do they get?
+    - statement: We handle refunds, credits or payouts
+      question: What are the limits on refunds and credits, and who must approve the large ones?
+    - statement: We sell limited stock, seats or bookings
+      question: What stops a bot or one buyer from taking everything? Do we have purchase limits or deposits?
+    - statement: One staff login can do almost everything
+      question: Which powerful actions should need a second approval, and would we be alerted if one account misused them?
+    - statement: New features are planned without asking how they could be abused
+      question: Do we ask what could go wrong before building each new feature, and who answers?
+  verdict: Several areas apply. A what-if review before building pays off here.
+cases:
+  title: Features that worked, exactly as designed.
+  items:
+    - tab: Facebook 2021
+      tag: Missing limits, 2021 to 2022
+      title: A lookup feature with no brakes.
+      what: Facebook let people find others by phone number through a contact-import feature. Attackers automated it, trying huge numbers of phone numbers and collecting profile details. Data on about 533 million users, including phone numbers, was shared online in April 2021. Meta said the scraping happened before September 2019 and that the issue had since been fixed.
+      fallout: In November 2022, Ireland's Data Protection Commission fined Meta €265 million, finding it hadn't built adequate data-protection safeguards into the feature by design and by default.
+      lesson: Nothing was hacked. The feature worked as planned, with no limit on how fast or how often it could be used.
+      sources: "Sources: Irish Data Protection Commission (November 2022), Meta statements, press coverage."
+    - tab: Snapchat 2013
+      tag: Missing limits, 2013 to 2014
+      title: Warned in August, leaked by New Year.
+      what: Researchers warned in August 2013 that Snapchat's Find Friends feature had no limit on how many phone numbers could be checked. On 31 December 2013, attackers published about 4.6 million usernames with partly hidden phone numbers.
+      fallout: In 2014 the US Federal Trade Commission reached a settlement with Snapchat that covered this security failure among other claims, and required a privacy program with independent reviews for 20 years.
+      lesson: A missing limit is a design gap. The warning was public months before the leak, and the fix is a plan-level rule, not a patch.
+      sources: "Sources: US Federal Trade Commission (2014), Gibson Security, press coverage."
+    - tab: The cinema example
+      tag: A textbook case (OWASP)
+      title: Group bookings with no deposit.
+      what: OWASP's own example describes a cinema chain that gives group discounts and requires a deposit only above fifteen attendees. An attacker who studies the booking flow could try to book hundreds of seats across all the cinemas in a few requests.
+      fallout: The result would be a large loss of income and empty seats for real customers. It's an illustration, not a reported incident.
+      lesson: The booking code could be flawless. The loss comes from a rule nobody questioned.
+      sources: "Source: OWASP Top 10, Insecure Design (owasp.org)."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Set the rules
+      text: "For every flow that moves money, stock or data, decide the limits: how often, how much, and who approves. These are business rules, so they're yours."
+    - title: Ask "what could go wrong?" first
+      text: Require a short abuse review before any new feature is built, with someone playing the attacker.
+    - title: Put it in the plan, then test it
+      text: Write security requirements into the specification, and have the finished feature tested against abuse, not just against bugs.
+devNotes:
+  - Threat-model each feature early (data-flow diagrams, STRIDE) and write abuse cases next to user stories.
+  - "Enforce business limits on the server: rate limits, quotas, per-user and per-device caps, velocity checks."
+  - Never trust the client for prices, roles or state. Recompute them server-side.
+  - Apply least privilege, and require a second approval (two-person rule) for high-risk actions.
+  - Write tests that assert abuse fails, such as the 501st use of a coupon being rejected.
+  - Add bot defences on high-value flows, monitor for abnormal usage, and keep a kill switch.
+  - Reuse proven design patterns and reference architectures instead of inventing security-critical flows.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Perfect code can't fix a plan that never imagined abuse.
+    - Limits, approvals and who can do what are business decisions. Make them early.
+    - Ask "what could go wrong?" before building, not after launch.

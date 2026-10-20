@@ -150,6 +150,17 @@ export type Pricing = z.infer<typeof pricingSchema>;
 
 const link = z.object({ label: z.string(), href: z.string() });
 
+// A place on the site that shows one video: a YouTube/Loom link, or a small mp4 in public/media/video/.
+// The link wins when both are set. Both empty = the section is hidden.
+const videoSlot = z.object({
+  title: z.string().min(3).max(120),
+  caption: z.string().max(240).optional(),
+  url: z.string().default(""),
+  file: z.union([z.literal(""), localPath.regex(/\.(mp4|webm)$/i, "use an .mp4 or .webm file")]).default(""),
+  poster: z.union([z.literal(""), localPath]).default(""),
+});
+export type VideoSlot = z.infer<typeof videoSlot>;
+
 export const siteSchema = z.object({
   name: z.string(),
   legalName: z.string(),
@@ -194,9 +205,161 @@ export const siteSchema = z.object({
     youtube: z.string(), // empty = fall back to the film video
     cta: link.optional(),
   }),
+  about: z.object({ video: videoSlot }).optional(),
   analytics: z.object({ gtmId: z.string().optional(), ga4Id: z.string().optional() }),
   social: z.array(link.extend({ icon: z.string() })),
   nav: z.array(link.extend({ children: z.enum(["services", "academy"]).optional() })),
   footer: z.array(z.object({ title: z.string(), links: z.union([z.literal("services"), z.array(link)]) })),
 });
 export type Site = z.infer<typeof siteSchema>;
+
+// ---------------------------------------------------------------- OWASP academy (for business owners)
+
+export const owaspCategories = {
+  data: "Data and logins",
+  website: "Your website",
+  partners: "Third parties",
+  running: "How you run it",
+} as const;
+
+export const owaspBusinessSchema = z.object({
+  slug,
+  label: z.string(),
+  /** "an online shop": used in sentences like "For an online shop: …" */
+  bizName: z.string(),
+  person: z.string(),
+  people: z.string(),
+  record: z.string(),
+  records: z.string(),
+  doc: z.string(),
+});
+export type OwaspBusiness = z.infer<typeof owaspBusinessSchema>;
+
+const cardList = z.object({
+  title: z.string(),
+  cards: z.array(z.object({ label: z.string().optional(), title: z.string(), text: z.string() })),
+});
+/** One colour per lesson: the simulation, its gallery tile and its accents use it. */
+export const owaspThemes = ["violet", "orange", "sky", "teal", "amber", "rose", "indigo", "fuchsia", "lime", "red"] as const;
+
+export const owaspTopicSchema = z.object({
+  slug,
+  rank: z.number().int().min(1).max(10),
+  title: z.string(),
+  /** The bold line on the gallery card. Keep it short. */
+  tagline: z.string().max(48),
+  question: z.string(),
+  summary: z.string(),
+  category: z.enum(Object.keys(owaspCategories) as [keyof typeof owaspCategories]),
+  readMinutes: z.number().int().positive(),
+  theme: z.enum(owaspThemes),
+  /** Gallery tile. The tile plays the simulation on its own (no text) unless a preview video is set. */
+  preview: z.object({
+    size: z.enum(["tall", "square", "wide"]),
+    /** Silent looping clip for the tile, e.g. /academy/owasp/broken-access-control-loop.mp4 */
+    video: mediaPath.optional(),
+    poster: mediaPath.optional(),
+  }),
+  /** The "watch instead of read" video at the end of the lesson. Empty = a "coming soon" panel. */
+  video: z
+    .object({
+      youtube: z.string().regex(/^[A-Za-z0-9_-]{6,64}$/, "YouTube video id, not a URL").optional(),
+      src: mediaPath.optional(),
+      poster: mediaPath.optional(),
+      minutes: z.number().positive().optional(),
+    })
+    .default({}),
+  seo: z.object({ title: z.string().max(60), description: z.string().max(170) }),
+  /** Per-business words for the placeholders, keyed by business slug. */
+  vars: z.record(z.string(), z.record(z.string(), z.string())).default({}),
+  /** What OWASP says (Top 10:2025, CC BY 3.0), paraphrased for owners. Shown in the knowledge clip. */
+  owasp: z.object({
+    summary: z.string(),
+    prevent: z.array(z.string()).min(3).max(5),
+    /** Three 2–3 word versions of the safety measures, for the card's motion graphic. */
+    keywords: z.array(z.string().max(24)).length(3),
+    url: z.string().url(),
+  }),
+  quick: cardList,
+  variants: cardList.optional(),
+  /**
+   * The interactive simulation. The scene itself is code (components/owasp/sims/<slug>.tsx); its steps' words live
+   * here. Step ids must match the ones the scene expects, in order (checked by the tests).
+   */
+  simulation: z.object({
+    title: z.string(),
+    lede: z.string(),
+    /** The motion-graphic film for this lesson. When set it replaces the step list on the page. */
+    film: z.object({ src: mediaPath, poster: mediaPath.optional() }).optional(),
+    steps: z
+      .array(
+        z.object({
+          id: slug,
+          /** Short name in the directions list, e.g. "Change the number" */
+          title: z.string(),
+          /** What to click, e.g. "Click the number {a} in the address bar." */
+          direction: z.string(),
+          /** What just happened, shown once the step is done. */
+          explain: z.string(),
+        }),
+      )
+      .min(2),
+    /** Shown when the visitor finishes: the risk in one or two plain sentences. */
+    definition: z.string(),
+  }),
+  map: z.object({
+    title: z.string(),
+    lede: z.string().optional(),
+    zones: z
+      .array(
+        z.object({
+          label: z.string(),
+          url: z.string(),
+          here: z.string(),
+          wrong: z.string(),
+          ask: z.string(),
+          term: z.string(),
+          /** The simulation shows this zone: adds a "Try it in the simulation" button. */
+          simulate: z.boolean().optional(),
+        }),
+      )
+      .min(1),
+  }),
+  cost: cardList.extend({ note: z.string().optional() }),
+  checklist: z.object({
+    items: z
+      .array(
+        z.object({
+          statement: z.string(),
+          question: z.string(),
+          /** The simulation shows this risk: a "that's us" answer offers to replay it. */
+          simulate: z.boolean().optional(),
+        }),
+      )
+      .min(1),
+    /** Shown when three or more items are ticked. */
+    verdict: z.string(),
+  }),
+  cases: z.object({
+    title: z.string(),
+    items: z
+      .array(
+        z.object({
+          tab: z.string(),
+          tag: z.string(),
+          title: z.string(),
+          what: z.string(),
+          fallout: z.string(),
+          lesson: z.string(),
+          sources: z.string().optional(),
+          /** A real clip about this incident (news report, official statement): YouTube id, not a URL. */
+          youtube: z.string().regex(/^[A-Za-z0-9_-]{6,64}$/, "YouTube video id, not a URL").optional(),
+        }),
+      )
+      .min(1),
+  }),
+  decisions: z.object({ title: z.string(), items: z.array(z.object({ title: z.string(), text: z.string() })) }),
+  devNotes: z.array(z.string()).default([]),
+  takeaways: z.object({ title: z.string(), items: z.array(z.string()) }),
+});
+export type OwaspTopic = z.infer<typeof owaspTopicSchema>;

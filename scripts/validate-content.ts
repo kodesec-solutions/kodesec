@@ -127,6 +127,16 @@ if (site) {
 if (site?.announcement.youtube && parseVideoUrl(site.announcement.youtube)?.provider !== "youtube") {
   errors.push(`site.yml announcement.youtube is not a valid YouTube link: ${site.announcement.youtube}`);
 }
+if (site?.about) {
+  const v = site.about.video;
+  if (v.url && !parseVideoUrl(v.url)) errors.push(`site.yml about.video.url is not a YouTube or Loom link: ${v.url}`);
+  if (v.file) {
+    const f = path.join(PUBLIC, v.file);
+    if (!fs.existsSync(f)) errors.push(`site.yml about.video.file not found: ${v.file}`);
+    else if (fs.statSync(f).size > 20 * 1024 * 1024) errors.push(`site.yml about.video.file is over 20 MB (Cloudflare Pages limit is 25 MB) — compress it or use a YouTube link`);
+  }
+  if (v.poster) checkImage(v.poster, "site.yml about.video.poster");
+}
 if (site && !site.booking.calLink) warnings.push("site.yml: booking.calLink is empty — /book shows the email fallback");
 
 for (const w of warnings) console.warn(`⚠ ${w}`);

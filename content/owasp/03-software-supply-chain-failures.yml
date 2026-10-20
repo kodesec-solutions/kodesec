@@ -1,0 +1,178 @@
+slug: software-supply-chain-failures
+rank: 3
+title: Software supply chain failures
+tagline: Your code is mostly theirs.
+question: Your website is built from other people's parts.
+summary: Plugins, code libraries, outside scripts, update tools. Each one is a supplier. When a supplier slips, the problem arrives inside your website.
+category: partners
+readMinutes: 3
+theme: sky
+preview:
+  size: wide
+seo:
+  title: "Software supply chain failures: explained for business owner"
+  description: Plugins, code libraries, outside scripts, update tools. Each one is a supplier. When a supplier slips, the problem arrives inside your website.
+vars:
+  shop:
+    person: customer
+    people: customers
+    plugin: booking and checkout plugin
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    person: patient
+    people: patients
+    plugin: appointment-booking plugin
+    exposed: appointments, contact details and health-related notes
+  school:
+    person: student
+    people: students
+    plugin: student-portal plugin
+    exposed: grades, attendance and family contact details
+  saas:
+    person: client company
+    people: client companies
+    plugin: third-party library in the product
+    exposed: client files, user lists and business data
+owasp:
+  summary: Your website is built on other people's components and tools. When one of them is outdated, abandoned or tampered with, your business is exposed even if your own work is sound.
+  prevent:
+    - Keep a complete list of the parts you use.
+    - Subscribe to security alerts for those parts.
+    - Have a set process for reviewing and applying updates.
+    - Require a second sign-off before anything goes live.
+  url: https://top10.owasp.org/2025/A03_2025-Software_Supply_Chain_Failures/
+  keywords:
+    - list your parts
+    - watch for alerts
+    - update on schedule
+quick:
+  title: Most of your website is built from other people's parts.
+  cards:
+    - title: What it is
+      text: Most of a modern website is made of parts other people wrote. A supply chain failure is when one of those parts is out of date, tampered with, or fake, and it gets installed anyway.
+    - title: Why you care
+      text: The attacker never touches your site directly. They come in through something you trusted, and can reach your {exposed}. OWASP, the industry's list of web risks, now gives this its own place in the Top 10.
+    - title: What to do
+      text: Know what your site is built from, keep it updated, and ask who checks a new part before it goes in.
+simulation:
+  title: "Try it: find the weak part in your website."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: parts
+      title: See what your site is made of
+      direction: Click “Show the parts list”.
+      explain: "Most of your website is code written by other companies: plugins, libraries and outside scripts. That is normal, and it is also where many attacks begin."
+    - id: flaw
+      title: Find the outdated part
+      direction: Click the {plugin}, version 2.1.
+      explain: A security flaw in this version was published months ago. A fixed version exists, but your website never installed it.
+    - id: scan
+      title: Run an attacker's scan
+      direction: Click “Run attacker scan”.
+      explain: Automated tools check millions of websites for known weak parts. Yours matches within seconds, and the flaw gives them a way in.
+    - id: fix
+      title: Update the part
+      direction: Click “Update to 2.4” and switch on update alerts.
+      explain: The fixed version closes the hole, and alerts tell your team whenever a part needs updating.
+    - id: retry
+      title: Run the scan again
+      direction: Click “Run attacker scan” again.
+      explain: Nothing to exploit. The scanner moves on to an easier target.
+  definition: "**Software supply chain failures** mean your website inherits the weaknesses of every part it is built from. Keep a list of your parts and update them on a schedule."
+map:
+  title: Pick a supplier your website depends on.
+  lede: Every one of these is a door that someone else built.
+  zones:
+    - label: Plugins and themes
+      url: admin > plugins and themes
+      here: "Add-ons that give your site extra features: booking, chat, payments, analytics."
+      wrong: Abandoned, out of date, or sold to a new owner who slips in something harmful. One weak plugin can open the whole site.
+      ask: Which plugins and themes do we use, who updates them, and have we removed the ones we don't need?
+      term: Vulnerable and outdated components, malicious plugin updates
+      simulate: true
+    - label: Code libraries
+      url: software > dependencies list
+      here: Building blocks your developers pull in from public libraries instead of writing everything from scratch.
+      wrong: A library ships with a known flaw, or a fake look-alike with a near-identical name is installed by mistake.
+      ask: Do we have a list of every library our software uses, and are we alerted when one has a known flaw?
+      term: Dependencies, SBOM, typosquatting
+      simulate: true
+    - label: Outside scripts
+      url: yourbusiness.com/checkout
+      here: Chat widgets, analytics, ad and payment scripts that load from other companies' servers every time a page opens.
+      wrong: If that company is breached or sells the service, their changed script now runs on your pages, including checkout.
+      ask: Which outside scripts load on our pages? Do we still need each one, and would we know if one changed?
+      term: Third-party scripts, Magecart-style skimming
+    - label: Build and release
+      url: build server > release pipeline
+      here: The automated process that packages your code and publishes updates to your live site.
+      wrong: If an attacker gets in here, their code ships inside your next update, looking official to everyone.
+      ask: Who can change our build and release process, and would we notice if something extra was added?
+      term: CI/CD compromise, build integrity, code signing
+    - label: Vendor software
+      url: vendor portal > updates
+      here: Business software you buy or subscribe to, and the updates it installs on your systems.
+      wrong: The supplier's own systems are compromised and a poisoned update arrives, trusted because it comes from them.
+      ask: Which vendors can push updates or reach our systems, and how do we judge their security?
+      term: Compromised vendor updates, third-party risk
+cost:
+  title: You inherit your suppliers' problems.
+  cards:
+    - title: Out of sight
+      text: You can be careful with everything you built and still be hit through something you didn't.
+    - title: Everywhere at once
+      text: One flawed part can sit in thousands of sites, so attackers hunt for it everywhere.
+    - title: Slow to find
+      text: Many businesses can't list their parts, so it takes weeks just to learn if they're affected.
+    - title: Your name, your fine
+      text: Customers and regulators usually hold you responsible, even when a supplier was at fault. Duties vary by country and sector.
+  note: "**For {bizName}:** a flawed {plugin} or chat widget could expose {exposed}."
+checklist:
+  items:
+    - statement: Our site uses plugins, themes or add-ons
+      question: Which plugins and themes do we use, who updates them, and have we removed the ones we don't need?
+      simulate: true
+    - statement: Our developers use open-source libraries
+      question: Do we have a list of every library our software uses, and are we alerted when one has a known flaw?
+      simulate: true
+    - statement: Outside scripts load on our pages (chat, analytics, payments, ads)
+      question: Which outside scripts load on our pages, especially checkout and login? Do we still need each one?
+    - statement: A freelancer or agency handles our updates
+      question: Who is responsible for updates, and how do we know they've been done?
+    - statement: We run vendor software that installs its own updates
+      question: Which vendors can push updates or reach our systems, and how do we judge their security?
+    - statement: We couldn't list everything our site is built from
+      question: Can we get a complete, current list of everything our site is built from?
+  verdict: Several areas apply. A parts list and an update rule pay off here.
+cases:
+  title: The weak link was a chatbot.
+  items:
+    - tab: Ticketmaster UK, 2018
+      tag: Ticketmaster UK, 2018
+      title: A supplier's script, running on the payment page.
+      what: Ticketmaster UK loaded a customer-support chatbot built by an outside supplier, Inbenta Technologies, on its payment page. Attackers altered the supplier's script, and it captured card details that customers typed in. Up to about 9.4 million customers were reported as potentially affected.
+      fallout: In 2020 the UK Information Commissioner's Office fined Ticketmaster UK &pound;1.25 million. It said the company hadn't properly assessed the risk of using the chatbot on its payment page.
+      lesson: Ticketmaster's own code wasn't changed. A part from a supplier sat in the most sensitive spot on the site, and nobody had asked whether it should be there.
+      sources: "Also: in 2021, a flaw in Log4j, a logging library inside countless products, left many organisations spending weeks just finding where they used it. In 2024, researchers at Sansec reported that a widely used script service changed hands and began serving harmful code to more than 100,000 websites. Sources: UK ICO, Apache Software Foundation, Sansec."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Know what you're built from
+      text: Ask for a written, current list of every plugin, library and outside service your site depends on.
+    - title: Set an update rule
+      text: Decide how fast serious security updates must go in, for example within days, and who is accountable.
+    - title: Vet new parts
+      text: Before anything new is added, ask who built it, who maintains it, and what it can access.
+devNotes:
+  - Keep a software bill of materials (SBOM) and scan dependencies automatically in CI, with alerts on new advisories.
+  - Pin versions with lockfiles and verify hashes. Pull only from approved registries, and watch for look-alike package names.
+  - Remove unused plugins and libraries. Fewer parts means fewer doors.
+  - "Harden the build pipeline: least-privilege access, a second step on logins, and signed, traceable builds."
+  - Load third-party scripts with Subresource Integrity and a Content Security Policy, and keep them off payment and login pages where possible.
+  - Assess vendors before integrating them, and review what they can reach on a schedule.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Your website is mostly other people's parts. Their problems become yours.
+    - Keep a list, keep it updated, and remove what you don't use.
+    - Ask who checks a new part before it goes in, especially near payments and logins.

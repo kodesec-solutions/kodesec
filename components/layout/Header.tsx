@@ -1,12 +1,11 @@
 import { TOP_BAR_HEIGHT } from "./TopBar";
 import HeaderClient, { type NavItem } from "./HeaderClient";
-import { getAcademy, getServices, getSite } from "@/lib/content/loaders";
+import { getServices, getSite } from "@/lib/content/loaders";
 
 /** Builds the nav from content/site.yml, filling the Services and Academy menus from their content folders. */
 export default function Header() {
   const site = getSite();
   const services = getServices();
-  const tracks = getAcademy();
 
   const items: NavItem[] = site.nav.map((n) => {
     if (n.children === "services") {
@@ -17,20 +16,8 @@ export default function Header() {
         footer: { label: "See pricing and engagement models", href: "/pricing" },
       };
     }
-    if (n.children === "academy") {
-      return {
-        label: n.label,
-        href: n.href,
-        children: tracks.map((t) => ({
-          label: t.title,
-          href: t.href,
-          description: t.summary.split(".")[0] + ".",
-          icon: t.icon,
-          badge: t.status === "coming-soon" ? "Soon" : undefined,
-        })),
-        footer: { label: "Browse the free Kodesec Academy", href: "/academy" },
-      };
-    }
+    // The Academy is a plain, highlighted link (no dropdown), so visitors spot it straight away.
+    if (n.children === "academy") return { label: n.label, href: n.href, highlight: true };
     return { label: n.label, href: n.href };
   });
 

@@ -1,0 +1,195 @@
+slug: security-logging-and-alerting-failures
+rank: 9
+title: Security logging and alerting failures
+tagline: Nobody saw it happen.
+question: If a break-in happened tonight, would you know?
+summary: Attackers rarely strike once and leave. This is about whether your site records what happens, and whether anyone is told when something looks wrong.
+category: running
+readMinutes: 3
+theme: lime
+preview:
+  size: square
+seo:
+  title: "Security logging and alerting failures: explained for busine"
+  description: Attackers rarely strike once and leave. This is about whether your site records what happens, and whether anyone is told when something looks wrong.
+vars:
+  shop:
+    person: customer
+    people: customers
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    person: patient
+    people: patients
+    exposed: appointments, contact details and health-related notes
+  school:
+    person: student
+    people: students
+    exposed: grades, attendance and family contact details
+  saas:
+    person: client company
+    people: client companies
+    exposed: client files, user lists and business data
+owasp:
+  summary: Without the right records and alerts, a business can't spot an attack in progress, stop it quickly, or work out afterwards what was affected.
+  prevent:
+    - Record logins, refused access and other key security events.
+    - Send alerts on suspicious activity, with a named person to respond.
+    - Protect the records so they can't be quietly changed.
+    - Have a response plan, and practise it.
+  url: https://top10.owasp.org/2025/A09_2025-Security_Logging_and_Alerting_Failures/
+  keywords:
+    - log key events
+    - alert a person
+    - practise the plan
+quick:
+  title: Attacks that happen without anyone noticing.
+  cards:
+    - title: What it is
+      text: Logs are your website's security-camera footage, and alerts are the alarm. A failure is when important events aren't recorded, the records can be erased, or nobody is told or looks.
+    - title: Why you care
+      text: It doesn't cause break-ins. It lets them run for months. The longer an attacker stays unseen, the more of your {exposed} they can reach, and the harder it is to say what was taken.
+    - title: What to do
+      text: "Ask four things: what do we record, who is alerted, who responds, and when did we last test it?"
+simulation:
+  title: "Try it: watch a break-in that nobody notices."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: night
+      title: Play the night
+      direction: Click “Play the night”.
+      explain: From 2 a.m., thousands of failed logins hit the staff portal. At 3:12 one succeeds.
+    - id: export
+      title: Inspect the 3:20 event
+      direction: Click the 3:20 event on the timeline.
+      explain: The intruder exports the full {person} list. The system recorded every step, but nobody was told.
+    - id: phone
+      title: Check your phone at 8 a.m.
+      direction: Click the phone.
+      explain: No messages. You will find out weeks later, from a {person}, a journalist or a regulator.
+    - id: fix
+      title: Switch on alerts
+      direction: Click “Alert the owner about unusual activity”.
+      explain: Rules now watch for floods of failed logins, new admin accounts and bulk exports, and a named person is notified at once.
+    - id: retry
+      title: Play the night again
+      direction: Click “Play the night” again.
+      explain: At 2:04 your phone buzzes. The account is locked before anyone gets in.
+  definition: "**Logging and alerting failures** mean attacks happen, but nobody notices in time, because nothing is recorded or nobody is told."
+map:
+  title: Pick a part of your watch system.
+  lede: A camera is useless if it's off, unwatched, or the tape can be erased. Each of these can fail on its own.
+  zones:
+    - label: Logins and access
+      url: logs > sign-ins
+      here: Records of who logged in, from where, and what they did, including failures.
+      wrong: Failed and successful logins aren't recorded, or are kept for only a few days, so a month-long takeover leaves no trail.
+      ask: Do we record every sign-in, failed attempt and admin action, and how long do we keep those records?
+      term: Insufficient audit logging, short log retention
+      simulate: true
+    - label: Alerts
+      url: alerts > rules
+      here: Automatic warnings when something looks wrong, such as hundreds of failed logins or a new admin account.
+      wrong: Events are recorded but no rule fires, or alerts go to an inbox nobody reads, or so many fire that they're all ignored.
+      ask: Which events trigger an alert, who receives it, and how fast must they respond?
+      term: Missing alerting, alert fatigue
+      simulate: true
+    - label: Who is watching
+      url: security > on-call
+      here: The person or team that actually looks at logs and acts on alerts, including nights and weekends.
+      wrong: Nobody owns it. An alert arrives on Friday evening and waits until Monday, and attackers often choose weekends and holidays.
+      ask: Who is responsible for watching, and what happens outside office hours?
+      term: No round-the-clock monitoring, no on-call
+    - label: Protecting the records
+      url: logs > storage
+      here: Where logs are kept and who can change them.
+      wrong: Logs sit on the same server an attacker has taken over, so they can be erased or edited, leaving a clean-looking record.
+      ask: Are logs copied to a separate, protected place that someone on our server can't edit?
+      term: Log tampering, no centralised or tamper-proof logging
+    - label: What's in the logs
+      url: logs > detail
+      here: "The detail recorded: who, what, when and from where."
+      wrong: "Too little detail to reconstruct what happened, or the opposite: passwords and card numbers written into the logs for anyone with access to read."
+      ask: Do our logs have enough detail to answer who, what and when, and do they avoid secrets and personal data?
+      term: Insufficient context, sensitive data in logs
+    - label: A plan for when it goes off
+      url: security > incident plan
+      here: "What you actually do when an alert is real: who decides, who calls whom, who tells {people}."
+      wrong: No written plan and no practice. Hours are lost deciding who's in charge while the attacker keeps going.
+      ask: Do we have a written incident plan, and when did we last rehearse it?
+      term: No incident response plan, untested runbooks
+cost:
+  title: Time is what the attacker gains.
+  cards:
+    - title: Slow discovery
+      text: Industry studies, such as IBM's yearly Cost of a Data Breach report, have put the average time to find and contain a breach at several months.
+    - title: Bigger damage
+      text: The longer they stay, the more they take, and the more you have to assume was taken.
+    - title: No answers
+      text: Customers, regulators and insurers ask what was taken. Without logs you can't say, so you may have to assume the worst.
+    - title: Told by others
+      text: Many breaches are first spotted by someone outside the company, not by its own systems.
+  note: "**For {bizName}:** after an incident you'd need to say whose {exposed} were accessed. Without logs, you can't."
+checklist:
+  items:
+    - statement: Nobody can tell us what our website records
+      question: "What security events do we record: sign-ins, failures, admin changes, exports?"
+      simulate: true
+    - statement: Logs are kept for only a few days, or not at all
+      question: How long are logs kept, and is that long enough to investigate something found months later?
+      simulate: true
+    - statement: Alerts go to a shared inbox, or nowhere
+      question: Which events trigger an alert, who receives it, and how fast must they respond?
+    - statement: Nobody watches outside office hours
+      question: Who watches our systems at night, on weekends and on holidays, and what do they do?
+    - statement: Logs live only on the same server as the website
+      question: Are logs copied somewhere separate and protected, so attackers can't erase them?
+    - statement: We have no written plan for a security incident
+      question: Do we have a written incident plan, and when did we last practise it?
+  verdict: Several areas apply. A named watcher and a tested plan pay off here.
+cases:
+  title: The camera was there. The answer wasn't.
+  items:
+    - tab: Target 2013
+      tag: The alarm rang, 2013
+      title: The alerts worked. Nobody answered them.
+      what: In late 2013 attackers installed card-stealing software on Target's payment systems. A security tool from FireEye spotted the malware and raised alerts, which were passed on to Target's security staff in the US. The alerts weren't acted on, and the attackers kept going, taking about 40 million payment card numbers and personal details of up to 70 million customers.
+      fallout: Target's chief executive resigned in 2014. The company later reached an $18.5 million settlement with US states and reported breach-related costs of around $200 million.
+      lesson: The alarm worked. Nobody was set up to answer it. Alerts only help if someone owns the response.
+      sources: "Sources: US Senate Commerce Committee report (2014), Bloomberg Businessweek, Target filings."
+    - tab: Equifax 2017
+      tag: A camera switched off, 2017
+      title: An expired certificate blinded the monitoring.
+      what: In 2017 attackers had access to Equifax's systems for about 76 days. A tool meant to inspect network traffic for data leaving couldn't do its job, because its security certificate had expired about 19 months earlier. Once the certificate was renewed, the team immediately saw suspicious traffic. Data on around 147 million people had been taken.
+      fallout: In 2019 Equifax agreed a settlement with US regulators and states worth up to about $700 million.
+      lesson: The camera existed, but an expired certificate nobody tracked had quietly switched it off.
+      sources: "Sources: US House Oversight Committee report (December 2018), US Federal Trade Commission (2019)."
+    - tab: Marriott 2018
+      tag: Four silent years, 2014 to 2018
+      title: Inside for years, found by one alert.
+      what: Attackers had been inside the guest-reservation system of Starwood, a hotel group Marriott acquired in 2016, since 2014. Marriott found out in September 2018, when a security tool flagged an unusual database query. Up to about 339 million guest records worldwide were affected.
+      fallout: In 2020 the UK ICO fined Marriott £18.4 million, citing gaps in security measures including monitoring.
+      lesson: The breach ran unnoticed through years of earlier chances. One alert, finally, ended it.
+      sources: "Sources: Marriott statements (2018), UK Information Commissioner's Office (October 2020)."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Decide what must be recorded
+      text: "At minimum: sign-ins and failures, admin changes, permission changes and large data exports. Keep the records long enough to investigate, for example a year."
+    - title: Name who watches and who acts
+      text: Someone owns the alerts, including nights, weekends and holidays, whether in-house or an outside service.
+    - title: Rehearse it
+      text: Write an incident plan and practise it once a year, so the first time isn't the real time.
+devNotes:
+  - Log authentication events, access-control failures, input-validation failures, admin actions and exports, each with timestamp, user, source and outcome.
+  - Use structured logs with correlation IDs and synchronised clocks, so events from different systems can be put in order.
+  - Ship logs in near real time to a central, access-controlled, append-only store that is separate from the application host.
+  - Never log passwords, tokens, full card numbers or other secrets, and encode logged input to prevent log injection.
+  - "Keep alerts few and high-signal: bursts of failed logins, new admin accounts, mass exports, unusual locations. Define severity and escalation to avoid alert fatigue."
+  - Align retention with legal needs and investigation time, and regularly test that alerts really reach a person.
+  - Consider canary tokens and decoy accounts for high-confidence alerts, and run tabletop exercises.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Logs and alerts don't stop attackers. They shorten how long attackers stay.
+    - An alarm nobody answers is the same as no alarm. Name an owner.
+    - "Record enough to answer: what happened, when, and whose data."

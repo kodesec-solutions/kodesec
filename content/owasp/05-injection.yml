@@ -1,0 +1,218 @@
+slug: injection
+rank: 5
+title: Injection
+tagline: Text that becomes a command.
+question: When your site mistakes what a visitor types for instructions.
+summary: "SQL injection, cross-site scripting (XSS) and their relatives. Different names, one mistake: text from outside gets treated as a command."
+category: website
+readMinutes: 4
+theme: amber
+preview:
+  size: tall
+seo:
+  title: "Injection: explained for business owners"
+  description: "SQL injection, cross-site scripting (XSS) and their relatives. Different names, one mistake: text from outside gets treated as a command."
+vars:
+  shop:
+    person: customer
+    people: customers
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    person: patient
+    people: patients
+    exposed: appointments, contact details and health-related notes
+  school:
+    person: student
+    people: students
+    exposed: grades, attendance and family contact details
+  saas:
+    person: client company
+    people: client companies
+    exposed: client files, user lists and business data
+owasp:
+  summary: Injection happens when text that visitors type is treated as an instruction by your system, which can expose or change data that should be off limits.
+  prevent:
+    - Treat everything visitors type as data, never as instructions.
+    - Use the safe, standard ways of querying data.
+    - Check input on the server for every entry point.
+    - Include automated security testing before releases.
+  url: https://top10.owasp.org/2025/A05_2025-Injection/
+  keywords:
+    - input is data
+    - safe queries
+    - test before release
+quick:
+  title: Text a visitor types, treated as a command.
+  cards:
+    - title: What it is
+      text: Your site has search boxes, forms and web addresses where visitors type text. Injection is when that text slips through as an instruction, and your system obeys it.
+    - title: Why you care
+      text: It's one of the oldest and best-known attacks, and still common. It can reach your {exposed}, change what your visitors see, or run commands on your server.
+    - title: What to do
+      text: Ask how your site treats what visitors type, and whether anyone independent has tested it. OWASP groups SQL injection and XSS together under this one heading in its Top 10.
+variants:
+  title: Four famous cousins, one root mistake.
+  cards:
+    - label: Targets your database
+      title: SQL injection
+      text: "Typed text becomes a database command. It can read, change or delete records. Famous for: TalkTalk, Heartland."
+    - label: Targets your visitors
+      title: Cross-site scripting (XSS)
+      text: "A hidden script in a page runs for everyone who views it, as if it came from you. Famous for: the MySpace Samy worm."
+    - label: Targets your server
+      title: Command and code injection
+      text: "Typed text becomes an instruction to the server itself. Famous for: Log4Shell."
+    - label: Targets your AI assistant
+      title: Prompt injection
+      text: Text tells your chatbot to ignore its rules. The newest relative, growing as businesses add AI helpers.
+simulation:
+  title: "Try it: turn a search box into a command."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: search
+      title: Search normally
+      direction: Click “Search” to look for “coffee”.
+      explain: "The website places your words into a question for the database: find products named “coffee”. You get coffee."
+    - id: craft
+      title: Add a hidden instruction
+      direction: Click the suggested search text to use it.
+      explain: "This text closes the question early and adds its own instruction: “or anything at all”. The database cannot tell the visitor's words from your developer's."
+    - id: dump
+      title: Run the search
+      direction: Click “Search”.
+      explain: "Instead of products, the page lists every {person}'s details: {exposed}. One search box opened the whole database."
+    - id: fix
+      title: Keep input as data
+      direction: Click “Use safe queries”.
+      explain: The website now sends its question and the visitor's text separately. Typed text can only ever be text.
+    - id: retry
+      title: Try the trick again
+      direction: Click “Search” with the same text.
+      explain: No results. The database looked for those exact characters and found nothing.
+  definition: "**Injection** means text a visitor types is treated as an instruction. Search boxes, forms, uploads and chatbots all become doors if input is not kept as data."
+map:
+  title: Pick a place on your website.
+  lede: Anywhere a visitor can type, post or upload is a place the site must keep text and commands apart.
+  zones:
+    - label: Search box
+      url: yourbusiness.com/search?q=...
+      here: A search box or filter that looks things up in your database.
+      wrong: The typed words are glued into a database command. Crafted text can add a second instruction, so the database reads, changes or deletes records it shouldn't.
+      ask: Does our search treat what people type as plain text only? Has it been tested with deliberately hostile input?
+      term: SQL injection, reflected XSS
+      simulate: true
+    - label: Login form
+      url: yourbusiness.com/login
+      here: The form where {people} and staff sign in.
+      wrong: If the sign-in check is built from the typed text, it can be tricked into saying yes without a real password.
+      ask: Was our login form tested for injection, and are strange failed attempts watched?
+      term: SQL injection (authentication bypass)
+      simulate: true
+    - label: Reviews and comments
+      url: yourbusiness.com/product/reviews
+      here: "Anywhere visitors post words that other visitors will see: reviews, comments, profile names."
+      wrong: A post can carry a hidden script. Everyone who views it runs it in their own browser, as if it came from your site.
+      ask: Is posted content cleaned before it's shown to other visitors? Can the staff who moderate it be targeted too?
+      term: Stored cross-site scripting (XSS)
+    - label: Contact and support forms
+      url: yourbusiness.com/contact
+      here: Forms whose messages your staff read inside an admin screen.
+      wrong: A message can carry a hidden script that runs when staff open it, inside their trusted, logged-in admin area.
+      ask: When staff open customer messages, are they displayed safely?
+      term: Stored XSS aimed at administrators (blind XSS)
+    - label: Uploads and file names
+      url: yourbusiness.com/upload
+      here: Anywhere a visitor can send a file, or a name that your server then uses.
+      wrong: The name or content is passed to the server's own tools. A hidden command inside it gets run by your server.
+      ask: How are uploads and their names checked, and are they kept away from system commands?
+      term: Command injection, path traversal, unsafe file handling
+    - label: AI assistant
+      url: yourbusiness.com/assistant
+      here: A chatbot or AI helper that can see your data or take actions.
+      wrong: A visitor writes text that tells the assistant to ignore its rules. If it can reach private data or tools, it may follow them.
+      ask: What can our assistant see and do? Is that limited to what the person asking may access?
+      term: Prompt injection (LLM)
+cost:
+  title: One unguarded box, many ways to lose.
+  cards:
+    - title: Data theft
+      text: A whole database can be read through one search box or login form.
+    - title: Your pages, their words
+      text: XSS lets attackers show fake login boxes or redirect customers, on your own pages.
+    - title: Control of servers
+      text: Command injection can hand over the machine your website runs on.
+    - title: Fines and fallout
+      text: Because it's so well known, regulators have treated it as avoidable. Duties vary by country and sector.
+  note: "**For {bizName}:** one unguarded search box or form could expose {exposed}."
+checklist:
+  items:
+    - statement: Our site has search boxes, filters or login forms
+      question: Is everything visitors type treated as plain data and never run as a command? Has that been tested?
+      simulate: true
+    - statement: Visitors can post content others will see (reviews, comments, profiles)
+      question: Is posted content cleaned before it's shown, so it can't run in other visitors' browsers?
+    - statement: We accept uploads or let people name files
+      question: How are uploaded files and their names checked, and are they kept away from system commands?
+    - statement: We use an AI chatbot or assistant that can see our data
+      question: What can our chatbot access, and is it limited to what the person asking may see?
+    - statement: Our site was built years ago or by several different people
+      question: Has an independent tester tried to inject into our forms and web addresses? When?
+    - statement: We use older plugins or custom-built forms
+      question: Which forms and plugins are old or custom-built, and who checks them for injection flaws?
+    - statement: We've never had the site tested for these flaws
+      question: When did someone independent last test for injection, and what did they find?
+  verdict: Several areas apply. A coding standard and independent testing pay off here.
+cases:
+  title: Old, famous, and still happening.
+  items:
+    - tab: TalkTalk 2015 (SQL)
+      tag: SQL injection, 2015
+      title: Forgotten pages, a well-known flaw.
+      what: In October 2015 attackers used SQL injection against old web pages on TalkTalk's site, left over from a company it had acquired. The pages ran database software with a flaw whose fix had been available for years. The UK ICO found personal details of about 157,000 customers were accessed, including bank account numbers and sort codes for around 15,600.
+      fallout: In 2016 the ICO fined TalkTalk £400,000, saying its failure to apply basic security measures let the attackers in with ease.
+      lesson: Injection is old and well known, so regulators treat it as avoidable. It often lives in pages nobody remembers owning.
+      sources: "Source: UK Information Commissioner's Office (October 2016)."
+    - tab: Heartland 2008 (SQL)
+      tag: SQL injection, 2008
+      title: A web form was the way into the card network.
+      what: Attackers used SQL injection on a web form of the US payment processor Heartland Payment Systems, then installed software that captured card data as it moved through the company's network. It was disclosed in January 2009, and around 130 million card numbers were reported as exposed.
+      fallout: The ringleader, Albert Gonzalez, was sentenced to 20 years in prison in 2010. Heartland reported well over $100 million in breach-related costs and was temporarily dropped from Visa's list of compliant providers.
+      lesson: One injectable form was enough to reach the heart of the business. The real damage came from what the attackers did next.
+      sources: "Sources: US Department of Justice, Heartland statements, Krebs on Security."
+    - tab: MySpace 2005 (XSS)
+      tag: Cross-site scripting, 2005
+      title: A profile page that copied itself.
+      what: In October 2005, Samy Kamkar posted a MySpace profile containing a script that the site didn't neutralise. Anyone who viewed it ran the script, which added him as a friend and copied itself onto their own profile. It spread to more than a million profiles in about 20 hours.
+      fallout: MySpace had to take the site offline to clean up. Kamkar was later prosecuted and received probation rather than prison.
+      lesson: XSS turns your own pages against your visitors. It spread because every viewer's browser trusted the page.
+      sources: "Sources: Samy Kamkar's own technical write-up, press coverage at the time."
+    - tab: Log4Shell 2021
+      tag: Code injection, 2021
+      title: A line of text in a log file.
+      what: In December 2021 a flaw was disclosed in Log4j, a logging library built into countless products. Text that a visitor typed, for example in a username or message, could trick a system into fetching and running attacker-supplied code just by being written to a log. It was rated at the maximum severity score of 10.
+      fallout: Attacks began within days. Many organisations spent weeks just working out which of their products used the library.
+      lesson: "Injection can hide in places nobody thinks of as inputs, including your own logs. It's also a parts-list problem: you needed to know what you were built from."
+      sources: "Sources: Apache Software Foundation, US CISA."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Make it a standard
+      text: Require that everything visitors type is treated as data, never as a command, on every form and every app. It's a rule, not a one-off fix.
+    - title: Test with outsiders
+      text: Have independent testers try to inject into your forms and web addresses, before launch and after major changes.
+    - title: Limit the damage
+      text: Decide what each system and each chatbot is allowed to reach, so one slip can't expose everything.
+devNotes:
+  - Use parameterised queries or prepared statements, and use ORMs correctly. Never build queries by joining strings.
+  - Encode output for its context (HTML, attribute, JavaScript, URL) and keep framework auto-escaping on. Add a Content Security Policy to limit XSS damage.
+  - Validate input against an allow-list of type, length and format as a second layer, never the only one.
+  - Avoid shell commands built from user input. Use library APIs that take arguments separately.
+  - Give the web app a least-privilege database account, not an admin one.
+  - "For LLM features: treat model output as untrusted, limit tools and data per user, and require approval for sensitive actions."
+  - Combine automated scanning in CI with manual testing. A web application firewall is a safety net, not a fix.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Every place a visitor can type is a place text can be mistaken for a command.
+    - It's old and well known, so it's seen as avoidable. Test for it, including on forgotten pages.
+    - Limit what each system can reach, so a slip stays small.

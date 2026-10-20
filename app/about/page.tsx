@@ -8,6 +8,8 @@ import { renderMarkdown } from "@/lib/content/markdown";
 import { Prose } from "@/components/content/Prose";
 import { PartnerCard } from "@/components/home/Partnership";
 import { ContactDetails } from "@/components/ui/ContactDetails";
+import YouTubePlayer from "@/components/home/YouTubePlayer";
+import { parseVideoUrl } from "@/lib/content/markdown";
 import { breadcrumbLd, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -28,6 +30,9 @@ export default async function AboutPage() {
   const partners = site.partners;
   const page = getPage("about");
   const { html } = page ? await renderMarkdown(page.body) : { html: "" };
+  const video = site.about?.video;
+  const linked = video?.url ? parseVideoUrl(video.url) : null;
+  const showVideo = !!video && (!!linked || !!video.file);
   return (
     <>
       <JsonLd data={[breadcrumbLd([{ name: "About", path: "/about" }])]} />
@@ -37,6 +42,25 @@ export default async function AboutPage() {
         title="Security engineered in, not bolted on"
         lead="KODESEC Solutions is a cybersecurity-focused engineering company delivering secure, scalable, and reliable technology solutions for startups, SMEs, and enterprises."
       />
+
+      {showVideo && (
+        <Section className="border-t border-line" id="video">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-4">
+              <SectionHeading eyebrow="Watch" title={video.title} lead={video.caption} />
+            </div>
+            <div className="lg:col-span-8">
+              <YouTubePlayer
+                id={linked?.id ?? null}
+                provider={linked?.provider}
+                title={video.title}
+                fallbackVideo={video.file}
+                fallbackPoster={video.poster}
+              />
+            </div>
+          </div>
+        </Section>
+      )}
 
       {html && (
         <Section className="border-t border-line" id="who-we-are">

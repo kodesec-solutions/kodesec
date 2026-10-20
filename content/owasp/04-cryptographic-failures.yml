@@ -1,0 +1,174 @@
+slug: cryptographic-failures
+rank: 4
+title: Cryptographic failures
+tagline: Locked, or just closed?
+question: Private data, sent in a see-through envelope.
+summary: Encryption is the lock on your data. This is what happens when the lock is missing, outdated, or the key is left lying around.
+category: data
+readMinutes: 3
+theme: teal
+preview:
+  size: square
+seo:
+  title: "Cryptographic failures: explained for business owners"
+  description: Encryption is the lock on your data. This is what happens when the lock is missing, outdated, or the key is left lying around.
+vars:
+  shop:
+    person: customer
+    people: customers
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    person: patient
+    people: patients
+    exposed: appointments, contact details and health-related notes
+  school:
+    person: student
+    people: students
+    exposed: grades, attendance and family contact details
+  saas:
+    person: client company
+    people: client companies
+    exposed: client files, user lists and business data
+owasp:
+  summary: Sensitive data such as passwords, payment details and personal information is at risk when it isn't encrypted, or is encrypted weakly, while it is stored or sent.
+  prevent:
+    - Know which of your data is sensitive.
+    - Encrypt it in storage and on the move.
+    - Use modern, strong encryption standards.
+    - Store passwords only in protected, one-way form.
+  url: https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/
+  keywords:
+    - know your data
+    - encrypt it all
+    - hash passwords
+quick:
+  title: Sensitive data that anyone who intercepts it can read.
+  cards:
+    - title: What it is
+      text: Encryption scrambles data so only the right people can read it. A failure is when it's missing, outdated or badly managed, so data is readable while it travels or while it's stored.
+    - title: Why you care
+      text: If anyone gets at your data through any other flaw, encryption is the last thing standing between them and your {exposed}. It's part of OWASP's Top 10 list of web risks.
+    - title: What to do
+      text: Ask where your sensitive data lives, how it's protected on the move and in storage, and who holds the keys.
+simulation:
+  title: "Try it: intercept a password on café Wi-Fi."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: signin
+      title: Sign in on café Wi-Fi
+      direction: Click “Sign in” on the login form.
+      explain: "There is no padlock: the connection is not encrypted. Anyone on the same Wi-Fi can see the details as they travel."
+    - id: sniff
+      title: Look at what travelled
+      direction: Click the intercepted message in the Wi-Fi panel.
+      explain: The email and password are readable as plain text. Whoever intercepted them can now sign in as your {person}.
+    - id: backup
+      title: Open a leaked backup
+      direction: Click “Leaked backup” in the database panel.
+      explain: Passwords are stored exactly as typed. One leaked backup exposes every {person}'s password, and many people reuse theirs elsewhere.
+    - id: fix
+      title: Switch on encryption
+      direction: Click “Encrypt the connection and passwords”.
+      explain: The connection now uses HTTPS, and passwords are stored as one-way scrambled codes that cannot be turned back into the original.
+    - id: retry
+      title: Sign in again
+      direction: Click “Sign in” again.
+      explain: The intercepted message is unreadable, and the backup holds only scrambled codes.
+  definition: "**Cryptographic failures** mean sensitive data travels or is stored without strong encryption, so anyone who intercepts or steals it can read it."
+map:
+  title: Pick a place where data needs a lock.
+  lede: Each one can look fine from the outside and still be open.
+  zones:
+    - label: The connection
+      url: http://yourbusiness.com/login
+      here: How data travels between your {person}'s browser, your app and your servers.
+      wrong: Parts of the site still load over plain HTTP, or the certificate has expired or is set up wrongly. On public Wi-Fi, others can read or change what passes through.
+      ask: Is every page, including login and checkout, available only over HTTPS? Who renews our certificate, and when does it expire?
+      term: TLS misconfiguration, mixed content, expired certificates, missing HSTS
+      simulate: true
+    - label: Passwords
+      url: database > users > password
+      here: How your system remembers the passwords of {people} and staff.
+      wrong: Stored as plain text, or with weak, outdated scrambling. If the database leaks, passwords can be read or cracked fast, and people reuse them elsewhere.
+      ask: How are passwords stored? Can any employee or developer see a {person}'s real password?
+      term: Plaintext or weakly hashed passwords (MD5, SHA-1), missing salts
+      simulate: true
+    - label: Stored data and backups
+      url: storage > database backup
+      here: "{People}' records, documents and backups sitting in databases and storage."
+      wrong: Held unencrypted, so anyone who gets a copy, from a stolen laptop, a leaked backup or an open folder, can read it all.
+      ask: Which sensitive data is encrypted when stored? Does that include backups and staff laptops?
+      term: Missing encryption at rest, unencrypted backups
+    - label: Encryption keys
+      url: settings file > secret keys
+      here: The keys that unlock encrypted data, like the key to a safe.
+      wrong: Keys written into code, left in shared documents, or stored right beside the data they protect. A lock with the key taped to it.
+      ask: Where are our encryption keys kept, who can reach them, and when were they last changed?
+      term: Hard-coded secrets, weak key management, no rotation
+    - label: Data you don't need
+      url: database > old records
+      here: "Information you collect and keep longer than needed: old orders, ID scans, card details."
+      wrong: Data you don't hold can't leak. Old, forgotten data is usually the least protected of all.
+      ask: What sensitive data do we collect but don't really need? When do we delete it?
+      term: Data minimisation, retention policy
+cost:
+  title: A missing lock makes every other leak worse.
+  cards:
+    - title: Last line of defence
+      text: Encryption is what makes a stolen copy useless. Without it, every leak is a full leak.
+    - title: Spreads beyond you
+      text: Stolen passwords unlock customers' other accounts, and the blame can still land on you.
+    - title: Legal and card rules
+      text: Many laws and card-payment rules expect sensitive data to be encrypted. Duties vary by country and sector.
+    - title: Visible to customers
+      text: Browsers warn visitors about insecure or expired connections, and customers notice.
+  note: "**For {bizName}:** one leaked, unencrypted backup could expose {exposed}."
+checklist:
+  items:
+    - statement: Customers log in or pay on our website
+      question: Is every page, especially login and checkout, available only over HTTPS? Who renews our certificate, and when does it expire?
+      simulate: true
+    - statement: We store customer passwords
+      question: How are passwords stored? Can any employee or developer see a customer's real password?
+      simulate: true
+    - statement: We keep customer records, documents or IDs in databases or storage
+      question: Which sensitive data is encrypted when stored, including backups?
+    - statement: Staff use laptops or phones that hold business data
+      question: Are staff devices encrypted, so a lost laptop doesn't mean a leaked customer list?
+    - statement: We collect or keep data longer than we need
+      question: What sensitive data do we collect but don't need, and when do we delete it?
+    - statement: Nobody can tell us where our encryption keys are kept
+      question: Where are our encryption keys stored, who can reach them, and when were they last changed?
+  verdict: Several areas apply. An encryption standard and a key owner pay off here.
+cases:
+  title: Encrypted, and still readable.
+  items:
+    - tab: Adobe, 2013
+      tag: Adobe, 2013
+      title: Passwords were "encrypted", but badly.
+      what: Attackers took a copy of Adobe's customer database in 2013. Adobe first said about 38 million active users were affected, and later analysis of the leaked file pointed to around 153 million records. The passwords were encrypted, but with one shared key, so identical passwords looked identical, and password hints were stored as plain text.
+      fallout: Security researchers used the hints and the repeated patterns to work out many real passwords. Adobe forced password resets for affected users, and the breach led to lawsuits.
+      lesson: Having encryption isn't the same as having it done properly. A lock installed wrongly can fail as badly as no lock.
+      sources: "Also: LinkedIn's 2012 breach exposed passwords stored without \"salting\", so many were cracked quickly. In 2016, data from the same breach covering about 117 million accounts was put up for sale. Sources: Sophos Naked Security (2013), Ars Technica, Krebs on Security."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Know your sensitive data
+      text: Ask for a list of what you hold, where it lives and why you keep it. Delete what you don't need.
+    - title: Make encryption the default
+      text: On the move (HTTPS everywhere), in storage, and in backups. Write it into your standards.
+    - title: Own the keys
+      text: Name who controls them, keep them apart from the data, and track when certificates expire.
+devNotes:
+  - TLS 1.2 or newer everywhere, with HSTS, no mixed content and auto-renewing certificates.
+  - "Passwords: Argon2id, scrypt or bcrypt with a unique salt per user. Never reversible encryption, never MD5 or SHA-1."
+  - Encrypt data at rest with modern, well-reviewed algorithms such as AES-256-GCM. Never invent your own cryptography.
+  - Keep keys in a key management service or vault, not in code or repositories. Restrict access and rotate them.
+  - Use cryptographically secure random generators for tokens, session IDs and reset links.
+  - Minimise what you store. For example, let a payment provider hold card numbers so you never do.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Encryption is your last line of defence. Without it, any leak is a full leak.
+    - A lock is only as good as how it's fitted and where the key is kept.
+    - The safest data is the data you never kept.

@@ -56,6 +56,17 @@ announcement:
   youtube: ""
   cta: { label: "Book a scoping call", href: "/book" }
 
+# Video on /about. Paste a YouTube (unlisted is fine) or Loom link in `url`, or put a small
+# .mp4 (under 20 MB) in public/media/video/ and set `file` + `poster`. Both empty = section hidden.
+# Editable from the admin panel once it ships.
+about:
+  video:
+    title: "Kodesec in two minutes"
+    caption: "What we do, how we test, and why every fix gets re-verified."
+    url: ""
+    file: ""
+    poster: ""
+
 analytics:
   gtmId: GTM-PX3H2865
   # Same GA4 property the current live site loads directly. If your GTM container also
@@ -75,7 +86,7 @@ nav:
     children: services   # filled from content/services
   - label: Academy
     href: /academy
-    children: academy    # filled from content/academy
+    children: academy    # shown as a highlighted link (no dropdown)
   - { label: Blog, href: /blog }
   - { label: Pricing, href: /pricing }
   - { label: About, href: /about }

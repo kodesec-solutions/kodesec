@@ -1,0 +1,36 @@
+# Business types for the OWASP Academy. The picker shows them in this order; the first one is the default.
+# Every lesson can add or override words per business under its own `vars:` block.
+# Placeholders in lesson text: {person}, {Person} (capitalised), {records|slug} (spaces become dashes).
+# record / records / doc are shared so every simulation can use them.
+- slug: shop
+  label: Online shop
+  bizName: an online shop
+  person: customer
+  people: customers
+  record: order
+  records: orders
+  doc: invoice
+- slug: clinic
+  label: Clinic
+  bizName: a clinic
+  person: patient
+  people: patients
+  record: appointment record
+  records: appointment records
+  doc: medical report
+- slug: school
+  label: School
+  bizName: a school
+  person: student
+  people: students
+  record: student record
+  records: student records
+  doc: report card
+- slug: saas
+  label: Software company
+  bizName: a software company
+  person: client company
+  people: client companies
+  record: workspace
+  records: workspaces
+  doc: exported report

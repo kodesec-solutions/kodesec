@@ -1,0 +1,199 @@
+slug: security-misconfiguration
+rank: 2
+title: Security misconfiguration
+tagline: Left on factory settings.
+question: A strong lock, left on factory settings.
+summary: 'Nothing is "hacked". Something was simply left in an unsafe state: a default password, a public folder, an error screen that says too much.'
+category: website
+readMinutes: 3
+theme: orange
+preview:
+  size: square
+  video: /academy/owasp/security-misconfiguration-loop.mp4
+  poster: /academy/owasp/security-misconfiguration-loop.jpg
+seo:
+  title: "Security misconfiguration: explained for business owners"
+  description: 'Nothing is "hacked". Something was simply left in an unsafe state: a default password, a public folder, an error screen that says too much.'
+vars:
+  shop:
+    record: order
+    records: orders
+    person: customer
+    people: customers
+    staff: support agent
+    doc: invoice
+    path: /orders/
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    record: appointment record
+    records: appointment records
+    person: patient
+    people: patients
+    staff: receptionist
+    doc: medical report
+    path: /appointments/
+    exposed: appointments, contact details and health-related notes
+  school:
+    record: student record
+    records: student records
+    person: student
+    people: students
+    staff: teacher
+    doc: report card
+    path: /students/
+    exposed: grades, attendance and family contact details
+  saas:
+    record: workspace
+    records: workspaces
+    person: client company
+    people: client companies
+    staff: account manager
+    doc: exported report
+    path: /workspaces/
+    exposed: client files, user lists and business data
+owasp:
+  summary: "Secure software becomes unsafe when it isn't set up with security in mind: default passwords left in place, unused features left on, protective settings never tightened."
+  prevent:
+    - Use one locked-down set-up everywhere, applied automatically.
+    - Remove unused features, sample content and default accounts.
+    - Review settings regularly, alongside updates.
+    - Check the set-up automatically, not by memory.
+  url: https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/
+  keywords:
+    - change defaults
+    - remove extras
+    - review settings
+quick:
+  title: Sound software, set up unsafely.
+  cards:
+    - title: What it is
+      text: "Software, servers and cloud services come with hundreds of settings. Misconfiguration is when they're left unsafe: factory passwords, public folders, features nobody turned off."
+    - title: Why you care
+      text: No clever hacking is needed. Automated tools scan the internet all day for these slips, and one setting can expose your {exposed}. OWASP, the industry's list of web risks, puts it at number two.
+    - title: What to do
+      text: Name an owner for your settings, ask for a written checklist, and have them reviewed on a schedule.
+simulation:
+  title: "Watch: how a default setting leaves the door open."
+  lede: A 30-second film. Watch it, then check your own site below.
+  film:
+    src: /academy/owasp/security-misconfiguration.mp4
+    poster: /academy/owasp/security-misconfiguration.jpg
+  steps:
+    - id: folder
+      title: Visit a folder address
+      direction: Click the address bar to visit yourbusiness.com/backups/.
+      explain: "Instead of “Not found”, the server lists every file in the folder. Nobody broke anything: a default setting was simply left on."
+    - id: file
+      title: Open a backup file
+      direction: Click {people}-backup.zip in the list.
+      explain: The file downloads for anyone who knows the address. It contains {exposed}.
+    - id: login
+      title: Try the factory password
+      direction: On the admin login, click “Sign in” with the details admin / admin.
+      explain: The default password was never changed, so anyone who has read the product manual can sign in as administrator.
+    - id: fix
+      title: Apply secure settings
+      direction: In the server settings panel, click “Apply secure settings”.
+      explain: Folder listing is off, the default password is replaced, and detailed error pages are hidden from visitors.
+    - id: retry
+      title: Visit the folder again
+      direction: Visit yourbusiness.com/backups/ again.
+      explain: The server now answers “Not found”. Same software, safer settings.
+  definition: "**Security misconfiguration** means the software itself is sound, but it is set up unsafely: default passwords, open folders, test features left switched on. Attackers scan for these automatically."
+map:
+  title: Pick a place where settings matter.
+  lede: Each one can be perfectly built and still be left open.
+  zones:
+    - label: Logins and admin pages
+      url: yourbusiness.com/admin/login
+      here: The screens where staff or vendors manage your website, shop or systems.
+      wrong: Still on the factory password, a shared login, or open to the whole internet with no second step.
+      ask: Have all factory passwords been changed? Is every admin login protected by a second step, such as an app code?
+      term: Default credentials, exposed admin interfaces
+      simulate: true
+    - label: Storage and backups
+      url: storage.yourbusiness.com/exports/
+      here: Online folders holding {doc}s, exports and backups of your {people}' data.
+      wrong: A folder set to public by mistake, so anyone with the web address can read or download everything in it.
+      ask: Which of our storage folders are public? Can we see a list, and who checks it?
+      term: Open storage buckets, public cloud storage
+      simulate: true
+    - label: Error screens
+      url: yourbusiness.com{path}9999999
+      here: What a visitor sees when something breaks.
+      wrong: "The error page shows file paths, database names or even secret keys: a free map for an attacker."
+      ask: If our site crashes, what does a visitor see? Are the details kept in a private log instead?
+      term: Verbose errors, debug mode left on in production
+    - label: Test and old sites
+      url: staging.yourbusiness.com
+      here: Practice copies of your site, old versions and sample pages, built to try things out.
+      wrong: Left online with weak protection, often holding real {people}' data copied in for testing, with no one watching.
+      ask: Which test or old versions are still online? Do any hold real data? Who switches them off?
+      term: Forgotten staging environments, unnecessary features enabled
+    - label: Cloud permissions
+      url: cloud console > permissions
+      here: The settings that decide which accounts and tools can do what in your hosting or cloud.
+      wrong: Accounts and tools allowed to do far more than their job needs, so one stolen login opens everything.
+      ask: Who has access to our cloud account, and does each person or tool have only what it needs?
+      term: Over-permissive roles, least privilege
+cost:
+  title: Easy for them. Expensive for you.
+  cards:
+    - title: Found fast
+      text: Scanners look for exactly these slips around the clock. It's found, not guessed.
+    - title: All at once
+      text: One public folder or default login can expose everything behind it.
+    - title: Takeover
+      text: "A default admin login hands over control: pages changed, payments redirected."
+    - title: Cleanup
+      text: Investigation, telling people, and legal duties that vary by country and sector.
+  note: "**For {bizName}:** one public folder or factory login could expose {exposed}."
+checklist:
+  items:
+    - statement: Someone else set up our website, hosting or cloud account
+      question: Who owns our settings today, and is there a written list of how things were set up?
+      simulate: true
+    - statement: We use admin panels, a website builder or a CMS
+      question: Have all factory passwords and sample accounts been removed, and is every admin login protected by a second step?
+      simulate: true
+    - statement: We store files or backups online
+      question: Which storage folders are public? Can we see a list, and who reviews it?
+    - statement: We have a test or staging copy of our site
+      question: Is the test site protected or switched off, and does it hold real {people}' data?
+    - statement: Several staff or vendors have cloud or server access
+      question: Who has access to our cloud account, and does each person have only what their job needs?
+    - statement: Nobody has reviewed our settings since launch
+      question: When were our settings last checked against a security checklist, and by whom?
+  verdict: Several areas apply. A written checklist and an independent review pay off here.
+cases:
+  title: It happens to well-funded teams.
+  items:
+    - tab: Capital One, 2019
+      tag: Capital One, 2019
+      title: A strong system with one setting wrong.
+      what: An attacker reached customer data held in Capital One's cloud account. According to US court filings, the way in was a misconfigured web application firewall, the tool meant to filter attacks. The bank said about 100 million people in the US and 6 million in Canada were affected.
+      fallout: In 2020 the US Office of the Comptroller of the Currency fined the bank $80 million, citing weaknesses in how it managed risk and controls around its move to the cloud.
+      lesson: The software wasn't the problem. One setting was wrong in a system with a huge number of them. Someone has to own those settings and check them.
+      sources: "Also: in 2021, researchers at UpGuard reported that default settings in Microsoft Power Apps portals left about 38 million records from dozens of organisations publicly readable. Microsoft later changed the default. Sources: US Department of Justice, US OCC, UpGuard."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Own the settings
+      text: Name one person accountable for how your website, hosting and cloud accounts are set up.
+    - title: Demand a baseline
+      text: Every new system gets a written secure-settings checklist, checked before it goes live.
+    - title: Review on a schedule
+      text: Have someone independent check the settings after setup, after big changes, and regularly after that.
+devNotes:
+  - Harden to a published baseline (for example CIS Benchmarks) and remove default accounts, sample apps and unused services.
+  - No debug mode or verbose errors in production. Log details privately.
+  - Storage private by default, with public access blocked at the account level.
+  - Least-privilege cloud roles, with a second step on every admin login.
+  - Test and staging environments kept separate, protected, and free of real customer data.
+  - Define infrastructure as code and scan it automatically, so settings can't drift unnoticed.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Secure software can still be left in an unsafe state. Settings need an owner.
+    - Attackers need no skill for these. Tools find them automatically.
+    - 'Make "safe" the default: a checklist for every new system and a regular independent review.'

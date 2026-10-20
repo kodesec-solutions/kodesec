@@ -1,0 +1,194 @@
+slug: software-and-data-integrity-failures
+rank: 8
+title: Software and data integrity failures
+tagline: Trusted without checking.
+question: Is it still what it claims to be?
+summary: Updates, files, scripts and saved data are trusted the moment they arrive. This is what happens when nobody checks the seal, and something changed on the way gets accepted as genuine.
+category: partners
+readMinutes: 3
+theme: fuchsia
+preview:
+  size: tall
+seo:
+  title: "Software and data integrity failures: explained for business"
+  description: Updates, files, scripts and saved data are trusted the moment they arrive. This is what happens when nobody checks the seal, and something changed on the way gets accepte
+vars:
+  shop:
+    person: customer
+    people: customers
+    exposed: names, addresses, phone numbers and purchase history
+  clinic:
+    person: patient
+    people: patients
+    exposed: appointments, contact details and health-related notes
+  school:
+    person: student
+    people: students
+    exposed: grades, attendance and family contact details
+  saas:
+    person: client company
+    people: client companies
+    exposed: client files, user lists and business data
+owasp:
+  summary: Your systems take in updates, components and data from outside. If nothing checks they are genuine and unaltered, tampered code or data can slip in with full trust.
+  prevent:
+    - Accept only digitally signed updates.
+    - Use components from approved, trusted sources only.
+    - Review every change to how software is built and released.
+    - Tightly control who can change the release process.
+  url: https://top10.owasp.org/2025/A08_2025-Software_or_Data_Integrity_Failures/
+  keywords:
+    - signed updates only
+    - trusted sources
+    - review the pipeline
+quick:
+  title: Updates and data trusted without a check.
+  cards:
+    - title: What it is
+      text: Your systems accept updates, files, scripts and saved data. If nothing verifies they're untampered and from the right source, a changed version is treated as the real thing.
+    - title: Why you care
+      text: "The change can be small: a swapped update, an edited price, an altered record. It runs or is believed with full trust, and can reach your {exposed} or quietly change them."
+    - title: What to do
+      text: Ask whether updates, builds and important data are verified before use, and who is able to change them.
+simulation:
+  title: "Try it: slip a fake update past your website."
+  lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  steps:
+    - id: source
+      title: See where updates come from
+      direction: Click the vendor's download server.
+      explain: Your website installs updates from its software vendor automatically. That saves time, and it means trusting the file completely.
+    - id: swap
+      title: Swap the update
+      direction: Click “Replace the file” in the attacker panel.
+      explain: An attacker has broken into the vendor's server and replaced the update with their own version. Same name, same version number.
+    - id: install
+      title: Install the update
+      direction: Click “Install update 3.2” in your admin panel.
+      explain: Your website installs it without checking. The attacker's code now runs inside your website, with full trust.
+    - id: fix
+      title: Require a signature
+      direction: Click “Only install signed updates”.
+      explain: Genuine updates carry a digital signature that only the vendor can produce. Any altered file fails the check.
+    - id: retry
+      title: Install it again
+      direction: Click “Install update 3.2” again.
+      explain: "Rejected: “Signature doesn't match”. The genuine update can still be installed."
+  definition: "**Software and data integrity failures** mean your systems trust updates, scripts or data without checking that nobody altered them on the way."
+map:
+  title: Pick something your business trusts on arrival.
+  lede: Every one of these is a package that someone could tamper with before it reaches you.
+  zones:
+    - label: Software updates
+      url: yourbusiness.com/updates/latest
+      here: Updates your systems and apps download and install, often automatically.
+      wrong: Accepted without checking they're genuine, so a tampered update, or one from a hijacked server, installs with full trust.
+      ask: Are updates checked (signed) before they install, and who controls where they come from?
+      term: Unsigned updates, missing code signing, insecure update channels
+      simulate: true
+    - label: Build and release
+      url: build server > release
+      here: The automated line that turns your developers' code into the live product.
+      wrong: Anyone who can change the pipeline can slip changes into what ships, and nobody compares what was built to what was reviewed.
+      ask: Who can change our build and release process, and can every release be traced back to reviewed code?
+      term: CI/CD pipeline integrity, unsigned builds, missing provenance
+      simulate: true
+    - label: Outside scripts and files
+      url: yourbusiness.com/checkout (loads an outside script)
+      here: Scripts and files your pages load from other companies' servers.
+      wrong: Loaded with no check that they're unchanged, so if the file is swapped at the source, your page runs the new version.
+      ask: Do we verify that outside scripts haven't changed, or do we host them ourselves?
+      term: Missing Subresource Integrity (SRI), unpinned CDN content
+    - label: Data the browser sends back
+      url: yourbusiness.com/cart (cookie)
+      here: Cookies, hidden form fields and tokens that carry information back to your server, such as a role or a cart total.
+      wrong: Believed without proof they weren't edited, so a visitor can change "customer" to "admin" or a price to a lower number.
+      ask: Does our server verify that cookies and tokens weren't edited, or does it just believe them?
+      term: Unsigned cookies, client-side state tampering, token misuse
+    - label: Imported and saved data
+      url: yourbusiness.com/import
+      here: "Files and saved data your system reads back and rebuilds into live objects: imports, session data, messages between systems."
+      wrong: Rebuilt without checking what's inside, so a crafted file can make your system run an attacker's instructions while it's "loading" it.
+      ask: Where do we load imported or saved data from, and is it checked before our system uses it?
+      term: Insecure deserialization
+    - label: Backups and records
+      url: storage > backups > restore
+      here: Backups and business records you would rely on in a crisis.
+      wrong: Nothing proves they haven't been altered or poisoned, so you restore bad data, or find that records were quietly changed.
+      ask: How do we know our backups and key records haven't been altered? When did we last test a restore?
+      term: Tamper-evident storage, backup integrity, immutable backups
+cost:
+  title: Trusted by default, so damaging by default.
+  cards:
+    - title: Full trust
+      text: A tampered update or file runs with your system's own permissions, which is more than an outsider would ever get.
+    - title: Quiet
+      text: Small changes to a price, a record or a setting can go unnoticed until the damage is done.
+    - title: Many at once
+      text: A poisoned update reaches every customer or system that installs it.
+    - title: Hard to undo
+      text: If you can't prove what is clean, recovery can mean rebuilding from scratch.
+  note: "**For {bizName}:** one tampered update or altered record could expose or change {exposed}."
+checklist:
+  items:
+    - statement: Our systems or apps install updates automatically
+      question: Are updates checked (signed) before they install, and who controls where they come from?
+      simulate: true
+    - statement: Our developers use an automated build and release process
+      question: Who can change our build and release process, and can every release be traced back to reviewed code?
+    - statement: Our pages load scripts or files from other companies
+      question: Do we verify that outside scripts haven't changed, or do we host them ourselves?
+    - statement: We rely on cookies or saved browser data for roles, carts or prices
+      question: Does our server verify that cookies and tokens weren't edited?
+    - statement: We import files or data from outside our own systems
+      question: Where do we load imported or saved data from, and is it checked before our system uses it?
+    - statement: We couldn't prove our backups haven't been altered
+      question: How do we know our backups and key records haven't been altered? When did we last test a restore?
+  verdict: Several areas apply. A rule to verify before you trust pays off here.
+cases:
+  title: The update was real. The contents weren't.
+  items:
+    - tab: SolarWinds 2020
+      tag: Compromised build, 2020
+      title: A signed update, with the attacker inside.
+      what: In 2020 attackers broke into SolarWinds' build system and inserted malicious code into updates of its Orion network-monitoring software. The updates were digitally signed by SolarWinds and went out to about 18,000 customers between March and June 2020. A much smaller number, including US government agencies and large companies, were then chosen for follow-up attacks. Security firm FireEye uncovered it in December 2020 after being affected itself.
+      fallout: It became one of the most studied breaches in history and fed into a May 2021 US executive order on improving cybersecurity, including software supply chain security.
+      lesson: A signature proves who shipped the update, not that their build was clean. Verification only helps if the build itself is protected too.
+      sources: "Sources: SolarWinds statements, US CISA, Mandiant (FireEye)."
+    - tab: NotPetya 2017
+      tag: Hijacked update, 2017
+      title: A small accounting program's update server.
+      what: In June 2017 attackers compromised the update system of M.E.Doc, an accounting program widely used in Ukraine. A routine update delivered destructive malware, later called NotPetya, which then spread through company networks well beyond Ukraine.
+      fallout: Global companies were hit. Shipping giant Maersk estimated losses of up to $300 million, and the White House later put total worldwide damage at about $10 billion.
+      lesson: A small supplier's update channel became the way into huge companies, because customers trusted updates from the usual place.
+      sources: "Sources: ESET, Maersk statements, White House statement (2018), press coverage."
+    - tab: 3CX 2023
+      tag: Signed but trojanised, 2023
+      title: A supply chain attack on a supply chain attack.
+      what: In March 2023 researchers found that the desktop app of 3CX, a business phone-system provider, had been turned into a carrier for malware. The installers were digitally signed by 3CX. Investigators later traced the origin to another compromised software package that a 3CX employee had installed, which Mandiant described as the first time it had seen one software supply chain compromise lead to another.
+      fallout: 3CX told customers to stop using the affected app while it investigated. Mandiant attributed the activity to a North Korea-linked group.
+      lesson: Signed doesn't always mean safe, and your suppliers' suppliers matter too.
+      sources: "Sources: Mandiant (April 2023), 3CX statements, CrowdStrike."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Verify what you run
+      text: Require that updates, builds and key files are checked, signed or fingerprinted, before use, with no way to skip the check.
+    - title: Control who changes what ships
+      text: Limit and log who can alter your build and release process, and require a second person for changes to production.
+    - title: Be able to prove it's clean
+      text: Keep backups that can't be altered and test a restore regularly, so you can show what's genuine.
+devNotes:
+  - Sign and verify artifacts and updates (code signing, tools such as Sigstore). Verify checksums and signatures of downloads and dependencies, and pin versions.
+  - "Protect the CI/CD pipeline: least privilege, separate build from deploy, protected branches, mandatory review, short-lived credentials. Record build provenance (for example SLSA) and keep an SBOM."
+  - Use Subresource Integrity and a Content Security Policy for third-party scripts, or host critical scripts yourself.
+  - Don't trust client state. Sign (HMAC) or encrypt cookies and tokens, validate token signatures and algorithms on the server, and keep sensitive state server-side.
+  - Avoid deserialising untrusted data. Prefer simple formats such as JSON with strict schema validation and allow-listed types, and run parsers with low privileges.
+  - Keep immutable, versioned backups with hash checks and an offline copy. Monitor file integrity on critical systems.
+  - Log and alert on unexpected changes to builds, configuration and critical records.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Trust isn't verification. Check the seal before you accept anything.
+    - A signature shows who shipped it, not that their build was clean. Protect the build too.
+    - If you can't prove your backups and records are untouched, you can't fully trust them.

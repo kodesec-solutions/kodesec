@@ -3,7 +3,9 @@
 Context for Claude and humans working in this repo. Read this first.
 
 - **Plan:** `docs/V2_PLAN.md` (architecture, admin panel, admin security §6, SEO §8, CI/CD, phases)
+- **Admin panel (Phase 4):** `docs/ADMIN_ARCHITECTURE.md` (agreed decisions; wins over V2_PLAN §5–6)
 - **Writing content:** `docs/CONTENT_GUIDE.md`
+- **Academy (business owners, OWASP Top 10, motion simulations):** `docs/ACADEMY_MOTION.md`
 - **Old production site (v1, still live on Vercel from `master`):** `docs/ARCHITECTURE.md`, `docs/SEO_AUDIT.md`
 
 ## Status (2026-09-28)
@@ -15,7 +17,7 @@ v2 is being built on the **`v2` branch**. `master` still deploys the old v1 site
 |---|---|
 | 1 Foundation (content layer, design system, CI) | ✅ done |
 | 2 Public site (home, services, pricing, booking, contact, blog, about, legal) | ✅ done: copy still needs the team (`TODO(team)` markers) |
-| 3 Academy (tracks → modules → lessons, progress in browser) | ✅ done: 1 sample module, 3 lessons |
+| 3 Academy (tracks → modules → lessons, progress in browser) | ✅ done: 3 tracks (Web Security, DevOps → Git & GitHub, Development → Backend systems), 9 lessons |
 | 4 Admin panel + Workers (admin-api, public-api) | ⏳ not started |
 | 5 Launch (Cloudflare Pages, DNS cutover) | ⏳ |
 

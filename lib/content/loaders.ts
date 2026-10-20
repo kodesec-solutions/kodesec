@@ -7,6 +7,8 @@ import {
   blogSchema,
   lessonSchema,
   moduleSchema,
+  owaspBusinessSchema,
+  owaspTopicSchema,
   pageSchema,
   pricingSchema,
   serviceSchema,
@@ -16,6 +18,8 @@ import {
   type BlogFrontmatter,
   type LessonFrontmatter,
   type Module,
+  type OwaspBusiness,
+  type OwaspTopic,
   type Pricing,
   type ServiceFrontmatter,
   type Site,
@@ -197,3 +201,23 @@ export function getLesson(trackSlug: string, moduleSlug: string, lessonSlug: str
 }
 
 export const getAllLessons = () => getAcademy().flatMap((t) => t.modules.flatMap((m) => m.lessons));
+
+// ---------------------------------------------------------------- OWASP academy
+
+export type OwaspTopicEntry = OwaspTopic & { href: string; code: string };
+
+export const getBusinesses = (): OwaspBusiness[] =>
+  cached("owasp-businesses", () => {
+    const file = path.join(CONTENT_DIR, "owasp", "_businesses.yml");
+    return parse(owaspBusinessSchema.array().min(1), YAML.parse(fs.readFileSync(file, "utf8")), file);
+  });
+
+export const getOwaspTopics = (): OwaspTopicEntry[] =>
+  cached("owasp-topics", () =>
+    listFiles(path.join(CONTENT_DIR, "owasp"), ".yml")
+      .map((file) => readYaml(file, owaspTopicSchema))
+      .map((t) => ({ ...t, href: `/academy/owasp/${t.slug}`, code: `A${String(t.rank).padStart(2, "0")}` }))
+      .sort((a, b) => a.rank - b.rank),
+  );
+
+export const getOwaspTopic = (slug: string) => getOwaspTopics().find((t) => t.slug === slug);

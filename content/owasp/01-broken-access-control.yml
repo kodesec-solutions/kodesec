@@ -1,0 +1,213 @@
+slug: broken-access-control
+rank: 1
+title: Broken access control
+tagline: Who can open what?
+question: Who can open what on your site?
+summary: Your website knows who someone is. This is what happens when it forgets to check what they're allowed to see or change.
+category: data
+readMinutes: 3
+theme: violet
+preview:
+  size: tall
+  video: /academy/owasp/broken-access-control-loop.mp4
+  poster: /academy/owasp/broken-access-control-loop.jpg
+seo:
+  title: "Broken access control: explained for business owners"
+  description: Your website knows who someone is. This is what happens when it forgets to check what they're allowed to see or change.
+vars:
+  shop:
+    record: order
+    records: orders
+    person: customer
+    people: customers
+    staff: support agent
+    doc: invoice
+    path: /orders/
+    a: "1001"
+    b: "1002"
+    admin: /admin/orders
+    sample: 2 items, delivery address, phone number
+    exposed: names, addresses, phone numbers and purchase history
+    changed: cancel or redirect orders, change prices, trigger refunds
+  clinic:
+    record: appointment record
+    records: appointment records
+    person: patient
+    people: patients
+    staff: receptionist
+    doc: medical report
+    path: /appointments/
+    a: A-2041
+    b: A-2042
+    admin: /admin/appointments
+    sample: reason for visit, contact details
+    exposed: appointments, contact details and health-related notes
+    changed: cancel or alter appointments and notes
+  school:
+    record: student record
+    records: student records
+    person: student
+    people: students
+    staff: teacher
+    doc: report card
+    path: /students/
+    a: S-3301
+    b: S-3302
+    admin: /admin/grades
+    sample: grades, attendance, guardian contact
+    exposed: grades, attendance and family contact details
+    changed: change grades or attendance
+  saas:
+    record: workspace
+    records: workspaces
+    person: client company
+    people: client companies
+    staff: account manager
+    doc: exported report
+    path: /workspaces/
+    a: W-770
+    b: W-771
+    admin: /admin/workspaces
+    sample: projects, files, user list
+    exposed: another company's files, users and business data
+    changed: edit or delete another company's data
+owasp:
+  summary: Your system knows who someone is, but doesn't properly enforce what they may see or do, so people can reach data and actions that were never meant for them.
+  prevent:
+    - Deny access by default; grant only what's needed.
+    - Check every request on the server, not in the browser.
+    - Make sure people can only reach their own records.
+    - Log refused attempts and watch for patterns.
+  url: https://top10.owasp.org/2025/A01_2025-Broken_Access_Control/
+  keywords:
+    - deny by default
+    - check on the server
+    - own records only
+quick:
+  title: Signed in is not the same as allowed.
+  cards:
+    - title: What it is
+      text: The site checked who you are, but not what you're allowed to open. Logging in is not the same as being allowed.
+    - title: Why you care
+      text: One {person} could see or change another's {records}, or reach staff-only tools. It ranks number one on OWASP's Top 10 list of web risks.
+    - title: What to do
+      text: Ask your developer a few questions, and decide who may do what. Both are below.
+simulation:
+  title: "Watch: how one {person} can open another's {record}."
+  lede: A 30-second film. Watch it, then check your own site below.
+  film:
+    src: /academy/owasp/broken-access-control.mp4
+    poster: /academy/owasp/broken-access-control.jpg
+  steps:
+    - id: open
+      title: Open your own {record}
+      direction: You are signed in as {Person} A. Click your {record}, number {a}.
+      explain: "Your {record} opens. Look at the address bar: it now ends in {a}. The website uses that number to decide what to show you."
+    - id: tamper
+      title: Change the number
+      direction: Click the number {a} in the address bar to change it to {b}.
+      explain: "{Record} {b} belongs to {Person} B, yet it opens. The website checked that you are signed in, but never checked whether this {record} is yours."
+    - id: admin
+      title: Visit the staff area
+      direction: Click the address bar again to visit the staff address. There is no link to it in your menu.
+      explain: "The staff area opens too. Hiding a link is not protection: the website itself must refuse anyone who is not staff."
+    - id: fix
+      title: Switch on the ownership check
+      direction: In the website panel, switch on “Check who owns each {record}”.
+      explain: "From now on, before showing anything, the website asks two questions: who is this, and are they allowed to see it?"
+    - id: retry
+      title: Try the same trick again
+      direction: Change the number to {b} again.
+      explain: Refused. You see “You don't have access to this {record}”, and the attempt is logged so your team can spot a pattern.
+  definition: "**Broken access control** means your website knows who someone is, but does not check what they are allowed to see or change. Every page, file and action needs its own permission check, on the server."
+map:
+  title: Pick a part of your website.
+  lede: Each one is a place where the site must check permission.
+  zones:
+    - label: Account and {records}
+      url: yourbusiness.com{path}{a}
+      here: Each {person} sees their own {records}. Each item has its own page.
+      wrong: The page address contains a number. If the site never checks whose {record} it is, changing the number can show someone else's.
+      ask: When a {person} opens a {record}, does the server check it's theirs?
+      term: IDOR (Insecure Direct Object Reference)
+      simulate: true
+    - label: Downloads
+      url: yourbusiness.com/files/{doc|slug}-{a}.pdf
+      here: "Files like an {doc}: PDFs, reports, scanned documents."
+      wrong: Links that work for anyone who has them, or file names that are easy to guess.
+      ask: Can an {doc} link be opened by someone who isn't that {person}?
+      term: Forced browsing, unprotected file paths
+    - label: Staff area
+      url: yourbusiness.com{admin}
+      here: "Screens for your {staff}s and managers: see everyone, edit, refund."
+      wrong: Hiding the menu link isn't protection. A regular {person} who types the address must still be refused.
+      ask: If a regular {person} typed our admin address, what exactly stops them?
+      term: Privilege escalation
+      simulate: true
+    - label: Mobile app and API
+      url: api.yourbusiness.com/v1/{records|slug}/{b}
+      here: If you have an app, it talks to your servers through back doors customers never see.
+      wrong: The website checks permissions, but the app's back door doesn't. Attackers can use it directly.
+      ask: Do the app's back doors follow the same rules as the website?
+      term: BOLA (Broken Object-Level Authorization)
+cost:
+  title: The flaw is small. The fallout isn't.
+  cards:
+    - title: Trust
+      text: Customers forgive slow sites, not strangers seeing their details.
+    - title: Legal
+      text: Data-protection and reporting duties vary by country and sector. Ask a legal adviser.
+    - title: Cleanup
+      text: Investigation, fixes, telling people, handling complaints.
+    - title: Fraud
+      text: If records can be edited, not just seen, attackers can redirect, refund or alter.
+  note: "**For {bizName}:** what could be seen is {exposed}. What could be changed: {changed}."
+checklist:
+  items:
+    - statement: Customers or users have accounts
+      question: For every screen after login, where is the rule that stops one user reaching another's data?
+    - statement: People can view their own {records} or documents
+      question: When a {person} opens a {record}, does the server confirm it's theirs?
+      simulate: true
+    - statement: We have downloadable files (invoices, reports, IDs)
+      question: Can a file link be opened by someone who isn't the owner?
+    - statement: We have several roles (customer, staff, manager, admin)
+      question: Do we have a written list of who may do what, tested with a real account for each role?
+    - statement: We have an admin or staff area
+      question: Is the admin area protected on the server, or only hidden from the menu?
+      simulate: true
+    - statement: We have a mobile app or an API
+      question: Do our API endpoints follow the same rules as the website, including old versions?
+  verdict: Several areas apply. Written rules and independent testing pay off here.
+cases:
+  title: It happens to large, careful companies.
+  items:
+    - tab: First American Financial, 2019
+      tag: First American Financial, 2019
+      title: A document link that worked for anyone who changed a number.
+      what: Documents on the US title insurer's website could be opened through an address containing a sequential number. Journalist Brian Krebs reported in May 2019 that changing the number showed other customers' documents, and that around 885 million records were exposed.
+      fallout: The US SEC later charged the company over how it handled the disclosure, with a penalty of $487,616.
+      lesson: A link is a door. Every door needs its own check.
+      sources: "Also: in 2018 Krebs reported that a USPS service for business mailers let any logged-in user look up other users' account details. USPS said it found no evidence of misuse and fixed it. Sources: Krebs on Security, US SEC."
+decisions:
+  title: Three decisions that are yours.
+  items:
+    - title: Who may do what
+      text: Write down what each role can see and change. Developers build it, but can't invent your rules.
+    - title: Independent testing
+      text: Have someone who didn't build the system test it, before launch and after big changes.
+    - title: One owner
+      text: Name one person accountable for access rules.
+devNotes:
+  - Also called IDOR, BOLA and privilege escalation, depending on the form.
+  - Deny by default. Check permission on the server, on every request, for every object.
+  - Scope database queries by user or tenant, so wrong rows are never returned.
+  - Unpredictable IDs help, but never replace the check.
+  - Test with two accounts of each role, and review every API endpoint, old versions included.
+  - Log refused attempts and alert on patterns. Scanners miss these flaws because they don't know your rules.
+takeaways:
+  title: Three things to keep.
+  items:
+    - Logged in is not the same as allowed. The site must check both, every time.
+    - Who may see what is a business decision. Write it down.
+    - The damage depends on what's behind the door, so start with your most sensitive data.

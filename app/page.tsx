@@ -1,3 +1,4 @@
+import { StackLogo } from "@/components/ui/StackLogo";
 import Link from "next/link";
 import { ArrowRight, CircleDot } from "lucide-react";
 import { Horizon } from "@/components/effects/Aurora";
@@ -49,13 +50,12 @@ export default function HomePage() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_32%,rgba(3,6,5,0.82),rgba(3,6,5,0.35)_70%,transparent)]" />
         <div className="container-kd relative">
           <div className="mx-auto max-w-4xl text-center">
-            <p className="eyebrow justify-center">Offensive security · Secure engineering · Free academy</p>
-            <h1 className="mt-6 text-[2.4rem] font-semibold leading-[1.05] sm:text-5xl lg:text-[4.3rem]">
+            <h1 className="text-[2.4rem] font-semibold leading-[1.05] sm:text-5xl lg:text-[4.3rem]">
               <span className="text-gradient">Engineering security into every layer.</span>
               <br />
               <span className="text-aurora">Deploy with confidence.</span>
             </h1>
-            <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-fg-2 md:text-lg">
+            <p className="hero-lede mx-auto mt-7 max-w-2xl text-lg leading-relaxed md:text-xl">
               A founder-led team of penetration testers and engineers. We find the flaws scanners miss, build software and
               cloud platforms that are secure by default, and teach it all for free.
             </p>
@@ -67,21 +67,16 @@ export default function HomePage() {
                 Explore the Academy
               </Link>
             </div>
-            <p className="mt-5 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fg-3">
-              Manual testing · Fixed quotes · Every fix re-tested
-            </p>
           </div>
         </div>
 
         {/* Stack marquee */}
         <div className="container-kd relative mt-20">
-          <p className="text-center font-mono text-[0.68rem] uppercase tracking-[0.16em] text-fg-3">
-            Tested and built across your stack
-          </p>
-          <div className="marquee-mask mt-6 overflow-hidden">
+          <div className="marquee-mask overflow-hidden">
             <ul className="flex w-max animate-marquee gap-12">
               {[...stack, ...stack].map((s, i) => (
-                <li key={i} className="whitespace-nowrap text-lg font-medium tracking-tight text-fg-3/80">
+                <li key={i} className="flex items-center gap-3 whitespace-nowrap text-xl font-bold tracking-tight text-fg">
+                  <StackLogo name={s} className="h-7 w-7 shrink-0" />
                   {s}
                 </li>
               ))}

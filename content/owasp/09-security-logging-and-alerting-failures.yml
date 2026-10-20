@@ -53,6 +53,9 @@ quick:
 simulation:
   title: "Try it: watch a break-in that nobody notices."
   lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  film:
+    src: /academy/owasp/security-logging-and-alerting-failures.mp4
+    poster: /academy/owasp/security-logging-and-alerting-failures.jpg
   steps:
     - id: night
       title: Play the night

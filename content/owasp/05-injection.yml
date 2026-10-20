@@ -68,6 +68,9 @@ variants:
 simulation:
   title: "Try it: turn a search box into a command."
   lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  film:
+    src: /academy/owasp/injection.mp4
+    poster: /academy/owasp/injection.jpg
   steps:
     - id: search
       title: Search normally

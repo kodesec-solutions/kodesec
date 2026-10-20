@@ -53,6 +53,9 @@ quick:
 simulation:
   title: "Try it: intercept a password on café Wi-Fi."
   lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  film:
+    src: /academy/owasp/cryptographic-failures.mp4
+    poster: /academy/owasp/cryptographic-failures.jpg
   steps:
     - id: signin
       title: Sign in on café Wi-Fi

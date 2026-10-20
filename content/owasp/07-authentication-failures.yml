@@ -53,6 +53,9 @@ quick:
 simulation:
   title: "Try it: break into an account with a leaked password."
   lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  film:
+    src: /academy/owasp/authentication-failures.mp4
+    poster: /academy/owasp/authentication-failures.jpg
   steps:
     - id: list
       title: Open a leaked password list

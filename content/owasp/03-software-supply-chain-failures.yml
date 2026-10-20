@@ -57,6 +57,9 @@ quick:
 simulation:
   title: "Try it: find the weak part in your website."
   lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  film:
+    src: /academy/owasp/software-supply-chain-failures.mp4
+    poster: /academy/owasp/software-supply-chain-failures.jpg
   steps:
     - id: parts
       title: See what your site is made of

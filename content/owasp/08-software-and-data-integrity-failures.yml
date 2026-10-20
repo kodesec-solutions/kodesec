@@ -53,6 +53,9 @@ quick:
 simulation:
   title: "Try it: slip a fake update past your website."
   lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  film:
+    src: /academy/owasp/software-and-data-integrity-failures.mp4
+    poster: /academy/owasp/software-and-data-integrity-failures.jpg
   steps:
     - id: source
       title: See where updates come from

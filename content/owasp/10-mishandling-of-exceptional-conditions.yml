@@ -53,6 +53,9 @@ quick:
 simulation:
   title: "Try it: make a payment fail the wrong way."
   lede: Follow the directions on the right, one step at a time, and read what each step shows.
+  film:
+    src: /academy/owasp/mishandling-of-exceptional-conditions.mp4
+    poster: /academy/owasp/mishandling-of-exceptional-conditions.jpg
   steps:
     - id: outage
       title: Cause a hiccup

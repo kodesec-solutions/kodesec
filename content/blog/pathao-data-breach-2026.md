@@ -19,7 +19,7 @@ relatedServices:
 - devops
 cover: /blog/pathao-data-breach-2026/cover.jpeg
 coverAlt: '19 Million Users, 133 GB, 24 Hours: Inside the Pathao Breach That Shook Bangladesh'
-featured: true
+featured: false
 draft: false
 ---
 

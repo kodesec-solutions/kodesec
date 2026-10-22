@@ -16,6 +16,10 @@ export const blogSchema = z.object({
   title: z.string().min(10).max(140),
   slug,
   description: z.string().min(50).max(300),
+  /** Search-result title (<= 55 chars, "| Kodesec" is appended) when the headline is longer. */
+  seoTitle: z.string().max(60).optional(),
+  /** Search-result description (120-160 chars) when the lede is longer. */
+  seoDescription: z.string().max(165).optional(),
   date: isoDate,
   updated: isoDate.optional(),
   authors: z.array(slug).min(1),
@@ -34,6 +38,8 @@ export const levels = ["beginner", "practitioner", "expert"] as const;
 
 export const lessonSchema = z.object({
   title: z.string().min(5).max(120),
+  /** Search-result title (<= 50 chars) when the lesson title is longer. */
+  seoTitle: z.string().max(60).optional(),
   slug,
   track: slug,
   module: slug,
@@ -65,6 +71,7 @@ export type Track = z.infer<typeof trackSchema>;
 
 export const moduleSchema = z.object({
   title: z.string(),
+  seoTitle: z.string().max(60).optional(),
   slug,
   order: z.number().int(),
   summary: z.string(),

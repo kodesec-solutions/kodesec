@@ -3,7 +3,8 @@ import { Check } from "lucide-react";
 import Booking from "@/components/booking/Booking";
 import { PageHero } from "@/components/ui/PageHero";
 import { getPricing, getServices, getSite } from "@/lib/content/loaders";
-import { buildMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbLd, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Book a Scoping Call",
@@ -24,6 +25,7 @@ export default function BookPage() {
   const plans = getPricing().models.map((m) => ({ slug: m.id, title: m.name }));
   return (
     <>
+      <JsonLd data={breadcrumbLd([{ name: "Book a call", path: "/book" }])} />
       <PageHero crumbs={[{ name: "Book a call" }]} eyebrow="Book a call" title="Pick a time that works for you" />
       <section className="pb-24">
         <div className="container-kd grid gap-10 lg:grid-cols-12">

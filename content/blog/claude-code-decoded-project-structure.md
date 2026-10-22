@@ -2,6 +2,8 @@
 title: 'Claude Code, Decoded: The Full Project Structure of an Agent-Ready Repo'
 slug: claude-code-decoded-project-structure
 description: Most people dump everything into one CLAUDE.md. The real power is in the structure. Here's how rules, commands, skills, agents, and hooks turn a repo into something you can actually direct, not just prompt.
+seoTitle: 'Claude Code Project Structure, Explained'
+seoDescription: 'Most people dump everything into one CLAUDE.md. Rules, commands, skills, agents and hooks turn a repo into something you can direct, not just prompt.'
 date: '2026-09-15'
 updated: '2026-09-15'
 authors:

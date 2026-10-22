@@ -2,6 +2,8 @@
 title: 'Shwapno Data Breach 2026: 4 Million Customers Exposed in Major Bangladesh Cyberattack'
 slug: shwapno-data-breach-2026
 description: A detailed analysis of the Shwapno data breach impacting 4 million customers in Bangladesh. Explore the attack timeline, ransomware links, root causes, and key security lessons.
+seoTitle: 'Shwapno Data Breach 2026: 4M Customers Exposed'
+seoDescription: 'Analysis of the Shwapno breach that exposed 4 million customers in Bangladesh: attack timeline, ransomware links, root causes and lessons.'
 date: '2026-04-25'
 updated: '2026-04-25'
 authors:

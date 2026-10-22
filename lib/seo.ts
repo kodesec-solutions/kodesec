@@ -5,6 +5,15 @@ export const SITE_URL = "https://kodesec.com";
 export const ORG_ID = `${SITE_URL}/#organization`;
 const abs = (p: string) => (p.startsWith("http") ? p : `${SITE_URL}${p}`);
 
+/** The site-wide share card (app/opengraph-image.tsx), used when a page has no image of its own. */
+const DEFAULT_OG = {
+  url: `${SITE_URL}/opengraph-image`,
+  width: 1200,
+  height: 630,
+  type: "image/png",
+  alt: "Kodesec: penetration testing, secure engineering and a free security academy",
+};
+
 /**
  * One helper for every page's metadata. Title pattern: "<Topic> | Kodesec" (template in app/layout.tsx),
  * so pages pass only their topic.
@@ -19,7 +28,8 @@ export function buildMetadata(opts: {
   modifiedTime?: string;
   noindex?: boolean;
 }): Metadata {
-  const images = opts.image ? [{ url: abs(opts.image) }] : undefined;
+  // A page that sets its own `openGraph` replaces the root one, so the default card has to be set here.
+  const images = [opts.image ? { url: abs(opts.image) } : DEFAULT_OG];
   return {
     ...(opts.title ? { title: opts.title } : {}),
     description: opts.description,
@@ -31,14 +41,14 @@ export function buildMetadata(opts: {
       locale: "en_US",
       ...(opts.title ? { title: `${opts.title} | Kodesec` } : {}),
       description: opts.description,
-      ...(images ? { images } : {}),
+      images,
       ...(opts.publishedTime ? { publishedTime: opts.publishedTime, modifiedTime: opts.modifiedTime } : {}),
     },
     twitter: {
       card: "summary_large_image",
       ...(opts.title ? { title: `${opts.title} | Kodesec` } : {}),
       description: opts.description,
-      ...(images ? { images: images.map((i) => i.url) } : {}),
+      images: images.map((i) => i.url),
     },
     ...(opts.noindex ? { robots: { index: false, follow: true } } : {}),
   };
@@ -68,6 +78,7 @@ export function organizationLd() {
       addressCountry: site.address.country,
     },
     areaServed: ["GB", "BD", "Worldwide"],
+    knowsAbout: ["Penetration testing", "Application security", "Cloud security", "DevSecOps", "Secure software development", "OWASP Top 10"],
     sameAs: site.social.map((s) => s.href),
   };
 }
@@ -101,8 +112,22 @@ function authorsLd(slugs: string[]) {
     const m = getMember(s);
     if (!m) return { "@type": "Person", name: s };
     if (m.kind === "organization") return { "@id": ORG_ID };
-    return { "@type": "Person", name: m.name, jobTitle: m.role, sameAs: Object.values(m.links) };
+    return { "@type": "Person", name: m.name };
   });
+}
+
+export function videoLd(opts: { name: string; description: string; embedUrl: string; thumbnail: string; uploadDate: string; pageUrl: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: opts.name,
+    description: opts.description,
+    thumbnailUrl: abs(opts.thumbnail),
+    uploadDate: opts.uploadDate,
+    embedUrl: opts.embedUrl,
+    url: abs(opts.pageUrl),
+    publisher: { "@id": ORG_ID },
+  };
 }
 
 export function articleLd(post: Post) {

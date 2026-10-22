@@ -2,6 +2,7 @@
 title: 'Pathao Data Breach 2026: 19 Million Users, 133 GB, 24 Hours'
 slug: pathao-data-breach-2026
 description: 'Pathao data breach explained: a hacker claims 19 million user records and 133 GB of data and demands a $400,000 ransom. Timeline, impact and what to do.'
+seoTitle: 'Pathao Data Breach 2026: 19M Users, 133 GB'
 date: '2026-10-10'
 updated: '2026-10-10'
 authors:

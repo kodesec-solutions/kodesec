@@ -5,7 +5,8 @@ import ContactForm from "@/components/booking/ContactForm";
 import { PageHero } from "@/components/ui/PageHero";
 import { SocialIcon } from "@/components/ui/Icon";
 import { getServices, getSite } from "@/lib/content/loaders";
-import { buildMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbLd, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Contact",
@@ -23,6 +24,7 @@ export default function ContactPage() {
   ];
   return (
     <>
+      <JsonLd data={breadcrumbLd([{ name: "Contact", path: "/contact" }])} />
       <PageHero
         crumbs={[{ name: "Contact" }]}
         eyebrow="Contact"

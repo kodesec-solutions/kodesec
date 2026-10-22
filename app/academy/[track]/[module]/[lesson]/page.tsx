@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props) {
   const desc = f.lesson.objectives.length
     ? `Learn to ${f.lesson.objectives[0].charAt(0).toLowerCase()}${f.lesson.objectives[0].slice(1)}. A free ${f.lesson.level} lesson from the Kodesec Academy ${f.track.title} track.`
     : `A free ${f.lesson.level} lesson from the Kodesec Academy ${f.track.title} track.`;
-  return buildMetadata({ title: f.lesson.title, description: desc.slice(0, 165), path: f.lesson.href, type: "article" });
+  return buildMetadata({ title: f.lesson.seoTitle ?? f.lesson.title, description: desc.slice(0, 165), path: f.lesson.href, type: "article" });
 }
 
 export default async function LessonPage({ params }: Props) {

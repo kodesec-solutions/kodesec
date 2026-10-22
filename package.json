@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "validate-content": "tsx scripts/validate-content.ts",
+    "validate-seo": "node scripts/validate-seo.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "postbuild": "node scripts/flatten-rsc.mjs",

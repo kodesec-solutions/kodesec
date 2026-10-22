@@ -10,7 +10,7 @@ theme: red
 preview:
   size: wide
 seo:
-  title: "Mishandling of exceptional conditions: explained for busines"
+  title: "Mishandling exceptional conditions: a guide"
   description: "Every system hits errors: a database timeout, a missing field, a payment provider that doesn't answer. This is about whether your site fails safely, or falls open and spi"
 vars:
   shop:

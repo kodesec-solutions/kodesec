@@ -2,6 +2,7 @@
 title: 'Broken Access Control: The #1 OWASP Vulnerability That Can Sink a Business'
 slug: broken-access-control-business-guide
 description: Broken Access Control is the digital version of a hotel key card that accidentally opens every room in the building instead of just one.
+seoTitle: 'Broken Access Control: OWASP #1 Risk for Business'
 date: '2026-09-18'
 updated: '2026-09-18'
 authors:

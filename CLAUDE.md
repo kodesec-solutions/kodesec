@@ -35,7 +35,7 @@ which is lessons only, with no labs.
   (`lib/content/loaders.ts`), rendered by one unified pipeline (`lib/content/markdown.ts`): GFM, GitHub alerts,
   Shiki highlighting, heading anchors and TOC, YouTube/Loom embeds from a bare URL on its own line. **Raw HTML in content
   is dropped by design.**
-- SEO: `lib/seo.ts` (`buildMetadata` + JSON-LD builders), `app/sitemap.ts`, `app/robots.ts`, `app/llms.txt`,
+- SEO: `docs/seo/keyword-map.md` (one query per URL), `scripts/validate-seo.mjs`, `scripts/indexnow.mjs`, `lib/seo.ts` (`buildMetadata` + JSON-LD builders), `app/sitemap.ts`, `app/robots.ts`, `app/llms.txt`,
   `app/blog/rss.xml`, `app/opengraph-image.tsx`.
 - Fonts: Geist and Geist Mono. Icons: lucide-react (brand icons live in `components/ui/Icon.tsx` because lucide v1 dropped them).
 
@@ -59,6 +59,7 @@ npm run dev               # http://localhost:3000
 npm run build             # static export → out/
 npm run lint && npm run typecheck && npm test
 npm run validate-content  # schemas, broken links, missing/oversized images, SEO warnings
+npm run validate-seo      # after build: titles, descriptions, canonicals, OG, JSON-LD, links, sitemap (runs in CI)
 ```
 
 Env: `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` (contact form). The Cal.com link goes in `content/site.yml` → `booking.calLink`.

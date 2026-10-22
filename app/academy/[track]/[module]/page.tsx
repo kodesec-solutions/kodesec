@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props) {
   const { track, module } = await params;
   const f = find(track, module);
   if (!f) return {};
-  return buildMetadata({ title: `${f.mod.title} — ${f.track.title}`, description: f.mod.summary, path: f.mod.href });
+  return buildMetadata({ title: f.mod.seoTitle ?? `${f.mod.title} — ${f.track.title}`, description: f.mod.summary, path: f.mod.href });
 }
 
 export default async function ModulePage({ params }: Props) {

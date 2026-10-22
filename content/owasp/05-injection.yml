@@ -10,7 +10,7 @@ theme: amber
 preview:
   size: tall
 seo:
-  title: "Injection: explained for business owners"
+  title: "Injection for business owners"
   description: "SQL injection, cross-site scripting (XSS) and their relatives. Different names, one mistake: text from outside gets treated as a command."
 vars:
   shop:

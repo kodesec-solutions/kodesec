@@ -10,7 +10,7 @@ theme: lime
 preview:
   size: square
 seo:
-  title: "Security logging and alerting failures: explained for busine"
+  title: "Logging and alerting failures, explained"
   description: Attackers rarely strike once and leave. This is about whether your site records what happens, and whether anyone is told when something looks wrong.
 vars:
   shop:

@@ -1,5 +1,6 @@
 ---
 title: "Collaborating on GitHub: pull requests and protected branches"
+seoTitle: GitHub pull requests and protected branches
 slug: collaborating-on-github
 track: devops
 module: git-and-github

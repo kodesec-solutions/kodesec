@@ -1,5 +1,6 @@
 ---
 title: "Architecture styles and scaling: monoliths, microservices and growth"
+seoTitle: Monoliths vs microservices and scaling
 slug: architecture-styles-and-scaling
 track: development
 module: backend-systems

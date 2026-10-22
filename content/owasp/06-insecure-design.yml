@@ -10,7 +10,7 @@ theme: rose
 preview:
   size: square
 seo:
-  title: "Insecure design: explained for business owners"
+  title: "Insecure design for business owners"
   description: Nothing is coded wrong. The plan never asked "how could someone abuse this?", so no amount of careful programming fixes it later.
 vars:
   shop:

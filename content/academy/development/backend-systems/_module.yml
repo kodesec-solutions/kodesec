@@ -1,4 +1,5 @@
 title: Backend systems from an architecture perspective
+seoTitle: Backend systems architecture
 slug: backend-systems
 order: 1
 summary: What happens between a user's click and the data coming back — the parts of a backend, how they fit together, and how the design changes as a product grows.

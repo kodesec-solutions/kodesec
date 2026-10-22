@@ -41,6 +41,15 @@
           "value": "image/png"
         }
       ]
+    },
+    {
+      "source": "/apple-icon",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/png"
+        }
+      ]
     }
   ],
   "redirects": [

@@ -32,8 +32,24 @@ jobs:
         run: npm run validate-content
       - name: Build static site
         run: npm run build
+      - name: Validate SEO (titles, descriptions, canonicals, OG, JSON-LD, links, sitemap)
+        run: npm run validate-seo
       - uses: actions/upload-artifact@v4
         with:
           name: site
           path: out
           retention-days: 7
+
+  lighthouse:
+    # Core Web Vitals budget from docs/V2_PLAN.md §8.1: LCP < 2.0 s, CLS < 0.05, SEO score >= 95.
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx --yes @lhci/cli@0.14.0 autorun

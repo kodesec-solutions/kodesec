@@ -3,7 +3,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Prose } from "@/components/content/Prose";
 import { getPage } from "@/lib/content/loaders";
 import { renderMarkdown } from "@/lib/content/markdown";
+import JsonLd from "@/components/JsonLd";
 import { formatDate } from "@/lib/format";
+import { breadcrumbLd } from "@/lib/seo";
 
 export async function LegalPage({ slug }: { slug: string }) {
   const page = getPage(slug);
@@ -11,6 +13,7 @@ export async function LegalPage({ slug }: { slug: string }) {
   const { html } = await renderMarkdown(page.body);
   return (
     <>
+      <JsonLd data={breadcrumbLd([{ name: page.data.title, path: `/${slug}` }])} />
       <PageHero crumbs={[{ name: page.data.title }]} eyebrow="Legal" title={page.data.title} lead={`Last updated ${formatDate(page.data.updated)}`} />
       <div className="container-kd max-w-3xl pb-24">
         <Prose html={html} />

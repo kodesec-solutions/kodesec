@@ -2,6 +2,8 @@
 title: 'Vercel OAuth Breach (April 2026): How a Supply Chain Attack Exposed Customer Secrets'
 slug: vercel-oauth-breach
 description: A detailed technical analysis of the April 2026 Vercel OAuth supply chain breach. Learn how a stolen token led to internal access, environment variable exposure, and widespread credential risk.
+seoTitle: 'Vercel OAuth Breach (April 2026) Explained'
+seoDescription: 'How a stolen OAuth token led to internal access and exposed environment variables in the April 2026 Vercel supply chain breach, and what to rotate.'
 date: '2026-04-25'
 updated: '2026-04-25'
 authors:

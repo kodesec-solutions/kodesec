@@ -19,7 +19,7 @@ const site = getSite();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Kodesec — Penetration Testing, Secure Engineering & Security Academy", template: "%s | Kodesec" },
+  title: { default: "Kodesec: Penetration Testing & Secure Engineering", template: "%s | Kodesec" },
   description: site.description,
   applicationName: "Kodesec",
   authors: [{ name: "Kodesec", url: SITE_URL }],

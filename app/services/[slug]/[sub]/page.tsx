@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props) {
   if (!f) return {};
   return buildMetadata({
     title: f.sub.title,
-    description: `${f.sub.summary}`.slice(0, 165),
+    description: (f.sub.summary.length < 110 ? `${f.sub.summary} Delivered by Kodesec engineers, with a clear report and a fixed quote.` : f.sub.summary).slice(0, 160),
     path: `/services/${slug}/${sub}`,
   });
 }

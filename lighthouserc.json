@@ -1,0 +1,21 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./out",
+      "url": ["/index.html", "/services/cybersecurity/index.html", "/blog/shwapno-data-breach-2026/index.html", "/academy/owasp/broken-access-control/index.html", "/pricing/index.html"],
+      "numberOfRuns": 3,
+      "settings": { "preset": "desktop", "chromeFlags": "--no-sandbox" }
+    },
+    "assert": {
+      "assertions": {
+        "largest-contentful-paint": ["error", { "maxNumericValue": 2000 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.05 }],
+        "total-blocking-time": ["warn", { "maxNumericValue": 200 }],
+        "categories:seo": ["error", { "minScore": 0.95 }],
+        "categories:accessibility": ["warn", { "minScore": 0.9 }],
+        "categories:performance": ["warn", { "minScore": 0.85 }]
+      }
+    },
+    "upload": { "target": "temporary-public-storage" }
+  }
+}

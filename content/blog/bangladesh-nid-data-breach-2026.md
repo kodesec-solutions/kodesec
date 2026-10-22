@@ -2,6 +2,8 @@
 title: 'Bangladesh''s Data Breach Crisis: Every Major NID Leak From 2023 to 2026, and Why the New Law Still Won''t Stop the Next One'
 slug: bangladesh-nid-data-breach-2026
 description: Bangladesh's NID database has been leaked or resold at least seven times since 2023. A comprehensive breakdown of every major leak from 2023 to 2026, the 'shadow copy' problem, and analysis of the new Data Protection Act.
+seoTitle: 'Bangladesh NID Data Leaks 2023–2026: Full Timeline'
+seoDescription: 'Bangladesh''s NID database has been leaked or resold at least seven times since 2023. Every major leak, the shadow-copy problem and the new Data Protection Act.'
 date: '2026-08-10'
 updated: '2026-08-10'
 authors:

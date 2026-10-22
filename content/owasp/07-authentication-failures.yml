@@ -10,7 +10,7 @@ theme: indigo
 preview:
   size: wide
 seo:
-  title: "Authentication failures: explained for business owners"
+  title: "Authentication failures for business owners"
   description: Logging in is how your site decides who's who. This is what happens when that check is weak, guessable or easy to skip, and a stranger walks in as one of your customers o
 vars:
   shop:

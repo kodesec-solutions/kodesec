@@ -12,7 +12,7 @@ preview:
   video: /academy/owasp/security-misconfiguration-loop.mp4
   poster: /academy/owasp/security-misconfiguration-loop.jpg
 seo:
-  title: "Security misconfiguration: explained for business owners"
+  title: "Security misconfiguration for business owners"
   description: 'Nothing is "hacked". Something was simply left in an unsafe state: a default password, a public folder, an error screen that says too much.'
 vars:
   shop:

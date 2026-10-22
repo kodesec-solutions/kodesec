@@ -85,8 +85,8 @@ for (const p of posts) {
   p.authors.forEach((a) => authorSlugs.has(a) || errors.push(`${where}: unknown author "${a}" (add content/team/${a}.yml)`));
   p.relatedServices.forEach((s) => serviceSlugs.has(s) || errors.push(`${where}: unknown related service "${s}"`));
   if (p.cover) checkImage(p.cover, where);
-  if (p.description.length > 160) warnings.push(`${where}: description is ${p.description.length} chars (aim for 120–160)`);
-  if (p.title.length > 65) warnings.push(`${where}: title is ${p.title.length} chars (search shows ~60)`);
+  if ((p.seoDescription ?? p.description).length > 160) warnings.push(`${where}: description is ${(p.seoDescription ?? p.description).length} chars (aim for 120–160)`);
+  if ((p.seoTitle ?? p.title).length > 60) warnings.push(`${where}: SEO title is ${(p.seoTitle ?? p.title).length} chars (search shows ~60)`);
   checkBody(p.body, where);
 }
 

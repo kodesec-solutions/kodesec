@@ -10,7 +10,7 @@ theme: teal
 preview:
   size: square
 seo:
-  title: "Cryptographic failures: explained for business owners"
+  title: "Cryptographic failures for business owners"
   description: Encryption is the lock on your data. This is what happens when the lock is missing, outdated, or the key is left lying around.
 vars:
   shop:

@@ -12,7 +12,7 @@ preview:
   video: /academy/owasp/broken-access-control-loop.mp4
   poster: /academy/owasp/broken-access-control-loop.jpg
 seo:
-  title: "Broken access control: explained for business owners"
+  title: "Broken access control for business owners"
   description: Your website knows who someone is. This is what happens when it forgets to check what they're allowed to see or change.
 vars:
   shop:

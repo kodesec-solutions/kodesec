@@ -10,7 +10,7 @@ theme: fuchsia
 preview:
   size: tall
 seo:
-  title: "Software and data integrity failures: explained for business"
+  title: "Data integrity failures for business owners"
   description: Updates, files, scripts and saved data are trusted the moment they arrive. This is what happens when nobody checks the seal, and something changed on the way gets accepte
 vars:
   shop:

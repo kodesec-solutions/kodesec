@@ -1,5 +1,6 @@
 ---
 title: "The building blocks: databases, caches, queues and storage"
+seoTitle: "Backend building blocks: databases, caches, queues"
 slug: backend-building-blocks
 track: development
 module: backend-systems

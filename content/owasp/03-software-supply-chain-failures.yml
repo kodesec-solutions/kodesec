@@ -10,7 +10,7 @@ theme: sky
 preview:
   size: wide
 seo:
-  title: "Software supply chain failures: explained for business owner"
+  title: "Software supply chain failures for owners"
   description: Plugins, code libraries, outside scripts, update tools. Each one is a supplier. When a supplier slips, the problem arrives inside your website.
 vars:
   shop:

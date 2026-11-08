@@ -46,7 +46,7 @@ export function VideoPanel({ video, title, code, theme }: { video: Video; title:
             <div data-theme="dark" className="sim-bg absolute inset-0" style={{ "--acc": THEMES[theme] } as React.CSSProperties} />
             <div className="absolute inset-0 grid place-items-center bg-black/40 text-center">
               <div>
-                <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-white/60">Video</p>
+                <p className="font-mono text-eyebrow uppercase tracking-[0.2em] text-white/60">Video</p>
                 <p className="mt-2 text-2xl font-semibold text-white">Coming soon</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ export function VideoPanel({ video, title, code, theme }: { video: Video; title:
         <p className="text-sm text-fg-2">
           The {minutes} version of this lesson, made for owners who&apos;d rather watch than read.
         </p>
-        <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-3">{code} · Watch instead</span>
+        <span className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">{code} · Watch instead</span>
       </div>
     </div>
   );

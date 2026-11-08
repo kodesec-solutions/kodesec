@@ -1,7 +1,7 @@
 import { StackLogo } from "@/components/ui/StackLogo";
 import Link from "next/link";
 import { ArrowRight, CircleDot } from "lucide-react";
-import { Horizon } from "@/components/effects/Aurora";
+import { Horizon } from "@/components/effects/Horizon";
 import { AuroraBars } from "@/components/effects/AuroraBars";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Icon } from "@/components/ui/Icon";
@@ -50,7 +50,7 @@ export default function HomePage() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_32%,rgba(3,6,5,0.82),rgba(3,6,5,0.35)_70%,transparent)]" />
         <div className="container-kd relative">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="text-[2.4rem] font-semibold leading-[1.05] sm:text-5xl lg:text-[4.3rem]">
+            <h1 className="text-hero-sm font-semibold leading-[1.05] sm:text-5xl lg:text-display">
               <span className="text-gradient">Engineering security into every layer.</span>
               <br />
               <span className="text-aurora">Deploy with confidence.</span>
@@ -100,15 +100,15 @@ export default function HomePage() {
           <div className="lg:col-span-5">
             <p className="flex items-center gap-3">
               <span className="eyebrow">{announcement.label}</span>
-              <time dateTime={announcement.date} className="font-mono text-[0.72rem] uppercase tracking-[0.12em] text-fg-3">
+              <time dateTime={announcement.date} className="font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">
                 {formatDate(announcement.date)}
               </time>
             </p>
-            <h2 className="mt-5 text-3xl font-semibold leading-[1.1] text-fg sm:text-4xl md:text-[2.75rem]">{announcement.title}</h2>
+            <h2 className="mt-5 text-3xl font-semibold leading-[1.1] text-fg sm:text-4xl md:text-h2">{announcement.title}</h2>
             <p className="mt-5 text-base leading-relaxed text-fg-2 md:text-lg">{announcement.summary}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               {announcement.cta && (
-                <Link href={announcement.cta.href} className="btn bg-[#04160d] text-white hover:bg-[#0b2a1a]">
+                <Link href={announcement.cta.href} className="btn bg-ink text-white hover:bg-ink-2">
                   {announcement.cta.label} <ArrowRight className="h-4 w-4" />
                 </Link>
               )}
@@ -178,7 +178,7 @@ export default function HomePage() {
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center gap-2 font-medium text-fg">
                         {t.title}
-                        {t.status === "coming-soon" && <span className="chip h-5 px-1.5 text-[0.6rem]">Soon</span>}
+                        {t.status === "coming-soon" && <span className="chip h-5 px-1.5 text-eyebrow">Soon</span>}
                       </span>
                       <span className="mt-0.5 block truncate text-xs text-fg-3">{t.summary}</span>
                     </span>

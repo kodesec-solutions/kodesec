@@ -49,7 +49,7 @@ export function SelfAssessment({ checklist }: { checklist: Checklist }) {
     <div className="card mt-8 overflow-hidden">
       {/* progress */}
       <div className="flex items-center gap-4 border-b hairline px-5 py-3">
-        <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-3">
+        <span className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">
           {askBiz ? "First" : done ? "Your result" : `${step + 1} of ${items.length}`}
         </span>
         <div className="flex flex-1 gap-1" aria-hidden>
@@ -71,8 +71,8 @@ export function SelfAssessment({ checklist }: { checklist: Checklist }) {
 
       {askBiz ? (
         <div className="kd-qcard px-5 py-8 md:px-10 md:py-12">
-          <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-3">So the questions fit you</p>
-          <p className="mt-3 text-2xl font-semibold leading-snug text-fg md:text-[1.9rem]">What kind of business do you run?</p>
+          <p className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">So the questions fit you</p>
+          <p className="mt-3 text-2xl font-semibold leading-snug text-fg md:text-3xl">What kind of business do you run?</p>
           <div className="mt-8 flex flex-wrap gap-2">
             {profiles.map((p) => (
               <button
@@ -94,8 +94,8 @@ export function SelfAssessment({ checklist }: { checklist: Checklist }) {
         </div>
       ) : !done ? (
         <div key={step} className="kd-qcard px-5 py-8 md:px-10 md:py-12" aria-live="polite">
-          <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-3">Is this true for you?</p>
-          <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug text-fg md:text-[1.9rem]">
+          <p className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">Is this true for you?</p>
+          <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug text-fg md:text-3xl">
             <Biz text={items[step].statement} />
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
@@ -117,7 +117,7 @@ export function SelfAssessment({ checklist }: { checklist: Checklist }) {
               <button
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
-                className="ml-auto inline-flex h-11 items-center gap-1.5 px-2 text-sm text-fg-3 hover:text-fg"
+                className="btn btn-link ml-auto"
               >
                 <ArrowLeft className="h-4 w-4" /> Back
               </button>
@@ -137,7 +137,7 @@ export function SelfAssessment({ checklist }: { checklist: Checklist }) {
                   ? "Start with the questions on the right."
                   : checklist.verdict}
             </p>
-            <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-3">
+            <p className="mt-4 font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">
               {`${yes} apply · ${unsure} not sure · ${items.length - yes - unsure} don't`}
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
@@ -150,7 +150,7 @@ export function SelfAssessment({ checklist }: { checklist: Checklist }) {
           {flagged.length > 0 && (
             <div className="rounded-2xl border hairline bg-bg-2/60 p-5">
               <p className="font-semibold text-fg">Ask your developer</p>
-              <ol className="mt-3 list-decimal space-y-2 pl-5 text-[0.95rem] leading-relaxed text-fg-2 marker:font-mono marker:text-brand">
+              <ol className="mt-3 list-decimal space-y-2 pl-5 text-body-sm leading-relaxed text-fg-2 marker:font-mono marker:text-brand">
                 {flagged.map((item, i) => (
                   <li key={i}>
                     <Biz text={item.question} />

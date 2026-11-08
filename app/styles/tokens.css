@@ -1,0 +1,166 @@
+/* ============================================================================
+   Kodesec design tokens: the single source of truth. See docs/DESIGN_SYSTEM.md.
+
+   1. @theme          dark values (the default) + every non-colour token. Tailwind makes utilities from it.
+   2. [data-theme]    light and dark re-maps (dark is repeated for "dark islands" inside light pages).
+                      tests/design-tokens.test.ts fails if the @theme dark values and the dark block drift apart.
+   3. .theme-light    the fixed mint band.
+   WCAG AA (4.5:1) is the floor for every text token on every surface token it is used on.
+   ========================================================================== */
+
+@custom-variant light (&:where([data-theme="light"] *):not(:where([data-theme="dark"] *)));
+
+@theme {
+  /* ---- colour: theme-aware (re-mapped below for light) ---- */
+  --color-bg: #030605;
+  --color-bg-2: #070c0a;
+  --color-surface: #0b1210;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-2: rgb(255 255 255 / 0.14);
+  --color-fg: #f1f5f2;
+  --color-fg-2: #a8b3ad;
+  --color-fg-3: #85918b;
+  --color-brand: #2ecc71;
+  --color-brand-2: #1f7a4d;
+  --color-mint: #b8f5d2;
+  --color-danger: #f87171;
+  --color-warn: #fbbf24;
+  --color-success: #34d399;
+  --color-info: #7dd3fc;
+  --color-card: #111312;
+  --color-card-2: #161817;
+  --color-tint: #ffffff;
+
+  /* ---- colour: constant in every theme ---- */
+  --color-violet: #a78bfa; /* second accent: light beams, halftone, "Loom" */
+  --color-violet-2: #8b5cf6;
+  --color-ink: #04160d; /* deep green: text on white pills, video frames */
+  --color-ink-2: #0b2a1a;
+  --color-panel: #101312; /* always-dark chrome: top bar, dark islands */
+  --color-panel-2: #141615;
+  --color-panel-3: #14201a;
+  --color-paper: #f3f0e8; /* warm off-white used by the Academy motion art and pencil sketches */
+  --color-danger-strong: #dc2626; /* solid red fills that carry white text */
+
+  /* ---- typography ---- */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-hand: var(--font-caveat), "Segoe Print", "Bradley Hand", cursive;
+
+  /* Type scale. 12px (--text-eyebrow) is the smallest size allowed anywhere. */
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.45;
+  --text-body-sm: 0.9375rem;
+  --text-body-sm--line-height: 1.55;
+  --text-lede: 1.0625rem;
+  --text-lede--line-height: 1.6;
+  --text-h2: 2.75rem;
+  --text-h2--line-height: 1.1;
+  --text-hero-sm: 2.5rem;
+  --text-hero-sm--line-height: 1.05;
+  --text-display: 4.25rem;
+  --text-display--line-height: 1.02;
+
+  /* ---- shape ---- */
+  --radius-pill: 999px;
+  --radius-card: 1.25rem;
+  --radius-panel: 1.375rem;
+
+  /* ---- elevation ---- */
+  --shadow-glow: 0 0 0 1px rgb(var(--brand-rgb) / 0.25), 0 10px 40px -10px rgb(var(--brand-rgb) / 0.35);
+  --shadow-panel: 0 40px 80px -30px rgb(4 22 13 / 0.55);
+
+  /* ---- motion ---- */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+/* Raw channels for translucent brand colours in plain CSS: rgb(var(--brand-rgb) / 0.3). Same in every theme. */
+:root {
+  --brand-rgb: 46 204 113;
+  --violet-rgb: 139 92 246;
+  --violet-2-rgb: 167 139 250;
+  /* z-index scale: use z-(--z-header) etc. instead of magic numbers */
+  --z-raised: 10;
+  --z-sticky: 30;
+  --z-header: 50;
+  --z-top: 60;
+}
+
+/* Light section (Neon's mint band): re-map the tokens inside it */
+.theme-light {
+  --color-bg: #dcf5e6;
+  --color-bg-2: #cdeedb;
+  --color-surface: #c4e9d3;
+  --color-line: rgb(3 30 18 / 0.12);
+  --color-line-2: rgb(3 30 18 / 0.2);
+  --color-fg: #04160d;
+  --color-fg-2: #1d3b2b;
+  --color-fg-3: #3f5c4b;
+  --color-brand: #0f6e3c;
+  color: var(--color-fg);
+}
+.theme-light .text-gradient {
+  background: linear-gradient(180deg, #04160d 30%, #0f6e3c 120%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.theme-light .eyebrow::before { box-shadow: none; }
+.theme-light .card { background: rgb(255 255 255 / 0.35); }
+
+/* ============================================================================
+   Themes. <html data-theme="light|dark"> is set before paint by the script in app/layout.tsx
+   (preference: light / dark / system). Sections that must stay dark (neon hero, services beam,
+   film band, simulations) carry data-theme="dark" (or .sim-bg) themselves, which re-applies the dark tokens.
+   ========================================================================== */
+[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #f7f9f8;
+  --color-bg-2: #ffffff;
+  --color-surface: #edf2ef;
+  --color-line: rgb(6 30 18 / 0.1);
+  --color-line-2: rgb(6 30 18 / 0.17);
+  --color-fg: #07140d;
+  --color-fg-2: #3a4a41;
+  --color-fg-3: #55695d;
+  --color-brand: #0f7a45;
+  --color-brand-2: #0f6e3c;
+  --color-mint: #0f7a45;
+  --color-danger: #c62828;
+  --color-warn: #8f5806;
+  --color-success: #166534;
+  --color-info: #0369a1;
+  --color-card: #ffffff;
+  --color-card-2: #eef3f0;
+  --color-tint: #000000;
+}
+[data-theme="dark"],
+.sim-bg {
+  color-scheme: dark;
+  --color-bg: #030605;
+  --color-bg-2: #070c0a;
+  --color-surface: #0b1210;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-2: rgb(255 255 255 / 0.14);
+  --color-fg: #f1f5f2;
+  --color-fg-2: #a8b3ad;
+  --color-fg-3: #85918b;
+  --color-brand: #2ecc71;
+  --color-brand-2: #1f7a4d;
+  --color-mint: #b8f5d2;
+  --color-danger: #f87171;
+  --color-warn: #fbbf24;
+  --color-success: #34d399;
+  --color-info: #7dd3fc;
+  --color-card: #111312;
+  --color-card-2: #161817;
+  --color-tint: #ffffff;
+}
+/* dark islands paint their own text colour */
+body [data-theme="dark"] { color: var(--color-fg); }
+
+/* keep the fixed mint band identical in both themes */
+.theme-light { color-scheme: light; --color-card: #ffffff; --color-card-2: #e9f7ef; --color-tint: #000000; --color-danger: #c62828; --color-warn: #8f5806; --color-success: #166534; --color-info: #0369a1; --color-mint: #0f7a45; }

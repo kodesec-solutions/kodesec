@@ -37,7 +37,7 @@ export default function ServicesPage() {
       </PageHero>
 
       <section className="pb-20">
-        <div className="container-kd max-w-[1320px]">
+        <div className="container-kd container-wide">
           <ServiceGrid services={services} />
         </div>
       </section>

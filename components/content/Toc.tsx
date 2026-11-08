@@ -24,14 +24,14 @@ export function Toc({ items, className }: { items: TocItem[]; className?: string
   if (items.length < 2) return null;
   return (
     <nav aria-label="On this page" className={className}>
-      <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fg-3">On this page</p>
+      <p className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">On this page</p>
       <ul className="mt-4 space-y-1 border-l border-line">
         {items.map((i) => (
           <li key={i.id}>
             <a
               href={`#${i.id}`}
               className={cn(
-                "-ml-px block border-l py-1 text-[0.82rem] leading-snug transition-colors",
+                "-ml-px block border-l py-1 text-caption leading-snug transition-colors",
                 i.depth === 3 ? "pl-6" : "pl-3",
                 active === i.id ? "border-brand text-fg" : "border-transparent text-fg-3 hover:text-fg-2",
               )}

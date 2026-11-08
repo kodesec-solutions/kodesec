@@ -39,7 +39,7 @@ export default function Footer() {
             const links = col.links === "services" ? services.map((s) => ({ label: s.title, href: `/services/${s.slug}` })) : col.links;
             return (
               <div key={col.title}>
-                <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fg-3">{col.title}</h2>
+                <h2 className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">{col.title}</h2>
                 <ul className="mt-4 space-y-2.5">
                   {links.map((l) => (
                     <li key={l.href}>

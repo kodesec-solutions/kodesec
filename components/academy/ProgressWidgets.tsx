@@ -61,7 +61,7 @@ export function TrackProgress({ title, hrefs }: { title: string; hrefs: string[]
 
   return (
     <div className="card overflow-hidden p-6">
-      <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fg-3">Your progress</p>
+      <p className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">Your progress</p>
       <div className="mt-5 flex items-center gap-5">
         <svg viewBox="0 0 72 72" className="h-[72px] w-[72px] shrink-0 -rotate-90" aria-hidden="true">
           <circle cx="36" cy="36" r={r} fill="none" stroke="rgb(255 255 255 / 0.08)" strokeWidth="6" />
@@ -97,7 +97,7 @@ export function TrackProgress({ title, hrefs }: { title: string; hrefs: string[]
           <span className="text-sm text-brand">Track complete 🎉</span>
         )}
         {done > 0 && (
-          <button type="button" onClick={() => reset(hrefs)} className="text-xs text-fg-3 hover:text-fg-2">
+          <button type="button" onClick={() => reset(hrefs)} className="btn btn-link">
             Reset
           </button>
         )}

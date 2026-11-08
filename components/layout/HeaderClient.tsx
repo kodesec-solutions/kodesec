@@ -38,7 +38,7 @@ function NewArrivalHint() {
           <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" />
         </filter>
       </defs>
-      <g filter="url(#kd-pencil)" fill="none" stroke="#ece9e1" strokeLinecap="round" strokeLinejoin="round">
+      <g filter="url(#kd-pencil)" fill="none" stroke="var(--color-paper)" strokeLinecap="round" strokeLinejoin="round">
         <path className="kd-stroke" pathLength="1" strokeWidth="1.7" d="M40 70 C 22 52, 34 28, 70 9" />
         <path className="kd-stroke kd-stroke-2" pathLength="1" strokeWidth="1.1" opacity="0.7" d="M42 72 C 26 54, 38 31, 72 11" />
         <path className="kd-stroke kd-stroke-3" pathLength="1" strokeWidth="1.7" d="M70 9 L58 14 M70 9 L73 22" />
@@ -46,7 +46,7 @@ function NewArrivalHint() {
           className="kd-hint-text"
           x="38"
           y="90"
-          fill="#ece9e1"
+          fill="var(--color-paper)"
           stroke="none"
           fontSize="19"
           transform="rotate(-4 38 90)"
@@ -162,7 +162,7 @@ export default function HeaderClient({ items, offset = 0 }: { items: NavItem[]; 
                             <span>
                               <span className="flex items-center gap-2 text-sm font-medium text-fg">
                                 {c.label}
-                                {c.badge && <span className="chip h-5 px-1.5 text-[0.6rem]">{c.badge}</span>}
+                                {c.badge && <span className="chip h-5 px-1.5 text-eyebrow">{c.badge}</span>}
                               </span>
                               <span className="mt-0.5 block text-xs leading-relaxed text-fg-3">{c.description}</span>
                             </span>
@@ -210,7 +210,7 @@ export default function HeaderClient({ items, offset = 0 }: { items: NavItem[]; 
           </Link>
           <button
             type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-line-2 lg:hidden"
+            className="btn btn-icon lg:hidden"
             aria-label={mobile ? "Close menu" : "Open menu"}
             aria-expanded={mobile}
             onClick={() => setMobile(!mobile)}

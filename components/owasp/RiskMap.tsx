@@ -37,16 +37,16 @@ export function RiskMap({ zones }: { zones: Zone[] }) {
             type="button"
             aria-pressed={i === index}
             onClick={() => setIndex(i)}
-            className="group flex min-h-20 flex-col justify-between gap-3 rounded-2xl border border-line bg-card/60 p-4 text-left text-[0.95rem] font-medium text-fg transition-colors hover:border-line-2 aria-pressed:border-brand/60 aria-pressed:bg-brand/[0.07]"
+            className="group flex min-h-20 flex-col justify-between gap-3 rounded-2xl border border-line bg-card/60 p-4 text-left text-body-sm font-medium text-fg transition-colors hover:border-line-2 aria-pressed:border-brand/60 aria-pressed:bg-brand/[0.07]"
           >
-            <span className="font-mono text-[0.65rem] tracking-[0.14em] text-fg-3 group-aria-pressed:text-brand">{String(i + 1).padStart(2, "0")}</span>
+            <span className="font-mono text-eyebrow tracking-[0.14em] text-fg-3 group-aria-pressed:text-brand">{String(i + 1).padStart(2, "0")}</span>
             <Biz text={z.label} />
           </button>
         ))}
       </div>
 
       <div className="card mt-3 overflow-hidden">
-        <div className="flex items-center gap-3 border-b hairline px-5 py-3 font-mono text-[0.8rem] text-fg-3">
+        <div className="flex items-center gap-3 border-b hairline px-5 py-3 font-mono text-caption text-fg-3">
           <span className="flex gap-1.5" aria-hidden>
             <i className="h-2.5 w-2.5 rounded-full bg-line-2" />
             <i className="h-2.5 w-2.5 rounded-full bg-line-2" />
@@ -59,8 +59,8 @@ export function RiskMap({ zones }: { zones: Zone[] }) {
         <dl className="divide-y divide-line px-5" aria-live="polite">
           {rows.map(([term, value]) => (
             <div key={term} className="grid gap-1 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
-              <dt className="pt-0.5 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-3">{term}</dt>
-              <dd className="text-[0.97rem] leading-relaxed text-fg-2">{value}</dd>
+              <dt className="pt-0.5 font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">{term}</dt>
+              <dd className="text-body-sm leading-relaxed text-fg-2">{value}</dd>
             </div>
           ))}
         </dl>

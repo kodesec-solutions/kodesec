@@ -28,21 +28,21 @@ export function BusinessStakes({ topic }: { topic: OwaspTopic }) {
       <div className="mt-6 grid gap-3 md:grid-cols-3">
         {cards.slice(0, 2).map((c) => (
           <div key={c.label} className="card p-6">
-            <p className="acc-text flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.14em]">
+            <p className="acc-text flex items-center gap-2 font-mono text-eyebrow uppercase tracking-[0.14em]">
               {c.icon}
               {c.label}
             </p>
-            <p className="mt-3 text-[1.05rem] leading-relaxed text-fg">
+            <p className="mt-3 text-lede leading-relaxed text-fg">
               <Biz text={c.text} />
             </p>
           </div>
         ))}
         <div className="card acc-border p-6">
-          <p className="acc-text flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.14em]">
+          <p className="acc-text flex items-center gap-2 font-mono text-eyebrow uppercase tracking-[0.14em]">
             <MessageSquareQuote className="h-4 w-4" />
             Ask this first
           </p>
-          <p className="mt-3 text-[1.05rem] leading-relaxed text-fg">
+          <p className="mt-3 text-lede leading-relaxed text-fg">
             “<Biz text={question} />”
           </p>
           <CopyButton className="mt-4" label="Copy question" text={() => plain(question, v)} />

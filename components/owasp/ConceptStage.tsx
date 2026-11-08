@@ -87,7 +87,7 @@ export function ConceptStage({ topic, theme, slug }: { topic: OwaspTopic; theme:
                 )}
               >
                 {b.key === "film" && <Play className="h-3 w-3" />}
-                <span className="font-mono text-[0.62rem] opacity-70">{String(n + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-eyebrow opacity-70">{String(n + 1).padStart(2, "0")}</span>
                 {b.label}
               </button>
             ))}
@@ -97,7 +97,7 @@ export function ConceptStage({ topic, theme, slug }: { topic: OwaspTopic; theme:
               <Biz text={beat.body} />
             </p>
             {beat.extra && (
-              <p className="mt-3 text-[0.95rem] leading-relaxed text-fg-2">
+              <p className="mt-3 text-body-sm leading-relaxed text-fg-2">
                 <Biz text={beat.extra} />
               </p>
             )}
@@ -114,11 +114,11 @@ export function ConceptStage({ topic, theme, slug }: { topic: OwaspTopic; theme:
             <ArrowLeft className="h-4 w-4" />
           </button>
           {i < beats.length - 1 ? (
-            <button type="button" onClick={() => setI((n) => n + 1)} className="acc-bg inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-sm font-semibold text-black">
+            <button type="button" onClick={() => setI((n) => n + 1)} className="btn btn-acc btn-sm">
               Next <ArrowRight className="h-4 w-4" />
             </button>
           ) : (
-            <a href="#you" className="acc-bg inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-sm font-semibold text-black">
+            <a href="#you" className="btn btn-acc btn-sm">
               Check your site <ArrowRight className="h-4 w-4" />
             </a>
           )}

@@ -68,14 +68,14 @@ export default function ServiceBeam({ services }: { services: BeamService[] }) {
     <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" className="absolute inset-0 h-full w-full overflow-visible">
       <defs>
         <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#8b5cf6" stopOpacity="0.16" />
-          <stop offset="0.45" stopColor="#2ECC71" stopOpacity="0.1" />
-          <stop offset="1" stopColor="#8b5cf6" stopOpacity="0.2" />
+          <stop offset="0" stopColor="var(--color-violet-2)" stopOpacity="0.16" />
+          <stop offset="0.45" stopColor="var(--color-brand)" stopOpacity="0.1" />
+          <stop offset="1" stopColor="var(--color-violet-2)" stopOpacity="0.2" />
         </linearGradient>
         <linearGradient id={`${id}-line`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#a78bfa" stopOpacity="0" />
-          <stop offset="0.35" stopColor="#a78bfa" stopOpacity="0.7" />
-          <stop offset="1" stopColor="#b8f5d2" stopOpacity="1" />
+          <stop offset="0" stopColor="var(--color-violet)" stopOpacity="0" />
+          <stop offset="0.35" stopColor="var(--color-violet)" stopOpacity="0.7" />
+          <stop offset="1" stopColor="var(--color-mint)" stopOpacity="1" />
         </linearGradient>
         <filter id={`${id}-blur`} x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="28" />
@@ -109,7 +109,7 @@ export default function ServiceBeam({ services }: { services: BeamService[] }) {
         <g className="kd-fan" fill="none">
           {services.map((s, i) => (
             <g key={s.slug}>
-              <path d={fanOut(bx, tileX(i))} stroke="#b8f5d2" strokeOpacity="0.45" strokeWidth="1.2" vectorEffect="non-scaling-stroke" />
+              <path d={fanOut(bx, tileX(i))} stroke="var(--color-mint)" strokeOpacity="0.45" strokeWidth="1.2" vectorEffect="non-scaling-stroke" />
               <path
                 d={fanOut(bx, tileX(i))}
                 stroke="#ffffff"
@@ -157,7 +157,7 @@ export default function ServiceBeam({ services }: { services: BeamService[] }) {
             <h2 id="services-beam-title" className="mt-5 text-4xl font-semibold leading-[1.05] sm:text-5xl md:text-6xl">
               <span className="text-gradient">Four ways in.</span>
               <br />
-              <span className="bg-gradient-to-r from-mint via-brand to-violet-400 bg-clip-text text-transparent">One secure system.</span>
+              <span className="bg-gradient-to-r from-mint via-brand to-violet bg-clip-text text-transparent">One secure system.</span>
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-fg-2 md:text-lg">
               Start wherever the risk is. Every engagement ends tested, hardened and re-verified.
@@ -169,7 +169,7 @@ export default function ServiceBeam({ services }: { services: BeamService[] }) {
         </div>
 
         {/* ---------------------------------------------------------------- panel */}
-        <div className="kd-panel relative z-10 rounded-2xl border border-line-2 bg-[#05090a]">
+        <div className="kd-panel relative z-10 rounded-2xl border border-line-2 bg-bg-2">
           <span aria-hidden="true" className="kd-edge" />
           <span aria-hidden="true" className="kd-impact left-[86%] md:left-[66%]" />
           {/* where each fan-out stream enters the panel */}
@@ -179,7 +179,7 @@ export default function ServiceBeam({ services }: { services: BeamService[] }) {
             ))}
           </div>
 
-          <div className="flex items-center justify-between border-b border-line px-5 py-3.5 font-mono text-[11px] text-fg-3">
+          <div className="flex items-center justify-between border-b border-line px-5 py-3.5 font-mono text-eyebrow text-fg-3">
             <span className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-brand shadow-[0_0_8px_var(--color-brand)]" />
               kodesec <span className="text-fg-3/60">/</span> <span className="text-fg-2">services</span>
@@ -210,7 +210,7 @@ export default function ServiceBeam({ services }: { services: BeamService[] }) {
                   <h3 className="mt-5 text-lg font-semibold leading-snug text-fg">{s.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-fg-2">{s.tagline}</p>
                   {(FIXES[s.slug] ?? []).length > 0 && (
-                    <ul className="mt-5 space-y-2 border-t border-line pt-5 text-[13px] text-fg-2">
+                    <ul className="mt-5 space-y-2 border-t border-line pt-5 text-caption text-fg-2">
                       {FIXES[s.slug].map((f) => (
                         <li key={f} className="flex items-center gap-2">
                           <Check className="h-3.5 w-3.5 shrink-0 text-brand" /> {f}

@@ -6,12 +6,12 @@ export const TOP_BAR_HEIGHT = 34; // px — matches Neon's strip
 /** Neon-style announcement strip at the very top of every page (scrolls away with the page). */
 export default function TopBar({ text, href }: { text: string; href: string }) {
   return (
-    <div data-theme="dark" className="relative z-[60] border-b border-line bg-[#101312]" style={{ height: TOP_BAR_HEIGHT }}>
+    <div data-theme="dark" className="relative z-(--z-top) border-b border-line bg-panel" style={{ height: TOP_BAR_HEIGHT }}>
       <span aria-hidden="true" className="kd-halftone kd-halftone-left" />
       <span aria-hidden="true" className="kd-halftone kd-halftone-right" />
       <Link
         href={href}
-        className="group relative mx-auto flex h-full max-w-[1200px] items-center justify-center gap-1.5 px-10 text-[13px] font-medium text-fg transition-colors hover:text-mint sm:text-sm"
+        className="group relative mx-auto flex h-full max-w-[1200px] items-center justify-center gap-1.5 px-10 text-caption font-medium text-fg transition-colors hover:text-mint sm:text-sm"
       >
         {/* phones: only the part before ":" so it never gets cut off */}
         <span className="truncate sm:hidden">{text.split(":")[0]}</span>

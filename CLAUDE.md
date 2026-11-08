@@ -4,6 +4,7 @@ Context for Claude and humans working in this repo. Read this first.
 
 - **Plan:** `docs/V2_PLAN.md` (architecture, admin panel, admin security §6, SEO §8, CI/CD, phases)
 - **Admin panel (Phase 4):** `docs/ADMIN_ARCHITECTURE.md` (agreed decisions; wins over V2_PLAN §5–6)
+- **Design system (tokens, type scale, components, rules):** `docs/DESIGN_SYSTEM.md`
 - **Writing content:** `docs/CONTENT_GUIDE.md`
 - **Academy (business owners, OWASP Top 10, motion simulations):** `docs/ACADEMY_MOTION.md`
 - **Old production site (v1, still live on Vercel from `master`):** `docs/ARCHITECTURE.md`, `docs/SEO_AUDIT.md`
@@ -42,9 +43,9 @@ which is lessons only, with no labs.
 ## Design system (from the reference videos: Neon, Aikido, Atomik, PortSwigger)
 
 - Black canvas `#030605`, brand greens from the logo: `--color-brand #2ECC71`, `--color-brand-2 #1F7A4D`, mint `#B8F5D2`.
-  The tokens are in `app/globals.css` (`@theme`).
-- `<Aurora />` (`components/effects/Aurora.tsx`): green/white aurora with blurred light, vertical curtain rays and grain.
-  It's pure CSS and frozen when the user prefers reduced motion. `<Horizon />` is the glowing planet edge behind closing CTAs.
+  All tokens live in `app/styles/tokens.css` (`app/globals.css` only imports the six files in `app/styles/`).
+- `<AuroraBars />` (`components/effects/AuroraBars.tsx`): green/white aurora with blurred light, vertical curtain rays and grain.
+  It's frozen when the user prefers reduced motion. `<Horizon />` (`components/effects/Horizon.tsx`) is the glowing planet edge behind closing CTAs.
 - The header is a floating capsule nav with mega-menus built from content (Aikido). The footer has a giant faded KODESEC wordmark (Atomik).
 - `.eyebrow` (mono uppercase with a green square), `.btn-primary` (white pill), `.btn-ghost`, `.btn-brand`, `.card`,
   `.chip`, and `.kd-prose` for all rendered Markdown.
@@ -57,7 +58,7 @@ which is lessons only, with no labs.
 ```bash
 npm run dev               # http://localhost:3000
 npm run build             # static export → out/
-npm run lint && npm run typecheck && npm test
+npm run lint && npm run lint:design && npm run typecheck && npm test
 npm run validate-content  # schemas, broken links, missing/oversized images, SEO warnings
 ```
 
@@ -65,6 +66,8 @@ Env: `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` (contact form). The Cal.com link goes in
 
 ## Rules
 
+- **No hex, arbitrary colours or arbitrary font sizes in components**; use tokens and the type scale (`npm run lint:design` fails CI otherwise).
+  New token → `tokens.css` + `extendTailwindMerge` in `lib/utils.ts` + `docs/DESIGN_SYSTEM.md`.
 - **Never change a public URL** without a 301 in **both** `vercel.json` and `public/_redirects`
   (and headers in both `vercel.json` and `public/_headers`).
 - Content lives in `content/`, not in components. Pages read it via `lib/content/loaders.ts`.

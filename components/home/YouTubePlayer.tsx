@@ -25,7 +25,7 @@ export default function YouTubePlayer({
   const isYouTube = provider === "youtube";
 
   return (
-    <div className="group relative aspect-video overflow-hidden rounded-2xl border border-black/10 bg-[#04160d] shadow-[0_40px_80px_-30px_rgba(4,22,13,0.55)]">
+    <div className="group relative aspect-video overflow-hidden rounded-2xl border border-black/10 bg-ink shadow-panel">
       {!id ? (
         // No announcement link yet: play the local film with controls
         <video src={fallbackVideo} poster={fallbackPoster} controls playsInline preload="none" className="h-full w-full object-cover" aria-label={title} />
@@ -55,11 +55,11 @@ export default function YouTubePlayer({
             />
           )}
           <span className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-[#04160d] shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition group-hover:scale-105">
+          <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-ink shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition group-hover:scale-105">
             <Play className="ml-1 h-8 w-8 fill-current" />
           </span>
-          <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-white backdrop-blur">
-            <span className={`h-1.5 w-1.5 rounded-full ${isYouTube ? "bg-red-500" : "bg-violet-400"}`} /> {isYouTube ? "YouTube" : "Loom"}
+          <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 font-mono text-eyebrow uppercase tracking-[0.12em] text-white backdrop-blur">
+            <span className={`h-1.5 w-1.5 rounded-full ${isYouTube ? "bg-danger" : "bg-violet"}`} /> {isYouTube ? "YouTube" : "Loom"}
           </span>
         </button>
       )}

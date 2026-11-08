@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 
 export function Breadcrumbs({ items }: { items: { name: string; path?: string }[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="font-mono text-[0.72rem] uppercase tracking-[0.1em] text-fg-3">
+    <nav aria-label="Breadcrumb" className="font-mono text-eyebrow uppercase tracking-[0.1em] text-fg-3">
       <ol className="flex flex-wrap items-center gap-1.5">
         {items.map((it, i) => (
           <li key={it.name} className="flex items-center gap-1.5">

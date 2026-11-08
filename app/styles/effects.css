@@ -1,0 +1,239 @@
+/* ---------------------------------------------------------------- effects */
+
+/* Horizon glow — a planet edge lit from behind (Aikido / Atomik) */
+.horizon {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 9rem);
+  width: 160%;
+  aspect-ratio: 2.4 / 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 0%, #07110c 55%, var(--color-bg) 70%);
+  border-top: 1px solid rgb(184 245 210 / 0.55);
+  box-shadow:
+    0 -2px 30px rgb(var(--brand-rgb) / 0.55),
+    0 -30px 120px rgb(var(--brand-rgb) / 0.35),
+    inset 0 20px 60px rgb(var(--brand-rgb) / 0.18);
+  pointer-events: none;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------------------------------------------------------------- Neon-style page rails
+   Thin vertical lines framing the content column, fixed behind every page. */
+.page-rails {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, transparent calc(50% - 600px), var(--color-line) calc(50% - 600px), var(--color-line) calc(50% - 599px), transparent calc(50% - 599px)),
+    linear-gradient(to right, transparent calc(50% + 599px), var(--color-line) calc(50% + 599px), var(--color-line) calc(50% + 600px), transparent calc(50% + 600px)),
+    linear-gradient(to right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--color-tint) 3%, transparent) calc(50% - 0.5px), color-mix(in srgb, var(--color-tint) 3%, transparent) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+@media (max-width: 1240px) {
+  .page-rails { display: none; }
+}
+
+/* Reveal on scroll */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================================
+   ServiceBeam — neon beam striking the services panel (Huly-style, green → purple)
+   Vars on the section: --beam (0..1 scroll), --flare (0..1 impact), --mx/--my/--mlit (cursor)
+   ========================================================================== */
+.kd-beam { opacity: min(1, calc(var(--beam) * 5)); }
+.kd-beam > span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-50%) scaleY(var(--beam));
+  transform-origin: top;
+  border-radius: 999px;
+}
+.kd-beam-core {
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgb(240 255 247 / 0.7) 20%, #fff 70%, #fff);
+  animation: kd-flicker 4s ease-in-out infinite;
+}
+.kd-beam-glow {
+  width: 12px;
+  filter: blur(5px);
+  background: linear-gradient(to bottom, transparent, rgb(var(--brand-rgb) / 0.5) 25%, #b8f5d2 75%, #e9fff3);
+  animation: kd-flicker 4s ease-in-out infinite reverse;
+}
+.kd-beam-halo {
+  width: 150px;
+  filter: blur(38px);
+  opacity: 0.85;
+  background: linear-gradient(to bottom, transparent, rgb(var(--violet-rgb) / 0.25) 35%, rgb(var(--brand-rgb) / 0.35) 80%, rgb(var(--violet-2-rgb) / 0.6));
+}
+.kd-beam-foot {
+  top: auto !important;
+  height: 220px;
+  width: 300px;
+  transform: translateX(-50%) !important;
+  opacity: var(--flare);
+  background: radial-gradient(ellipse 50% 100% at 50% 100%, rgb(255 255 255 / 0.9), rgb(184 245 210 / 0.5) 18%, rgb(var(--violet-rgb) / 0.3) 45%, transparent 72%);
+  filter: blur(8px);
+  mix-blend-mode: screen;
+}
+.kd-beam-cone {
+  width: 760px;
+  filter: blur(18px);
+  background: radial-gradient(ellipse 26% 72% at 50% 100%, rgb(var(--violet-2-rgb) / 0.42), rgb(var(--brand-rgb) / 0.18) 38%, transparent 70%);
+}
+@keyframes kd-flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.86; }
+  50% { opacity: 1; }
+  52% { opacity: 0.9; }
+}
+
+/* panel + lit edge */
+.kd-panel { --ix: 86%; }
+@media (min-width: 768px) { .kd-panel { --ix: 66%; } }
+.kd-edge {
+  position: absolute;
+  inset: -1px 0 auto 0;
+  height: 2px;
+  border-radius: 2px;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 22% 100% at var(--ix) 50%, #fff, #b8f5d2 30%, transparent 70%),
+    linear-gradient(90deg, transparent 2%, rgb(var(--violet-rgb) / 0.55) 30%, rgb(var(--brand-rgb) / 0.7) var(--ix), rgb(var(--violet-rgb) / 0.55) 90%, transparent 99%);
+  opacity: calc(0.25 + var(--flare) * 0.75);
+  box-shadow: 0 0 18px rgb(var(--violet-2-rgb) / calc(var(--flare) * 0.8));
+}
+.kd-impact {
+  position: absolute;
+  top: 0;
+  width: min(640px, 90vw);
+  height: 140px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: var(--flare);
+  mix-blend-mode: screen;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgb(255 255 255 / 0.85), rgb(184 245 210 / 0.55) 10%, rgb(var(--brand-rgb) / 0.3) 25%, rgb(var(--violet-rgb) / 0.3) 45%, transparent 70%);
+  filter: blur(4px);
+}
+
+/* glowing CTA (Huly's orange glow, in brand green/purple) */
+.kd-neon-btn {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.5), 0 0 22px rgb(var(--brand-rgb) / 0.55), 0 0 60px -8px rgb(var(--violet-rgb) / 0.75);
+}
+.kd-neon-btn:hover {
+  background: #eafff3;
+  box-shadow: 0 0 0 1px #fff, 0 0 30px rgb(var(--brand-rgb) / 0.8), 0 0 80px -6px rgb(var(--violet-2-rgb) / 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kd-beam-core, .kd-beam-glow, .kd-stream, .kd-entry { animation: none; }
+}
+
+/* funnel of light + flowing streams (scroll-gated) */
+.kd-funnel { opacity: var(--beam); }
+.kd-intake { opacity: var(--beam); }
+.kd-fan { opacity: var(--flare); }
+.kd-stream { animation: kd-stream 2.6s linear infinite; }
+.kd-stream-fast { animation-duration: 1.6s; }
+@keyframes kd-stream { from { stroke-dashoffset: 300; } to { stroke-dashoffset: 0; } }
+.kd-entry {
+  position: absolute;
+  top: 0;
+  width: 90px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: var(--flare);
+  background: radial-gradient(ellipse at center, rgb(255 255 255 / 0.9), rgb(184 245 210 / 0.55) 25%, rgb(var(--violet-2-rgb) / 0.25) 55%, transparent 72%);
+  filter: blur(2px);
+  animation: kd-entry 2.4s ease-in-out infinite;
+}
+.kd-entry:nth-child(2) { animation-delay: -0.6s; }
+.kd-entry:nth-child(3) { animation-delay: -1.2s; }
+.kd-entry:nth-child(4) { animation-delay: -1.8s; }
+@keyframes kd-entry { 0%, 100% { scale: 0.8; } 50% { scale: 1.15; } }
+
+/* gradients / effects that need a light version */
+[data-theme="light"] .text-gradient:not([data-theme="dark"] *) {
+  background: linear-gradient(180deg, #07140d 35%, #1f7a4d 120%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+[data-theme="light"] .text-aurora:not([data-theme="dark"] *) {
+  background: linear-gradient(90deg, #0f7a45, #15924f 45%, #0d9488);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+[data-theme="light"] .horizon:not([data-theme="dark"] *) {
+  background: radial-gradient(ellipse at 50% 0%, #e7f6ee 55%, var(--color-bg) 70%);
+  border-top-color: rgb(21 146 79 / 0.45);
+  box-shadow: 0 -2px 30px rgb(21 146 79 / 0.3), 0 -30px 120px rgb(21 146 79 / 0.18), inset 0 20px 60px rgb(21 146 79 / 0.1);
+}
+[data-theme="light"] .btn-primary:not([data-theme="dark"] *):hover { background: var(--color-brand-2); color: #fff; box-shadow: none; }
+[data-theme="light"] .btn-brand:not([data-theme="dark"] *) { color: #ffffff; }
+[data-theme="light"] .btn-brand:not([data-theme="dark"] *):hover { background: var(--color-brand-2); }
+[data-theme="light"] .eyebrow:not([data-theme="dark"] *)::before { box-shadow: none; }
+[data-theme="light"] .card-hover:not([data-theme="dark"] *):hover { box-shadow: 0 20px 50px -30px rgb(6 30 18 / 0.35); }
+[data-theme="light"] .kd-prose :not(pre) > code:not([data-theme="dark"] *) { background: #e3f4ea; border-color: #bfe5cf; color: #0b5a33; }
+[data-theme="light"] ::selection { background: rgb(21 146 79 / 0.25); color: #07140d; }
+[data-theme="light"] .kd-scanlines:not([data-theme="dark"] *) { opacity: 0.2; }
+[data-theme="light"] .kd-bars-glow:not([data-theme="dark"] *) { mix-blend-mode: multiply; opacity: 0.55; }
+
+/* smooth switch (not on first paint) */
+html.theme-anim, html.theme-anim * { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease; }
+
+/* Top announcement strip: halftone dot fades at both ends (Neon-style, brand colours) */
+.kd-halftone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(34%, 460px);
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--color-violet), #2ecc71 45%, #b8f5d2);
+  -webkit-mask-image: radial-gradient(circle, #000 1.15px, transparent 1.55px), linear-gradient(90deg, #000 0%, rgb(0 0 0 / 0.55) 45%, transparent 100%);
+  mask-image: radial-gradient(circle, #000 1.15px, transparent 1.55px), linear-gradient(90deg, #000 0%, rgb(0 0 0 / 0.55) 45%, transparent 100%);
+  -webkit-mask-size: 5px 5px, 100% 100%;
+  mask-size: 5px 5px, 100% 100%;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+.kd-halftone-left { left: 0; }
+.kd-halftone-right { right: 0; transform: scaleX(-1); }
+
+/* ---- "New arrival" pencil arrow: draws itself, holds, then fades away ---- */
+.kd-hint { animation: kd-hint-life 8s ease-in-out forwards; }
+.kd-stroke { stroke-dasharray: 1; stroke-dashoffset: 1; animation: kd-draw 0.5s ease-out 0.05s forwards; }
+.kd-stroke-2 { animation-delay: 0.12s; }
+.kd-stroke-3 { animation-delay: 0.5s; animation-duration: 0.2s; }
+.kd-hint-text { opacity: 0; animation: kd-fade-in 0.25s ease-out 0.55s forwards; }
+@keyframes kd-draw { to { stroke-dashoffset: 0; } }
+@keyframes kd-fade-in { to { opacity: 1; } }
+@keyframes kd-hint-life { 0%, 85% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .kd-stroke { animation: none; stroke-dashoffset: 0; }
+  .kd-hint-text { animation: none; opacity: 1; }
+}

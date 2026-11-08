@@ -60,7 +60,7 @@ export default async function LessonPage({ params }: Props) {
 
       {/* Academy sub-bar */}
       <div className="border-b border-line bg-bg-2/60 pt-[5.25rem] md:pt-24">
-        <div className="container-kd flex h-12 items-center gap-6 overflow-x-auto font-mono text-[0.72rem] uppercase tracking-[0.12em] text-fg-3">
+        <div className="container-kd flex h-12 items-center gap-6 overflow-x-auto font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">
           <Link href="/academy" className="shrink-0 hover:text-fg">
             Academy
           </Link>
@@ -96,7 +96,7 @@ export default async function LessonPage({ params }: Props) {
               { name: mod.title, path: mod.href },
             ]}
           />
-          <h1 className="mt-6 text-3xl font-semibold leading-tight text-fg md:text-[2.6rem]">{lesson.title}</h1>
+          <h1 className="mt-6 text-3xl font-semibold leading-[1.12] text-fg sm:text-4xl md:text-5xl">{lesson.title}</h1>
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <LevelChip level={lesson.level} />
             <span className="chip">
@@ -109,7 +109,7 @@ export default async function LessonPage({ params }: Props) {
             <div className="card mt-8 grid gap-6 p-6 sm:grid-cols-2">
               {lesson.objectives.length > 0 && (
                 <div className={prereqs.length ? "" : "sm:col-span-2"}>
-                  <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.12em] text-fg-3">
+                  <p className="flex items-center gap-2 font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">
                     <Target className="h-3.5 w-3.5 text-brand" /> You will learn to
                   </p>
                   <ul className="mt-3 space-y-2 text-sm text-fg-2">
@@ -123,7 +123,7 @@ export default async function LessonPage({ params }: Props) {
               )}
               {prereqs.length > 0 && (
                 <div>
-                  <p className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-fg-3">Before this lesson</p>
+                  <p className="font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">Before this lesson</p>
                   <ul className="mt-3 space-y-2 text-sm">
                     {prereqs.map((p) => (
                       <li key={p.href}>
@@ -149,7 +149,7 @@ export default async function LessonPage({ params }: Props) {
           <nav aria-label="Lesson navigation" className="mt-6 grid gap-3 sm:grid-cols-2">
             {prev ? (
               <Link href={prev.href} className="card card-hover p-5">
-                <span className="flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-fg-3">
+                <span className="flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">
                   <ArrowLeft className="h-3 w-3" /> Previous
                 </span>
                 <span className="mt-2 block text-sm font-medium text-fg">{prev.title}</span>
@@ -159,7 +159,7 @@ export default async function LessonPage({ params }: Props) {
             )}
             {next && (
               <Link href={next.href} className="card card-hover p-5 text-right">
-                <span className="flex items-center justify-end gap-1.5 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-fg-3">
+                <span className="flex items-center justify-end gap-1.5 font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">
                   Next <ArrowRight className="h-3 w-3" />
                 </span>
                 <span className="mt-2 block text-sm font-medium text-fg">{next.title}</span>

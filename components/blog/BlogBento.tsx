@@ -22,7 +22,7 @@ function Cover({ post, className }: { post: Post; className?: string }) {
 
 function Meta({ post }: { post: Post }) {
   return (
-    <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[13px] text-fg-2">
+    <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-caption text-fg-2">
       <span className="flex items-center gap-1.5">
         <Calendar className="h-3.5 w-3.5 text-fg-3" /> {formatDate(post.date)}
       </span>
@@ -44,13 +44,13 @@ export function BlogBento({ posts }: { posts: Post[] }) {
         </div>
         <div className="mt-6 flex flex-col">
           <Meta post={lead} />
-          <h3 className="mt-4 text-2xl font-semibold leading-snug text-fg md:text-[1.75rem]">
+          <h3 className="mt-4 text-2xl font-semibold leading-snug text-fg md:text-3xl">
             <Link href={`/blog/${lead.slug}`} className="after:absolute after:inset-0">
               {lead.title}
             </Link>
           </h3>
           <div className="mt-3 flex items-end justify-between gap-6">
-            <p className="line-clamp-2 text-[15px] leading-relaxed text-fg-2">{lead.description}</p>
+            <p className="line-clamp-2 text-body-sm leading-relaxed text-fg-2">{lead.description}</p>
             <span
               aria-hidden="true"
               className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-dashed border-fg-3 text-fg-2 transition group-hover:border-brand group-hover:text-brand"

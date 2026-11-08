@@ -12,6 +12,7 @@ import { getMember, getPost, getPosts, slugify } from "@/lib/content/loaders";
 import { readingTime, renderMarkdown } from "@/lib/content/markdown";
 import { formatDate } from "@/lib/format";
 import { articleLd, breadcrumbLd, buildMetadata } from "@/lib/seo";
+import { Section } from "@/components/ui/Section";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -128,16 +129,14 @@ export default async function PostPage({ params }: Props) {
       </div>
 
       {related.length > 0 && (
-        <section className="border-t border-line py-20">
-          <div className="container-kd">
+        <Section className="border-t border-line md:py-20">
             <h2 className="text-2xl font-semibold text-fg">Keep reading</h2>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {related.map((p) => (
                 <PostCard key={p.slug} post={p} />
               ))}
             </div>
-          </div>
-        </section>
+        </Section>
       )}
     </>
   );

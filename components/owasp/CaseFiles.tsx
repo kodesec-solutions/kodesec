@@ -59,18 +59,18 @@ export function CaseFiles({ cases, slug, theme }: { cases: Case[]; slug: string;
         ) : (
           <div key={index} className="kd-qcard grid gap-6 p-6 md:grid-cols-[1.1fr_1fr] md:p-8">
             <div>
-              <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fg-3">{c.tag}</p>
-              <h3 className="mt-3 text-2xl font-semibold leading-tight text-fg md:text-[1.9rem]">{c.title}</h3>
+              <p className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">{c.tag}</p>
+              <h3 className="mt-3 text-2xl font-semibold leading-tight text-fg md:text-3xl">{c.title}</h3>
             </div>
             <dl className="space-y-4">
               <div>
-                <dt className="acc-text font-mono text-[0.66rem] uppercase tracking-[0.14em]">What it cost</dt>
+                <dt className="acc-text font-mono text-eyebrow uppercase tracking-[0.14em]">What it cost</dt>
                 <dd className="mt-1 leading-relaxed text-fg-2">
                   <Biz text={first(c.fallout)} />
                 </dd>
               </div>
               <div>
-                <dt className="acc-text font-mono text-[0.66rem] uppercase tracking-[0.14em]">The lesson</dt>
+                <dt className="acc-text font-mono text-eyebrow uppercase tracking-[0.14em]">The lesson</dt>
                 <dd className="mt-1 font-medium leading-relaxed text-fg">
                   <Biz text={c.lesson} />
                 </dd>
@@ -80,7 +80,7 @@ export function CaseFiles({ cases, slug, theme }: { cases: Case[]; slug: string;
         )}
         <div className="flex flex-wrap items-center gap-3 border-t hairline px-6 py-3 md:px-8">
           {c.youtube && (
-            <button type="button" onClick={() => setClip((v) => !v)} className="inline-flex items-center gap-1.5 rounded-full bg-fg px-3.5 py-1.5 text-xs font-medium text-bg">
+            <button type="button" onClick={() => setClip((v) => !v)} className="btn btn-primary btn-sm">
               <MonitorPlay className="h-3.5 w-3.5" /> {clip ? "Back to the case" : "Watch the clip"}
             </button>
           )}

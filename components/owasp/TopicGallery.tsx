@@ -42,7 +42,7 @@ export function TopicGallery({ topics, categories }: { topics: GalleryTopic[]; c
             {label} <span className="pill-count">{count(key)}</span>
           </button>
         ))}
-        <button type="button" onClick={() => setPaused((p) => !p)} className="ml-auto inline-flex items-center gap-1.5 text-xs text-fg-3 hover:text-fg">
+        <button type="button" onClick={() => setPaused((p) => !p)} className="btn btn-link ml-auto">
           {paused ? <Play className="h-3.5 w-3.5" /> : <Pause className="h-3.5 w-3.5" />}
           {paused ? "Play previews" : "Pause previews"}
         </button>
@@ -70,12 +70,12 @@ function TopicCard({ topic, paused, stagger }: { topic: GalleryTopic; paused: bo
       </div>
       <div className="flex items-center justify-between gap-3 pt-3">
         <span className="flex min-w-0 items-center gap-2.5">
-          <span className="acc-bg grid h-6 w-6 flex-none place-items-center rounded-full font-mono text-[0.55rem] font-semibold text-black">
+          <span className="acc-bg grid h-6 w-6 flex-none place-items-center rounded-full font-mono text-eyebrow font-semibold text-black">
             {topic.code.slice(1)}
           </span>
-          <span className="truncate text-[0.95rem] font-semibold tracking-tight text-fg">{topic.title}</span>
+          <span className="truncate text-body-sm font-semibold tracking-tight text-fg">{topic.title}</span>
         </span>
-        <span className="inline-flex flex-none items-center gap-1 rounded-md border border-line-2 px-2 py-0.5 text-[0.7rem] text-fg-3 transition-colors group-hover:border-fg-3 group-hover:text-fg">
+        <span className="inline-flex flex-none items-center gap-1 rounded-md border border-line-2 px-2 py-0.5 text-eyebrow text-fg-3 transition-colors group-hover:border-fg-3 group-hover:text-fg">
           {topic.readMinutes} min <ArrowUpRight className="h-3 w-3" />
         </span>
       </div>

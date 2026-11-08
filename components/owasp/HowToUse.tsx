@@ -19,10 +19,10 @@ export function HowToUse() {
           </span>
           <span className="min-w-0">
             <span className="block text-sm font-semibold text-fg">
-              <span className="mr-1.5 font-mono text-[0.68rem] text-fg-3">{String(i + 1).padStart(2, "0")}</span>
+              <span className="mr-1.5 font-mono text-eyebrow text-fg-3">{String(i + 1).padStart(2, "0")}</span>
               {title}
             </span>
-            <span className="mt-1 block text-[0.8rem] leading-snug text-fg-2">{text}</span>
+            <span className="mt-1 block text-caption leading-snug text-fg-2">{text}</span>
           </span>
         </li>
       ))}

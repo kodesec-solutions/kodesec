@@ -11,7 +11,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-line bg-bg">
+    <footer className="relative overflow-hidden ">
       <div className="container-kd grid gap-12 pb-10 pt-16 md:grid-cols-12">
         <div className="md:col-span-4">
           <Logo />
@@ -61,28 +61,31 @@ export default function Footer() {
         </p>
         <ThemeToggle labels />
         <p className="flex items-center gap-2 font-mono uppercase tracking-[0.12em]">
-          <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-[0_0_8px_var(--color-brand)]" />
           Security-first by design
         </p>
       </div>
 
-      {/* Giant wordmark: near-black fill + thin dashed outline, spanning the full width, cropped at the bottom */}
+      {/* Giant wordmark: soft gradient fill (no outline), brighter at the top and sinking into the dark at the bottom, spanning the full width */}
       <div aria-hidden="true" className="pointer-events-none select-none overflow-hidden px-2">
-        <svg viewBox="0 0 1000 160" preserveAspectRatio="xMidYMin meet" className="block h-auto w-full">
+        <svg viewBox="0 8 1000 180" preserveAspectRatio="xMidYMin meet" className="block h-auto w-full">
+          <defs>
+            {/* Gentle top→bottom tone shift across the letters (cap top ≈13, baseline 180). Never reaches transparent, so letters stay crisp. */}
+            <linearGradient id="kd-footer-wordmark" gradientUnits="userSpaceOnUse" x1="0" y1="13" x2="0" y2="180">
+              <stop offset="0%" style={{ stopColor: "color-mix(in srgb, var(--color-tint) 15%, transparent)" }} />
+              <stop offset="100%" style={{ stopColor: "color-mix(in srgb, var(--color-tint) 6%, transparent)" }} />
+            </linearGradient>
+          </defs>
           <text
             x="500"
-            y="196"
+            y="180"
             textAnchor="middle"
             textLength="990"
             lengthAdjust="spacingAndGlyphs"
             fontFamily="var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif"
-            fontSize="262"
+            fontSize="235"
             fontWeight="800"
             letterSpacing="-6"
-            style={{ fill: "var(--color-card-2)", stroke: "color-mix(in srgb, var(--color-tint) 22%, transparent)" }}
-            strokeWidth="1"
-            strokeDasharray="4 4"
-            vectorEffect="non-scaling-stroke"
+            fill="url(#kd-footer-wordmark)"
           >
             KODESEC
           </text>

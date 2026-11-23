@@ -48,6 +48,15 @@ partners:
 # Client testimonials on the home page. Real quotes only, with the client's permission.
 # Add a new entry at the end; the carousel picks it up automatically.
 testimonials:
+  - name: Martin Naiem Edward
+    role: Chairman
+    company: NeoScape Properties Ltd
+    location: Sweden
+    photo: /assets/clients/martin-naiem-edward.webp
+    focus: "50% 40%"
+    project: QA and penetration testing
+    rating: 5
+    quote: "Kodesec's work on this QA and pentesting project is really good. Their test report was pretty solid and clearly understandable. Their engineering team was also responsive to queries."
   - name: Ivo Barone
     role: Enterprise Architect
     company: CBI S.c.p.a. Società Benefit

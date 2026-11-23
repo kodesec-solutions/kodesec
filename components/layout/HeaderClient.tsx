@@ -12,53 +12,6 @@ import ThemeToggle from "@/components/theme/ThemeToggle";
 export type NavChild = { label: string; href: string; description: string; icon: string; badge?: string };
 export type NavItem = { label: string; href: string; children?: NavChild[]; footer?: { label: string; href: string }; highlight?: boolean };
 
-// Pencil-sketch arrow that points at the highlighted nav item for a few seconds, once per session.
-function NewArrivalHint() {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    try {
-      if (sessionStorage.getItem("kd-new-hint")) return;
-      sessionStorage.setItem("kd-new-hint", "1");
-    } catch {}
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setShow(true);
-    const t = setTimeout(() => setShow(false), 8000);
-    return () => clearTimeout(t);
-  }, []);
-  if (!show) return null;
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 170 100"
-      className="kd-hint pointer-events-none absolute left-1/2 top-full z-10 mt-1 h-[100px] w-[170px] -translate-x-[40%] overflow-visible"
-    >
-      <defs>
-        <filter id="kd-pencil" x="-10%" y="-10%" width="120%" height="120%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n" />
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" />
-        </filter>
-      </defs>
-      <g filter="url(#kd-pencil)" fill="none" stroke="#ece9e1" strokeLinecap="round" strokeLinejoin="round">
-        <path className="kd-stroke" pathLength="1" strokeWidth="1.7" d="M40 70 C 22 52, 34 28, 70 9" />
-        <path className="kd-stroke kd-stroke-2" pathLength="1" strokeWidth="1.1" opacity="0.7" d="M42 72 C 26 54, 38 31, 72 11" />
-        <path className="kd-stroke kd-stroke-3" pathLength="1" strokeWidth="1.7" d="M70 9 L58 14 M70 9 L73 22" />
-        <text
-          className="kd-hint-text"
-          x="38"
-          y="90"
-          fill="#ece9e1"
-          stroke="none"
-          fontSize="19"
-          transform="rotate(-4 38 90)"
-          style={{ fontFamily: "'Segoe Print','Bradley Hand','Comic Sans MS',cursive" }}
-        >
-          New arrival!
-        </text>
-      </g>
-    </svg>
-  );
-}
-
 export default function HeaderClient({ items, offset = 0 }: { items: NavItem[]; offset?: number }) {
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
@@ -194,7 +147,6 @@ export default function HeaderClient({ items, offset = 0 }: { items: NavItem[]; 
                 >
                   {item.label}
                 </Link>
-                {item.highlight && <NewArrivalHint />}
               </span>
             ),
           )}

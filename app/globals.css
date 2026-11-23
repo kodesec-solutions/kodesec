@@ -961,16 +961,63 @@ html { scroll-behavior: smooth; }
   .nav-glow::before { animation: none; }
 }
 
-/* ---- "New arrival" pencil arrow: draws itself, holds, then fades away ---- */
-.kd-hint { animation: kd-hint-life 8s ease-in-out forwards; }
+/* ---- pencil arrow strokes: draw themselves (used by the reviews hint) ---- */
 .kd-stroke { stroke-dasharray: 1; stroke-dashoffset: 1; animation: kd-draw 0.5s ease-out 0.05s forwards; }
 .kd-stroke-2 { animation-delay: 0.12s; }
 .kd-stroke-3 { animation-delay: 0.5s; animation-duration: 0.2s; }
 .kd-hint-text { opacity: 0; animation: kd-fade-in 0.25s ease-out 0.55s forwards; }
 @keyframes kd-draw { to { stroke-dashoffset: 0; } }
 @keyframes kd-fade-in { to { opacity: 1; } }
-@keyframes kd-hint-life { 0%, 85% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   .kd-stroke { animation: none; stroke-dashoffset: 0; }
   .kd-hint-text { animation: none; opacity: 1; }
 }
+
+/* ---- testimonials ---- */
+.tcard-wrap { perspective: 1200px; display: flex; }
+.tcard {
+  --mx: 50%; --my: 0%; --rx: 0deg; --ry: 0deg;
+  position: relative; isolation: isolate; display: flex; flex: 1; flex-direction: column; overflow: hidden;
+  border-radius: 1.5rem; border: 1px solid var(--color-line);
+  background: var(--color-bg-2);
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.25s ease-out, border-color 0.4s, box-shadow 0.4s, opacity 0.4s, filter 0.4s;
+  will-change: transform;
+}
+.tcard:hover {
+  border-color: color-mix(in srgb, var(--color-brand) 55%, transparent);
+  box-shadow: 0 30px 80px -30px color-mix(in srgb, var(--color-brand) 45%, transparent);
+}
+/* cursor-following light */
+.tcard-spot {
+  pointer-events: none; position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 0.4s;
+  background: radial-gradient(420px circle at var(--mx) var(--my), color-mix(in srgb, var(--color-brand) 22%, transparent), transparent 65%);
+  mix-blend-mode: screen;
+}
+.tcard:hover .tcard-spot { opacity: 1; }
+/* when one card is hovered, the other recedes */
+@media (hover: hover) {
+  .tgrid:has(.tcard:hover) .tcard:not(:hover) { opacity: 0.55; filter: saturate(0.6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tcard { transform: none !important; transition: none; }
+}
+
+/* ---- reviews poster hint ---- */
+@keyframes kd-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes kd-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+.kd-rise { animation: kd-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.kd-bounce { animation: kd-bounce 1.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .kd-rise, .kd-bounce { animation: none; } }
+
+/* fanned hand of cards: each card pivots from its bottom-centre; hovering the hand opens it wider */
+.kd-card {
+  transform-origin: 50% 130%;
+  transform: translate(var(--x), var(--y)) rotate(var(--r));
+  box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.7), 0 0 0 1px color-mix(in srgb, var(--color-bg) 30%, transparent), 0 0 28px -10px rgb(46 204 113 / 0.45);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, box-shadow 0.3s;
+}
+/* only the card under the cursor lifts; the rest of the hand stays put */
+.kd-card:is(button):hover { border-color: var(--color-brand); transform: translate(var(--x), calc(var(--y) - 14px)) rotate(var(--r)); }
+@media (prefers-reduced-motion: reduce) { .kd-card { transition: none; } }
+

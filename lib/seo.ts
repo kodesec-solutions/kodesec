@@ -83,6 +83,33 @@ export function organizationLd() {
   };
 }
 
+/** Client reviews as schema.org Review nodes about the organisation. No ratings: we don't invent numbers. */
+export function reviewsLd() {
+  const site = getSite();
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/#reviews`,
+    name: "Kodesec client reviews",
+    itemListElement: site.testimonials.map((t, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Review",
+        itemReviewed: { "@id": ORG_ID, "@type": "ProfessionalService", name: site.name, url: SITE_URL },
+        author: {
+          "@type": "Person",
+          name: t.name,
+          jobTitle: t.role,
+          worksFor: { "@type": "Organization", name: t.company },
+        },
+        reviewBody: t.quote,
+        about: t.project,
+      },
+    })),
+  };
+}
+
 export function websiteLd() {
   return {
     "@context": "https://schema.org",

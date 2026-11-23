@@ -8,12 +8,15 @@ import { Icon } from "@/components/ui/Icon";
 import { BlogBento } from "@/components/blog/BlogBento";
 import ServiceBeam from "@/components/home/ServiceBeam";
 import FilmSection from "@/components/home/FilmSection";
+import ReviewsHint from "@/components/home/ReviewsHint";
+import Testimonials from "@/components/home/Testimonials";
 import Partnership from "@/components/home/Partnership";
 import YouTubePlayer from "@/components/home/YouTubePlayer";
 import { parseVideoUrl } from "@/lib/content/markdown";
 import { formatDate } from "@/lib/format";
 import { getAcademy, getPosts, getServices, getSite } from "@/lib/content/loaders";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, reviewsLd } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata = buildMetadata({
   description:
@@ -43,6 +46,8 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={[reviewsLd()]} />
+      {site.testimonials.length > 0 && <ReviewsHint targetId="reviews" items={site.testimonials.map((t) => ({ src: t.photo, name: t.name, role: t.role, company: t.company, rating: t.rating }))} confidential={site.confidentialClients} />}
       {/* ================================================================ HERO */}
       <section data-theme="dark" className="relative isolate overflow-hidden bg-bg pb-20 pt-36 md:pb-28 md:pt-44">
         <AuroraBars />
@@ -87,6 +92,22 @@ export default function HomePage() {
 
       {/* ================================================================ SERVICE BEAM */}
       <ServiceBeam services={services.map((s) => ({ slug: s.slug, title: s.title, tagline: s.tagline, icon: s.icon }))} />
+
+      {/* ================================================================ CLIENT TESTIMONIALS */}
+      {site.testimonials.length > 0 && (
+        <Section id="reviews" className="scroll-mt-16 border-t border-line">
+          <SectionHeading
+            eyebrow="Client voices"
+            title={
+              <>
+                Trusted by teams who <span className="text-aurora">can&apos;t afford surprises</span>
+              </>
+            }
+            lead="From compliance reviews in Italy to platform rebuilds in London, here is what clients say after working with us."
+          />
+          <Testimonials items={site.testimonials} />
+        </Section>
+      )}
 
       {/* ================================================================ FILM */}
       <FilmSection film={site.film} />

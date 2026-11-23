@@ -204,6 +204,24 @@ export const siteSchema = z.object({
       }),
     )
     .default([]),
+  testimonials: z
+    .array(
+      z.object({
+        name: z.string(),
+        role: z.string(),
+        company: z.string(),
+        location: z.string().optional(),
+        photo: localPath,
+        focus: z.string().optional(), // CSS object-position for the face, e.g. "50% 40%"
+        companyLogo: z.string().optional(), // "" / omitted = text only
+        project: z.string(), // short tag, e.g. "IEXF website redesign"
+        projectImage: z.string().optional(), // screenshot shown behind the card
+        quote: z.string().min(20).max(400),
+        rating: z.number().int().min(1).max(5).default(5), // stars shown on the review card
+      }),
+    )
+    .default([]),
+  confidentialClients: z.number().int().min(0).max(6).default(0), // unnamed face-down cards in the reviews hint
   announcement: z.object({
     label: z.string(),
     title: z.string().min(5).max(120),

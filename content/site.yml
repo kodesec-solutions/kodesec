@@ -45,6 +45,33 @@ partners:
     about: "Builds intelligent automation, AI agents, SaaS platforms and enterprise AI systems for manufacturing, healthcare, finance, logistics and agriculture. UK-headquartered with global reach."
     together: "They build the AI. We make sure it's secure — from threat modelling and secure engineering to penetration testing of AI-powered products."
 
+# Client testimonials on the home page. Real quotes only, with the client's permission.
+# Add a new entry at the end; the carousel picks it up automatically.
+testimonials:
+  - name: Ivo Barone
+    role: Enterprise Architect
+    company: CBI S.c.p.a. Società Benefit
+    location: Latium, Italy
+    photo: /assets/clients/ivo-barone.webp
+    focus: "50% 55%"
+    companyLogo: /assets/clients/cbi-logo.webp
+    project: Security reports for a compliance review
+    rating: 5
+    quote: "Kodesec Solutions was quick and easy to work with. They answered fast, delivered on a tight deadline and handled the few minor issues along the way openly and fairly. Their reports were accepted without issues as part of a third-party compliance review."
+  - name: Kabir Qureshi
+    role: CIO
+    company: Hedge Capital Partners
+    location: London, United Kingdom
+    photo: /assets/clients/kabir-qureshi.webp
+    focus: "50% 35%"
+    project: IEXF website redesign
+    projectImage: /assets/clients/iexf-site.webp
+    rating: 5
+    quote: "Kodesec did an excellent job redesigning our IEXF website. The team was always on hand, responsive and attentive to detail throughout. I would highly recommend them for website design and development, particularly with security in mind."
+
+# Clients who asked not to be named: shown as blurred, face-down cards in the reviews hint (0 = none).
+confidentialClients: 2
+
 # Announcement band on the home page (mint section). Paste any YouTube link
 # (watch, youtu.be, shorts or live). Leave `youtube` empty to show the Kodesec film instead.
 # Editable from the admin panel once it ships.

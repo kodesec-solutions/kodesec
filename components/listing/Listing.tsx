@@ -63,7 +63,7 @@ export default function Listing({
 
   return (
     <div className="container-kd pb-24 pt-32 md:pt-40">
-      <h1 className="text-5xl font-semibold tracking-tight text-fg md:text-7xl">{heading}</h1>
+      <h1 className="text-4xl font-semibold leading-[1.05] text-fg sm:text-5xl md:text-6xl">{heading}</h1>
 
       <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
         <span className="rounded-md border border-line-2 px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-fg">
@@ -131,7 +131,7 @@ export default function Listing({
 function Meta({ item }: { item: ListingItem }) {
   if (!item.date && !item.meta) return null;
   return (
-    <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[13px] text-fg-2">
+    <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-caption text-fg-2">
       {item.date && (
         <span className="flex items-center gap-1.5">
           <Calendar className="h-3.5 w-3.5 text-fg-3" /> {item.date}
@@ -157,12 +157,12 @@ function FeaturedCard({ item }: { item: ListingItem }) {
     <article className="group relative grid gap-6 rounded-lg border border-line-2 bg-card p-5 transition-colors hover:border-fg-3 md:grid-cols-2 md:p-5">
       <div className="flex flex-col p-1 md:py-2">
         <Meta item={item} />
-        <h2 className="mt-4 text-2xl font-semibold leading-snug text-fg md:text-[1.75rem]">
+        <h2 className="mt-4 text-2xl font-semibold leading-snug text-fg md:text-3xl">
           <Link href={item.href} className="after:absolute after:inset-0">
             {item.title}
           </Link>
         </h2>
-        <p className="mt-3 line-clamp-4 text-[15px] leading-relaxed text-fg-2">{item.description}</p>
+        <p className="mt-3 line-clamp-4 text-body-sm leading-relaxed text-fg-2">{item.description}</p>
         <span
           aria-hidden="true"
           className="mt-8 flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-fg-3 text-fg-2 transition group-hover:border-brand group-hover:text-brand md:mt-auto"

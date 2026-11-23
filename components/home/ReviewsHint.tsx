@@ -117,7 +117,7 @@ export default function ReviewsHint({
                   </span>
                   <span className="mt-4 h-2.5 w-20 rounded-full bg-bg/25" />
                   <span className="mt-2 h-2 w-14 rounded-full bg-bg/15" />
-                  <span className="mt-auto font-mono text-[0.5rem] uppercase tracking-[0.16em] text-bg/50">Confidential</span>
+                  <span className="mt-auto font-mono text-eyebrow uppercase tracking-wide text-bg/50">Confidential</span>
                 </span>
               </span>
             );
@@ -136,7 +136,7 @@ export default function ReviewsHint({
               <span className="flex h-full flex-col items-center p-3.5 text-center">
                 <span className="flex items-center gap-0.5" role="img" aria-label={`${t.rating} out of 5 stars`}>
                   {Array.from({ length: 5 }, (_, n) => (
-                    <Star key={n} aria-hidden="true" className={n < t.rating ? "h-3.5 w-3.5 fill-[#f5b301] text-[#f5b301]" : "h-3.5 w-3.5 text-bg/25"} />
+                    <Star key={n} aria-hidden="true" className={n < t.rating ? "h-3.5 w-3.5 fill-warn text-warn" : "h-3.5 w-3.5 text-bg/25"} />
                   ))}
                 </span>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -147,14 +147,14 @@ export default function ReviewsHint({
                   height={80}
                   className="mt-3 h-16 w-16 shrink-0 rounded-full border-[3px] border-brand object-cover lg:h-[4.5rem] lg:w-[4.5rem]"
                 />
-                <span className="mt-3 block w-full truncate text-sm font-semibold leading-tight lg:text-[0.95rem]">{t.name}</span>
-                <span className="mt-1 block w-full truncate text-[0.66rem] text-bg/70">{t.role}</span>
-                <span className="block w-full truncate text-[0.66rem] font-medium text-bg/90">{t.company}</span>
+                <span className="mt-3 block w-full truncate text-sm font-semibold leading-tight lg:text-body-sm">{t.name}</span>
+                <span className="mt-1 block w-full truncate text-eyebrow text-bg/70">{t.role}</span>
+                <span className="block w-full truncate text-eyebrow font-medium text-bg/90">{t.company}</span>
               </span>
             </button>
           );
         })}
-        <span className="pointer-events-none absolute -bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap text-[0.7rem] text-fg-2">
+        <span className="pointer-events-none absolute -bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap text-eyebrow text-fg-2">
           <ChevronsDown className="kd-bounce h-3.5 w-3.5 text-brand" /> Tap a card to read the reviews
         </span>
         <button

@@ -74,7 +74,7 @@ export function BusinessPicker({ className, align = "start" }: { className?: str
       aria-label="Your type of business"
       className={cn("flex flex-wrap items-center gap-2", align === "center" && "justify-center", className)}
     >
-      <span className="mr-1 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-fg-3">I run a</span>
+      <span className="mr-1 font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">I run a</span>
       {profiles.map((p) => (
         <button
           key={p.slug}

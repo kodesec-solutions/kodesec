@@ -10,8 +10,8 @@ export const roleLabels: Record<string, string> = {
 
 const levelStyle: Record<string, string> = {
   beginner: "border-brand/40 text-brand bg-brand/5",
-  practitioner: "border-sky-400/40 text-sky-300 bg-sky-400/5",
-  expert: "border-rose-400/40 text-rose-300 bg-rose-400/5",
+  practitioner: "border-info/40 text-info bg-info/5",
+  expert: "border-danger/40 text-danger bg-danger/5",
 };
 
 export function LevelChip({ level, className }: { level: string; className?: string }) {

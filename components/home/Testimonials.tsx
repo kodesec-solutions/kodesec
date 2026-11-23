@@ -79,10 +79,10 @@ function Card({ t, index }: { t: Item; index: number }) {
           )}
           <Quote aria-hidden="true" className="relative h-7 w-7 text-brand" />
           <blockquote className="relative mt-4 flex-1">
-            <p className="text-[1.05rem] leading-[1.65] text-fg sm:text-lg">{t.quote}</p>
+            <p className="text-lede leading-[1.65] text-fg sm:text-lg">{t.quote}</p>
           </blockquote>
           {t.location && (
-            <p className="relative mt-7 flex items-center gap-1.5 border-t border-line pt-4 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-fg-3">
+            <p className="relative mt-7 flex items-center gap-1.5 border-t border-line pt-4 font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">
               <MapPin className="h-3 w-3 text-brand" /> {t.location}
             </p>
           )}

@@ -87,7 +87,7 @@ export default async function OwaspTopicPage({ params }: Props) {
               <p className="eyebrow mt-8">
                 {topic.code} · OWASP Top 10 · {topic.readMinutes} min
               </p>
-              <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-5xl md:text-[4.25rem]">
+              <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.05] sm:text-5xl md:text-6xl">
                 <span className="text-gradient">{topic.title}.</span>{" "}
                 <span className="text-aurora">{topic.question}</span>
               </h1>
@@ -137,7 +137,7 @@ export default async function OwaspTopicPage({ params }: Props) {
           <Block id="cost" eyebrow="What it costs" title={topic.cost.title}>
             <CardGrid cards={topic.cost.cards} cols={4} />
             {topic.cost.note && (
-              <p className="mt-4 rounded-2xl border border-danger/25 bg-danger/[0.06] px-5 py-4 text-[0.97rem] leading-relaxed text-fg-2">
+              <p className="mt-4 rounded-2xl border border-danger/25 bg-danger/[0.06] px-5 py-4 text-body-sm leading-relaxed text-fg-2">
                 <Biz text={topic.cost.note} />
               </p>
             )}
@@ -189,7 +189,7 @@ export default async function OwaspTopicPage({ params }: Props) {
                   For your developer: the technical layer
                   <Plus className="h-5 w-5 flex-none text-brand transition-transform group-open:rotate-45" />
                 </summary>
-                <ul className="space-y-2 px-6 pb-6 pl-11 text-[0.95rem] leading-relaxed text-fg-2 marker:text-brand list-disc">
+                <ul className="space-y-2 px-6 pb-6 pl-11 text-body-sm leading-relaxed text-fg-2 marker:text-brand list-disc">
                   {topic.devNotes.map((note, n) => (
                     <li key={n}>{note}</li>
                   ))}
@@ -259,7 +259,7 @@ function Block({
     <section id={id} className={cn("scroll-mt-24 pt-16 md:pt-20", className)}>
       <div className="container-kd">
         <p className="eyebrow">{eyebrow}</p>
-        <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-[1.1] text-fg md:text-[2.5rem]">
+        <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-[1.1] text-fg md:text-hero-sm">
           {title}
         </h2>
         {lede && (
@@ -290,12 +290,12 @@ function CardGrid({
       {cards.map((c, n) => (
         <div key={n} className="card p-6">
           {c.label && (
-            <p className="mb-3 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-brand">
+            <p className="mb-3 font-mono text-eyebrow uppercase tracking-[0.14em] text-brand">
               {c.label}
             </p>
           )}
           <h3 className="text-lg font-semibold text-fg">{c.title}</h3>
-          <p className="mt-2 text-[0.95rem] leading-relaxed text-fg-2">
+          <p className="mt-2 text-body-sm leading-relaxed text-fg-2">
             <Biz text={c.text} />
           </p>
         </div>
@@ -319,7 +319,7 @@ function LessonLink({
         dir === "next" && "md:items-end md:text-right",
       )}
     >
-      <span className="inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-fg-3 group-hover:text-brand">
+      <span className="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-wider text-fg-3 group-hover:text-brand">
         {dir === "prev" && <ArrowLeft className="h-3 w-3" />}
         {dir === "prev" ? "Previous" : "Next"} · {topic.code}
         {dir === "next" && <ArrowRight className="h-3 w-3" />}

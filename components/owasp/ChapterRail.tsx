@@ -32,7 +32,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
   return (
     <nav aria-label="Lesson chapters" className="fixed left-4 top-1/2 z-30 hidden w-44 -translate-y-1/2 2xl:block">
       <div className="mb-4">
-        <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-fg-3">In this lesson · {pct}%</p>
+        <p className="font-mono text-eyebrow uppercase tracking-[0.16em] text-fg-3">In this lesson · {pct}%</p>
         <span className="mt-2 block h-0.5 overflow-hidden rounded-full bg-line-2">
           <span className="block h-full rounded-full bg-brand transition-[width] duration-500" style={{ width: `${pct}%` }} />
         </span>
@@ -49,14 +49,14 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
                 className={cn("group block rounded-lg px-2 py-1.5 transition-colors", on ? "bg-brand/[0.08]" : "hover:bg-tint/[0.03]")}
               >
                 <span className="flex items-baseline gap-2.5">
-                  <span className={cn("font-mono text-[0.62rem] tabular-nums", on ? "text-brand" : done ? "text-fg-2" : "text-fg-3")}>
+                  <span className={cn("font-mono text-eyebrow tabular-nums", on ? "text-brand" : done ? "text-fg-2" : "text-fg-3")}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className={cn("text-[0.8rem] leading-tight", on ? "font-medium text-fg" : done ? "text-fg-2" : "text-fg-3 group-hover:text-fg-2")}>
+                  <span className={cn("text-caption leading-tight", on ? "font-medium text-fg" : done ? "text-fg-2" : "text-fg-3 group-hover:text-fg-2")}>
                     {c.label}
                   </span>
                 </span>
-                {on && <span className="kd-sub mt-1 block pl-[1.6rem] text-[0.7rem] leading-snug text-fg-2">{c.hint}</span>}
+                {on && <span className="kd-sub mt-1 block pl-[1.6rem] text-eyebrow leading-snug text-fg-2">{c.hint}</span>}
               </a>
             </li>
           );

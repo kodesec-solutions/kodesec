@@ -16,7 +16,7 @@ export function Logo({ className, href = "/" }: { className?: string; href?: str
   const inner = (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark className="h-7 w-auto drop-shadow-[0_0_10px_rgba(46,204,113,0.35)]" />
-      <span className="font-sans text-[1.05rem] font-semibold tracking-[0.18em] text-fg">
+      <span className="font-sans text-lede font-semibold tracking-[0.18em] text-fg">
         KODE<span className="text-brand">SEC</span>
       </span>
     </span>

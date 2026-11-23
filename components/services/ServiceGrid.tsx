@@ -71,10 +71,10 @@ function SubCard({ serviceSlug, sub, accent, long }: { serviceSlug: string; sub:
       <div className="flex items-start justify-between gap-2">
         <Icon name={sub.icon} className={cn("h-5 w-5 shrink-0", a.text)} />
         {sub.badge && (
-          <span className={cn("rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide", a.head)}>{sub.badge}</span>
+          <span className={cn("rounded-full px-2 py-0.5 font-mono text-eyebrow font-semibold uppercase tracking-wide", a.head)}>{sub.badge}</span>
         )}
       </div>
-      <h3 className="mt-3 text-[0.95rem] font-semibold leading-snug text-fg">{sub.title}</h3>
+      <h3 className="mt-3 text-body-sm font-semibold leading-snug text-fg">{sub.title}</h3>
       {long && <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-fg-2">{sub.summary}</p>}
       <span className="mt-auto flex items-center justify-between pt-3 text-xs text-fg-3 transition-colors group-hover:text-fg">
         Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />

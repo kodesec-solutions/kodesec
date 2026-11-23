@@ -39,7 +39,7 @@ export default function FilmSection({ film }: { film: FilmContent }) {
       ref={sectionRef}
       data-theme="dark"
       aria-labelledby="film-title"
-      className="relative isolate flex min-h-[600px] overflow-hidden border-t border-line bg-[#141615] md:h-[min(92vh,920px)]"
+      className="relative isolate flex min-h-[600px] overflow-hidden border-t border-line bg-panel-2 md:h-[min(92vh,920px)]"
     >
       <video
         ref={videoRef}
@@ -62,7 +62,7 @@ export default function FilmSection({ film }: { film: FilmContent }) {
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,11,11,0.6)_100%)]" />
 
       <div className="container-kd relative flex w-full flex-col justify-between py-14 md:py-20">
-        <h2 id="film-title" className="max-w-3xl text-4xl font-medium leading-[1.08] tracking-tight text-fg sm:text-5xl md:text-[3.6rem]">
+        <h2 id="film-title" className="max-w-3xl text-4xl font-medium leading-[1.08] tracking-tight text-fg sm:text-5xl md:text-hero">
           {film.heading.map((line, i) => (
             <span key={i} className="block">
               {line}

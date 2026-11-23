@@ -19,7 +19,7 @@ export function PostCard({ post, className, priority }: { post: Post; className?
         </div>
       )}
       <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-center gap-3 font-mono text-[0.68rem] uppercase tracking-[0.12em]">
+        <div className="flex items-center gap-3 font-mono text-eyebrow uppercase tracking-[0.12em]">
           <span className="text-brand">{post.category}</span>
           <span className="text-fg-3">{formatDate(post.date)}</span>
         </div>

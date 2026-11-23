@@ -24,6 +24,8 @@ jobs:
       - run: npm ci
       - name: Lint
         run: npm run lint
+      - name: Design tokens
+        run: npm run lint:design
       - name: Type-check
         run: npm run typecheck
       - name: Unit tests

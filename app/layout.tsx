@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Caveat, Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -14,6 +14,8 @@ import { SITE_URL, organizationLd, websiteLd } from "@/lib/seo";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
+
+const hand = Caveat({ subsets: ["latin"], variable: "--font-caveat", weight: ["700"], display: "swap" });
 
 const site = getSite();
 
@@ -39,14 +41,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${sans.variable} ${mono.variable} ${hand.variable}`}>
       <head>
         {/* apply the saved theme before first paint (no flash) */}
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       {site.analytics.gtmId && <GoogleTagManager gtmId={site.analytics.gtmId} />}
       <body className="min-h-dvh">
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-black">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-(--z-top) focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-black">
           Skip to content
         </a>
         <div className="page-rails" aria-hidden="true" />

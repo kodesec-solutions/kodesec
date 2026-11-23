@@ -9,6 +9,7 @@ import { getAcademy, getOwaspTopics } from "@/lib/content/loaders";
 import { owaspCategories } from "@/lib/content/schemas";
 import { businessProfiles } from "@/lib/academy/profiles";
 import { breadcrumbLd, buildMetadata } from "@/lib/seo";
+import { Section } from "@/components/ui/Section";
 
 // TODO(team): review the Academy hero copy.
 export const metadata = buildMetadata({
@@ -38,11 +39,11 @@ export default function AcademyPage() {
 
       <section className="relative isolate overflow-hidden pb-10 pt-32 md:pt-36">
         <AuroraBars intensity="soft" />
-        <div className="relative mx-auto w-full max-w-[1400px] px-4 md:px-6">
+        <div className="relative container-kd container-wide">
           <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
             <div>
               <p className="eyebrow">Kodesec Academy · for business owners</p>
-              <h1 className="mt-5 text-4xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-5xl md:text-6xl">
+              <h1 className="mt-5 text-4xl font-semibold leading-[1.05] sm:text-5xl md:text-6xl">
                 <span className="text-gradient">How websites get hacked,</span> <span className="text-aurora">explained for owners.</span>
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-fg-2">
@@ -60,7 +61,7 @@ export default function AcademyPage() {
       </section>
 
       <section className="pb-24">
-        <div className="mx-auto w-full max-w-[1400px] px-4 md:px-6">
+        <div className="container-kd container-wide">
           <TopicGallery topics={topics} categories={owaspCategories} />
           <p className="mt-6 text-xs text-fg-3">
             Safety measures adapted from the{" "}
@@ -73,8 +74,7 @@ export default function AcademyPage() {
       </section>
 
       {tracks.length > 0 && (
-        <section className="border-t hairline py-16">
-          <div className="container-kd">
+        <Section className="border-t border-line py-16 md:py-16">
             <p className="eyebrow">For technical teams</p>
             <h2 className="mt-4 text-2xl font-semibold text-fg">Hands-on tracks for developers and engineers</h2>
             <ul className="mt-8 grid gap-3 md:grid-cols-3">
@@ -83,15 +83,14 @@ export default function AcademyPage() {
                   <Link href={t.href} className="card card-hover group flex h-full flex-col p-5">
                     <span className="font-medium text-fg">{t.title}</span>
                     <span className="mt-2 flex-1 text-sm leading-relaxed text-fg-2">{t.summary.split(".")[0]}.</span>
-                    <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-fg-3 group-hover:text-brand">
+                    <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-wider text-fg-3 group-hover:text-brand">
                       {t.lessonCount} lessons <ArrowRight className="h-3 w-3" />
                     </span>
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
+        </Section>
       )}
     </BusinessProvider>
   );

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check, CircleAlert } from "lucide-react";
-import { Horizon } from "@/components/effects/Aurora";
+import { Horizon } from "@/components/effects/Horizon";
 import { AuroraBars } from "@/components/effects/AuroraBars";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -92,7 +92,7 @@ export default async function SubServicePage({ params }: Props) {
               </span>
               kodesec<span className={a.text}>/{s.label}</span>
             </p>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.05] text-fg sm:text-5xl">{sub.title}</h1>
+            <h1 className="mt-5 text-4xl font-semibold leading-[1.05] text-fg sm:text-5xl md:text-6xl">{sub.title}</h1>
             <p className="mt-6 text-base leading-relaxed text-fg-2 md:text-lg">{sub.summary}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={bookHref} className="btn btn-primary">
@@ -104,7 +104,7 @@ export default async function SubServicePage({ params }: Props) {
             </div>
           </div>
           <div className="lg:col-span-6">
-            <div className={cn("rounded-[22px] border border-line-2 p-1.5", a.glow)}>
+            <div className={cn("rounded-panel border border-line-2 p-1.5", a.glow)}>
               <ServiceMedia src={media} alt={sub.title} priority />
             </div>
           </div>
@@ -119,7 +119,7 @@ export default async function SubServicePage({ params }: Props) {
             {sub.problems.map((p) => (
               <div key={p} data-reveal className="card flex gap-4 p-6">
                 <CircleAlert className={cn("mt-0.5 h-5 w-5 shrink-0", a.text)} />
-                <p className="text-[15px] leading-relaxed text-fg">{p}</p>
+                <p className="text-body-sm leading-relaxed text-fg">{p}</p>
               </div>
             ))}
           </div>

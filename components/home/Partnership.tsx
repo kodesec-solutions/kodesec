@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import type { Site } from "@/lib/content/schemas";
+import { Section } from "@/components/ui/Section";
 
 type Partner = Site["partners"][number];
 
@@ -13,9 +14,9 @@ function PartnerMark({ partner }: { partner: Partner }) {
   }
   const [base, tld] = partner.name.split(/(?=\.[a-z]+$)/i);
   return (
-    <span className="text-[1.15rem] font-bold leading-none tracking-tight text-fg">
+    <span className="text-lede font-bold leading-none tracking-tight text-fg">
       {base}
-      {tld && <span className="font-medium italic text-sky-500 light:text-sky-700">{tld}</span>}
+      {tld && <span className="font-medium italic text-info">{tld}</span>}
     </span>
   );
 }
@@ -30,7 +31,7 @@ export function PartnerCard({ partner }: { partner: Partner }) {
           <Logo href={null} />
         </div>
         <div className="relative flex h-10 w-px items-center justify-center sm:h-px sm:w-28" aria-hidden="true">
-          <span className="absolute inset-0 bg-gradient-to-b from-brand via-mint to-sky-400 sm:bg-gradient-to-r" />
+          <span className="absolute inset-0 bg-gradient-to-b from-brand via-mint to-info sm:bg-gradient-to-r" />
           <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-line-2 bg-bg font-mono text-sm text-fg">
             ×
           </span>
@@ -42,12 +43,12 @@ export function PartnerCard({ partner }: { partner: Partner }) {
 
       <div className="grid gap-8 p-6 md:grid-cols-2 md:p-8">
         <div>
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fg-3">About {partner.short ?? partner.name}</p>
-          <p className="mt-3 text-sm leading-relaxed text-fg-2 md:text-[15px]">{partner.about}</p>
+          <p className="font-mono text-eyebrow uppercase tracking-[0.14em] text-fg-3">About {partner.short ?? partner.name}</p>
+          <p className="mt-3 text-sm leading-relaxed text-fg-2 md:text-body-sm">{partner.about}</p>
         </div>
         <div>
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-brand">Together</p>
-          <p className="mt-3 text-sm leading-relaxed text-fg md:text-[15px]">{partner.together}</p>
+          <p className="font-mono text-eyebrow uppercase tracking-[0.14em] text-brand">Together</p>
+          <p className="mt-3 text-sm leading-relaxed text-fg md:text-body-sm">{partner.together}</p>
         </div>
       </div>
 
@@ -67,11 +68,10 @@ export function PartnerCard({ partner }: { partner: Partner }) {
 export default function Partnership({ partners }: { partners: Partner[] }) {
   if (partners.length === 0) return null;
   return (
-    <section id="partners" aria-labelledby="partners-title" className="relative scroll-mt-24 border-t border-line py-20 md:py-28">
-      <div className="container-kd">
+    <Section id="partners" aria-labelledby="partners-title" className="scroll-mt-24 border-t border-line">
         <div data-reveal className="mx-auto max-w-2xl text-center">
           <p className="eyebrow justify-center">In partnership</p>
-          <h2 id="partners-title" className="mt-4 text-3xl font-semibold leading-[1.1] text-fg sm:text-4xl md:text-[2.75rem]">
+          <h2 id="partners-title" className="mt-4 text-3xl font-semibold leading-[1.1] text-fg sm:text-4xl md:text-h2">
             {partners.length === 1 ? (
               <>
                 Kodesec <span className="text-fg-3">×</span> <span className="text-aurora">{partners[0].name}</span>
@@ -89,7 +89,6 @@ export default function Partnership({ partners }: { partners: Partner[] }) {
             <PartnerCard key={p.url} partner={p} />
           ))}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

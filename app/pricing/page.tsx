@@ -41,7 +41,7 @@ export default function PricingPage() {
                 <p className="text-3xl font-semibold tracking-tight text-fg">{m.from ? `From ${m.from}` : "Custom quote"}</p>
                 <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-fg-3">{m.unit}</p>
               </div>
-              <p className="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.12em] text-fg-3">Best for</p>
+              <p className="mt-6 font-mono text-eyebrow uppercase tracking-[0.12em] text-fg-3">Best for</p>
               <p className="mt-1 text-sm text-fg">{m.bestFor}</p>
               <ul className="mt-6 flex-1 space-y-3">
                 {m.features.map((f) => (

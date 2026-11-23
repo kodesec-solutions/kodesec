@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
-import { Horizon } from "@/components/effects/Aurora";
+import { Horizon } from "@/components/effects/Horizon";
 import { AuroraBars } from "@/components/effects/AuroraBars";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -59,7 +59,7 @@ export default async function ServicePage({ params }: Props) {
               <span className="font-bold">kodesec</span>
               <span className={a.text}>/{s.label}</span>
             </p>
-            <h1 className="mt-4 text-4xl font-semibold leading-[1.05] text-fg sm:text-5xl lg:text-[3.4rem]">{s.tagline}</h1>
+            <h1 className="mt-4 text-4xl font-semibold leading-[1.05] text-fg sm:text-5xl md:text-6xl">{s.tagline}</h1>
             <p className="mt-6 text-base leading-relaxed text-fg-2 md:text-lg">{s.summary}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={bookHref} className="btn btn-primary">
@@ -72,14 +72,14 @@ export default async function ServicePage({ params }: Props) {
             <p className="mt-4 text-xs text-fg-3">Free 30-minute call · NDA available · Fixed quote in 48h</p>
           </div>
           <div className="lg:col-span-7">
-            <div className={cn("rounded-[22px] border border-line-2 p-1.5", a.glow)}>
+            <div className={cn("rounded-panel border border-line-2 p-1.5", a.glow)}>
               <ServiceMedia src={s.media} alt={`${s.title} at Kodesec`} priority />
             </div>
           </div>
         </div>
         {/* stack row, like Aikido's logo strip */}
         <div className="container-kd relative mt-16">
-          <p className="text-center font-mono text-[0.68rem] uppercase tracking-[0.16em] text-fg-3">Tools & platforms we work with</p>
+          <p className="text-center font-mono text-eyebrow uppercase tracking-[0.16em] text-fg-3">Tools & platforms we work with</p>
           <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             {s.technologies.map((t) => (
               <li key={t} className="text-base font-semibold tracking-tight text-fg-3/90">
@@ -91,23 +91,23 @@ export default async function ServicePage({ params }: Props) {
       </section>
 
       {/* ------------------------------------------------ alternating feature rows */}
-      <section className="relative py-16 md:py-24">
-        <div className="container-kd space-y-16 md:space-y-24">
+      <Section className="py-16 md:py-24">
+        <div className="space-y-16 md:space-y-24">
           {s.highlights.map((h, i) => (
             <div key={h.title} className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
               <div data-reveal className={cn(i % 2 === 1 && "md:order-2")}>
-                <div className={cn("rounded-[22px] border border-line-2 p-1.5", a.tint)}>
+                <div className={cn("rounded-panel border border-line-2 p-1.5", a.tint)}>
                   <ServiceMedia src={h.media} alt={h.title} />
                 </div>
               </div>
               <div data-reveal>
-                <h2 className="text-3xl font-semibold leading-tight text-fg md:text-[2.25rem]">{h.title}</h2>
+                <h2 className="text-3xl font-semibold leading-tight text-fg md:text-4xl">{h.title}</h2>
                 <p className="mt-4 max-w-md text-base leading-relaxed text-fg-2 md:text-lg">{h.text}</p>
               </div>
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       {/* ------------------------------------------------ all sub-services (tinted grid) */}
       <Section id="services" className="scroll-mt-24 border-t border-line">

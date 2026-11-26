@@ -263,7 +263,75 @@ html.theme-anim, html.theme-anim * { transition: background-color 0.25s ease, bo
   .kd-hint-text { animation: none; opacity: 1; }
 }
 
+/* ---- review cards: project tag ----
+   A band across the top of each card: icon chip with a pulse ring, bold text with a slow aurora sheen,
+   and a light that runs along the bottom hairline like a scan. One line always: the size follows the
+   card width (container units) and only falls back to an ellipsis on very narrow cards. */
+.kd-review { container-type: inline-size; transition: background-color 0.3s; }
+.kd-review:hover { background-color: color-mix(in srgb, var(--color-bg-2) 88%, var(--color-brand)); }
+.kd-proj {
+  position: relative;
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 1rem 1.75rem;
+  background: linear-gradient(90deg, rgb(var(--brand-rgb) / 0.14), rgb(var(--brand-rgb) / 0.03) 70%, transparent);
+  border-bottom: 1px solid rgb(var(--brand-rgb) / 0.18);
+  overflow: hidden;
+}
+@media (min-width: 1024px) { .kd-proj { padding-inline: 2rem; } }
+/* the scan light along the bottom edge */
+.kd-proj::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 40%;
+  background: linear-gradient(90deg, transparent, var(--color-mint), var(--color-brand), transparent);
+  box-shadow: 0 0 10px 1px rgb(var(--brand-rgb) / 0.6);
+  animation: kd-scan 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: calc(var(--kd-i, 0) * 0.9s);
+}
+.kd-proj-icon {
+  position: relative; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; border-radius: 9999px;
+  color: var(--color-brand);
+  background: rgb(var(--brand-rgb) / 0.14);
+  border: 1px solid rgb(var(--brand-rgb) / 0.45);
+  box-shadow: 0 0 16px -2px rgb(var(--brand-rgb) / 0.55), inset 0 0 8px rgb(var(--brand-rgb) / 0.2);
+}
+.kd-proj-icon::before {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit;
+  border: 1px solid rgb(var(--brand-rgb) / 0.7);
+  animation: kd-proj-ping 2.8s ease-out infinite;
+  animation-delay: calc(var(--kd-i, 0) * 0.6s);
+}
+.kd-proj-text {
+  min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: clamp(var(--text-eyebrow), 4.1cqi, var(--text-lede));
+  line-height: 1.3;
+  background: linear-gradient(90deg, var(--color-fg) 0%, var(--color-mint) 25%, var(--color-brand) 45%, var(--color-mint) 65%, var(--color-fg) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: kd-sheen 7s linear infinite;
+  animation-delay: calc(var(--kd-i, 0) * -2.3s);
+}
+.kd-review:hover .kd-proj-text { animation-duration: 3s; }
+.kd-review:hover .kd-proj-icon { color: var(--color-mint); }
+@keyframes kd-scan { 0% { transform: translateX(-100%); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(260%); opacity: 0; } }
+@keyframes kd-proj-ping { 0% { transform: scale(1); opacity: 0.9; } 70%, 100% { transform: scale(1.7); opacity: 0; } }
+@keyframes kd-sheen { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .kd-proj::after, .kd-proj-icon::before { animation: none; display: none; }
+  .kd-proj-text { animation: none; background-position: 60% 0; }
+}
+
 /* ---- reviews poster hint ---- */
+/* Rendered in the static HTML so it paints with the page (no wait for JS). Shown only when the screen is
+   roomy enough not to cover the hero copy, or once the visitor has scrolled (data-roomy, set by JS). */
+.kd-hint { display: none; }
+@media (min-width: 1400px) and (min-height: 780px) { .kd-hint { display: block; } }
+.kd-hint[data-roomy] { display: block; }
+@media (max-width: 639px) { .kd-hint[data-roomy] { display: none; } }
+.kd-hint-off .kd-hint { display: none !important; }
 @keyframes kd-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes kd-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
 .kd-rise { animation: kd-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }

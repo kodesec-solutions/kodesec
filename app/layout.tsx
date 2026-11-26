@@ -9,6 +9,7 @@ import VideoFacade from "@/components/content/VideoFacade";
 import SceneEffects from "@/components/effects/SceneEffects";
 import JsonLd from "@/components/JsonLd";
 import { THEME_SCRIPT } from "@/components/theme/theme";
+import { HINT_SCRIPT } from "@/components/home/reviews-hint-key";
 import { getSite } from "@/lib/content/loaders";
 import { SITE_URL, organizationLd, websiteLd } from "@/lib/seo";
 
@@ -44,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" data-theme="dark" suppressHydrationWarning className={`${sans.variable} ${mono.variable} ${hand.variable}`}>
       <head>
         {/* apply the saved theme before first paint (no flash) */}
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT + HINT_SCRIPT }} />
       </head>
       {site.analytics.gtmId && <GoogleTagManager gtmId={site.analytics.gtmId} />}
       <body className="min-h-dvh">

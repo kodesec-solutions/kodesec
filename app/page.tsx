@@ -47,7 +47,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={[reviewsLd()]} />
-      {site.testimonials.length > 0 && <ReviewsHint targetId="reviews" items={site.testimonials.map((t) => ({ src: t.photo, name: t.name, role: t.role, company: t.company, rating: t.rating }))} confidential={site.confidentialClients} />}
+      {site.testimonials.length > 0 && <ReviewsHint targetId="reviews" items={site.testimonials.map((t) => ({ src: t.photo, name: t.name, role: t.role, company: t.company }))} confidential={site.confidentialClients} />}
       {/* ================================================================ HERO */}
       <section data-theme="dark" className="relative isolate overflow-hidden bg-bg pb-20 pt-36 md:pb-28 md:pt-44">
         <AuroraBars />

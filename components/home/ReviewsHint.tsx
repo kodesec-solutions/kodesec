@@ -1,15 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronsDown, Lock, Star, X } from "lucide-react";
-
-const KEY = "kd-reviews-hint-closed";
+import { ChevronsDown, Lock, X } from "lucide-react";
+import { HINT_KEY as KEY } from "./reviews-hint-key";
 
 /**
  * Floating hand of playing cards (one 16:9 card per client, fanned) on the left edge of the landing page,
  * with a hand-drawn arrow pointing at it.
  * Click = smooth scroll to the reviews. Hides once the reviews are on screen (or already passed),
  * and can be dismissed for the session.
+ *
+ * It is in the static HTML (no timer, no waiting for hydration) so it paints with the page; CSS decides
+ * whether the screen is roomy enough (`.kd-hint` in effects.css). HINT_SCRIPT (in the root layout's <head>)
+ * hides it before first paint for visitors who dismissed it this session.
  */
 export default function ReviewsHint({
   targetId,
@@ -17,24 +20,19 @@ export default function ReviewsHint({
   confidential = 0,
 }: {
   targetId: string;
-  items: { src: string; name: string; role: string; company: string; rating: number }[];
+  items: { src: string; name: string; role: string; company: string }[];
   confidential?: number; // extra face-down cards for clients who asked not to be named
 }) {
-  const [ready, setReady] = useState(false);
+  const [closed, setClosed] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [roomy, setRoomy] = useState(false); // enough screen that the poster won't cover the hero copy
+  const [scrolled, setScrolled] = useState(false); // past the hero: room to show it on smaller screens too
 
   useEffect(() => {
-    let closed = false;
-    try {
-      closed = !!sessionStorage.getItem(KEY);
-    } catch {}
-    if (closed) return;
-    const t = window.setTimeout(() => setReady(true), 1200);
-    const measure = () => setRoomy((window.innerWidth >= 1400 && window.innerHeight >= 780) || window.scrollY > 400);
+    // dismissed earlier this session: HINT_SCRIPT already hid it (html.kd-hint-off), nothing to watch
+    if (document.documentElement.classList.contains("kd-hint-off")) return;
+    const measure = () => setScrolled(window.scrollY > 400);
     measure();
     window.addEventListener("scroll", measure, { passive: true });
-    window.addEventListener("resize", measure);
     const el = document.getElementById(targetId);
     let io: IntersectionObserver | undefined;
     if (el) {
@@ -42,9 +40,7 @@ export default function ReviewsHint({
       io.observe(el);
     }
     return () => {
-      window.clearTimeout(t);
       window.removeEventListener("scroll", measure);
-      window.removeEventListener("resize", measure);
       io?.disconnect();
     };
   }, [targetId]);
@@ -57,10 +53,10 @@ export default function ReviewsHint({
     try {
       sessionStorage.setItem(KEY, "1");
     } catch {}
-    setHidden(true);
+    setClosed(true);
   };
 
-  if (!ready || hidden || !roomy) return null;
+  if (closed) return null;
 
   const real = items.slice(0, 3).map((item) => ({ real: true as const, item }));
   const left = Math.ceil(confidential / 2);
@@ -71,7 +67,12 @@ export default function ReviewsHint({
   ];
 
   return (
-    <div className="kd-rise fixed bottom-4 left-8 z-40 hidden sm:block lg:bottom-8 lg:left-10">
+    <div
+      className="kd-hint kd-rise fixed bottom-4 left-8 z-40 transition-opacity duration-300 lg:bottom-8 lg:left-10"
+      data-roomy={scrolled || undefined}
+      style={hidden ? { animation: "none", opacity: 0, visibility: "hidden", pointerEvents: "none" } : undefined}
+      aria-hidden={hidden || undefined}
+    >
       <svg aria-hidden="true" viewBox="0 0 270 84" className="pointer-events-none -mb-1 -ml-2 h-[56px] w-[190px] overflow-visible text-fg lg:h-[70px] lg:w-[225px]">
         <defs>
           <filter id="kd-pencil-r" x="-10%" y="-10%" width="120%" height="120%">
@@ -134,18 +135,13 @@ export default function ReviewsHint({
               className={`${base} border-brand/60 text-left`}
             >
               <span className="flex h-full flex-col items-center p-3.5 text-center">
-                <span className="flex items-center gap-0.5" role="img" aria-label={`${t.rating} out of 5 stars`}>
-                  {Array.from({ length: 5 }, (_, n) => (
-                    <Star key={n} aria-hidden="true" className={n < t.rating ? "h-3.5 w-3.5 fill-warn text-warn" : "h-3.5 w-3.5 text-bg/25"} />
-                  ))}
-                </span>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={t.src}
                   alt=""
                   width={80}
                   height={80}
-                  className="mt-3 h-16 w-16 shrink-0 rounded-full border-[3px] border-brand object-cover lg:h-[4.5rem] lg:w-[4.5rem]"
+                  className="mt-4 h-16 w-16 shrink-0 rounded-full border-[3px] border-brand object-cover lg:h-[4.5rem] lg:w-[4.5rem]"
                 />
                 <span className="mt-3 block w-full truncate text-sm font-semibold leading-tight lg:text-body-sm">{t.name}</span>
                 <span className="mt-1 block w-full truncate text-eyebrow text-bg/70">{t.role}</span>
